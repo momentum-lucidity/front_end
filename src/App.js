@@ -1,18 +1,18 @@
-import "./App.css";
-import { AdminDashboard } from "./components/admin/AdminDashboard";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "tailwindcss/tailwind.css"
+import './App.css';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
 
-function App() {
+function App () {
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Switch>
-          <Route exact path="/" component={AdminDashboard} />
+          <Route path='/' component={AdminDashboard} />
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
