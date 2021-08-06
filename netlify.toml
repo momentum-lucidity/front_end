@@ -3,5 +3,5 @@
   to = "/"
   status = 200
 
-[[build]]
+[build]
   CI= npm run build
