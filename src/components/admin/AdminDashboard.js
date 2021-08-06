@@ -6,8 +6,53 @@ import {
   ClockIcon,
   ReceiptRefundIcon,
   UsersIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/solid";
+import classNames from 'classnames'
 
+const actions = [
+  {
+    title: "Request time off",
+    href: "#",
+    icon: ClockIcon,
+    iconForeground: "text-teal-700",
+    iconBackground: "bg-teal-50",
+  },
+  {
+    title: "Benefits",
+    href: "#",
+    icon: BadgeCheckIcon,
+    iconForeground: "text-purple-700",
+    iconBackground: "bg-purple-50",
+  },
+  {
+    title: "Schedule a one-on-one",
+    href: "#",
+    icon: UsersIcon,
+    iconForeground: "text-sky-700",
+    iconBackground: "bg-sky-50",
+  },
+  {
+    title: "Payroll",
+    href: "#",
+    icon: CashIcon,
+    iconForeground: "text-yellow-700",
+    iconBackground: "bg-yellow-50",
+  },
+  {
+    title: "Submit an expense",
+    href: "#",
+    icon: ReceiptRefundIcon,
+    iconForeground: "text-rose-700",
+    iconBackground: "bg-rose-50",
+  },
+  {
+    title: "Training",
+    href: "#",
+    icon: AcademicCapIcon,
+    iconForeground: "text-indigo-700",
+    iconBackground: "bg-indigo-50",
+  },
+];
 export const AdminDashboard = () => {
   return (
     <div className="rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px">
