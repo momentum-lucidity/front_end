@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { AdminDashboard } from "./components/admin/AdminDashboard";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
