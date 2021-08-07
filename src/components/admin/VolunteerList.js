@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AdminHeader } from './AdminHeader.js'
-import { MockVolunteers } from '/Users/loganatkinson/momentum-assignments/final-project/front_end/src/MockVolunteers.js'
+import { MockVolunteers } from '../../MockVolunteers.js'
 
 export const VolunteerList = () => {
   return (
