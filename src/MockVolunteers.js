@@ -1,4 +1,4 @@
-[
+export const MockVolunteers = [
   {
     id: 1,
     preferred_name: 'Melli',
@@ -190,3 +190,4 @@
     phone: '775-771-0363'
   }
 ]
+
