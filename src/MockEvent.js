@@ -1,3 +1,4 @@
+export const MockEvent =
 [
   {
     id: 1,
