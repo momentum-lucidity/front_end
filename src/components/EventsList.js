@@ -1,10 +1,5 @@
 import { AdminHeader } from "./admin/AdminHeader.js";
 import { MockEvent } from "../MockEvent.js";
-import { DotsVerticalIcon } from "@heroicons/react/solid";
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export const EventsList = () => {
   return (
@@ -29,19 +24,19 @@ export const EventsList = () => {
                     {event.location}
                   </p>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                    2 Volunteers Needed
+                     Volunteers Needed
                   </span>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    2 Volunteers Signed Up
+                     Volunteers Signed Up
                   </span>
                 </a>
               </div>
-              <time
+              {/* <time
                 dateTime={event.datetime}
                 className="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"
               >
                 {event.time}
-              </time>
+              </time> */}
             </div>
           </li>
         ))}
