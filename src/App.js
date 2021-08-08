@@ -1,5 +1,6 @@
 import './App.css';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminLogin } from './components/admin/AdminLogin';
 import { VolunteerList } from './components/admin/VolunteerList';
 import { EventsList } from './components/EventsList';
 import { DocumentList } from './components/admin/DocumentList';
@@ -12,7 +13,8 @@ function App () {
     <Router>
       <div className='App'>
         <Switch>
-          <Route exact path='/' component={AdminDashboard} />
+          <Route exact path='/' component={AdminLogin} />
+          <Route exact path='/admindash' component={AdminDashboard} />
           <Route path='/volunteers' component={VolunteerList} />
           <Route path='/events' component={EventsList} />
           <Route path='/documents' component={DocumentList} />
