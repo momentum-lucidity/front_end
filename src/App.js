@@ -3,6 +3,7 @@ import { AdminDashboard } from './components/admin/AdminDashboard'
 import { AdminLogin } from './components/admin/AdminLogin'
 import { VolunteerList } from './components/admin/VolunteerList'
 import { EventsList } from './components/EventsList'
+import { EventDetail } from './components/admin/EventDetail'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
@@ -18,9 +19,10 @@ function App () {
           <Route path='/registration' component={Registration} />
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route path='/volunteers' component={VolunteerList} />
-          <Route path='/events' component={EventsList} />
+          <Route exact path='/events' component={EventsList} />
           <Route path='/documents' component={DocumentList} />
           <Route path='/announcements' component={CreateAnnouncements} />
+          <Route path='/events/eventdetail' component={EventDetail} />
         </Switch>
       </div>
     </Router>

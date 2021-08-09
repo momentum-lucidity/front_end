@@ -6,7 +6,7 @@ export const EventsList = () => {
     <>
       <AdminHeader />
       <ul className="divide-y divide-gray-200">
-        {MockEvent.map((event) => (
+        {MockEvent.map((event, idx) => (
           <li
             key={event.id}
             className="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
@@ -24,10 +24,10 @@ export const EventsList = () => {
                     {event.location}
                   </p>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                     Volunteers Needed
+                    Volunteers Needed
                   </span>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                     Volunteers Signed Up
+                    Volunteers Signed Up
                   </span>
                 </a>
               </div>
