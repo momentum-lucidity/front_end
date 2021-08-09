@@ -69,7 +69,6 @@ export const EventDetail = () => {
                     /> */}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <a href="#" className="focus:outline-none">
                       <span className="absolute inset-0" aria-hidden="true" />
                       <p className="text-sm font-medium text-gray-900">
                         Volunteer Slot
@@ -80,7 +79,6 @@ export const EventDetail = () => {
                       <p className="text-sm text-gray-500 truncate">
                         {item.volunteer_slots[0].start_time}-{item.volunteer_slots[0].end_time}
                       </p>
-                    </a>
                   </div>
                 </div>
               </div>
