@@ -9,7 +9,7 @@ export const EventForm = () => {
         <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Event Information
+              Create an Event
             </h3>
           </div>
           <div className="space-y-6 sm:space-y-5">
