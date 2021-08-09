@@ -81,6 +81,31 @@ export const EventDetail = () => {
                   </div>
                 </div>
               </div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div
+                  className="relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                >
+                  <div className="flex-shrink-0">
+                    {/* <img
+                      className="h-10 w-10 rounded-full"
+                      src={item.imageUrl}
+                      alt=""
+                    /> */}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                      <span className="absolute inset-0" aria-hidden="true" />
+                      <p className="text-sm font-medium text-gray-900">
+                        Volunteer Slot
+                      </p>
+                      <p className="text-sm font-medium text-gray-500">
+                        {item.volunteer_slots[1].volunteer_name}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate">
+                        {item.volunteer_slots[1].start_time}-{item.volunteer_slots[1].end_time}
+                      </p>
+                  </div>
+                </div>
+              </div>
             </dl>
           </div>
         </div>
