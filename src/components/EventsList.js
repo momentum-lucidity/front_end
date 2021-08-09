@@ -5,6 +5,23 @@ export const EventsList = () => {
   return (
     <>
       <AdminHeader />
+      <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+        <div className="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <div className="ml-4 mt-2">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Events
+            </h3>
+          </div>
+          <div className="ml-4 mt-2 flex-shrink-0">
+            <button
+              type="button"
+              className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Create new event
+            </button>
+          </div>
+        </div>
+      </div>
       <ul className="divide-y divide-gray-200">
         {MockEvent.map((event, idx) => (
           <li
@@ -13,7 +30,10 @@ export const EventsList = () => {
           >
             <div className="flex justify-between space-x-3">
               <div className="min-w-0 flex-1">
-                <a href={'/events/${event.id}'} className="block focus:outline-none">
+                <a
+                  href={"/events/${event.id}"}
+                  className="block focus:outline-none"
+                >
                   <span className="absolute inset-0" aria-hidden="true" />
                   <p className="text-sm font-medium text-gray-900 truncate">
                     {event.title}
