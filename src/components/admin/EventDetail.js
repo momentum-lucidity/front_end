@@ -1,6 +1,5 @@
 import { AdminHeader } from "./AdminHeader.js";
 import { MockEventDetail } from "../../MockEventDetail";
-import { PaperClipIcon } from "@heroicons/react/solid";
 
 export const EventDetail = () => {
   return (
