@@ -1,3 +1,4 @@
+import { AdminHeader } from './AdminHeader'
 
 const activityItems = [
   {
@@ -25,15 +26,18 @@ const activityItems = [
 
 export const CreateAnnouncements = () => {
   return (
-    <div>
-      <ul className='divide-y divide-gray-200'>
-        {activityItems.map((activityItem) => (
+    <>
+      <AdminHeader />
+      <div>
+        <ul className='divide-y divide-gray-200'>
+          {activityItems.map((activityItem) => (
           <li key={activityItem.id} className='py-4'>
             <div className='flex space-x-3'>
               <div className='flex-1 space-y-1'>
                 <div className='flex items-center justify-between'>
-                  <h3 className='text-sm font-medium'>{activityItem.title}</h3>
                   <p className='text-sm text-gray-500'>{activityItem.date}</p>
+                  <h3 className='text-sm font-medium'>{activityItem.title}</h3>
+                  <p className='text-sm text-gray-500'>posted by: {activityItem.person}</p>
                 </div>
                 <p className='text-sm text-gray-500'>
                   {activityItem.announcement_text}
@@ -43,7 +47,8 @@ export const CreateAnnouncements = () => {
             </div>
           </li>
         ))}
-      </ul>
-    </div>
+        </ul>
+      </div>
+    </>
   )
 }
