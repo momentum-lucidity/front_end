@@ -13,7 +13,7 @@ export const EventsList = () => {
           >
             <div className="flex justify-between space-x-3">
               <div className="min-w-0 flex-1">
-                <a href="#" className="block focus:outline-none">
+                <a href={'/events/${event.id}'} className="block focus:outline-none">
                   <span className="absolute inset-0" aria-hidden="true" />
                   <p className="text-sm font-medium text-gray-900 truncate">
                     {event.title}

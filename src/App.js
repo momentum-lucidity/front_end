@@ -20,9 +20,9 @@ function App () {
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route path='/volunteers' component={VolunteerList} />
           <Route exact path='/events' component={EventsList} />
+          <Route path='/events/:id' component={EventDetail} />
           <Route path='/documents' component={DocumentList} />
           <Route path='/announcements' component={CreateAnnouncements} />
-          <Route path='/events/eventdetail' component={EventDetail} />
         </Switch>
       </div>
     </Router>
