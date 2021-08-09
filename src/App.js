@@ -6,6 +6,7 @@ import { EventsList } from './components/EventsList'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
+import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'tailwindcss/tailwind.css'
 
@@ -21,6 +22,7 @@ function App () {
           <Route path='/events' component={EventsList} />
           <Route path='/documents' component={DocumentList} />
           <Route path='/announcements' component={CreateAnnouncements} />
+          <Route exact path='/volunteerdash' component={VolunteerDashboard} />
         </Switch>
       </div>
     </Router>
