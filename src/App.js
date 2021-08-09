@@ -5,6 +5,7 @@ import { VolunteerList } from './components/admin/VolunteerList'
 import { VolunteerDetails } from './components/admin/VolunteerDetails'
 import { EventsList } from './components/EventsList'
 import { EventDetail } from './components/admin/EventDetail'
+import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
@@ -20,6 +21,7 @@ function App () {
           <Route path='/registration' component={Registration} />
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route exact path='/events' component={EventsList} />
+          <Route path='/events/eventform' component={EventForm} />
           <Route path='/events/:id' component={EventDetail} />
           <Route exact path='/volunteers' component={VolunteerList} />
           <Route path='/volunteers/:id' component={VolunteerDetails} />
