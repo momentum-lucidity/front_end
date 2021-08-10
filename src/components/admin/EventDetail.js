@@ -331,47 +331,7 @@ export const EventDetail = () => {
                           qui eu.
                         </dd>
                       </div>
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="relative rounded-lg border border-green-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                          <div className="flex-1 min-w-0">
-                            <span
-                              className="absolute inset-0"
-                              aria-hidden="true"
-                            />
-                            <p className="text-sm font-medium text-gray-900">
-                              Volunteer Slot
-                            </p>
-                            <p className="text-sm font-medium text-gray-500">
-                              {item.volunteer_slots[0].volunteer_name}
-                            </p>
-                            <p className="text-sm text-gray-500 truncate">
-                              {item.volunteer_slots[0].start_time}-
-                              {item.volunteer_slots[0].end_time}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
-                          <div className="flex-1 min-w-0">
-                            <span
-                              className="absolute inset-0"
-                              aria-hidden="true"
-                            />
-                            <p className="text-sm font-medium text-gray-900">
-                              Volunteer Slot
-                            </p>
-                            <p className="text-sm font-medium text-gray-500">
-                              {item.volunteer_slots[1].volunteer_name}
-                            </p>
-                            <p className="text-sm text-gray-500 truncate">
-                              {item.volunteer_slots[1].start_time}-
-                              {item.volunteer_slots[1].end_time}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex-1 relative overflow-y-auto focus:outline-none">
+                      <div className="sm:col-span-2">
                         <div>
                           <h3 className="text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900">
                             Volunteers Needed
@@ -424,6 +384,46 @@ export const EventDetail = () => {
                                 <option>2:00</option>
                               </select>
                             </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="relative rounded-lg border border-green-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                          <div className="flex-1 min-w-0">
+                            <span
+                              className="absolute inset-0"
+                              aria-hidden="true"
+                            />
+                            <p className="text-sm font-medium text-gray-900">
+                              Volunteer Slot
+                            </p>
+                            <p className="text-sm font-medium text-gray-500">
+                              {item.volunteer_slots[0].volunteer_name}
+                            </p>
+                            <p className="text-sm text-gray-500 truncate">
+                              {item.volunteer_slots[0].start_time}-
+                              {item.volunteer_slots[0].end_time}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                          <div className="flex-1 min-w-0">
+                            <span
+                              className="absolute inset-0"
+                              aria-hidden="true"
+                            />
+                            <p className="text-sm font-medium text-gray-900">
+                              Volunteer Slot
+                            </p>
+                            <p className="text-sm font-medium text-gray-500">
+                              {item.volunteer_slots[1].volunteer_name}
+                            </p>
+                            <p className="text-sm text-gray-500 truncate">
+                              {item.volunteer_slots[1].start_time}-
+                              {item.volunteer_slots[1].end_time}
+                            </p>
                           </div>
                         </div>
                       </div>
