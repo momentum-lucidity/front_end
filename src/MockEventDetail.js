@@ -1,20 +1,27 @@
 export const MockEventDetail =
 [
   {
-    id: 1,
-    title: 'Nina Takes a Lover',
-    description: 'Front-line national interface',
-    type: 'soccer',
-    date: '05/10/2020',
-    time: '12:39 AM',
-    location: '84 Maywood Way',
+    id: 2,
+    title: 'Smiles of a Summer Night (Sommarnattens leende)',
+    description: 'Innovative user-facing methodology',
+    type: 'diaper drive',
+    date: '05/07/2021',
+    time: '12:15 PM',
+    location: '0 Sunnyside Alley',
     volunteer_slots: [
       {
-        filled: true,
-        start_time: '8:52 AM',
-        end_time: '1:55 PM',
-        volunteer_name: 'Ashlee Cawsby',
+        filled: false,
+        start_time: '9:26 AM',
+        end_time: '10:32 AM',
+        volunteer_name: 'Tuck Bilsborrow',
         user_id: 1
+      },
+      {
+        filled: true,
+        start_time: '3:08 AM',
+        end_time: '7:41 PM',
+        volunteer_name: 'Brook Loader',
+        user_id: 2
       }
     ]
   }
