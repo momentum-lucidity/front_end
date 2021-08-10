@@ -11,7 +11,6 @@ import { Registration } from "./components/Registration";
 import { CreateAnnouncements } from "./components/admin/CreateAnnouncements";
 import { VolunteerDashboard } from "./components/volunteer/VolunteerDashboard";
 import { VolunteerProfile } from "./components/volunteer/VolunteerProfile";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 

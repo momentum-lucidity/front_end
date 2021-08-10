@@ -277,6 +277,7 @@ export const EventDetail = () => {
             </Menu>
           </div>
         </div>
+
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6">
             <div className="px-4 sm:px-6 md:px-0">
@@ -375,6 +376,12 @@ export const EventDetail = () => {
                           <h3 className="text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900">
                             Volunteers Needed
                           </h3>
+                          <button
+                            type="button"
+                            className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          >
+                            Add Volunteer
+                          </button>
                         </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                           <div className="sm:col-span-3">
