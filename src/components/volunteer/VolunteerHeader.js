@@ -40,13 +40,13 @@ export const VolunteerHeader = () => {
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <a
-                    href="/volunteers"
+                    href="/profile"
                     className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     Profile
                   </a>
                   <a
-                    href="/events"
+                    href="/handbook"
                     className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     Handbook
@@ -66,11 +66,11 @@ export const VolunteerHeader = () => {
                       <div>
                         <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                           <span className="sr-only">Open user menu</span>
-                          <img
-                            className="h-8 w-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                          />
+                          <span className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-purple-500">
+                            <span className="font-medium leading-none text-white">
+                              DC
+                            </span>
+                          </span>
                         </Menu.Button>
                       </div>
                       <Transition
@@ -97,19 +97,6 @@ export const VolunteerHeader = () => {
                                 )}
                               >
                                 Your Profile
-                              </a>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <a
-                                href="#"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
-                                Settings
                               </a>
                             )}
                           </Menu.Item>
