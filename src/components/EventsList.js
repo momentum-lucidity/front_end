@@ -1,17 +1,12 @@
-<<<<<<< HEAD
+
 import { AdminHeader } from "./admin/AdminHeader.js";
 import { MockEvent } from "../MockEvent.js";
 import { Link } from "react-router-dom";
-=======
-import { AdminHeader } from './admin/AdminHeader.js'
-import { MockEvent } from '../MockEvent.js'
->>>>>>> main
 
 export const EventsList = () => {
   return (
     <>
       <AdminHeader />
-<<<<<<< HEAD
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
         <div className="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
           <div className="ml-4 mt-2">
