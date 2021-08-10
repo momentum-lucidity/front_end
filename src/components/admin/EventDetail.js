@@ -337,6 +337,22 @@ export const EventDetail = () => {
                             Volunteers Needed
                           </h3>
                         </div>
+                        <div className="sm:col-span-6">
+                          <label
+                            htmlFor="vol-duties"
+                            className="block text-sm font-medium text-gray-700"
+                          >
+                            Volunteer Duties
+                          </label>
+                          <div className="mt-1">
+                            <textarea
+                              id="vol-duties"
+                              name="vol-duties"
+                              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                              defaultValue={""}
+                            />
+                          </div>
+                        </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                           <div className="sm:col-span-3">
                             <label
