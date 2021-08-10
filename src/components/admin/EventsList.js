@@ -1,6 +1,8 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { MockEvent } from '../../MockEvent'
+import { Link } from 'react-router-dom';
+
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -259,6 +261,16 @@ export const EventsList = () => {
             <div className='px-4 sm:px-6 md:px-0'>
               <h1 className='text-2xl font-semibold text-gray-900'>Upcoming Events</h1>
             </div>
+            <div className="ml-4 mt-2 flex-shrink-0">
+            <Link to="/events/eventform">
+              <button
+                type="button"
+                className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Create new event
+              </button>
+            </Link>
+          </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>

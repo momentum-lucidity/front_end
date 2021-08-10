@@ -1,10 +1,8 @@
-import { AdminHeader } from "./AdminHeader.js";
 import { Link } from "react-router-dom";
 
 export const EventForm = () => {
   return (
     <>
-      <AdminHeader />
       <form className="space-y-8 divide-y divide-gray-200">
         <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
           <div>
