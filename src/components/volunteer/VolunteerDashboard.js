@@ -5,19 +5,12 @@ import {
   ThumbUpIcon,
   UserIcon
 } from '@heroicons/react/solid'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-import classNames from 'classnames'
 
 const steps = [
-  { id: '01', name: 'Registration', href: '#', status: 'complete' },
-  { id: '02', name: 'Pending Approval', href: '#', status: 'current' },
-  { id: '03', name: 'Approved!', href: '#', status: 'upcoming' }
+  { id: '01', name: 'Registration', status: 'complete' },
+  { id: '02', name: 'Pending Approval', status: 'current' },
+  { id: '03', name: 'Approved!', status: 'upcoming' }
 ]
-const eventTypes = {
-  applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
-  advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
-  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
-}
 
 export const VolunteerDashboard = () => {
   return (
@@ -49,58 +42,56 @@ export const VolunteerDashboard = () => {
             </div>
             <nav aria-label='Progress'>
               <ol className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
-        {steps.map((step, stepIdx) => (
-          <li key={step.name} className='relative md:flex-1 md:flex'>
-            {step.status === 'complete' ? (
-              <a href={step.href} className='group flex items-center w-full'>
-                <span className='px-6 py-4 flex items-center text-sm font-medium'>
-                  <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full group-hover:bg-indigo-800'>
-                    <CheckIcon className='w-6 h-6 text-white' aria-hidden='true' />
-                  </span>
-                  <span className='ml-4 text-sm font-medium text-gray-900'>{step.name}</span>
-                </span>
-              </a>
-            ) : step.status === 'current' ? (
-              <a href={step.href} className='px-6 py-4 flex items-center text-sm font-medium' aria-current='step'>
-                <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-indigo-600 rounded-full'>
-                  <span className='text-indigo-600'>{step.id}</span>
-                </span>
-                <span className='ml-4 text-sm font-medium text-indigo-600'>{step.name}</span>
-              </a>
-            ) : (
-              <a href={step.href} className='group flex items-center'>
-                <span className='px-6 py-4 flex items-center text-sm font-medium'>
-                  <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full group-hover:border-gray-400'>
-                    <span className='text-gray-500 group-hover:text-gray-900'>{step.id}</span>
-                  </span>
-                  <span className='ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900'>{step.name}</span>
-                </span>
-              </a>
-            )}
+                {steps.map((step, stepIdx) => (
+                  <li key={step.name} className='relative md:flex-1 md:flex'>
+                    {step.status === 'complete' ? (
+                      <span className='px-6 py-4 flex items-center text-sm font-medium'>
+                        <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full group-hover:bg-indigo-800'>
+                            <CheckIcon className='w-6 h-6 text-white' aria-hidden='true' />
+                          </span>
+                        <span className='ml-4 text-sm font-medium text-gray-900'>{step.name}</span>
+                      </span>
+                    ) : step.status === 'current' ? (
+                      <a href={step.href} className='px-6 py-4 flex items-center text-sm font-medium' aria-current='step'>
+                        <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-indigo-600 rounded-full'>
+                          <span className='text-indigo-600'>{step.id}</span>
+                        </span>
+                        <span className='ml-4 text-sm font-medium text-indigo-600'>{step.name}</span>
+                      </a>
+                    ) : (
+                      <a href={step.href} className='group flex items-center'>
+                        <span className='px-6 py-4 flex items-center text-sm font-medium'>
+                          <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full group-hover:border-gray-400'>
+                            <span className='text-gray-500 group-hover:text-gray-900'>{step.id}</span>
+                          </span>
+                          <span className='ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900'>{step.name}</span>
+                        </span>
+                      </a>
+                    )}
 
-            {stepIdx !== steps.length - 1 ? (
-              <>
-                {/* Arrow separator for lg screens and up */}
-                <div className='hidden md:block absolute top-0 right-0 h-full w-5' aria-hidden='true'>
-                  <svg
-                    className='h-full w-full text-gray-300'
-                    viewBox='0 0 22 80'
-                    fill='none'
-                    preserveAspectRatio='none'
-                  >
-                    <path
-                      d='M0 -2L20 40L0 82'
-                      vectorEffect='non-scaling-stroke'
-                      stroke='currentcolor'
-                      strokeLinejoin='round'
-                    />
-                  </svg>
-                </div>
-              </>
-            ) : null}
-          </li>
-        ))}
-      </ol>
+                    {stepIdx !== steps.length - 1 ? (
+                      <>
+                        {/* Arrow separator for lg screens and up */}
+                        <div className='hidden md:block absolute top-0 right-0 h-full w-5' aria-hidden='true'>
+                          <svg
+                            className='h-full w-full text-gray-300'
+                            viewBox='0 0 22 80'
+                            fill='none'
+                            preserveAspectRatio='none'
+                          >
+                            <path
+                              d='M0 -2L20 40L0 82'
+                              vectorEffect='non-scaling-stroke'
+                              stroke='currentcolor'
+                              strokeLinejoin='round'
+                            />
+                          </svg>
+                        </div>
+                      </>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
             </nav>
           </div>
         </div>
@@ -137,7 +128,6 @@ export const VolunteerDashboard = () => {
                 Announcements
               </h2>
 
-              {/* Activity Feed */}
               <div className='mt-6 flow-root'>
                 <ul className='-mb-8'>
                   <li>
@@ -152,7 +142,7 @@ export const VolunteerDashboard = () => {
                           <div>
                             <h3 className='text-black-500'>
                               Announcement #1
-                              </h3>
+                            </h3>
                             <p className='text-sm text-gray-600'>If anyone is free, we need two more volunteers for Saturday's soccer game and Dream Center!</p>
                           </div>
                           <div className='text-right text-sm whitespace-nowrap text-gray-500'>
@@ -194,13 +184,7 @@ export const VolunteerDashboard = () => {
                       </div>
                       <div className='flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
                         <div className='flex-1 px-4 py-2 text-sm truncate'>
-                          <a
-                            href='#'
-                            className='text-gray-900 font-medium hover:text-gray-600'
-                            target='_blank'
-                            rel='noreferrer noopener'
-                          >Event Title
-                          </a>
+                          <h3>Event Title</h3>
                           <p className='text-gray-500'>Time</p>
                         </div>
                       </div>
