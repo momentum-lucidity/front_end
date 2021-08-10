@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import { MockEvent } from '../../MockEvent'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -11,14 +12,14 @@ import {
   XIcon
 } from '@heroicons/react/outline'
 
-export const CreateAnnouncements = () => {
+export const EventsList = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
     { name: 'Volunteers', href: '/volunteers', icon: UsersIcon, current: false },
-    { name: 'Events', href: '/events', icon: FolderIcon, current: false },
-    { name: 'Announcements', href: '/announcements', icon: CalendarIcon, current: true },
+    { name: 'Events', href: '/events', icon: FolderIcon, current: true },
+    { name: 'Announcements', href: '/announcements', icon: CalendarIcon, current: false },
     { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
   ]
 
@@ -30,31 +31,7 @@ export const CreateAnnouncements = () => {
 
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
-    { name: 'All Announcements', href: '/announcements', current: true }
-  ]
-
-  const activityItems = [
-    {
-      announcement_id: 1,
-      person: 'Lauren',
-      title: 'Coaching sign-ups',
-      announcement_text: 'Sign ups for coaching postition will being Monday Sept 9.  We will have 9 available spots.',
-      date: 'Sept 1, 2021'
-    },
-    {
-      announcement_id: 2,
-      person: 'Lauren',
-      title: ' Urgent - After School Volunteer Needed',
-      announcement_text: 'We urgently need an open volunteer slot to be filled for Wed and Thurs afternoons with our after school program.  If you are able to help out please sign up under the events section.',
-      date: 'Sept 2, 2021'
-    },
-    {
-      announcement_id: 3,
-      person: 'Maria',
-      title: 'Fall Festival Meeting',
-      announcement_text: 'Our final organization meeting for the 2021 fall festival will be held on Sept 28th at 7:30 pm',
-      date: 'Sept 2, 2021'
-    }
+    { name: 'All Events', href: '/events', current: true }
   ]
 
   function classNames (...classes) {
@@ -280,69 +257,46 @@ export const CreateAnnouncements = () => {
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
+              <h1 className='text-2xl font-semibold text-gray-900'>Upcoming Events</h1>
+            </div>
+            <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
-              <div>
-                <h1 className='flex items-left text-med font-medium'>Current Announcements</h1>
-                <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5' />
-                <ul className='divide-y divide-gray-200'>
-                  {activityItems.map((activityItem) => (
-                    <li key={activityItem.id} className='py-4'>
-                      <div className='flex space-x-3'>
-                        <div className='flex-1 space-y-1'>
-                          <div className='flex items-center justify-between'>
-                            <p className='text-sm text-gray-500'>{activityItem.date}</p>
-                            <h3 className='text-sm font-medium'>{activityItem.title}</h3>
-                            <p className='text-sm text-gray-500'>posted by: {activityItem.person}</p>
-                          </div>
-                          <p className='text-sm text-gray-500'>
-                            {activityItem.announcement_text}
+              <ul className='divide-y divide-gray-200'>
+                {MockEvent.map((event, idx) => (
+                  <li
+                    key={event.id}
+                    className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
+                  >
+                    <div className='flex justify-between space-x-3'>
+                      <div className='min-w-0 flex-1'>
+                        <a href={`/events/${event.id}`} className='block focus:outline-none'>
+                          <span className='absolute inset-0' aria-hidden='true' />
+                          <p className='text-sm font-medium text-gray-900 truncate'>
+                            {event.title}
                           </p>
-                        </div>
+                          <p className='text-sm text-gray-500 truncate'>{event.date}</p>
+                          <p className='text-sm text-gray-500 truncate'>{event.time}</p>
+                          <p className='line-clamp-2 text-sm text-gray-600'>
+                            {event.location}
+                          </p>
+                          <span className='inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800'>
+                            Volunteers Needed
+                          </span>
+                          <span className='inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
+                            Volunteers Signed Up
+                          </span>
+                        </a>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <form className='space-y-8 divide-y divide-gray-200'>
-                <div className='space-y-8 divide-y divide-gray-200 sm:space-y-5'>
-                  <div className='mt-6 sm:mt-5 space-y-6 sm:space-y-5'><div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5' />
-
-                    <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
-                      <label htmlFor='about' className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'>
-                        Add A New Event
-                      </label>
-                      <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                        <textarea
-                          id='about'
-                          name='about'
-                          rows={3}
-                          className='max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md'
-                          defaultValue=''
-                        />
-                        <p className='mt-2 text-sm text-gray-500'>Write your new announcement here.</p>
-                      </div>
+                      {/* <time
+                dateTime={event.datetime}
+                className="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"
+              >
+                {event.time}
+              </time> */}
                     </div>
-
-                    <div className='pt-5'>
-                      <div className='flex justify-end'>
-                        <button
-                          type='button'
-                          className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type='submit'
-                          className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
+                  </li>
+                ))}
+              </ul>
               {/* /End replace */}
             </div>
           </div>
