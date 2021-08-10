@@ -324,6 +324,7 @@ export const DocumentList = () => {
                 {items.map((item) => (
                   <li
                     key={item.id}
+
                     className="bg-white shadow overflow-hidden rounded-md px-6 py-4"
                   >
                     <div>
@@ -339,7 +340,7 @@ export const DocumentList = () => {
                             <div
                               className={classNames(
                                 project.bgColor,
-                                "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
+                                 "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
                               )}
                             >
                               {project.initials}

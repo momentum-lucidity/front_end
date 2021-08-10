@@ -14,10 +14,11 @@ import { VolunteerProfile } from "./components/volunteer/VolunteerProfile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 
-function App() {
+
+function App () {
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Switch>
           <Route exact path="/" component={AdminLogin} />
           <Route path="/registration" component={Registration} />
@@ -34,7 +35,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
