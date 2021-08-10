@@ -370,6 +370,56 @@ export const EventDetail = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="flex-1 relative overflow-y-auto focus:outline-none">
+                        <div>
+                          <h3 className="text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900">
+                            Volunteers Needed
+                          </h3>
+                        </div>
+                        <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                          <div className="sm:col-span-3">
+                            <label
+                              htmlFor="volunteer-start-time"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Volunteer Start Time
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                              <select
+                                id="volunteer-start-time"
+                                name="volunteer-start-time"
+                                autoComplete="volunteer-start-time"
+                                className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                              >
+                                <option>12:00</option>
+                                <option>1:00</option>
+                                <option>2:00</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="sm:col-span-3">
+                            <label
+                              htmlFor="volunteer-end-time"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Volunteer End time
+                            </label>
+                            <div className="mt-1 sm:mt-0 sm:col-span-2">
+                              <select
+                                id="volunteer-end-time"
+                                name="volunteer-end-time"
+                                autoComplete="volunteer-end-time"
+                                className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                              >
+                                <option>12:00</option>
+                                <option>1:00</option>
+                                <option>2:00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </dl>
                   </div>
                 </div>
