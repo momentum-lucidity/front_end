@@ -1,117 +1,23 @@
 import { VolunteerHeader } from './VolunteerHeader.js'
 import { VolunteerEvents } from './VolunteerEvents.js'
 import {
-  ArrowNarrowLeftIcon,
   CheckIcon,
-  HomeIcon,
-  PaperClipIcon,
-  QuestionMarkCircleIcon,
-  SearchIcon,
   ThumbUpIcon,
   UserIcon
 } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import classNames from 'classnames'
 
-const user = {
-  name: 'Whitney Francis',
-  email: 'whitney@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80'
-}
-const navigation = [
-  { name: 'Dashboard', href: '#' },
-  { name: 'Jobs', href: '#' },
-  { name: 'Applicants', href: '#' },
-  { name: 'Company', href: '#' }
-]
-const breadcrumbs = [
-  { name: 'Jobs', href: '#', current: false },
-  { name: 'Front End Developer', href: '#', current: false },
-  { name: 'Applicants', href: '#', current: true }
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' }
-]
-const attachments = [
-  { name: 'resume_front_end_developer.pdf', href: '#' },
-  { name: 'coverletter_front_end_developer.pdf', href: '#' }
+const steps = [
+  { id: '01', name: 'Registration', href: '#', status: 'complete' },
+  { id: '02', name: 'Pending Approval', href: '#', status: 'current' },
+  { id: '03', name: 'Approved!', href: '#', status: 'upcoming' }
 ]
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
 }
-const timeline = [
-  {
-    id: 1,
-    type: eventTypes.applied,
-    content: 'Applied to',
-    target: 'Front End Developer',
-    date: 'Sep 20',
-    datetime: '2020-09-20'
-  },
-  {
-    id: 2,
-    type: eventTypes.advanced,
-    content: 'Advanced to phone screening by',
-    target: 'Bethany Blake',
-    date: 'Sep 22',
-    datetime: '2020-09-22'
-  },
-  {
-    id: 3,
-    type: eventTypes.completed,
-    content: 'Completed phone screening with',
-    target: 'Martha Gardner',
-    date: 'Sep 28',
-    datetime: '2020-09-28'
-  },
-  {
-    id: 4,
-    type: eventTypes.advanced,
-    content: 'Advanced to interview by',
-    target: 'Bethany Blake',
-    date: 'Sep 30',
-    datetime: '2020-09-30'
-  },
-  {
-    id: 5,
-    type: eventTypes.completed,
-    content: 'Completed interview with',
-    target: 'Katherine Snyder',
-    date: 'Oct 4',
-    datetime: '2020-10-04'
-  }
-]
-const comments = [
-  {
-    id: 1,
-    name: 'Leslie Alexander',
-    date: '4d ago',
-    imageId: '1494790108377-be9c29b29330',
-    body:
-      'Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.'
-  },
-  {
-    id: 2,
-    name: 'Michael Foster',
-    date: '4d ago',
-    imageId: '1519244703995-f4e0f30006d5',
-    body:
-      'Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.'
-  },
-  {
-    id: 3,
-    name: 'Dries Vincent',
-    date: '4d ago',
-    imageId: '1506794778202-cad84cf45f1d',
-    body:
-      'Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.'
-  }
-]
 
 export const VolunteerDashboard = () => {
   return (
@@ -141,11 +47,66 @@ export const VolunteerDashboard = () => {
                 on <time dateTime='2020-08-25'>August 25, 2020</time>
               </p>
             </div>
+            <nav aria-label='Progress'>
+              <ol className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
+        {steps.map((step, stepIdx) => (
+          <li key={step.name} className='relative md:flex-1 md:flex'>
+            {step.status === 'complete' ? (
+              <a href={step.href} className='group flex items-center w-full'>
+                <span className='px-6 py-4 flex items-center text-sm font-medium'>
+                  <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full group-hover:bg-indigo-800'>
+                    <CheckIcon className='w-6 h-6 text-white' aria-hidden='true' />
+                  </span>
+                  <span className='ml-4 text-sm font-medium text-gray-900'>{step.name}</span>
+                </span>
+              </a>
+            ) : step.status === 'current' ? (
+              <a href={step.href} className='px-6 py-4 flex items-center text-sm font-medium' aria-current='step'>
+                <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-indigo-600 rounded-full'>
+                  <span className='text-indigo-600'>{step.id}</span>
+                </span>
+                <span className='ml-4 text-sm font-medium text-indigo-600'>{step.name}</span>
+              </a>
+            ) : (
+              <a href={step.href} className='group flex items-center'>
+                <span className='px-6 py-4 flex items-center text-sm font-medium'>
+                  <span className='flex-shrink-0 w-10 h-10 flex items-center justify-center border-2 border-gray-300 rounded-full group-hover:border-gray-400'>
+                    <span className='text-gray-500 group-hover:text-gray-900'>{step.id}</span>
+                  </span>
+                  <span className='ml-4 text-sm font-medium text-gray-500 group-hover:text-gray-900'>{step.name}</span>
+                </span>
+              </a>
+            )}
+
+            {stepIdx !== steps.length - 1 ? (
+              <>
+                {/* Arrow separator for lg screens and up */}
+                <div className='hidden md:block absolute top-0 right-0 h-full w-5' aria-hidden='true'>
+                  <svg
+                    className='h-full w-full text-gray-300'
+                    viewBox='0 0 22 80'
+                    fill='none'
+                    preserveAspectRatio='none'
+                  >
+                    <path
+                      d='M0 -2L20 40L0 82'
+                      vectorEffect='non-scaling-stroke'
+                      stroke='currentcolor'
+                      strokeLinejoin='round'
+                    />
+                  </svg>
+                </div>
+              </>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+            </nav>
           </div>
         </div>
 
-        <div className='mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-0 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
-          <div className='space-y-6 lg:col-start-1 lg:col-span-3'>
+        <div className='mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-3 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
+          <div className='space-y-6 lg:col-start-1 lg:col-span-4 row-span-4'>
             {/* Description list */}
             <section aria-labelledby='applicant-information-title'>
               <div className='bg-white shadow sm:rounded-lg'>
@@ -179,49 +140,28 @@ export const VolunteerDashboard = () => {
               {/* Activity Feed */}
               <div className='mt-6 flow-root'>
                 <ul className='-mb-8'>
-                  {timeline.map((item, itemIdx) => (
-                    <li key={item.id}>
-                      <div className='relative pb-8'>
-                        {itemIdx !== timeline.length - 1 ? (
+                  <li>
+                    <div className='relative pb-8'>
+                      <div className='relative flex space-x-3'>
+                        <div>
                           <span
-                            className='absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200'
-                            aria-hidden='true'
+                            className='h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
                           />
-                        ) : null}
-                        <div className='relative flex space-x-3'>
+                        </div>
+                        <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
                           <div>
-                            <span
-                              className={classNames(
-                                item.type.bgColorClass,
-                                'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
-                              )}
-                            >
-                              <item.type.icon
-                                className='w-5 h-5 text-white'
-                                aria-hidden='true'
-                              />
-                            </span>
+                            <h3 className='text-black-500'>
+                              Announcement #1
+                              </h3>
+                            <p className='text-sm text-gray-600'>If anyone is free, we need two more volunteers for Saturday's soccer game and Dream Center!</p>
                           </div>
-                          <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
-                            <div>
-                              <p className='text-sm text-gray-500'>
-                                {item.content}{' '}
-                                <a
-                                  href='#'
-                                  className='font-medium text-gray-900'
-                                >
-                                  {item.target}
-                                </a>
-                              </p>
-                            </div>
-                            <div className='text-right text-sm whitespace-nowrap text-gray-500'>
-                              <time dateTime={item.datetime}>{item.date}</time>
-                            </div>
+                          <div className='text-right text-sm whitespace-nowrap text-gray-500'>
+                            <time dateTime=''>posted at 11:59 am</time>
                           </div>
                         </div>
                       </div>
-                    </li>
-                  ))}
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -243,17 +183,14 @@ export const VolunteerDashboard = () => {
                 className='bg-white shadow overflow-hidden rounded-md px-6 py-4'
               >
                 <div>
-                  <h2 className='text-gray-500 text-xs font-medium uppercase tracking-wide'>
-                    Documents
-                  </h2>
                   <ul className='mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4'>
                     <li
                       className='col-span-1 flex shadow-sm rounded-md'
                     >
                       <div
-                        className='flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
+                        className='bg-green-500 flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
                       >
-                        D
+                        DC
                       </div>
                       <div className='flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
                         <div className='flex-1 px-4 py-2 text-sm truncate'>
