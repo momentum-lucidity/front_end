@@ -9,6 +9,7 @@ import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'tailwindcss/tailwind.css'
 
