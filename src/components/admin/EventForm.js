@@ -36,7 +36,7 @@ export const EventForm = () => {
                 htmlFor="event-location"
                 className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
-                Location
+                Event Location
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <input
@@ -54,7 +54,7 @@ export const EventForm = () => {
                 htmlFor="event-start-time"
                 className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
-                Start Time
+                Event Start Time
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
@@ -75,7 +75,7 @@ export const EventForm = () => {
                 htmlFor="event-end-time"
                 className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
-                End Time
+                Event End Time
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <select
@@ -96,7 +96,7 @@ export const EventForm = () => {
                 htmlFor="event-details"
                 className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
-                Details
+                Event Details
               </label>
               <div className="mt-1 sm:mt-0 sm:col-span-2">
                 <textarea
@@ -108,23 +108,93 @@ export const EventForm = () => {
               </div>
             </div>
 
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-              <label
-                htmlFor="add-volunteers"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-              >
-                Volunteers Needed
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input
-                  type="text"
-                  name="add-volunteers"
-                  id="add-volunteers"
-                  autoComplete="postal-code"
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+            <div className="pt-8">
+              <div>
+                <h3 className="text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900">
+                  Volunteers Needed
+                </h3>
+              </div>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="first-name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    First name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      autoComplete="given-name"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="last-name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Last name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="last-name"
+                      id="last-name"
+                      autoComplete="family-name"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="volunteer-start-time"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Volunteer Start Time
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <select
+                      id="volunteer-start-time"
+                      name="volunteer-start-time"
+                      autoComplete="volunteer-start-time"
+                      className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    >
+                      <option>12:00</option>
+                      <option>1:00</option>
+                      <option>2:00</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="volunteer-end-time"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Volunteer End time
+                  </label>
+                  <div className="mt-1 sm:mt-0 sm:col-span-2">
+                    <select
+                      id="volunteer-end-time"
+                      name="volunteer-end-time"
+                      autoComplete="volunteer-end-time"
+                      className="max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                    >
+                      <option>12:00</option>
+                      <option>1:00</option>
+                      <option>2:00</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div className="pt-5">
               <div className="flex justify-end">
                 <Link to="/events">
