@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'tailwindcss/tailwind.css'
 import { AdminLogout } from './components/admin/AdminLogout'
 import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
+import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
@@ -44,6 +45,15 @@ function App () {
             exact path='/dreamcenter/login'
             component={() => (
               <VolunteerLogin
+                setToken={setToken}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/logout'
+            component={() => (
+              <VolunteerLogout
+                token={token}
                 setToken={setToken}
               />
             )}
