@@ -1,6 +1,23 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
+import { useState } from 'react'
+import { useHistory } from 'react-router'
+import { requestLogin } from '../../api'
 
-export const VolunteerLogin = () => {
+export const VolunteerLogin = (props) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const { setToken } = props
+  const history = useHistory()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    requestLogin(username, password)
+      .then((data) => {
+        if (data && data.data.auth_token) {
+          setToken(data.data.auth_token)
+          history.push('/volunteerdash')
+        }
+      })
+  }
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
@@ -18,21 +35,23 @@ export const VolunteerLogin = () => {
             </a>
           </p>
         </div>
-        <form className='mt-8 space-y-6' action='#' method='POST'>
+        <form className='mt-8 space-y-6' action='#' method='POST' onSubmit={handleSubmit}>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>
-              <label htmlFor='email-address' className='sr-only'>
-                Email address
+              <label htmlFor='username' className='sr-only'>
+                username
               </label>
               <input
-                id='email-address'
-                name='email'
-                type='email'
-                autoComplete='email'
+                id='username'
+                name='username'
+                type='username'
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete='username'
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Email address'
+                placeholder='username'
               />
             </div>
             <div>
@@ -43,6 +62,8 @@ export const VolunteerLogin = () => {
                 id='password'
                 name='password'
                 type='password'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 autoComplete='current-password'
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
