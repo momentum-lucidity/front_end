@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { registration } from '../api'
+import { registration } from '../../api'
 
 export const Registration = () => {
   const [email, setEmail] = useState('')
