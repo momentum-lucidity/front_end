@@ -67,8 +67,8 @@ function App () {
           <Route path='/volunteers/:id' component={VolunteerDetails} />
           <Route path='/documents' component={DocumentList} />
           <Route path='/announcements' component={CreateAnnouncements} />
-          <Route exact path='/volunteerdash' component={VolunteerDashboard} />
-          <Route exact path='/profile' component={VolunteerProfile} />
+          <Route exact path='/dreamcenter/volunteerdash' component={VolunteerDashboard} />
+          <Route exact path='/dreamcenter/profile' component={VolunteerProfile} />
         </Switch>
       </div>
     </Router>
