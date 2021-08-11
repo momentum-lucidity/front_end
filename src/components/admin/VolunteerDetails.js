@@ -53,7 +53,7 @@ export const VolunteerDetails = () => {
   }
 
   return (
-    <div className="h-screen bg-white overflow-hidden flex">
+    <div className="bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
