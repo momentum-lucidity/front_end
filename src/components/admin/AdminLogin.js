@@ -1,11 +1,23 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { requestLogin } from '../../api'
 
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { token, setToken } = props
+  const { setToken } = props
+  const history = useHistory()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    requestLogin(username, password)
+      .then((data) => {
+        if (data && data.data.auth_token) {
+          setToken(data.data.auth_token)
+          history.push('/admindash')
+        }
+      })
+  }
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
@@ -29,7 +41,7 @@ export const AdminLogin = (props) => {
             </a>
           </p>
         </div>
-        <form className='mt-8 space-y-6' action='#' method='POST'>
+        <form className='mt-8 space-y-6' action='#' method='POST' onSubmit={handleSubmit}>
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>

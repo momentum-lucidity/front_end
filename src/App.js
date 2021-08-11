@@ -24,7 +24,6 @@ function App () {
           <Route
             exact path='/' component={() => (
               <AdminLogin
-                token={token}
                 setToken={setToken}
               />
             )}
