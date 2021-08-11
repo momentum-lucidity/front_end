@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { registration } from '../../api'
 
-export const VolunteerRegistration = () => {
+export const Registration = () => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -12,7 +12,7 @@ export const VolunteerRegistration = () => {
     event.preventDefault()
     registration(email, username, password)
       .then(response => {
-        history.push('/dreamcenter/login')
+        history.push('/')
       })
   }
   return (

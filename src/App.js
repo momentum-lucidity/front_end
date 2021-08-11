@@ -8,10 +8,11 @@ import { EventsList } from './components/admin/EventsList'
 import { EventDetail } from './components/admin/EventDetail'
 import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
-import { Registration } from './components/Registration'
+import { Registration } from './components/admin/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
+import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import 'tailwindcss/tailwind.css'
 import { AdminLogout } from './components/admin/AdminLogout'
@@ -59,6 +60,7 @@ function App () {
             )}
           />
           <Route path='/registration' component={Registration} />
+          <Route exact path='/dreamcenter/registration' component={VolunteerRegistration} />
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route exact path='/events' component={EventsList} />
           <Route path='/events/eventform' component={EventForm} />
