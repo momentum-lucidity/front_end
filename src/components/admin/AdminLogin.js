@@ -1,6 +1,12 @@
-import { LockClosedIcon } from '@heroicons/react/solid';
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
-export const AdminLogin = () => {
+export const AdminLogin = (props) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const { token, setToken } = props
+
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>
@@ -28,16 +34,18 @@ export const AdminLogin = () => {
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>
               <label htmlFor='email-address' className='sr-only'>
-                Email address
+                username
               </label>
               <input
-                id='email-address'
-                name='email'
-                type='email'
-                autoComplete='email'
+                id='username'
+                name='username'
+                type='name'
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                autoComplete='username'
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Email address'
+                placeholder='username'
               />
             </div>
             <div>
@@ -48,6 +56,8 @@ export const AdminLogin = () => {
                 id='password'
                 name='password'
                 type='password'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 autoComplete='current-password'
                 required
                 className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
