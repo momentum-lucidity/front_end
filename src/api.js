@@ -10,3 +10,17 @@ export const requestLogin = (username, password) => {
     )
   )
 }
+
+export const registration = (email, username, password) => {
+  return (
+    axios
+      .post(
+        'https://momentum-lucidity.herokuapp.com/auth/users/',
+        {
+          email: email,
+          username: username,
+          password: password
+        }
+      )
+  )
+}
