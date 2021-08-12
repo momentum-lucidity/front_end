@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 import { registration, registrationInfo, requestLogin } from '../../api'
 
 export const VolunteerRegistration = (props) => {
@@ -21,7 +22,7 @@ export const VolunteerRegistration = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    registration(email, username, password)
+    axios.all([registration(email, username, password),
     registrationInfo(
       display_name,
       legal_name,
@@ -33,8 +34,8 @@ export const VolunteerRegistration = (props) => {
       state,
       zipcode,
       preferred_event
-    )
-    requestLogin(username, password)
+    ),
+    requestLogin(username, password)])
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)

@@ -30,7 +30,7 @@ export const registrationInfo = (
   zipcode,
   preferred_event
 ) => {
-  return axios.post("https://momentum-lucidity.herokuapp.com/volunteers/", {
+  return axios.post("https://momentum-lucidity.herokuapp.com/profile/", {
     display_name: display_name,
     legal_name: legal_name,
     pronouns: pronouns,
@@ -59,7 +59,7 @@ export const adminRegistration = (
   preferred_event
 ) => {
   return (
-    axios.post("https://momentum-lucidity.herokuapp.com/volunteers/", {
+    axios.post("https://momentum-lucidity.herokuapp.com/profile/", {
       display_name: display_name,
       legal_name: legal_name,
       pronouns: pronouns,
