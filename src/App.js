@@ -59,8 +59,22 @@ function App () {
               />
             )}
           />
-          <Route path='/registration' component={Registration} />
-          <Route exact path='/dreamcenter/registration' component={VolunteerRegistration} />
+          <Route
+            path='/registration'
+            component={() => (
+              <Registration
+                setToken={setToken}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/registration'
+            component={() => (
+              <VolunteerRegistration
+                setToken={setToken}
+              />
+            )}
+          />
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route exact path='/events' component={EventsList} />
           <Route path='/events/eventform' component={EventForm} />
