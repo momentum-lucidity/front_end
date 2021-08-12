@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { registration, registrationInfo } from '../../api'
+import { registration, registrationInfo, requestLogin } from '../../api'
 
-export const VolunteerRegistration = () => {
+export const VolunteerRegistration = (props) => {
+  const { setToken } = props
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -33,8 +34,12 @@ export const VolunteerRegistration = () => {
       zipcode,
       preferred_event
     )
-      .then(response => {
-        history.push('/dreamcenter/login')
+    requestLogin(username, password)
+      .then((data) => {
+        if (data && data.data.auth_token) {
+          setToken(data.data.auth_token)
+          history.push('/dreamcenter/volunteerdash')
+        }
       })
   }
   return (

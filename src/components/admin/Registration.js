@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { adminRegistration, registration, } from '../../api'
+import { adminRegistration, registration, requestLogin } from '../../api'
 
-export const Registration = () => {
+export const Registration = (props) => {
+  const { setToken } = props
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -32,8 +33,12 @@ export const Registration = () => {
       state,
       zipcode,
       preferred_event)
-      .then(response => {
-        history.push('/')
+    requestLogin(username, password)
+      .then((data) => {
+        if (data && data.data.auth_token) {
+          setToken(data.data.auth_token)
+          history.push('/admindash')
+        }
       })
   }
   return (
