@@ -1,7 +1,7 @@
-import { Fragment, useState } from 'react';
-import { Dialog, Menu, Transition } from '@headlessui/react';
-import { MockEvent } from '../../MockEvent';
-import { Link } from 'react-router-dom';
+import { Fragment, useEffect, useState } from 'react'
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Link } from 'react-router-dom'
+import { getEventsList } from '../../api'
 
 import {
   ChevronRightIcon,
@@ -12,10 +12,15 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/outline'
 
 export const EventsList = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [allEvents, setAllEvents] = useState([])
+
+  useEffect(() => {
+    getEventsList().then((data) => setAllEvents(data))
+  }, [])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -299,7 +304,7 @@ export const EventsList = () => {
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>
-                {MockEvent.map((event, idx) => (
+                {allEvents.map((event, idx) => (
                   <li
                     key={event.id}
                     className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
@@ -307,7 +312,7 @@ export const EventsList = () => {
                     <div className='flex justify-between space-x-3'>
                       <div className='min-w-0 flex-1'>
                         <a
-                          href={`/events/${event.id}`}
+                          href={`/events/${event.title}`}
                           className='block focus:outline-none'
                         >
                           <span
@@ -351,4 +356,4 @@ export const EventsList = () => {
       </div>
     </div>
   )
-};
+}
