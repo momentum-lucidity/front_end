@@ -24,3 +24,11 @@ export const registration = (email, username, password) => {
       )
   )
 }
+
+export const getVolunteerList = () => {
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/volunteers/')
+      .then((res) => res.data)
+  )
+}
