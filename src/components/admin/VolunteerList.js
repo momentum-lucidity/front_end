@@ -1,6 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MockVolunteers } from '../../MockVolunteers'
 import Avatar from 'react-avatar'
 import {
   ChevronRightIcon,
@@ -12,6 +11,7 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline'
+import { getVolunteerList } from '../../api'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -37,7 +37,13 @@ function classNames (...classes) {
 }
 
 export const VolunteerList = () => {
+  const [allVolunteers, setAllVolunteers] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  useEffect(() => {
+    getVolunteerList()
+      .then((data) => setAllVolunteers(data))
+  })
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
@@ -263,7 +269,7 @@ export const VolunteerList = () => {
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                {MockVolunteers.map((person, id) => (
+                {allVolunteers.map((person, id) => (
                   <div
                     key={person.id}
                     className='relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'
