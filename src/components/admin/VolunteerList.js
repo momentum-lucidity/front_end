@@ -1,6 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MockVolunteers } from '../../MockVolunteers'
 import Avatar from 'react-avatar'
 import {
   ChevronRightIcon,
@@ -12,6 +11,7 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline'
+import { getVolunteerList } from '../../api'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -37,7 +37,13 @@ function classNames (...classes) {
 }
 
 export const VolunteerList = () => {
+  const [allVolunteers, setAllVolunteers] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  useEffect(() => {
+    getVolunteerList()
+      .then((data) => setAllVolunteers(data))
+  })
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
@@ -262,24 +268,78 @@ export const VolunteerList = () => {
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
-              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                {MockVolunteers.map((person, id) => (
-                  <div
-                    key={person.id}
-                    className='relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'
-                  >
-                    <div className='flex-1 min-w-0'>
-                      <Avatar name={person.legal_name} size='40' round />
-                      <a href={`/volunteers/${person.id}`} className='focus:outline-none'>
-                        <span className='absolute inset-0' aria-hidden='true' />
-                        <p className='text-sm font-medium text-gray-900'>
-                          {person.preferred_name}
-                        </p>
-                        <p className='text-sm text-gray-500 truncate'>{person.intake_status}</p>
-                      </a>
+              <div className='flex flex-col'>
+                <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                  <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                    <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+                      <table className='min-w-full divide-y divide-gray-200'>
+                        <thead className='bg-gray-50'>
+                          <tr>
+                            <th
+                              scope='col'
+                              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                            >
+                              Name
+                            </th>
+                            <th
+                              scope='col'
+                              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                            >
+                              Title
+                            </th>
+                            <th
+                              scope='col'
+                              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                            >
+                              Status
+                            </th>
+                            <th
+                              scope='col'
+                              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                            >
+                              Role
+                            </th>
+                            <th scope='col' className='relative px-6 py-3'>
+                              <span className='sr-only'>Edit</span>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody className='bg-white divide-y divide-gray-200'>
+                          {allVolunteers.map((person) => (
+                            <tr key={person.email}>
+                              <td className='px-6 py-4 whitespace-nowrap'>
+                                <div className='flex items-center'>
+                                  <div className='flex-shrink-0 h-10 w-10'>
+                                    <Avatar name={person.legal_name} size='40' round />
+                                  </div>
+                                  <div className='ml-4'>
+                                    <div className='text-sm font-medium text-gray-900'>{person.display_name}</div>
+                                    <div className='text-sm text-gray-500'>{person.legal_name}</div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className='px-6 py-4 whitespace-nowrap'>
+                                <div className='text-sm text-gray-900'>{person.pronouns}</div>
+                                <div className='text-sm text-gray-500'>{person.department}</div>
+                              </td>
+                              <td className='px-6 py-4 whitespace-nowrap'>
+                                <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+                                  {person.intake_status}
+                                </span>
+                              </td>
+                              <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{person.telephone}</td>
+                              <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                                <a href={`/volunteers/ ${person.legal_name}`} className='text-indigo-600 hover:text-indigo-900'>
+                                  Details
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
               {/* /End replace */}
             </div>
