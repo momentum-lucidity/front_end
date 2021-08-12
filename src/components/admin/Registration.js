@@ -1,16 +1,37 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { registration } from '../../api'
+import { adminRegistration, registration, } from '../../api'
 
 export const Registration = () => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [display_name, setDisplayName] = useState('')
+  const [legal_name, setLegalName] = useState('')
+  const [pronouns, setPronouns] = useState('')
+  const [availability, setAvailability] = useState('')
+  const [telephone, setTelephone] = useState('')
+  const [address2, setAddress2] = useState('')
+  const [city, setCity] = useState('')
+  const [state, setStateName] = useState('')
+  const [zipcode, setZipcode] = useState('')
+  const [preferred_event, setPreferredEvent] = useState('')
   const history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     registration(email, username, password)
+    adminRegistration(
+      display_name,
+      legal_name,
+      pronouns,
+      availability,
+      telephone,
+      address2,
+      city,
+      state,
+      zipcode,
+      preferred_event)
       .then(response => {
         history.push('/')
       })
@@ -74,9 +95,160 @@ export const Registration = () => {
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                       />
                     </div>
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='legal-name' className='block text-sm font-medium text-gray-700'>
+                        Legal name
+                      </label>
+                      <input
+                        type='text'
+                        name='legal-name'
+                        id='legal-name'
+                        value={legal_name}
+                        onChange={(event) => setLegalName(event.target.value)}
+                        autoComplete='given-name'
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
 
-                    <div className='col-span-6 sm:col-span-4' />
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='preferred-name' className='block text-sm font-medium text-gray-700'>
+                        Preferred name
+                      </label>
+                      <input
+                        type='text'
+                        name='preferred-name'
+                        id='preferred-name'
+                        value={display_name}
+                        onChange={(event) => setDisplayName(event.target.value)}
+                        autoComplete='family-name'
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
 
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='pronouns' className='block text-sm font-medium text-gray-700'>
+                        Pronouns
+                      </label>
+                      <input
+                        type='text'
+                        name='pronouns'
+                        id='pronouns'
+                        value={pronouns}
+                        onChange={(event) => setPronouns(event.target.value)}
+                        autoComplete='pronouns'
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='street-address' className='block text-sm font-medium text-gray-700'>
+                        Street address
+                      </label>
+                      <input
+                        type='text'
+                        name='street-address'
+                        id='street-address'
+                        value={address2}
+                        onChange={(event) => setAddress2(event.target.value)}
+                        autoComplete='street-address'
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+                    
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='city' className='block text-sm font-medium text-gray-700'>
+                        City
+                      </label>
+                      <input
+                        type='text'
+                        name='city'
+                        id='city'
+                        value={city}
+                        onChange={(event) => setCity(event.target.value)}
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='state' className='block text-sm font-medium text-gray-700'>
+                        State / Province
+                      </label>
+                      <input
+                        type='text'
+                        name='state'
+                        id='state'
+                        value={state}
+                        onChange={(event) => setStateName(event.target.value)}
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='postal-code' className='block text-sm font-medium text-gray-700'>
+                        ZIP / Postal
+                      </label>
+                      <input
+                        type='text'
+                        name='postal-code'
+                        id='postal-code'
+                        value={zipcode}
+                        onChange={(event) => setZipcode(event.target.value)}
+                        autoComplete='postal-code'
+                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='phone-number' className='block text-sm font-medium text-gray-700'>
+                        Phone Number
+                      </label>
+                      <div className='mt-1 relative rounded-md shadow-sm'>
+                        <input
+                          type='text'
+                          name='phone-number'
+                          id='phone-number'
+                          value={telephone}
+                          onChange={(event) => setTelephone(event.target.value)}
+                          className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md'
+                          placeholder='+1 (555) 987-6543'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='preferred-events' className='block text-sm font-medium text-gray-700'>
+                        Preferred Events
+                      </label>
+                      <div className='mt-1 relative rounded-md shadow-sm'>
+                        <textarea
+                          type='textarea'
+                          name='preferred-events'
+                          id='preferred-events'
+                          value={preferred_event}
+                          onChange={(event) => setPreferredEvent(event.target.value)}
+                          className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md'
+                          placeholder='I prefer to work at these types of events...'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='col-span-6 sm:col-span-4'>
+                      <label htmlFor='availibility' className='block text-sm font-medium text-gray-700'>
+                        Availibility
+                      </label>
+                      <div className='mt-1 relative rounded-md shadow-sm'>
+                        <textarea
+                          type='textarea'
+                          name='availibility'
+                          id='availibility'
+                          value={availability}
+                          onChange={(event) => setAvailability(event.target.value)}
+                          className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md'
+                          aria-describedby='availibilty-description'
+                          placeholder='List your preferred times for volunteer opportunites.'
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
