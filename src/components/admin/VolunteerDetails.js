@@ -4,6 +4,7 @@ import { getUserDetails } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   ChevronRightIcon,
+  PaperClipIcon,
   CalendarIcon,
   FolderIcon,
   HomeIcon,
@@ -11,7 +12,9 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  CheckIcon
+  CheckIcon,
+  TrashIcon,
+  PencilIcon
 } from '@heroicons/react/outline'
 
 export const VolunteerDetails = (props) => {
@@ -386,157 +389,78 @@ export const VolunteerDetails = (props) => {
                   ))}
                 </ol>
               </nav>
-              <div className='mt-5 border-t border-gray-200'>
-                <dl className='divide-y divide-gray-200'>
-                  <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Preferred Name
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{userDetails.display_name}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Legal Name
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{userDetails.legal_name}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Preferred Pronouns
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{userDetails.pronouns}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Email address
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>
-                        {userDetails.email}
-                      </span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>Phone</dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{userDetails.telephone}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Street Address
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{userDetails.address2}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      City, State, Zip
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>{`${userDetails.city}, ${userDetails.state}, ${userDetails.zipcode}`}</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Preferred Event Types
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>
-                        {userDetails.preferred_event}
-                      </span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Availability
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>
+              <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
+                <div className='px-4 py-5 sm:px-6'>
+                  <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Information</h3>
+                  <p className='mt-1 max-w-2xl text-sm text-gray-500'>Personal details and application.</p>
+                </div>
+                <div className='border-t border-gray-200 px-4 py-5 sm:p-0'>
+                  <dl className='sm:divide-y sm:divide-gray-200'>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Preferred Name</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.display_name}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Pronouns</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.pronouns}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Full name</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.legal_name}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Telephone</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.telephone}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Email address</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.email}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Street Address</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.address2}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>City, State, Zip</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{`${userDetails.city}, ${userDetails.state} ${userDetails.zipcode}`}</dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Availability</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                         {userDetails.availability}
-                      </span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                </dl>
+                      </dd>
+                    </div>
+                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
+                      <dt className='text-sm font-medium text-gray-500'>Update</dt>
+                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+                        <ul className='border border-gray-200 rounded-md divide-y divide-gray-200'>
+                          <li className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'>
+                            <div className='w-0 flex-1 flex items-center'>
+                              <PencilIcon className='flex-shrink-0 h-5 w-5 text-gray-400' aria-hidden='true' />
+                              <span className='ml-2 flex-1 w-0 truncate'>Edit Profile</span>
+                            </div>
+                            <div className='ml-4 flex-shrink-0'>
+                              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
+                                Edit
+                              </a>
+                            </div>
+                          </li>
+                          <li className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'>
+                            <div className='w-0 flex-1 flex items-center'>
+                              <TrashIcon className='flex-shrink-0 h-5 w-5 text-gray-400' aria-hidden='true' />
+                              <span className='ml-2 flex-1 w-0 truncate'>Delete Profile</span>
+                            </div>
+                            <div className='ml-4 flex-shrink-0'>
+                              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
+                                Delete
+                              </a>
+                            </div>
+                          </li>
+                        </ul>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
               {/* /End replace */}
             </div>
