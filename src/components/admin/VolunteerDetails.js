@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { getUserDetails } from '../../api'
+import { useHistory, useParams } from 'react-router-dom'
+import { getUserDetails, deleteUser } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+
 import {
   ChevronRightIcon,
-  PaperClipIcon,
   CalendarIcon,
   FolderIcon,
   HomeIcon,
@@ -22,12 +22,18 @@ export const VolunteerDetails = (props) => {
   const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userDetails, setUserDetails] = useState('')
+  const history = useHistory()
 
   useEffect(() => {
     getUserDetails(token, id).then((data) => {
       setUserDetails(data)
     })
-  }, [userDetails])
+  }, [])
+
+  const handleDelete = () => {
+    deleteUser(token, id)
+    history.push('/volunteers')
+  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -451,7 +457,11 @@ export const VolunteerDetails = (props) => {
                               <span className='ml-2 flex-1 w-0 truncate'>Delete Profile</span>
                             </div>
                             <div className='ml-4 flex-shrink-0'>
-                              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
+                              <a
+                                href='#'
+                                className='font-medium text-indigo-600 hover:text-indigo-500'
+                                onClick={handleDelete}
+                              >
                                 Delete
                               </a>
                             </div>
