@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { adminRegistration, registration, requestLogin } from '../../api'
+import { adminRegistration, requestLogin } from '../../api'
 
 export const Registration = (props) => {
   const { setToken } = props
@@ -21,12 +21,14 @@ export const Registration = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    registration(email, username, password)
     adminRegistration(
+      username,
+      password,
       display_name,
       legal_name,
       pronouns,
       availability,
+      email,
       telephone,
       address2,
       city,

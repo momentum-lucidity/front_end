@@ -10,19 +10,14 @@ export const requestLogin = (username, password) => {
   );
 };
 
-export const registration = (email, username, password) => {
-  return axios.post("https://momentum-lucidity.herokuapp.com/auth/users/", {
-    email: email,
-    username: username,
-    password: password,
-  });
-};
-
 export const registrationInfo = (
+  username,
+  password,
   display_name,
   legal_name,
   pronouns,
   availability,
+  email,
   telephone,
   address2,
   city,
@@ -30,11 +25,14 @@ export const registrationInfo = (
   zipcode,
   preferred_event
 ) => {
-  return axios.post("https://momentum-lucidity.herokuapp.com/profile/", {
+  return axios.post("https://momentum-lucidity.herokuapp.com/volunteers/", {
+    username: username,
+    password: password,
     display_name: display_name,
     legal_name: legal_name,
     pronouns: pronouns,
     availability: availability,
+    email: email,
     telephone: telephone,
     address2: address2,
     city: city,
@@ -47,10 +45,13 @@ export const registrationInfo = (
 };
 
 export const adminRegistration = (
+  username,
+  password,
   display_name,
   legal_name,
   pronouns,
   availability,
+  email,
   telephone,
   address2,
   city,
@@ -59,11 +60,14 @@ export const adminRegistration = (
   preferred_event
 ) => {
   return (
-    axios.post("https://momentum-lucidity.herokuapp.com/profile/", {
+    axios.post("https://momentum-lucidity.herokuapp.com/volunteers/", {
+      username: username,
+      password: password,
       display_name: display_name,
       legal_name: legal_name,
       pronouns: pronouns,
       availability: availability,
+      email: email,
       telephone: telephone,
       address2: address2,
       city: city,
