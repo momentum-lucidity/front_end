@@ -95,3 +95,19 @@ export const getEventsList = () => {
       .then((res) => res.data)
   )
 }
+
+export const getUserDetails = (token, id) => {
+  return (
+    axios
+      .get(`https://momentum-lucidity.herokuapp.com/volunteers/${id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((res) => res.data)
+  )
+}

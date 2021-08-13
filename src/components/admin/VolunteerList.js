@@ -306,7 +306,7 @@ export const VolunteerList = () => {
                         </thead>
                         <tbody className='bg-white divide-y divide-gray-200'>
                           {allVolunteers.map((person) => (
-                            <tr key={person.email}>
+                            <tr key={person.id}>
                               <td className='px-6 py-4 whitespace-nowrap'>
                                 <div className='flex items-center'>
                                   <div className='flex-shrink-0 h-10 w-10'>
@@ -329,7 +329,7 @@ export const VolunteerList = () => {
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{person.telephone}</td>
                               <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                                <a href={`/volunteers/ ${person.legal_name}`} className='text-indigo-600 hover:text-indigo-900'>
+                                <a href={`/volunteers/${person.id}`} className='text-indigo-600 hover:text-indigo-900'>
                                   Details
                                 </a>
                               </td>

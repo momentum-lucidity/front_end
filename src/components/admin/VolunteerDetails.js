@@ -1,5 +1,6 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { getUserDetails } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   ChevronRightIcon,
@@ -13,15 +14,17 @@ import {
   CheckIcon
 } from '@heroicons/react/outline'
 
-const steps = [
-  { id: '01', name: 'Registration', status: 'complete' },
-  { id: '02', name: 'Pending Approval', status: 'current' },
-  { id: '03', name: 'Approved!', status: 'upcoming' }
-]
-
-export const VolunteerDetails = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+export const VolunteerDetails = (props) => {
+  const { token } = props
   const { id } = useParams()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [userDetails, setUserDetails] = useState('')
+
+  useEffect(() => {
+    getUserDetails(token, id).then((data) => {
+      setUserDetails(data)
+    })
+  }, [userDetails])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -46,6 +49,12 @@ export const VolunteerDetails = () => {
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Volunteers', href: '/volunteers', current: true },
     { name: 'Margot Foster Profile', href: `/volunteers/${id}`, current: true }
+  ]
+
+  const steps = [
+    { id: '01', name: 'Registration', status: `${userDetails.intake_status}` },
+    { id: '02', name: 'Pending Approval', status: `${userDetails.intake_status}` },
+    { id: '03', name: 'Approved!', status: `${userDetails.intake_status}` }
   ]
 
   function classNames (...classes) {
@@ -285,21 +294,21 @@ export const VolunteerDetails = () => {
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
               <h1 className='text-2xl font-semibold text-gray-900'>
-                Margot Foster's Profile
+                {userDetails.legal_name}
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Volunteer Profile
+                  Profile
                 </h3>
               </div>
               <nav aria-label='Progress'>
                 <ol className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
                   {steps.map((step, stepIdx) => (
                     <li key={step.name} className='relative md:flex-1 md:flex'>
-                      {step.status === 'complete'
+                      {step.status === 'approved'
                         ? (
                           <a
                             href={step.href}
@@ -318,7 +327,7 @@ export const VolunteerDetails = () => {
                             </span>
                           </a>
                           )
-                        : step.status === 'current'
+                        : step.status === 'pending'
                           ? (
                             <a
                               href={step.href}
@@ -363,11 +372,11 @@ export const VolunteerDetails = () => {
                                 preserveAspectRatio='none'
                               >
                                 <path
-                                d='M0 -2L20 40L0 82'
-                                vectorEffect='non-scaling-stroke'
-                                stroke='currentcolor'
-                                strokeLinejoin='round'
-                              />
+                                  d='M0 -2L20 40L0 82'
+                                  vectorEffect='non-scaling-stroke'
+                                  stroke='currentcolor'
+                                  strokeLinejoin='round'
+                                />
                               </svg>
                             </div>
                           </>
@@ -384,7 +393,7 @@ export const VolunteerDetails = () => {
                       Preferred Name
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>Maggie</span>
+                      <span className='flex-grow'>{userDetails.display_name}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -400,7 +409,7 @@ export const VolunteerDetails = () => {
                       Legal Name
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>Margot Foster</span>
+                      <span className='flex-grow'>{userDetails.legal_name}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -416,23 +425,7 @@ export const VolunteerDetails = () => {
                       Preferred Pronouns
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>She/Her</span>
-                      <span className='ml-4 flex-shrink-0'>
-                        <button
-                          type='button'
-                          className='bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                        >
-                          Update
-                        </button>
-                      </span>
-                    </dd>
-                  </div>
-                  <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
-                    <dt className='text-sm font-medium text-gray-500'>
-                      Preferred Language
-                    </dt>
-                    <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>English</span>
+                      <span className='flex-grow'>{userDetails.pronouns}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -449,7 +442,7 @@ export const VolunteerDetails = () => {
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                       <span className='flex-grow'>
-                        margotfoster@example.com
+                        {userDetails.email}
                       </span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
@@ -464,7 +457,7 @@ export const VolunteerDetails = () => {
                   <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
                     <dt className='text-sm font-medium text-gray-500'>Phone</dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>919-555-5555</span>
+                      <span className='flex-grow'>{userDetails.telephone}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -480,7 +473,7 @@ export const VolunteerDetails = () => {
                       Street Address
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>123 Main St Apt 402</span>
+                      <span className='flex-grow'>{userDetails.address2}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -496,7 +489,7 @@ export const VolunteerDetails = () => {
                       City, State, Zip
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                      <span className='flex-grow'>Burlington, NC 27377</span>
+                      <span className='flex-grow'>{`${userDetails.city}, ${userDetails.state}, ${userDetails.zipcode}`}</span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
                           type='button'
@@ -513,7 +506,7 @@ export const VolunteerDetails = () => {
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                       <span className='flex-grow'>
-                        After School Care, Diaper Drives
+                        {userDetails.preferred_event}
                       </span>
                       <span className='ml-4 flex-shrink-0'>
                         <button
@@ -527,15 +520,11 @@ export const VolunteerDetails = () => {
                   </div>
                   <div className='py-4 sm:grid sm:py-5 sm:grid-cols-3 sm:gap-4'>
                     <dt className='text-sm font-medium text-gray-500'>
-                      Notes/Availability
+                      Availability
                     </dt>
                     <dd className='mt-1 flex text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
                       <span className='flex-grow'>
-                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                        anim incididunt cillum culpa consequat. Excepteur qui
-                        ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                        nostrud in ea officia proident. Irure nostrud pariatur
-                        mollit ad adipisicing reprehenderit deserunt qui eu.
+                        {userDetails.availability}
                       </span>
                       <span className='ml-4 flex-shrink-0'>
                         <button

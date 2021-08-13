@@ -78,7 +78,14 @@ function App () {
           <Route exact path='/admindash' component={AdminDashboard} />
           <Route exact path='/events' component={EventsList} />
           <Route path='/events/eventform' component={EventForm} />
-          <Route path='/events/:id' component={EventDetail} />
+          <Route
+            path='/events/:id'
+            component={() => (
+              <EventDetail
+                token={token}
+              />
+            )}
+          />
           <Route exact path='/volunteers' component={VolunteerList} />
           <Route path='/volunteers/:id' component={VolunteerDetails} />
           <Route path='/documents' component={DocumentList} />
