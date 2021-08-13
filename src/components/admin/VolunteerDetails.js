@@ -24,7 +24,7 @@ export const VolunteerDetails = (props) => {
     getUserDetails(token, id).then((data) => {
       setUserDetails(data)
     })
-  }, [userDetails])
+  }, [])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
