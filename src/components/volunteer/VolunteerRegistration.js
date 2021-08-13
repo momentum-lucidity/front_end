@@ -22,13 +22,13 @@ export const VolunteerRegistration = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     registrationInfo(
+      email,
       username,
       password,
       display_name,
       legal_name,
       pronouns,
       availability,
-      email,
       telephone,
       address2,
       city,

@@ -22,13 +22,13 @@ export const Registration = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     adminRegistration(
+      email,
       username,
       password,
       display_name,
       legal_name,
       pronouns,
       availability,
-      email,
       telephone,
       address2,
       city,
