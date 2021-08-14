@@ -446,7 +446,7 @@ export const VolunteerDetails = (props) => {
                               <span className='ml-2 flex-1 w-0 truncate'>Edit Profile</span>
                             </div>
                             <div className='ml-4 flex-shrink-0'>
-                              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
+                              <a href={`/volunteers/${id}/edit`} className='font-medium text-indigo-600 hover:text-indigo-500'>
                                 Edit
                               </a>
                             </div>

@@ -10,6 +10,7 @@ import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/admin/Registration'
 import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
+import { EditVolunteer } from './components/admin/EditVolunteer'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
 import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration'
@@ -87,7 +88,15 @@ function App () {
             )}
           />
           <Route exact path='/volunteers' component={VolunteerList} />
-          <Route path='/volunteers/:id' component={VolunteerDetails} />
+          <Route exact path='/volunteers/:id' component={VolunteerDetails} />
+          <Route
+            path='volunteers/:id/edit'
+            component={() => (
+              <EditVolunteer
+                token={token}
+              />
+            )}
+          />
           <Route path='/documents' component={DocumentList} />
           <Route path='/announcements' component={CreateAnnouncements} />
           <Route exact path='/dreamcenter/volunteerdash' component={VolunteerDashboard} />

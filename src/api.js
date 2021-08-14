@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios'
 
 export const requestLogin = (username, password) => {
   return axios.post(
-    "https://momentum-lucidity.herokuapp.com/auth/token/login/",
+    'https://momentum-lucidity.herokuapp.com/auth/token/login/',
     {
       username: username,
-      password: password,
+      password: password
     }
-  );
-};
+  )
+}
 
 export const registrationInfo = (
   email,
@@ -25,7 +25,7 @@ export const registrationInfo = (
   zipcode,
   preferred_event
 ) => {
-  return axios.post("https://momentum-lucidity.herokuapp.com/auth/users/", {
+  return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     email: email,
     username: username,
     password: password,
@@ -38,11 +38,11 @@ export const registrationInfo = (
     city: city,
     state: state,
     zipcode: zipcode,
-    user_status: "volunteer",
-    intake_status: "registered",
-    preferred_event: preferred_event,
-  });
-};
+    user_status: 'volunteer',
+    intake_status: 'registered',
+    preferred_event: preferred_event
+  })
+}
 
 export const adminRegistration = (
   email,
@@ -59,7 +59,7 @@ export const adminRegistration = (
   zipcode,
   preferred_event
 ) => {
-  return axios.post("https://momentum-lucidity.herokuapp.com/auth/users/", {
+  return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     email: email,
     username: username,
     password: password,
@@ -72,11 +72,11 @@ export const adminRegistration = (
     city: city,
     state: state,
     zipcode: zipcode,
-    user_status: "coordinator",
-    intake_status: "approved",
-    preferred_event: preferred_event,
-  });
-};
+    user_status: 'coordinator',
+    intake_status: 'approved',
+    preferred_event: preferred_event
+  })
+}
 
 export const getVolunteerList = () => {
   return (
@@ -88,9 +88,9 @@ export const getVolunteerList = () => {
 
 export const getEventsList = () => {
   return axios
-    .get("https://momentum-lucidity.herokuapp.com/events/")
-    .then((res) => res.data);
-};
+    .get('https://momentum-lucidity.herokuapp.com/events/')
+    .then((res) => res.data)
+}
 
 export const getUserDetails = (token, id) => {
   return (
