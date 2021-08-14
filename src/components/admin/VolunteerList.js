@@ -43,7 +43,7 @@ export const VolunteerList = () => {
   useEffect(() => {
     getVolunteerList()
       .then((data) => setAllVolunteers(data))
-  }, [])
+  }, [allVolunteers])
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>

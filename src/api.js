@@ -79,10 +79,12 @@ export const adminRegistration = (
 };
 
 export const getVolunteerList = () => {
-  return axios
-    .get("https://momentum-lucidity.herokuapp.com/volunteers/")
-    .then((res) => res.data);
-};
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/users/')
+      .then((res) => res.data)
+  )
+}
 
 export const getEventsList = () => {
   return axios
@@ -91,16 +93,32 @@ export const getEventsList = () => {
 };
 
 export const getUserDetails = (token, id) => {
-  return axios
-    .get(
-      `https://momentum-lucidity.herokuapp.com/volunteers/${id}/`,
-      {},
-      {
-        headers: {
-          Authorization: `Token ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((res) => res.data);
-};
+  return (
+    axios
+      .get(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((res) => res.data)
+  )
+}
+
+export const deleteUser = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+  )
+}
