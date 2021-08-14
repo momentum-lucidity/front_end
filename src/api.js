@@ -28,7 +28,7 @@ export const registration = (email, username, password) => {
 export const getVolunteerList = () => {
   return (
     axios
-      .get('https://momentum-lucidity.herokuapp.com/volunteers/')
+      .get('https://momentum-lucidity.herokuapp.com/users/')
       .then((res) => res.data)
   )
 }
@@ -44,7 +44,7 @@ export const getEventsList = () => {
 export const getUserDetails = (token, id) => {
   return (
     axios
-      .get(`https://momentum-lucidity.herokuapp.com/volunteers/${id}/`,
+      .get(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
         {},
         {
           headers: {
@@ -54,5 +54,20 @@ export const getUserDetails = (token, id) => {
         }
       )
       .then((res) => res.data)
+  )
+}
+
+export const deleteUser = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
   )
 }
