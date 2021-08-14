@@ -33,7 +33,7 @@ export const VolunteerDashboard = () => {
             </div>
             <div>
               <h1 className='text-2xl font-bold text-gray-900'>
-                Welcome, Tootsie
+                Welcome, (volunter name here)
               </h1>
               <p className='text-sm font-medium text-gray-500'>
                 joined{' '}
