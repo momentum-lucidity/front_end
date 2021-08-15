@@ -12,14 +12,16 @@ import {
   XIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import { getAnnouncements, createAnnouncement } from "../../api";
+import { getAnnouncements, createAnnouncement, deleteAnnouncement } from "../../api";
 import moment from "moment";
 import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
-  const [alert_header, setAlertHeader] = useState("");
+  const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
+  const { id } = useParams()
   const history = useHistory()
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -29,10 +31,15 @@ export const CreateAnnouncements = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    createAnnouncement(alert_header, text)
+    createAnnouncement(alertHeader, text)
     .then(response => {
       history.push('/announcements')
     })
+  }
+
+  const handleDelete = () => {
+    deleteAnnouncement(id)
+    history.push('/announcements')
   }
 
   const navigation = [
@@ -346,6 +353,7 @@ export const CreateAnnouncements = () => {
                               <TrashIcon
                                 className="-ml-1 mr-2 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
+                                onClick={handleDelete}
                               />
                               Delete
                             </button>
@@ -376,7 +384,7 @@ export const CreateAnnouncements = () => {
                         <input
                           id="announcement-heading"
                           name="announcement-heading"
-                          value={alert_header}
+                          value={alertHeader}
                           onChange={(event) => setAlertHeader(event.target.value)}
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                         />
