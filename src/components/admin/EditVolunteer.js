@@ -39,13 +39,9 @@ export const EditVolunteer = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(userDetails.id)
+    console.log(id)
     console.log(token)
     editUser(token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent)
-      .then((res) => {
-        console.log(res)
-      }
-      )
     history.push('/volunteers')
   }
 
