@@ -12,34 +12,42 @@ import {
   XIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import { getAnnouncements, createAnnouncement, deleteAnnouncement } from "../../api";
+import {
+  getAnnouncements,
+  createAnnouncement,
+  deleteAnnouncement,
+} from "../../api";
 import moment from "moment";
 import { useHistory } from "react-router";
 // import { useParams } from "react-router-dom";
-import { sortBy } from "lodash";
+import { orderBy } from "lodash";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
-  const [id, setID] = useState('')
+  const [id, setID] = useState("");
   // const { id } = useParams()
-  const history = useHistory()
+  const history = useHistory();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     getAnnouncements().then((data) => setAnnoucements(data));
   }, []);
 
-  const sortedAnnouncements = sortBy(announcements, function(e) {
-    return new moment(e.date)
-  }).reverse()
+  const sortedAnnouncements = orderBy(
+    announcements,
+    [(object) => new moment(object.date)],
+    ["desc"]
+  );
+
+  console.log(sortedAnnouncements)
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    createAnnouncement(id, alertHeader, text)
-    window.location.reload(false)
-  }
+    event.preventDefault();
+    createAnnouncement(id, alertHeader, text);
+    window.location.reload(false);
+  };
 
   // const handleDelete = () => {
   //   deleteAnnouncement(id)
@@ -368,7 +376,10 @@ export const CreateAnnouncements = () => {
                   ))}
                 </ul>
               </div>
-              <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+              <form
+                className="space-y-8 divide-y divide-gray-200"
+                onSubmit={handleSubmit}
+              >
                 <div className="space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200">
                   <div className="pt-8 space-y-8 ">
                     <div>
@@ -376,7 +387,6 @@ export const CreateAnnouncements = () => {
                         Add A New Announcement
                       </h3>
                     </div>
-
 
                     <div className="sm:col-span-6">
                       <label
@@ -408,7 +418,9 @@ export const CreateAnnouncements = () => {
                           id="announcement-heading"
                           name="announcement-heading"
                           value={alertHeader}
-                          onChange={(event) => setAlertHeader(event.target.value)}
+                          onChange={(event) =>
+                            setAlertHeader(event.target.value)
+                          }
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                         />
                       </div>
