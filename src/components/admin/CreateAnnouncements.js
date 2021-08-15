@@ -296,17 +296,18 @@ export const CreateAnnouncements = () => {
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5" />
                 <ul className="divide-y divide-gray-200">
                   {announcements.map((announcement) => (
-                    <li key={announcement.title} className="py-4">
+                    <li key={announcement.alert_header} className="py-4">
                       <div className="flex space-x-3">
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-500">
                               {moment(announcement.date).format("DD/MM/YYYY")}
                             </p>
-                          </div>
-                          <h3 className="text-sm font-medium">
+                            <h3 className="text-sm font-medium">
                             {announcement.title}
                           </h3>
+                          <p className='text-sm text-gray-500'>posted by:</p>
+                          </div>
                           <p className="text-sm text-gray-500">
                             {announcement.text}
                           </p>
