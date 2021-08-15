@@ -1,19 +1,27 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { MockEventDetail } from '../../MockEventDetail'
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon
-} from '@heroicons/react/outline'
+import { useParams, useHistory } from 'react-router'
+import { getEventDetails, deleteEvent } from '../../api'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
 
-export const EventDetail = () => {
+export const EventDetail = (props) => {
+  const { token } = props
+  const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [eventDetails, setEventDetails] = useState('')
+  const history = useHistory()
+
+  useEffect(() => {
+    getEventDetails(token, id).then((data) => {
+      setEventDetails(data)
+    })
+  }, [])
+
+  const handleDelete = () => {
+    deleteEvent(token, id)
+    history.push('/events')
+  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },

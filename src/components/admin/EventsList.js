@@ -312,7 +312,7 @@ export const EventsList = () => {
                     <div className='flex justify-between space-x-3'>
                       <div className='min-w-0 flex-1'>
                         <a
-                          href={`/events/${event.title}`}
+                          href={`/events/${event.id}`}
                           className='block focus:outline-none'
                         >
                           <span
@@ -320,7 +320,7 @@ export const EventsList = () => {
                             aria-hidden='true'
                           />
                           <p className='text-sm font-medium text-gray-900 truncate'>
-                            {event.title}
+                            {event.event_header}
                           </p>
                           <p className='text-sm text-gray-500 truncate'>
                             {event.date}
