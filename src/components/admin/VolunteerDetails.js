@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserDetails, deleteUser } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 
@@ -446,9 +446,16 @@ export const VolunteerDetails = (props) => {
                               <span className='ml-2 flex-1 w-0 truncate'>Edit Profile</span>
                             </div>
                             <div className='ml-4 flex-shrink-0'>
-                              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
+                              <Link
+                                to={{
+
+                                  pathname: `/volunteers/edit/${id}/`,
+                                  state: { userDetails: userDetails }
+                                }}
+                                className='font-medium text-indigo-600 hover:text-indigo-500'
+                              >
                                 Edit
-                              </a>
+                              </Link>
                             </div>
                           </li>
                           <li className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'>

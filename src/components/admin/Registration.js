@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { adminRegistration, requestLogin } from '../../api'
 
 export const Registration = (props) => {
@@ -7,16 +7,16 @@ export const Registration = (props) => {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [display_name, setDisplayName] = useState('')
-  const [legal_name, setLegalName] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [legalName, setLegalName] = useState('')
   const [pronouns, setPronouns] = useState('')
   const [availability, setAvailability] = useState('')
   const [telephone, setTelephone] = useState('')
   const [address2, setAddress2] = useState('')
   const [city, setCity] = useState('')
   const [state, setStateName] = useState('')
-  const [zipcode, setZipcode] = useState('')
-  const [preferred_event, setPreferredEvent] = useState('')
+  const [zip, setZip] = useState('')
+  const [preferredEvent, setPreferredEvent] = useState('')
   const history = useHistory()
 
   const handleSubmit = (event) => {
@@ -25,16 +25,16 @@ export const Registration = (props) => {
       email,
       username,
       password,
-      display_name,
-      legal_name,
+      displayName,
+      legalName,
       pronouns,
       availability,
       telephone,
       address2,
       city,
       state,
-      zipcode,
-      preferred_event)
+      zip,
+      preferredEvent)
     requestLogin(username, password)
       .then((data) => {
         if (data && data.data.auth_token) {
@@ -110,7 +110,7 @@ export const Registration = (props) => {
                         type='text'
                         name='legal-name'
                         id='legal-name'
-                        value={legal_name}
+                        value={legalName}
                         onChange={(event) => setLegalName(event.target.value)}
                         autoComplete='given-name'
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
@@ -125,7 +125,7 @@ export const Registration = (props) => {
                         type='text'
                         name='preferred-name'
                         id='preferred-name'
-                        value={display_name}
+                        value={displayName}
                         onChange={(event) => setDisplayName(event.target.value)}
                         autoComplete='family-name'
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
@@ -161,7 +161,7 @@ export const Registration = (props) => {
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                       />
                     </div>
-                    
+
                     <div className='col-span-6 sm:col-span-4'>
                       <label htmlFor='city' className='block text-sm font-medium text-gray-700'>
                         City
@@ -198,8 +198,8 @@ export const Registration = (props) => {
                         type='text'
                         name='postal-code'
                         id='postal-code'
-                        value={zipcode}
-                        onChange={(event) => setZipcode(event.target.value)}
+                        value={zip}
+                        onChange={(event) => setZip(event.target.value)}
                         autoComplete='postal-code'
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                       />
@@ -231,7 +231,7 @@ export const Registration = (props) => {
                           type='textarea'
                           name='preferred-events'
                           id='preferred-events'
-                          value={preferred_event}
+                          value={preferredEvent}
                           onChange={(event) => setPreferredEvent(event.target.value)}
                           className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-16 sm:text-sm border-gray-300 rounded-md'
                           placeholder='I prefer to work at these types of events...'
