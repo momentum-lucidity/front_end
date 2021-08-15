@@ -122,3 +122,11 @@ export const deleteUser = (token, id) => {
       )
   )
 }
+
+export const getAnnouncements = () => {
+  return (
+    axios
+    .get('https://momentum-lucidity.herokuapp.com/announcements/')
+    .then((res) => res.data)
+  )
+}
