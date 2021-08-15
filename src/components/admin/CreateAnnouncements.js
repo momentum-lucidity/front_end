@@ -41,8 +41,6 @@ export const CreateAnnouncements = () => {
     ["desc"]
   );
 
-  console.log(sortedAnnouncements)
-
   const handleSubmit = (event) => {
     event.preventDefault();
     createAnnouncement(id, alertHeader, text);
