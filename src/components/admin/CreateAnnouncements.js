@@ -301,14 +301,14 @@ export const CreateAnnouncements = () => {
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center justify-between">
                             <p className="text-sm text-gray-500">
-                              {moment(announcement.date).format("DD/MM/YYYY")}
+                              {moment(announcement.date).format("LL")}
                             </p>
                             <h3 className="text-sm font-medium">
-                            {announcement.title}
-                          </h3>
-                          <p className='text-sm text-gray-500'>posted by:</p>
+                              {announcement.title}
+                            </h3>
+                            <p className="text-sm text-gray-500">posted by:</p>
                           </div>
-                          <p className="text-sm text-gray-500">
+                          <p className="items-center text-sm text-gray-500">
                             {announcement.text}
                           </p>
                           <span className="hidden sm:block">
