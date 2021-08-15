@@ -327,13 +327,13 @@ export const EventsList = () => {
                             aria-hidden="true"
                           />
                           <p className="text-sm font-medium text-gray-900 truncate">
-                            {event.title}
+                            {event.event_header}
                           </p>
                           <p className="text-sm text-gray-500 truncate">
                             {event.date}
                           </p>
                           <p className="text-sm text-gray-500 truncate">
-                            {event.time}
+                            {event.start_time}
                           </p>
                           <p className="line-clamp-2 text-sm text-gray-600">
                             {event.location}
