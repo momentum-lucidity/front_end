@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MockEventDetail } from '../../MockEventDetail'
+import { Fragment, useState } from 'react';
+import { Dialog, Menu, Transition } from '@headlessui/react';
+import { MockEventDetail } from '../../MockEventDetail';
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -9,11 +9,22 @@ import {
   InboxIcon,
   MenuAlt2Icon,
   UsersIcon,
-  XIcon
-} from '@heroicons/react/outline'
+  XIcon,
+  TrashIcon
+} from '@heroicons/react/outline';
+import { useParams, useHistory } from 'react-router-dom';
+import { deleteEvent } from '../../api';
 
-export const EventDetail = () => {
+export const EventDetail = (props) => {
+  const { token } = props
+  const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const history = useHistory()
+
+  const handleDelete = () => {
+    deleteEvent(token, id)
+    history.push('/events')
+  };
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -443,6 +454,26 @@ export const EventDetail = () => {
                           </div>
                         </div>
                       </div>
+                      <div>
+                        <div className='w-0 flex-1 flex items-center'>
+                          <TrashIcon
+                            className='flex-shrink-0 h-5 w-5 text-gray-400'
+                            aria-hidden='false'
+                          />
+                          <span className='ml-2 flex-1 w-0 truncate'>
+                            Delete Event
+                          </span>
+                        </div>
+                        <div className='ml-4 flex-shrink-0'>
+                          <a
+                            href='#'
+                            className='font-medium text-indigo-600 hover:text-indigo-500'
+                            onClick={handleDelete}
+                          >
+                            Delete Event
+                          </a>
+                        </div>
+                      </div>
                     </dl>
                   </div>
                 </div>
@@ -454,4 +485,4 @@ export const EventDetail = () => {
       </div>
     </div>
   )
-}
+};
