@@ -130,3 +130,14 @@ export const getAnnouncements = () => {
     .then((res) => res.data)
   )
 }
+
+export const createAnnouncement = (alert_header, text) => {
+  return (
+    axios
+    .post('https://momentum-lucidity.herokuapp.com/announcements/', {
+      alert_header: alert_header,
+      text: text
+    })
+    .then((res) => res.data)
+  )
+}

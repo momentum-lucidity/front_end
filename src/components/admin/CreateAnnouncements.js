@@ -295,8 +295,8 @@ export const CreateAnnouncements = () => {
                 </h1>
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5" />
                 <ul className="divide-y divide-gray-200">
-                  {announcements.map((announcement) => (
-                    <li key={announcement.alert_header} className="py-4">
+                  {announcements.map((announcement, idx) => (
+                    <li key={announcement.id} className="py-4">
                       <div className="flex space-x-3">
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center justify-between">
@@ -304,7 +304,7 @@ export const CreateAnnouncements = () => {
                               {moment(announcement.date).format("LL")}
                             </p>
                             <h3 className="text-sm font-medium">
-                              {announcement.title}
+                              {announcement.alert_header}
                             </h3>
                             <p className="text-sm text-gray-500">posted by:</p>
                           </div>
