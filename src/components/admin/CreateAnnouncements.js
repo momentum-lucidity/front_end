@@ -379,7 +379,6 @@ export const CreateAnnouncements = () => {
                           value={alert_header}
                           onChange={(event) => setAlertHeader(event.target.value)}
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={""}
                         />
                       </div>
                     </div>
@@ -399,7 +398,6 @@ export const CreateAnnouncements = () => {
                           value={text}
                           onChange={(event) => setText(event.target.value)}
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={""}
                         />
                       </div>
                       <p className="mt-2 text-sm text-gray-500">
