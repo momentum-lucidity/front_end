@@ -16,6 +16,7 @@ import { getAnnouncements, createAnnouncement, deleteAnnouncement } from "../../
 import moment from "moment";
 import { useHistory } from "react-router";
 // import { useParams } from "react-router-dom";
+import { sortBy } from "lodash";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
@@ -30,10 +31,14 @@ export const CreateAnnouncements = () => {
     getAnnouncements().then((data) => setAnnoucements(data));
   }, []);
 
+  const sortedAnnouncements = sortBy(announcements, function(e) {
+    return new moment(e.date)
+  }).reverse()
+
   const handleSubmit = (event) => {
     event.preventDefault()
     createAnnouncement(id, alertHeader, text)
-    .then((res) => res.data)
+    window.location.reload(false)
   }
 
   // const handleDelete = () => {
@@ -312,7 +317,7 @@ export const CreateAnnouncements = () => {
                   Current Announcements
                 </h1>
                 <ul className="divide-y divide-gray-200">
-                  {announcements.map((announcement, idx) => (
+                  {sortedAnnouncements.map((announcement, idx) => (
                     <li
                       key={announcement.id}
                       className="py-4 sm:border-t sm:border-gray-200"
