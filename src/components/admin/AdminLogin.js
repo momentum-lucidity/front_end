@@ -6,7 +6,7 @@ import { requestLogin } from '../../api'
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = props
+  const { setToken, setUser } = props
   const history = useHistory()
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -14,6 +14,7 @@ export const AdminLogin = (props) => {
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
+          setUser(data.data.username)
           history.push('/admindash')
         }
       })

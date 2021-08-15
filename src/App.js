@@ -1,4 +1,4 @@
-import './App.css'
+import { React, useEffect, useState } from 'react'
 import { useLocalStorageState } from 'use-local-storage-state'
 import { AdminDashboard } from './components/admin/AdminDashboard'
 import { AdminLogin } from './components/admin/AdminLogin'
@@ -19,9 +19,13 @@ import 'tailwindcss/tailwind.css'
 import { AdminLogout } from './components/admin/AdminLogout'
 import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
 import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
+import { getUserDetails, getVolunteerList } from './api'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
+  const [loggedInID, setLoggedInID] = useState('')
+  const [user, setUser] = useState('')
+
   return (
     <Router>
       <div className='App'>
@@ -31,6 +35,8 @@ function App () {
             component={() => (
               <AdminLogin
                 setToken={setToken}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
@@ -40,6 +46,8 @@ function App () {
               <AdminLogout
                 token={token}
                 setToken={setToken}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
@@ -48,6 +56,8 @@ function App () {
             component={() => (
               <VolunteerLogin
                 setToken={setToken}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
@@ -57,6 +67,8 @@ function App () {
               <VolunteerLogout
                 token={token}
                 setToken={setToken}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
@@ -65,6 +77,7 @@ function App () {
             component={() => (
               <Registration
                 setToken={setToken}
+                setUser={setUser}
               />
             )}
           />
@@ -73,34 +86,120 @@ function App () {
             component={() => (
               <VolunteerRegistration
                 setToken={setToken}
+                setUser={setUser}
               />
             )}
           />
-          <Route exact path='/admindash' component={AdminDashboard} />
-          <Route exact path='/events' component={EventsList} />
-          <Route path='/events/eventform' component={EventForm} />
+          <Route
+            exact path='/admindash'
+            component={() => (
+              <AdminDashboard
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/events'
+            component={() => (
+              <EventsList
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/events/eventform'
+            component={() => (
+              <EventForm
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
           <Route
             path='/events/:id'
             component={() => (
               <EventDetail
                 token={token}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
-          <Route exact path='/volunteers' component={VolunteerList} />
-          <Route exact path='/volunteers/:id' component={VolunteerDetails} />
+          <Route
+            exact path='/volunteers'
+            component={() => (
+              <VolunteerList
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/volunteers/:id'
+            component={() => (
+              <VolunteerDetails
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
           <Route
             exact path='/volunteers/edit/:id'
             component={() => (
               <EditVolunteer
                 token={token}
+                user={user}
+                setUser={setUser}
               />
             )}
           />
-          <Route path='/documents' component={DocumentList} />
-          <Route path='/announcements' component={CreateAnnouncements} />
-          <Route exact path='/dreamcenter/volunteerdash' component={VolunteerDashboard} />
-          <Route exact path='/dreamcenter/profile' component={VolunteerProfile} />
+          <Route
+            exact path='/documents'
+            component={() => (
+              <DocumentList
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/announcements'
+            component={() => (
+              <CreateAnnouncements
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/volunteerdash'
+            component={() => (
+              <VolunteerDashboard
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/profile'
+            component={() => (
+              <VolunteerProfile
+                token={token}
+                user={user}
+                setUser={setUser}
+              />
+            )}
+          />
         </Switch>
       </div>
     </Router>
