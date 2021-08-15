@@ -319,8 +319,8 @@ export const EventForm = () => {
           </div>
         </div>
         <>
-          <form onSubmit={(event) => handleSubmit(event)} className='space-y-8 divide-y divide-gray-200 overflow-y-auto'>
-            <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5 overflow-y-auto'>
+          <form className='space-y-8 divide-y divide-gray-200 overflow-y-auto'>
+            <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
                   Create an Event
