@@ -138,6 +138,5 @@ export const createAnnouncement = (alert_header, text) => {
       alert_header: alert_header,
       text: text
     })
-    .then((res) => res.data)
   )
 }

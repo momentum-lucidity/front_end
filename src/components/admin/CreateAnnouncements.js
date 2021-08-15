@@ -12,16 +12,28 @@ import {
   XIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import { getAnnouncements } from "../../api";
+import { getAnnouncements, createAnnouncement } from "../../api";
 import moment from "moment";
+import { useHistory } from "react-router";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
+  const [alert_header, setAlertHeader] = useState("");
+  const [text, setText] = useState("");
+  const history = useHistory()
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     getAnnouncements().then((data) => setAnnoucements(data));
   }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    createAnnouncement(alert_header, text)
+    .then(response => {
+      history.push('/announcements')
+    })
+  }
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -293,10 +305,12 @@ export const CreateAnnouncements = () => {
                 <h1 className="flex items-left text-med font-medium">
                   Current Announcements
                 </h1>
-                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5" />
                 <ul className="divide-y divide-gray-200">
                   {announcements.map((announcement, idx) => (
-                    <li key={announcement.id} className="py-4">
+                    <li
+                      key={announcement.id}
+                      className="py-4 sm:border-t sm:border-gray-200"
+                    >
                       <div className="flex space-x-3">
                         <div className="flex-1 space-y-1">
                           <div className="flex items-center justify-between">
@@ -342,46 +356,73 @@ export const CreateAnnouncements = () => {
                   ))}
                 </ul>
               </div>
-              <form className="space-y-8 divide-y divide-gray-200">
-                <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                  <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
+                <div className="space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200">
+                  <div className="pt-8 space-y-8 ">
+                    <div>
+                      <h3 className="text-lg leading-6 font-medium text-gray-900">
+                        Add A New Announcement
+                      </h3>
+                    </div>
+
+                    <div className="sm:col-span-6">
+                      <label
+                        htmlFor="announcement-heading"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Announcement Heading
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          id="announcement-heading"
+                          name="announcement-heading"
+                          value={alert_header}
+                          onChange={(event) => setAlertHeader(event.target.value)}
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          defaultValue={""}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="sm:col-span-6">
                       <label
                         htmlFor="about"
-                        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                        className="block text-sm font-medium text-gray-700"
                       >
-                        Add A New Event
+                        Announcement Body
                       </label>
-                      <div className="mt-1 sm:mt-0 sm:col-span-2">
+                      <div className="mt-1">
                         <textarea
                           id="about"
                           name="about"
                           rows={3}
-                          className="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue=""
+                          value={text}
+                          onChange={(event) => setText(event.target.value)}
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          defaultValue={""}
                         />
-                        <p className="mt-2 text-sm text-gray-500">
-                          Write your new announcement here.
-                        </p>
                       </div>
+                      <p className="mt-2 text-sm text-gray-500">
+                        Write your the body of your announcement here.
+                      </p>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="pt-5">
-                      <div className="flex justify-end">
-                        <button
-                          type="button"
-                          className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="submit"
-                          className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
+                <div className="pt-5">
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </form>
