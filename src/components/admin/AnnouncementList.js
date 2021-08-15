@@ -17,7 +17,7 @@ import moment from "moment";
 import { useHistory } from "react-router";
 // import { useParams } from "react-router-dom";
 
-export const CreateAnnouncements = () => {
+export const AnnouncementList = () => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");

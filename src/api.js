@@ -134,10 +134,11 @@ export const getAnnouncements = () => {
   )
 }
 
-export const createAnnouncement = (alertHeader, text) => {
+export const createAnnouncement = (id, alertHeader, text) => {
   return (
     axios
     .post('https://momentum-lucidity.herokuapp.com/announcements/', {
+      id: id,
       alert_header: alertHeader,
       text: text
     })

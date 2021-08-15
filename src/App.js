@@ -9,7 +9,7 @@ import { EventDetail } from './components/admin/EventDetail'
 import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/admin/Registration'
-import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
+import { AnnouncementList } from './components/admin/AnnouncementList'
 import { EditVolunteer } from './components/admin/EditVolunteer'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
@@ -98,7 +98,7 @@ function App () {
             )}
           />
           <Route path='/documents' component={DocumentList} />
-          <Route path='/announcements' component={CreateAnnouncements} />
+          <Route path='/announcements' component={AnnouncementList} />
           <Route exact path='/dreamcenter/volunteerdash' component={VolunteerDashboard} />
           <Route exact path='/dreamcenter/profile' component={VolunteerProfile} />
         </Switch>
