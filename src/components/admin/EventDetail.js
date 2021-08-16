@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+import { getEventDetails, deleteEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MockEventDetail } from '../../MockEventDetail'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -13,7 +13,6 @@ import {
   TrashIcon
 } from '@heroicons/react/outline'
 import { useParams, useHistory } from 'react-router-dom'
-import { deleteEvent } from '../../api'
 
 export const EventDetail = (props) => {
   const { token } = props
@@ -307,17 +306,16 @@ export const EventDetail = (props) => {
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
-              {event.map((detail, idx) => (
                 <div
-                  key={detail.id}
+                  key={event.id}
                   className='bg-white shadow overflow-hidden sm:rounded-lg'
                 >
                   <div className='px-4 py-5 sm:px-6'>
                     <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                      {detail.event_header}
+                      {event.event_header}
                     </h3>
                     <p className='text-sm text-gray-500'>
-                      {detail.description} {detail.type}
+                      {event.description} {event.type}
                     </p>
                   </div>
                   <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
@@ -327,7 +325,7 @@ export const EventDetail = (props) => {
                           When
                         </dt>
                         <dd className='mt-1 text-sm text-gray-900'>
-                          {detail.date} {detail.start_time}
+                          {event.date} {event.start_time}
                         </dd>
                       </div>
                       <div className='sm:col-span-1'>
@@ -418,11 +416,10 @@ export const EventDetail = (props) => {
                               Volunteer Slot
                             </p>
                             <p className='text-sm font-medium text-gray-500'>
-                              {detail.volunteer_slots[0].volunteer_name}
+                              
                             </p>
                             <p className='text-sm text-gray-500 truncate'>
-                              {detail.volunteer_slots[0].start_time}-
-                              {detail.volunteer_slots[0].end_time}
+                              
                             </p>
                           </div>
                         </div>
@@ -438,11 +435,10 @@ export const EventDetail = (props) => {
                               Volunteer Slot
                             </p>
                             <p className='text-sm font-medium text-gray-500'>
-                              {detail.volunteer_slots[1].volunteer_name}
+                              
                             </p>
                             <p className='text-sm text-gray-500 truncate'>
-                              {detail.volunteer_slots[1].start_time}-
-                              {detail.volunteer_slots[1].end_time}
+                              
                             </p>
                           </div>
                         </div>
