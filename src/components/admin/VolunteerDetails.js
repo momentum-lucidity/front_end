@@ -153,7 +153,7 @@ export const VolunteerDetails = (props) => {
                     </a>
                   ))}
                 </nav>
-              </div>
+              </div>0
             </div>
           </Transition.Child>
           <div className='flex-shrink-0 w-14'>
