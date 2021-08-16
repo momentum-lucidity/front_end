@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom'
+import { Fragment, useState } from 'react';
+import { Dialog, Menu, Transition } from '@headlessui/react';
+import { Link, useHistory } from 'react-router-dom';
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -10,10 +10,20 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon
-} from '@heroicons/react/outline'
+} from '@heroicons/react/outline';
+import axios from 'axios';
 
-export const EventForm = () => {
+export const EventForm = (props) => {
+  const { token } = props
+  // const [eventpk, setEventpk] = useState("");
+  const [event_header, setEventHeader] = useState('')
+  const [date, setDate] = useState('')
+  const [start_time, setStartTime] = useState('')
+  const [end_time, setEndTime] = useState('')
+  const [type, setType] = useState('')
+  const [description, setDescription] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const history = useHistory()
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -48,6 +58,39 @@ export const EventForm = () => {
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
   }
+
+  const handleSubmit = (event) => {
+    alert('Your event has been submitted!')
+    axios
+      .post(
+        'https://momentum-lucidity.herokuapp.com/events/',
+        {
+          event_header: event_header,
+          date: date,
+          start_time: start_time,
+          end_time: end_time,
+          type: type,
+          description: description
+        }
+        // {
+        //   headers: {
+        //     Authorization: `Token ${token}`,
+        //     'Content-Type': 'application/json'
+        //   }
+        // }
+      )
+      .then((response) => {
+        console.log({ start_time })
+        history.push('/events')
+      })
+    event.preventDefault()
+    setEventHeader('')
+    setDate('')
+    setStartTime('')
+    setEndTime('')
+    setType('')
+    setDescription('')
+  };
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
@@ -299,6 +342,8 @@ export const EventForm = () => {
                       name='event-name'
                       id='event-name'
                       autoComplete='given-name'
+                      value={event_header}
+                      onChange={(event) => setEventHeader(event.target.value)}
                       className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     />
                   </div>
@@ -306,17 +351,19 @@ export const EventForm = () => {
 
                 <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
                   <label
-                    htmlFor='event-location'
+                    htmlFor='event-date'
                     className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
                   >
-                    Event Location
+                    Event Date
                   </label>
                   <div className='mt-1 sm:mt-0 sm:col-span-2'>
                     <input
-                      type='text'
-                      name='event-location'
-                      id='event-location'
-                      autoComplete='family-name'
+                      type='date'
+                      name='event-date'
+                      id='event-date'
+                      autoComplete='given-name'
+                      value={date}
+                      onChange={(event) => setDate(event.target.value)}
                       className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     />
                   </div>
@@ -334,11 +381,36 @@ export const EventForm = () => {
                       id='event-start-time'
                       name='event-start-time'
                       autoComplete='event-start-time'
+                      value={start_time}
+                      onChange={(event) => setStartTime(event.target.value)}
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >
-                      <option>12:00</option>
-                      <option>1:00</option>
-                      <option>2:00</option>
+                      <option>-</option>
+                      <option>12:00 AM</option>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </div>
                 </div>
@@ -355,12 +427,57 @@ export const EventForm = () => {
                       id='event-end-time'
                       name='event-end-time'
                       autoComplete='event-end-time'
+                      value={end_time}
+                      onChange={(event) => setEndTime(event.target.value)}
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >
-                      <option>12:00</option>
-                      <option>1:00</option>
-                      <option>2:00</option>
+                      <option>-</option>
+                      <option>12:00 AM</option>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
                     </select>
+                  </div>
+                </div>
+
+                <div className='sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5'>
+                  <label
+                    htmlFor='event-type'
+                    className='block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2'
+                  >
+                    Event Type
+                  </label>
+                  <div className='mt-1 sm:mt-0 sm:col-span-2'>
+                    <input
+                      type='text'
+                      name='event-type'
+                      id='event-type'
+                      autoComplete='given-name'
+                      value={type}
+                      onChange={(event) => setType(event.target.value)}
+                      className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                    />
                   </div>
                 </div>
 
@@ -376,6 +493,8 @@ export const EventForm = () => {
                       type='text'
                       name='event-details'
                       id='event-details'
+                      value={description}
+                      onChange={(event) => setDescription(event.target.value)}
                       className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     />
                   </div>
@@ -392,6 +511,7 @@ export const EventForm = () => {
                       </button>
                     </Link>
                     <button
+                      onClick={handleSubmit}
                       type='submit'
                       className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                     >
@@ -406,4 +526,4 @@ export const EventForm = () => {
       </div>
     </div>
   )
-}
+};
