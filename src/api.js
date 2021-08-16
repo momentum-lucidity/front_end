@@ -151,3 +151,18 @@ export const deleteAnnouncement = (alertpk) => {
     {})
   )
 }
+
+export const deleteEvent = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/events/${id}/`,
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+  )
+}
