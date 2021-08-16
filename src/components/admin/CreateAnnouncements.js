@@ -19,15 +19,14 @@ import {
 } from "../../api";
 import moment from "moment";
 import { useHistory } from "react-router";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { orderBy } from "lodash";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
-  const [id, setID] = useState("");
-  // const { id } = useParams()
+  const { alertpk } = useParams()
   const history = useHistory();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -43,14 +42,14 @@ export const CreateAnnouncements = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createAnnouncement(id, alertHeader, text);
+    createAnnouncement(alertHeader, text);
     window.location.reload(false);
   };
 
-  // const handleDelete = () => {
-  //   deleteAnnouncement(id)
-  //   history.push('/announcements')
-  // }
+  const handleDelete = () => {
+    deleteAnnouncement(alertpk)
+    console.log(alertpk)
+  }
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -325,7 +324,7 @@ export const CreateAnnouncements = () => {
                 <ul className="divide-y divide-gray-200">
                   {sortedAnnouncements.map((announcement, idx) => (
                     <li
-                      key={announcement.id}
+                      key={announcement.alertpk}
                       className="py-4 sm:border-t sm:border-gray-200"
                     >
                       <div className="flex space-x-3">
@@ -359,11 +358,11 @@ export const CreateAnnouncements = () => {
                             <button
                               type="button"
                               className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                              onClick={handleDelete}
                             >
                               <TrashIcon
                                 className="-ml-1 mr-2 h-5 w-5 text-gray-400"
                                 aria-hidden="true"
-                                // onClick={handleDelete}
                               />
                               Delete
                             </button>
@@ -384,24 +383,6 @@ export const CreateAnnouncements = () => {
                       <h3 className="text-lg leading-6 font-medium text-gray-900">
                         Add A New Announcement
                       </h3>
-                    </div>
-
-                    <div className="sm:col-span-6">
-                      <label
-                        htmlFor="announcement-heading"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        ID
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="announcement-heading"
-                          name="announcement-heading"
-                          value={id}
-                          onChange={(event) => setID(event.target.value)}
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                        />
-                      </div>
                     </div>
 
                     <div className="sm:col-span-6">
