@@ -64,9 +64,10 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export const AdminDashboard = () => {
+export const AdminDashboard = (props) => {
+  const { authUser, setAuthUser, token } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  console.log(authUser)
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -286,7 +287,7 @@ export const AdminDashboard = () => {
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>Lauren's Dashboard</h1>
+              <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}

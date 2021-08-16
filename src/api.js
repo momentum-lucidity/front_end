@@ -10,6 +10,18 @@ export const requestLogin = (username, password) => {
   )
 }
 
+export const getAuthUser = (token) => {
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/auth/users/me/', {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      })
+      .then((res) => res.data)
+  )
+}
+
 export const registrationInfo = (email, username, password, displayName, legalName, pronouns, availability, telephone, address2, city, state, zip, preferredEvent) => {
   return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     username: `${username}`,

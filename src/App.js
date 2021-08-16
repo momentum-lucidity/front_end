@@ -19,22 +19,11 @@ import 'tailwindcss/tailwind.css'
 import { AdminLogout } from './components/admin/AdminLogout'
 import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
 import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
-import { getUserDetails, getVolunteerList } from './api'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
-  const [allUsers, setAllUsers] = useState('')
-  const [user, setUser] = useState('')
+  const [authUser, setAuthUser] = useLocalStorageState('authUser', [])
 
-  console.log(`this should be the username ${user}`)
-  useEffect(() => {
-    getVolunteerList()
-      .then((data) => setAllUsers(data))
-    console.log(allUsers)
-  })
-
-  const loggedInUserData = allUsers.filter(people => people.username === { user })
-  console.log(`please work ${loggedInUserData}`)
   return (
     <Router>
       <div className='App'>
@@ -43,9 +32,10 @@ function App () {
             exact path='/'
             component={() => (
               <AdminLogin
+                token={token}
                 setToken={setToken}
-                user={user}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -55,8 +45,8 @@ function App () {
               <AdminLogout
                 token={token}
                 setToken={setToken}
-                user={user}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -64,9 +54,10 @@ function App () {
             exact path='/dreamcenter/login'
             component={() => (
               <VolunteerLogin
+                token={token}
                 setToken={setToken}
-                user={user}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -76,8 +67,8 @@ function App () {
               <VolunteerLogout
                 token={token}
                 setToken={setToken}
-                user={user}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -85,8 +76,10 @@ function App () {
             path='/registration'
             component={() => (
               <Registration
+                token={token}
                 setToken={setToken}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -94,8 +87,10 @@ function App () {
             exact path='/dreamcenter/registration'
             component={() => (
               <VolunteerRegistration
+                token={token}
                 setToken={setToken}
-                setUser={setUser}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -104,8 +99,9 @@ function App () {
             component={() => (
               <AdminDashboard
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -114,8 +110,9 @@ function App () {
             component={() => (
               <EventsList
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -124,8 +121,9 @@ function App () {
             component={() => (
               <EventForm
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -134,8 +132,9 @@ function App () {
             component={() => (
               <EventDetail
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -144,8 +143,9 @@ function App () {
             component={() => (
               <VolunteerList
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -154,8 +154,9 @@ function App () {
             component={() => (
               <VolunteerDetails
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -164,8 +165,9 @@ function App () {
             component={() => (
               <EditVolunteer
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -174,8 +176,9 @@ function App () {
             component={() => (
               <DocumentList
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -184,8 +187,9 @@ function App () {
             component={() => (
               <CreateAnnouncements
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -193,9 +197,10 @@ function App () {
             exact path='/dreamcenter/volunteerdash'
             component={() => (
               <VolunteerDashboard
-                token={token}
-                user={user}
-                setUser={setUser}
+                ttoken={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -204,8 +209,9 @@ function App () {
             component={() => (
               <VolunteerProfile
                 token={token}
-                user={user}
-                setUser={setUser}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
