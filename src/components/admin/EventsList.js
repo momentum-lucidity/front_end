@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getEventsList } from '../../api'
 
 import {
@@ -306,21 +306,21 @@ export const EventsList = () => {
               <ul className='divide-y divide-gray-200'>
                 {allEvents.map((event, idx) => (
                   <li
-                    key={event.id}
+                    key={event.eventpk}
                     className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
                   >
                     <div className='flex justify-between space-x-3'>
                       <div className='min-w-0 flex-1'>
                         <a
-                          href={`/events/${event.title}`}
+                          href={`/events/${event.eventpk}`}
                           className='block focus:outline-none'
-                        >
+                        >eventpk {event.eventpk}
                           <span
                             className='absolute inset-0'
                             aria-hidden='true'
                           />
                           <p className='text-sm font-medium text-gray-900 truncate'>
-                            {event.title}
+                            {event.event_header}
                           </p>
                           <p className='text-sm text-gray-500 truncate'>
                             {event.date}

@@ -160,7 +160,7 @@ function App () {
             )}
           />
           <Route
-            exact path='/volunteers/edit/:id'
+            exact path='/volunteers/edit/:eventpk'
             component={() => (
               <EditVolunteer
                 token={token}

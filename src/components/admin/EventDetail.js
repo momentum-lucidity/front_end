@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+import { getEventDetails, deleteEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { MockEventDetail } from '../../MockEventDetail'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -9,11 +9,30 @@ import {
   InboxIcon,
   MenuAlt2Icon,
   UsersIcon,
-  XIcon
+  XIcon,
+  TrashIcon
 } from '@heroicons/react/outline'
+import { useParams, useHistory } from 'react-router-dom'
 
-export const EventDetail = () => {
+export const EventDetail = (props) => {
+  const { token } = props
+  const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [event, setEvent] = useState('')
+  const history = useHistory()
+
+  console.log(id)
+  useEffect(() => {
+    getEventDetails(token, id).then((data) => {
+      console.log(data)
+      setEvent(data)
+    })
+  }, [])
+
+  const handleDelete = () => {
+    deleteEvent(token, id)
+    history.push('/events')
+  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -287,17 +306,16 @@ export const EventDetail = () => {
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
-              {MockEventDetail.map((item, idx) => (
                 <div
-                  key={item.id}
+                  key={event.id}
                   className='bg-white shadow overflow-hidden sm:rounded-lg'
                 >
                   <div className='px-4 py-5 sm:px-6'>
                     <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                      {item.title}
+                      {event.event_header}
                     </h3>
                     <p className='text-sm text-gray-500'>
-                      {item.description} {item.type}
+                      {event.description} {event.type}
                     </p>
                   </div>
                   <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
@@ -307,29 +325,13 @@ export const EventDetail = () => {
                           When
                         </dt>
                         <dd className='mt-1 text-sm text-gray-900'>
-                          {item.date} {item.time}
+                          {event.date} {event.start_time}
                         </dd>
                       </div>
                       <div className='sm:col-span-1'>
                         <dt className='text-sm font-medium text-gray-500'>
                           Where
                         </dt>
-                        <dd className='mt-1 text-sm text-gray-900'>
-                          {item.location}
-                        </dd>
-                      </div>
-                      <div className='sm:col-span-2'>
-                        <dt className='text-sm font-medium text-gray-500'>
-                          Volunteer Duties
-                        </dt>
-                        <dd className='mt-1 text-sm text-gray-900'>
-                          Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                          anim incididunt cillum culpa consequat. Excepteur qui
-                          ipsum aliquip consequat sint. Sit id mollit nulla
-                          mollit nostrud in ea officia proident. Irure nostrud
-                          pariatur mollit ad adipisicing reprehenderit deserunt
-                          qui eu.
-                        </dd>
                       </div>
                       <div className='sm:col-span-2'>
                         <div>
@@ -414,11 +416,10 @@ export const EventDetail = () => {
                               Volunteer Slot
                             </p>
                             <p className='text-sm font-medium text-gray-500'>
-                              {item.volunteer_slots[0].volunteer_name}
+                              
                             </p>
                             <p className='text-sm text-gray-500 truncate'>
-                              {item.volunteer_slots[0].start_time}-
-                              {item.volunteer_slots[0].end_time}
+                              
                             </p>
                           </div>
                         </div>
@@ -434,13 +435,32 @@ export const EventDetail = () => {
                               Volunteer Slot
                             </p>
                             <p className='text-sm font-medium text-gray-500'>
-                              {item.volunteer_slots[1].volunteer_name}
+                              
                             </p>
                             <p className='text-sm text-gray-500 truncate'>
-                              {item.volunteer_slots[1].start_time}-
-                              {item.volunteer_slots[1].end_time}
+                              
                             </p>
                           </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div className='w-0 flex-1 flex items-center'>
+                          <TrashIcon
+                            className='flex-shrink-0 h-5 w-5 text-gray-400'
+                            aria-hidden='false'
+                          />
+                          <span className='ml-2 flex-1 w-0 truncate'>
+                            Delete Event
+                          </span>
+                        </div>
+                        <div className='ml-4 flex-shrink-0'>
+                          <a
+                            href='#'
+                            className='font-medium text-indigo-600 hover:text-indigo-500'
+                            onClick={handleDelete}
+                          >
+                            Delete Event
+                          </a>
                         </div>
                       </div>
                     </dl>
