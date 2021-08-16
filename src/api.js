@@ -175,25 +175,10 @@ export const createAnnouncement = (alertHeader, text) => {
   )
 }
 
-export const deleteAnnouncement = (id) => {
+export const deleteAnnouncement = (selectedPK) => {
   return (
     axios
-    .delete(`https://momentum-lucidity.herokuapp.com/announcements/${id}`,
+    .delete(`https://momentum-lucidity.herokuapp.com/announcements/${selectedPK}`,
     {})
-  )
-}
-
-export const deleteEvent = (token, id) => {
-  return (
-    axios
-      .delete(`https://momentum-lucidity.herokuapp.com/events/${id}/`,
-        {},
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
   )
 }

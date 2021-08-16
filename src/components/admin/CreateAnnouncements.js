@@ -18,14 +18,13 @@ import {
   deleteAnnouncement,
 } from "../../api";
 import moment from "moment";
-import { useParams } from "react-router-dom";
 import { orderBy } from "lodash";
 
 export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
-  const { id } = useParams()
+  const [selectedPK, setSelectedPK] = useState('') 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -44,9 +43,10 @@ export const CreateAnnouncements = () => {
     window.location.reload(false)
   };
 
-  const handleDelete = () => {
-    deleteAnnouncement(id)
-    console.log(id)
+  const handleDelete = (event) => {
+    setSelectedPK(event.target.value)
+    deleteAnnouncement(selectedPK)
+    console.log(selectedPK)
   }
 
   const navigation = [
@@ -355,6 +355,7 @@ export const CreateAnnouncements = () => {
                           <span className="hidden sm:block">
                             <button
                               type="button"
+                              value={announcement.alertpk}
                               className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
                               onClick={handleDelete}
                             >
