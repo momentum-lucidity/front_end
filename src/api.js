@@ -147,7 +147,7 @@ export const createAnnouncement = (alertHeader, text) => {
 export const deleteAnnouncement = (alertpk) => {
   return (
     axios
-    .delete(`https://momentum-lucidity.herokuapp.com/announcements/${alertpk}/`,
+    .delete(`https://momentum-lucidity.herokuapp.com/announcements/${alertpk}`,
     {})
   )
 }

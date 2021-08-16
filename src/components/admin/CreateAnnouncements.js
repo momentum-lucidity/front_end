@@ -18,7 +18,6 @@ import {
   deleteAnnouncement,
 } from "../../api";
 import moment from "moment";
-import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { orderBy } from "lodash";
 
@@ -27,7 +26,6 @@ export const CreateAnnouncements = () => {
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
   const { alertpk } = useParams()
-  const history = useHistory();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -42,8 +40,8 @@ export const CreateAnnouncements = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createAnnouncement(alertHeader, text);
-    window.location.reload(false);
+    createAnnouncement(alertHeader, text)
+    window.location.reload(false)
   };
 
   const handleDelete = () => {
