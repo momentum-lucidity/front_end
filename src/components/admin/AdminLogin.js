@@ -10,11 +10,12 @@ export const AdminLogin = (props) => {
   const history = useHistory()
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log(`setting ${username}`)
+    setUser(username)
     requestLogin(username, password)
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
-          setUser(data.data.username)
           history.push('/admindash')
         }
       })

@@ -23,9 +23,18 @@ import { getUserDetails, getVolunteerList } from './api'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
-  const [loggedInID, setLoggedInID] = useState('')
+  const [allUsers, setAllUsers] = useState('')
   const [user, setUser] = useState('')
 
+  console.log(`this should be the username ${user}`)
+  useEffect(() => {
+    getVolunteerList()
+      .then((data) => setAllUsers(data))
+    console.log(allUsers)
+  })
+
+  const loggedInUserData = allUsers.filter(people => people.username === { user })
+  console.log(`please work ${loggedInUserData}`)
   return (
     <Router>
       <div className='App'>
