@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
-import { Dialog, Menu, Transition } from '@headlessui/react';
-import { Link, useHistory } from 'react-router-dom';
+import { Fragment, useState } from 'react'
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Link, useHistory } from 'react-router-dom'
+import Avatar from 'react-avatar'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -10,11 +11,11 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon
-} from '@heroicons/react/outline';
-import axios from 'axios';
+} from '@heroicons/react/outline'
+import axios from 'axios'
 
 export const EventForm = (props) => {
-  const { token } = props
+  const { token, authUser } = props
   // const [eventpk, setEventpk] = useState("");
   const [event_header, setEventHeader] = useState('')
   const [date, setDate] = useState('')
@@ -90,7 +91,7 @@ export const EventForm = (props) => {
     setEndTime('')
     setType('')
     setDescription('')
-  };
+  }
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
@@ -277,11 +278,7 @@ export const EventForm = (props) => {
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
+                      <Avatar name={authUser.legal_name} size='40' round />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -526,4 +523,4 @@ export const EventForm = (props) => {
       </div>
     </div>
   )
-};
+}

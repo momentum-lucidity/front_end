@@ -1,4 +1,4 @@
-import './App.css'
+import { React, useEffect, useState } from 'react'
 import { useLocalStorageState } from 'use-local-storage-state'
 import { AdminDashboard } from './components/admin/AdminDashboard'
 import { AdminLogin } from './components/admin/AdminLogin'
@@ -22,6 +22,8 @@ import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
+  const [authUser, setAuthUser] = useLocalStorageState('authUser', [])
+
   return (
     <Router>
       <div className='App'>
@@ -30,7 +32,10 @@ function App () {
             exact path='/'
             component={() => (
               <AdminLogin
+                token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -40,6 +45,8 @@ function App () {
               <AdminLogout
                 token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -47,7 +54,10 @@ function App () {
             exact path='/dreamcenter/login'
             component={() => (
               <VolunteerLogin
+                token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -57,6 +67,8 @@ function App () {
               <VolunteerLogout
                 token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -64,7 +76,10 @@ function App () {
             path='/registration'
             component={() => (
               <Registration
+                token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
@@ -72,35 +87,134 @@ function App () {
             exact path='/dreamcenter/registration'
             component={() => (
               <VolunteerRegistration
+                token={token}
                 setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
-          <Route exact path='/admindash' component={AdminDashboard} />
-          <Route exact path='/events' component={EventsList} />
-          <Route path='/events/eventform' component={EventForm} />
+          <Route
+            exact path='/admindash'
+            component={() => (
+              <AdminDashboard
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/events'
+            component={() => (
+              <EventsList
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/events/eventform'
+            component={() => (
+              <EventForm
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
           <Route
             path='/events/:id'
             component={() => (
               <EventDetail
                 token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
-          <Route exact path='/volunteers' component={VolunteerList} />
-          <Route exact path='/volunteers/:id' component={VolunteerDetails} />
+          <Route
+            exact path='/volunteers'
+            component={() => (
+              <VolunteerList
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/volunteers/:id'
+            component={() => (
+              <VolunteerDetails
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
           <Route
             exact path='/volunteers/edit/:eventpk'
             component={() => (
               <EditVolunteer
                 token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
               />
             )}
           />
-          <Route path='/documents' component={DocumentList} />
-          <Route path='/announcements' component={CreateAnnouncements} />
-          <Route exact path='/dreamcenter/volunteerdash' component={VolunteerDashboard} />
-          <Route exact path='/dreamcenter/profile' component={VolunteerProfile} />
+          <Route
+            exact path='/documents'
+            component={() => (
+              <DocumentList
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/announcements'
+            component={() => (
+              <CreateAnnouncements
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/volunteerdash'
+            component={() => (
+              <VolunteerDashboard
+                ttoken={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact path='/dreamcenter/profile'
+            component={() => (
+              <VolunteerProfile
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
         </Switch>
       </div>
     </Router>

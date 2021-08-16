@@ -6,7 +6,8 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export const VolunteerHeader = () => {
+export const VolunteerHeader = (props) => {
+  const { authUser } = props
   return (
     <Disclosure as='nav' className='bg-white shadow'>
       {({ open }) => (

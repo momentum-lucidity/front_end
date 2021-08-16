@@ -10,6 +10,18 @@ export const requestLogin = (username, password) => {
   )
 }
 
+export const getAuthUser = (token) => {
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/auth/users/me/', {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      })
+      .then((res) => res.data)
+  )
+}
+
 export const registrationInfo = (email, username, password, displayName, legalName, pronouns, availability, telephone, address2, city, state, zip, preferredEvent) => {
   return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     username: `${username}`,
@@ -53,7 +65,7 @@ export const adminRegistration = (email, username, password, displayName, legalN
 export const getVolunteerList = () => {
   return (
     axios
-      .get('https://momentum-lucidity.herokuapp.com/users/')
+      .get('https://momentum-lucidity.herokuapp.com/users')
       .then((res) => res.data)
   )
 }
@@ -83,7 +95,7 @@ export const getEventDetails = (token, id) => {
 export const getUserDetails = (token, id) => {
   return (
     axios
-      .get(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
+      .get(`https://momentum-lucidity.herokuapp.com/users/${id}`,
         {},
         {
           headers: {

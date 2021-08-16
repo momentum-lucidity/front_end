@@ -1,12 +1,12 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
 import { useHistory } from 'react-router'
-import { requestLogin } from '../../api'
+import { getAuthUser, requestLogin } from '../../api'
 
 export const VolunteerLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = props
+  const { setToken, token, setAuthUser } = props
   const history = useHistory()
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -14,10 +14,13 @@ export const VolunteerLogin = (props) => {
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
+          getAuthUser(token)
+            .then(() => setAuthUser(data))
           history.push('/dreamcenter/volunteerdash')
         }
       })
   }
+
   return (
     <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-md w-full space-y-8'>

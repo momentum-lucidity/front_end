@@ -36,14 +36,15 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export const VolunteerList = () => {
+export const VolunteerList = (props) => {
+  const { token, authUser } = props
   const [allVolunteers, setAllVolunteers] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     getVolunteerList()
-      .then((data) => setAllVolunteers(data))
-  }, [])
+      .then((data) => setAllVolunteers(data.results))
+  })
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
@@ -217,11 +218,7 @@ export const VolunteerList = () => {
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
+                      <Avatar name={authUser.legal_name} size='40' round />
                     </Menu.Button>
                   </div>
                   <Transition
