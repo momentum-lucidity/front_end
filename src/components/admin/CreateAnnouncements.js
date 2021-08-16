@@ -20,6 +20,7 @@ import {
 import moment from "moment";
 import { orderBy } from "lodash";
 
+
 export const CreateAnnouncements = ({ token }) => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
@@ -45,8 +46,8 @@ export const CreateAnnouncements = ({ token }) => {
   };
 
   const handlePK = (event) => {
-    setSelectedPK(event.target.value)
-    alert('Are you sure you want to delete this announcement?')
+    setSelectedPK(event.target.value) 
+    handleDelete()
     console.log(selectedPK)
   }
 
