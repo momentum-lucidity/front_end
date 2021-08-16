@@ -25,7 +25,7 @@ export const CreateAnnouncements = () => {
   const [announcements, setAnnoucements] = useState([]);
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
-  const { alertpk } = useParams()
+  const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export const CreateAnnouncements = () => {
   };
 
   const handleDelete = () => {
-    deleteAnnouncement(alertpk)
-    console.log(alertpk)
+    deleteAnnouncement(id)
+    console.log(id)
   }
 
   const navigation = [
