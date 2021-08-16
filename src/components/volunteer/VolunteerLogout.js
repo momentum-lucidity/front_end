@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export const VolunteerLogout = ({ token, setToken }) => {
+export const VolunteerLogout = ({ token, setToken, setAuthUser }) => {
   axios
     .post(
       'https://momentum-lucidity.herokuapp.com/auth/token/logout/',
@@ -14,6 +14,7 @@ export const VolunteerLogout = ({ token, setToken }) => {
       }
     )
     .then(() => {
+      setAuthUser(null)
       setToken(null)
     })
 
