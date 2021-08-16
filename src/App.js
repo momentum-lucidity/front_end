@@ -90,7 +90,7 @@ function App () {
           <Route exact path='/volunteers' component={VolunteerList} />
           <Route exact path='/volunteers/:id' component={VolunteerDetails} />
           <Route
-            exact path='/volunteers/edit/:id'
+            exact path='/volunteers/edit/:eventpk'
             component={() => (
               <EditVolunteer
                 token={token}
