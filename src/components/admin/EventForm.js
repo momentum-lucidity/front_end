@@ -386,9 +386,31 @@ export const EventForm = (props) => {
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >
                       <option>-</option>
-                      <option>12:00</option>
-                      <option>1:00</option>
-                      <option>2:00</option>
+                      <option>12:00 AM</option>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </div>
                 </div>
@@ -409,9 +431,32 @@ export const EventForm = (props) => {
                       onChange={(event) => setEndTime(event.target.value)}
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >
-                      <option>12:00</option>
-                      <option>1:00</option>
-                      <option>2:00</option>
+                      <option>-</option>
+                      <option>12:00 AM</option>
+                      <option>1:00 AM</option>
+                      <option>2:00 AM</option>
+                      <option>3:00 AM</option>
+                      <option>4:00 AM</option>
+                      <option>5:00 AM</option>
+                      <option>6:00 AM</option>
+                      <option>7:00 AM</option>
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                      <option>5:00 PM</option>
+                      <option>6:00 PM</option>
+                      <option>7:00 PM</option>
+                      <option>8:00 PM</option>
+                      <option>9:00 PM</option>
+                      <option>10:00 PM</option>
+                      <option>11:00 PM</option>
+                      <option>12:00 PM</option>
                     </select>
                   </div>
                 </div>
