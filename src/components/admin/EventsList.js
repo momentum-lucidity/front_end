@@ -23,12 +23,6 @@ export const EventsList = () => {
     getEventsList().then((data) => setAllEvents(data));
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .delete("https://momentum-lucidity.herokuapp.com/events/")
-  //     .then(() => setStatus("Delete successful"));
-  // }, []);
-
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
     {
