@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Link, useParams } from 'react-router-dom'
 import { getEventsList } from '../../api'
+import Avatar from 'react-avatar'
 
 import {
   ChevronRightIcon,
@@ -14,13 +15,16 @@ import {
   XIcon
 } from '@heroicons/react/outline'
 
-export const EventsList = () => {
+export const EventsList = (props) => {
+  const { token, authUser } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
-    getEventsList().then((data) => setAllEvents(data))
-  }, [])
+    getEventsList()
+      .then((data) => setAllEvents(data.results))
+    console.log(allEvents)
+  })
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -240,11 +244,7 @@ export const EventsList = () => {
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
+                      <Avatar name={authUser.legal_name} size='40' round />
                     </Menu.Button>
                   </div>
                   <Transition

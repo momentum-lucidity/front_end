@@ -12,7 +12,8 @@ const steps = [
   { id: '03', name: 'Approved!', status: 'upcoming' }
 ]
 
-export const VolunteerDashboard = () => {
+export const VolunteerDashboard = (props) => {
+  const { token, authUser } = props
   return (
     <>
       <VolunteerHeader />
@@ -33,7 +34,7 @@ export const VolunteerDashboard = () => {
             </div>
             <div>
               <h1 className='text-2xl font-bold text-gray-900'>
-                Welcome, (volunter name here)
+                Welcome, {authUser.display_name}
               </h1>
               <p className='text-sm font-medium text-gray-500'>
                 joined{' '}

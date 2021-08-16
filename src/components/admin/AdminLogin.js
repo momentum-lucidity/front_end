@@ -1,12 +1,13 @@
 import { LockClosedIcon } from '@heroicons/react/solid'
+import Avatar from 'react-avatar'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { requestLogin } from '../../api'
+import { getAuthUser, requestLogin } from '../../api'
 
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = props
+  const { setToken, token, setAuthUser } = props
   const history = useHistory()
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -14,6 +15,8 @@ export const AdminLogin = (props) => {
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
+          getAuthUser(token)
+            .then(() => setAuthUser(data))
           history.push('/admindash')
         }
       })

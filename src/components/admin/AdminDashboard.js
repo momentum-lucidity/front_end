@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import Avatar from 'react-avatar'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   ChevronRightIcon,
@@ -64,9 +65,10 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export const AdminDashboard = () => {
+export const AdminDashboard = (props) => {
+  const { authUser, setAuthUser, token } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  console.log(authUser)
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -239,11 +241,7 @@ export const AdminDashboard = () => {
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
+                      <Avatar name={authUser.legal_name} size='40' round />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -286,7 +284,7 @@ export const AdminDashboard = () => {
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>Lauren's Dashboard</h1>
+              <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
