@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import { getEventDetails, deleteEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import Avatar from 'react-avatar'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -15,7 +16,7 @@ import {
 import { useParams, useHistory } from 'react-router-dom'
 
 export const EventDetail = (props) => {
-  const { token } = props
+  const { token, authUser } = props
   const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [event, setEvent] = useState('')
@@ -253,11 +254,7 @@ export const EventDetail = (props) => {
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
+                      <Avatar name={authUser.legal_name} size='40' round />
                     </Menu.Button>
                   </div>
                   <Transition
