@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getEventsList } from '../../api'
 
-export const VolunteerEvents = () => {
+export const VolunteerEvents = (props) => {
+  const { token, authUser } = props
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
-    getEventsList().then((data) => setAllEvents(data))
+    getEventsList().then((data) => setAllEvents(data.results))
   }, [])
 
   function classNames (...classes) {

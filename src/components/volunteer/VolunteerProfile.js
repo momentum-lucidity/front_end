@@ -1,6 +1,7 @@
 import { VolunteerHeader } from "./VolunteerHeader.js";
 
-export const VolunteerProfile = () => {
+export const VolunteerProfile = (props) => {
+  const { token, authUser } = props;
   return (
     <div>
       <VolunteerHeader />
@@ -18,7 +19,7 @@ export const VolunteerProfile = () => {
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Full name</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Volunteer Name
+                {authUser.legal_name}
               </dd>
             </div>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -26,13 +27,11 @@ export const VolunteerProfile = () => {
                 Preferred Name
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                Volunteer Preferred Name
+                {authUser.display_name}
               </dd>
             </div>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                Prounouns
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">Prounouns</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 They/Them
               </dd>
@@ -46,15 +45,15 @@ export const VolunteerProfile = () => {
               </dd>
             </div>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                Address
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">Address</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 123 volunteer way, Helpsville, NC 12345
               </dd>
             </div>
             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Availibility</dt>
+              <dt className="text-sm font-medium text-gray-500">
+                Availibility
+              </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 evenings
               </dd>
