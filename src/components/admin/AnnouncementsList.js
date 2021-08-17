@@ -21,12 +21,12 @@ import {
 export const AnnouncementsList = (props) => {
   const { token, authUser } = props;
   const [announcements, setAnnoucements] = useState([]);
-  const [selectedPK, setSelectedPK] = useState("");
+  const [selectedPK, setSelectedPK] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   
   useEffect(() => {
     getAnnouncements().then((data) => setAnnoucements(data));
-  }, []);
+  }, [])
 
   const sortedAnnouncements = orderBy(
     announcements.results,

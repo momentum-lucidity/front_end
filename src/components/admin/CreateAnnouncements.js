@@ -1,12 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 export const CreateAnnoucements = (props) => {
   const { token, authUser } = props;
   const [alertHeader, setAlertHeader] = useState("");
   const [text, setText] = useState("");
-  const history = useHistory()
 
   const handleSubmit = (event) => {
     axios.post(
@@ -24,7 +22,8 @@ export const CreateAnnoucements = (props) => {
       }
     );
     event.preventDefault();
-    history.push('/announcements')
+    setAlertHeader('')
+    setText('')
   };
 
   return (
