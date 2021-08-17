@@ -180,10 +180,17 @@ export const getAnnouncements = () => {
   )
 }
 
-export const deleteAnnouncement = (selectedPK) => {
+export const deleteAnnouncement = (selectedPK, token) => {
   return (
     axios
     .delete(`https://momentum-lucidity.herokuapp.com/announcements/${selectedPK}`,
-    {})
+    {},
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      }
+    }
+    )
   )
 }
