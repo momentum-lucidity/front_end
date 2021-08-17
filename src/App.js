@@ -10,7 +10,7 @@ import { EventDetail } from './components/admin/EventDetail'
 import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/admin/Registration'
-import { CreateAnnouncements } from './components/admin/CreateAnnouncements'
+import { AnnouncementsList } from './components/admin/AnnouncementsList'
 import { EditVolunteer } from './components/admin/EditVolunteer'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
@@ -33,10 +33,11 @@ function App () {
 
   return (
     <Router>
-      <div className='App'>
+      <div className="App">
         <Switch>
           <Route
-            exact path='/'
+            exact
+            path="/"
             component={() => (
               <AdminLogin
                 token={token}
@@ -47,7 +48,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/admin/logout'
+            exact
+            path="/admin/logout"
             component={() => (
               <AdminLogout
                 token={token}
@@ -58,7 +60,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/dreamcenter/login'
+            exact
+            path="/dreamcenter/login"
             component={() => (
               <VolunteerLogin
                 token={token}
@@ -69,7 +72,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/dreamcenter/logout'
+            exact
+            path="/dreamcenter/logout"
             component={() => (
               <VolunteerLogout
                 token={token}
@@ -80,7 +84,7 @@ function App () {
             )}
           />
           <Route
-            path='/registration'
+            path="/registration"
             component={() => (
               <Registration
                 token={token}
@@ -92,7 +96,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/dreamcenter/registration'
+            exact
+            path="/dreamcenter/registration"
             component={() => (
               <VolunteerRegistration
                 token={token}
@@ -104,7 +109,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/admindash'
+            exact
+            path="/admindash"
             component={() => (
               <AdminDashboard
                 token={token}
@@ -115,7 +121,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/events'
+            exact
+            path="/events"
             component={() => (
               <EventsList
                 token={token}
@@ -127,7 +134,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/events/eventform'
+            exact
+            path="/events/eventform"
             component={() => (
               <EventForm
                 token={token}
@@ -139,7 +147,7 @@ function App () {
             )}
           />
           <Route
-            path='/events/:id'
+            path="/events/:id"
             component={() => (
               <EventDetail
                 token={token}
@@ -151,7 +159,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/volunteers'
+            exact
+            path="/volunteers"
             component={() => (
               <VolunteerList
                 token={token}
@@ -164,7 +173,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/volunteers/:id'
+            exact
+            path="/volunteers/:id"
             component={() => (
               <VolunteerDetails
                 token={token}
@@ -177,7 +187,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/volunteers/edit/:eventpk'
+            exact
+            path="/volunteers/edit/:eventpk"
             component={() => (
               <EditVolunteer
                 token={token}
@@ -189,7 +200,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/documents'
+            exact
+            path="/documents"
             component={() => (
               <DocumentList
                 token={token}
@@ -200,9 +212,10 @@ function App () {
             )}
           />
           <Route
-            exact path='/announcements'
+            exact
+            path="/announcements"
             component={() => (
-              <CreateAnnouncements
+              <AnnouncementsList
                 token={token}
                 setToken={setToken}
                 authUser={authUser}
@@ -211,7 +224,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/dreamcenter/volunteerdash'
+            exact
+            path="/dreamcenter/volunteerdash"
             component={() => (
               <VolunteerDashboard
                 token={token}
@@ -222,7 +236,8 @@ function App () {
             )}
           />
           <Route
-            exact path='/dreamcenter/profile'
+            exact
+            path="/dreamcenter/profile"
             component={() => (
               <VolunteerProfile
                 token={token}
@@ -235,7 +250,7 @@ function App () {
         </Switch>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
