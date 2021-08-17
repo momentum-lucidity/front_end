@@ -1,5 +1,5 @@
-import { React, useEffect } from 'react'
-import { getAuthUser } from './api'
+import { React, useEffect, useState } from 'react'
+import { getAuthUser, getVolunteerList } from './api'
 import { useLocalStorageState } from 'use-local-storage-state'
 import { AdminDashboard } from './components/admin/AdminDashboard'
 import { AdminLogin } from './components/admin/AdminLogin'
@@ -24,6 +24,7 @@ import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
   const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
+  const [allVolunteers, setAllVolunteers] = useState([])
 
   useEffect(() => {
     getAuthUser(token)
@@ -86,6 +87,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                setAllVolunteers={setAllVolunteers}
               />
             )}
           />
@@ -97,6 +99,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                setAllVolunteers={setAllVolunteers}
               />
             )}
           />
@@ -119,6 +122,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
               />
             )}
           />
@@ -130,6 +134,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
               />
             )}
           />
@@ -141,6 +146,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
               />
             )}
           />
@@ -152,6 +158,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
+                setAllVolunteers={setAllVolunteers}
               />
             )}
           />
@@ -163,6 +171,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
+                setAllVolunteers={setAllVolunteers}
               />
             )}
           />
@@ -174,6 +184,7 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                allVolunteers={setAllVolunteers}
               />
             )}
           />

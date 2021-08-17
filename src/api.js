@@ -69,7 +69,7 @@ export const getVolunteerList = () => {
   return (
     axios
       .get('https://momentum-lucidity.herokuapp.com/users')
-      .then((res) => res.data)
+      .then((res) => res.data.results)
   )
 }
 

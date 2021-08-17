@@ -22,14 +22,13 @@ export const VolunteerDetails = (props) => {
   const { token, authUser } = props
   const { id } = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [userDetails, setUserDetails] = useState('')
+  const [userDetails, setUserDetails] = useState([])
   const history = useHistory()
 
   useEffect(() => {
-    getUserDetails(token, id).then((data) => {
-      setUserDetails(data)
-    })
-  })
+    getUserDetails(token, id)
+      .then((data) => setUserDetails(data))
+  }, [id, token])
 
   const handleDelete = async () => {
     const success = await deleteUser(token, id)
