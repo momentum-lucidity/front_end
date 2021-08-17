@@ -14,8 +14,8 @@ export const VolunteerLogout = ({ token, setToken, setAuthUser }) => {
       }
     )
     .then(() => {
-      setAuthUser(null)
-      setToken(null)
+      setAuthUser('')
+      setToken('')
     })
 
   return (
