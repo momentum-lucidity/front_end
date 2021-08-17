@@ -66,7 +66,7 @@ function classNames (...classes) {
 }
 
 export const AdminDashboard = (props) => {
-  const { authUser, setAuthUser, token } = props
+  const { authUser, token } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   console.log(authUser)
   return (
