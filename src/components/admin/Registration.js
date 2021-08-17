@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { adminRegistration, requestLogin } from '../../api'
 
 export const Registration = (props) => {
-  const { setToken, setUser } = props
+  const { setToken, setAuthUser } = props
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -39,7 +39,7 @@ export const Registration = (props) => {
       .then((data) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
-          setUser(data.data.username)
+          setAuthUser(data.data.username)
           history.push('/admindash')
         }
       })
