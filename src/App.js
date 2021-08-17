@@ -197,7 +197,7 @@ function App () {
             exact path='/dreamcenter/volunteerdash'
             component={() => (
               <VolunteerDashboard
-                ttoken={token}
+                token={token}
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}

@@ -15,7 +15,7 @@ export const VolunteerLogin = (props) => {
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
           getAuthUser(token)
-            .then(() => setAuthUser(data))
+            .then((data) => setAuthUser(data))
           history.push('/dreamcenter/volunteerdash')
         }
       })
