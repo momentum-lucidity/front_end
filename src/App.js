@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect } from 'react'
+import { getAuthUser } from './api'
 import { useLocalStorageState } from 'use-local-storage-state'
 import { AdminDashboard } from './components/admin/AdminDashboard'
 import { AdminLogin } from './components/admin/AdminLogin'
@@ -22,7 +23,12 @@ import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
-  const [authUser, setAuthUser] = useLocalStorageState('authUser', [])
+  const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
+
+  useEffect(() => {
+    getAuthUser(token)
+      .then((data) => setAuthUser(data))
+  }, [setAuthUser, token])
 
   return (
     <Router>

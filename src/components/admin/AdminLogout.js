@@ -14,8 +14,8 @@ export const AdminLogout = ({ token, setToken, setAuthUser }) => {
       }
     )
     .then(() => {
-      setToken(null)
-      setAuthUser(null)
+      setToken('')
+      setAuthUser('')
     })
 
   return (
