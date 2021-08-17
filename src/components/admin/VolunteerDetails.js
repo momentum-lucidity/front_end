@@ -31,9 +31,9 @@ export const VolunteerDetails = (props) => {
     })
   })
 
-  const handleDelete = () => {
-    deleteUser(token, id)
-    history.push('/volunteers')
+  const handleDelete = async () => {
+    const success = await deleteUser(token, id)
+    if (success) history.push('/volunteers')
   }
 
   const navigation = [
