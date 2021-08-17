@@ -15,11 +15,11 @@ import {
 } from "@heroicons/react/outline";
 import {
   getAnnouncements,
-  createAnnouncement,
   deleteAnnouncement,
 } from "../../api";
 import moment from "moment";
 import { orderBy } from "lodash";
+import axios from 'axios';
 
 
 export const CreateAnnouncements = (props) => {
@@ -42,20 +42,30 @@ export const CreateAnnouncements = (props) => {
   );
 
   const handleSubmit = (event) => {
+    axios
+    .post('https://momentum-lucidity.herokuapp.com/announcements/', {
+      user: `${authUser.id}`,
+      alert_header: alertHeader,
+      text: text
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      }
+    })
     event.preventDefault();
-    createAnnouncement(alertHeader, text, token)
     window.location.reload(false)
   };
 
   const handlePK = (event) => {
-    setSelectedPK(event.target.value) 
-    handleDelete()
+    setSelectedPK(event.target.value)
+    handleDelete() 
     console.log(selectedPK)
   }
 
   const handleDelete = () => {
     deleteAnnouncement(selectedPK)
-    console.log(selectedPK)
   }
 
   const navigation = [
@@ -79,7 +89,7 @@ export const CreateAnnouncements = (props) => {
   const userNavigation = [
     { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' }
+    { name: 'Sign out', href: '/admin/logout' }
   ]
 
   const pages = [
@@ -339,7 +349,7 @@ export const CreateAnnouncements = (props) => {
                             <h3 className="text-sm font-medium">
                               {announcement.alert_header}
                             </h3>
-                            <p className='text-sm text-gray-500'>posted by:</p>
+                            <p className='text-sm text-gray-500'>posted by: {authUser.display_name}</p>
                           </div>
                           <p className='items-center text-sm text-gray-500'>
                             {announcement.text}
@@ -356,7 +366,7 @@ export const CreateAnnouncements = (props) => {
                               Edit
                             </button>
                           </span>
-
+                          {console.log(announcement)}
                           <span className='hidden sm:block'>
                             <button
                               type="button"

@@ -180,22 +180,6 @@ export const getAnnouncements = () => {
   )
 }
 
-export const createAnnouncement = (alertHeader, text, token) => {
-  return (
-    axios
-    .post('https://momentum-lucidity.herokuapp.com/announcements/', {
-      alert_header: alertHeader,
-      text: text
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`
-      }
-    })
-  )
-}
-
 export const deleteAnnouncement = (selectedPK) => {
   return (
     axios
