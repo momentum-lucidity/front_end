@@ -171,26 +171,45 @@ export const deleteUser = (token, id) => {
       )
   )
 }
+export const newAnnouncement = ([user], alertHeader, text, token) => {
+  return (
+    axios
+      .post(
+        'https://momentum-lucidity.herokuapp.com/announcements/',
+        {
+          user: [user],
+          alert_header: alertHeader,
+          text: text
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        }
+      )
+  )
+}
 
 export const getAnnouncements = () => {
   return (
     axios
-    .get('https://momentum-lucidity.herokuapp.com/announcements/')
-    .then((res) => res.data)
+      .get('https://momentum-lucidity.herokuapp.com/announcements/')
+      .then((res) => res.data)
   )
 }
 
 export const deleteAnnouncement = (selectedPK, token) => {
   return (
     axios
-    .delete(`https://momentum-lucidity.herokuapp.com/announcements/${selectedPK}`,
-    {},
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Token ${token}`
-      }
-    }
-    )
+      .delete(`https://momentum-lucidity.herokuapp.com/announcements/${selectedPK}`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        }
+      )
   )
 }
