@@ -11,6 +11,7 @@ import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/admin/Registration'
 import { AnnouncementsList } from './components/admin/AnnouncementsList'
+import { EditAnnouncement } from './components/admin/EditAnnouncement'
 import { EditVolunteer } from './components/admin/EditVolunteer'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
@@ -205,6 +206,18 @@ function App () {
             path="/announcements"
             component={() => (
               <AnnouncementsList
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/announcements/edit/:alertpk'
+            component={() => (
+              <EditAnnouncement
                 token={token}
                 setToken={setToken}
                 authUser={authUser}

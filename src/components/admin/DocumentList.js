@@ -62,7 +62,7 @@ export const DocumentList = (props) => {
     {
       name: 'Volunteer Handbook',
       initials: 'VH',
-      href: '#',
+      href: '',
       members: 16,
       bgColor: 'bg-yellow-500'
     },
