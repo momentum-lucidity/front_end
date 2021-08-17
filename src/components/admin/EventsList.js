@@ -304,7 +304,7 @@ export const EventsList = (props) => {
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>
-                {allEvents.map((event, idx) => (
+                {allEvents.results && allEvents.results.map((event, idx) => (
                   <li
                     key={event.eventpk}
                     className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
