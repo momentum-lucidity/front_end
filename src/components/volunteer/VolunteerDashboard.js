@@ -18,7 +18,6 @@ export const VolunteerDashboard = (props) => {
     <>
       <VolunteerHeader />
       <main className='py-10'>
-        {/* Page header */}
         <div className='max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8'>
           <div className='flex items-center space-x-5'>
             <div className='flex-shrink-0'>
