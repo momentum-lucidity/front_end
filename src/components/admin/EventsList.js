@@ -22,7 +22,7 @@ export const EventsList = (props) => {
 
   useEffect(() => {
     getEventsList()
-      .then((data) => setAllEvents(data.results))
+      .then((data) => setAllEvents(data))
     console.log(allEvents)
   })
 

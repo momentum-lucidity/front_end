@@ -73,13 +73,13 @@ export const EventForm = (props) => {
           end_time: end_time,
           type: type,
           description: description
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
         }
-        // {
-        //   headers: {
-        //     Authorization: `Token ${token}`,
-        //     'Content-Type': 'application/json'
-        //   }
-        // }
       )
       .then((response) => {
         console.log({ start_time })
