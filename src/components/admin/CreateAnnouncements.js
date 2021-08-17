@@ -20,6 +20,7 @@ import {
 import moment from "moment";
 import { orderBy } from "lodash";
 import axios from 'axios';
+import { Users } from 'heroicons-react';
 
 
 export const CreateAnnouncements = (props) => {
@@ -55,7 +56,6 @@ export const CreateAnnouncements = (props) => {
       }
     })
     event.preventDefault();
-    window.location.reload(false)
   };
 
   const handlePK = (event) => {
@@ -349,7 +349,7 @@ export const CreateAnnouncements = (props) => {
                             <h3 className="text-sm font-medium">
                               {announcement.alert_header}
                             </h3>
-                            <p className='text-sm text-gray-500'>posted by: {authUser.display_name}</p>
+                            <p className='text-sm text-gray-500'>posted by:</p>
                           </div>
                           <p className='items-center text-sm text-gray-500'>
                             {announcement.text}
@@ -366,7 +366,6 @@ export const CreateAnnouncements = (props) => {
                               Edit
                             </button>
                           </span>
-                          {console.log(announcement)}
                           <span className='hidden sm:block'>
                             <button
                               type="button"
