@@ -66,6 +66,7 @@ export const EventForm = (props) => {
       .post(
         'https://momentum-lucidity.herokuapp.com/events/',
         {
+          user: [authUser.id],
           event_header: event_header,
           date: date,
           start_time: start_time,
