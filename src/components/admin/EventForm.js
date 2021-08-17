@@ -17,10 +17,10 @@ import axios from 'axios'
 export const EventForm = (props) => {
   const { token, authUser } = props
   // const [eventpk, setEventpk] = useState("");
-  const [event_header, setEventHeader] = useState('')
+  const [eventHeader, setEventHeader] = useState('')
   const [date, setDate] = useState('')
-  const [start_time, setStartTime] = useState('')
-  const [end_time, setEndTime] = useState('')
+  const [startTime, setStartTime] = useState('')
+  const [endTime, setEndTime] = useState('')
   const [type, setType] = useState('')
   const [description, setDescription] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -66,10 +66,10 @@ export const EventForm = (props) => {
       .post(
         'https://momentum-lucidity.herokuapp.com/events/',
         {
-          event_header: event_header,
+          event_header: eventHeader,
           date: date,
-          start_time: start_time,
-          end_time: end_time,
+          start_time: startTime,
+          end_time: endTime,
           type: type,
           description: description
         }
@@ -81,7 +81,7 @@ export const EventForm = (props) => {
         // }
       )
       .then((response) => {
-        console.log({ start_time })
+        console.log({ startTime })
         history.push('/events')
       })
     event.preventDefault()
@@ -339,7 +339,7 @@ export const EventForm = (props) => {
                       name='event-name'
                       id='event-name'
                       autoComplete='given-name'
-                      value={event_header}
+                      value={eventHeader}
                       onChange={(event) => setEventHeader(event.target.value)}
                       className='max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     />
@@ -378,7 +378,7 @@ export const EventForm = (props) => {
                       id='event-start-time'
                       name='event-start-time'
                       autoComplete='event-start-time'
-                      value={start_time}
+                      value={startTime}
                       onChange={(event) => setStartTime(event.target.value)}
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >
@@ -424,7 +424,7 @@ export const EventForm = (props) => {
                       id='event-end-time'
                       name='event-end-time'
                       autoComplete='event-end-time'
-                      value={end_time}
+                      value={endTime}
                       onChange={(event) => setEndTime(event.target.value)}
                       className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                     >

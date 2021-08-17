@@ -23,8 +23,7 @@ export const EventsList = (props) => {
   useEffect(() => {
     getEventsList()
       .then((data) => setAllEvents(data.results))
-    console.log(allEvents)
-  })
+  }, [allEvents])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },

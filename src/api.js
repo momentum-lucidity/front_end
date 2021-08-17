@@ -129,7 +129,7 @@ export const deleteEvent = (token, id) => {
 export const editUser = (token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent) => {
   return (
     axios
-      .put(`https://momentum-lucidity.herokuapp.com/auth/users/${id}/`,
+      .put(`https://momentum-lucidity.herokuapp.com/users/${id}/`,
         {
           username: username,
           password: password,
