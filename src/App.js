@@ -1,28 +1,34 @@
-import { React, useEffect, useState } from "react";
-import { useLocalStorageState } from "use-local-storage-state";
-import { AdminDashboard } from "./components/admin/AdminDashboard";
-import { AdminLogin } from "./components/admin/AdminLogin";
-import { VolunteerList } from "./components/admin/VolunteerList";
-import { VolunteerDetails } from "./components/admin/VolunteerDetails";
-import { EventsList } from "./components/admin/EventsList";
-import { EventDetail } from "./components/admin/EventDetail";
-import { EventForm } from "./components/admin/EventForm";
-import { DocumentList } from "./components/admin/DocumentList";
-import { Registration } from "./components/admin/Registration";
-import { AnnouncementsList } from "./components/admin/AnnouncementsList.js";
-import { EditVolunteer } from "./components/admin/EditVolunteer";
-import { VolunteerDashboard } from "./components/volunteer/VolunteerDashboard";
-import { VolunteerProfile } from "./components/volunteer/VolunteerProfile";
-import { VolunteerRegistration } from "./components/volunteer/VolunteerRegistration";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "tailwindcss/tailwind.css";
-import { AdminLogout } from "./components/admin/AdminLogout";
-import { VolunteerLogin } from "./components/volunteer/VolunteerLogin";
-import { VolunteerLogout } from "./components/volunteer/VolunteerLogout";
+import { React, useEffect } from 'react'
+import { getAuthUser } from './api'
+import { useLocalStorageState } from 'use-local-storage-state'
+import { AdminDashboard } from './components/admin/AdminDashboard'
+import { AdminLogin } from './components/admin/AdminLogin'
+import { VolunteerList } from './components/admin/VolunteerList'
+import { VolunteerDetails } from './components/admin/VolunteerDetails'
+import { EventsList } from './components/admin/EventsList'
+import { EventDetail } from './components/admin/EventDetail'
+import { EventForm } from './components/admin/EventForm'
+import { DocumentList } from './components/admin/DocumentList'
+import { Registration } from './components/admin/Registration'
+import { AnnouncementsList } from './components/admin/AnnouncementsList'
+import { EditVolunteer } from './components/admin/EditVolunteer'
+import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
+import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
+import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import 'tailwindcss/tailwind.css'
+import { AdminLogout } from './components/admin/AdminLogout'
+import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
+import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
 
-function App() {
-  const [token, setToken] = useLocalStorageState("token", "");
-  const [authUser, setAuthUser] = useLocalStorageState("authUser", []);
+function App () {
+  const [token, setToken] = useLocalStorageState('token', '')
+  const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
+
+  useEffect(() => {
+    getAuthUser(token)
+      .then((data) => setAuthUser(data))
+  }, [setAuthUser, token])
 
   return (
     <Router>
