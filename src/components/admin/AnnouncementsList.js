@@ -10,6 +10,8 @@ import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, Inbox
 export const AnnouncementsList = (props) => {
   const { token, authUser } = props
   const [announcements, setAnnouncements] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [announcementsPerPage] = useState(5)
   const [selectedPK, setSelectedPK] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -18,12 +20,19 @@ export const AnnouncementsList = (props) => {
       .then((data) => setAnnouncements(data))
   }, [])
 
+
   const sortedAnnouncements = orderBy(
     announcements.results,
     [(object) => new moment(object.date)],
     ['desc']
   )
 
+  const indexOfLastAnnouncement = currentPage * announcementsPerPage;
+  const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
+  const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  
   const handleDelete = () => {
     deleteAnnouncement(selectedPK)
   }
@@ -299,7 +308,7 @@ export const AnnouncementsList = (props) => {
               Current Announcements
             </h1>
             <ul className='divide-y divide-gray-200'>
-              {sortedAnnouncements.map((announcement, idx) => (
+              {currentAnnouncements.map((announcement, idx) => (
                 <li
                   key={announcement.alertpk}
                   className='py-4 sm:border-t sm:border-gray-200'

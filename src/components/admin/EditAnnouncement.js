@@ -6,6 +6,11 @@ import Avatar from 'react-avatar'
 
 export const EditAnnouncement = (props) => {
     const { token, authUser } = props
+
+    const [alertHeader, setAlertHeader] = useState('')
+  const [text, setText] = useState('')
+    const user = authUser.id
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
     
