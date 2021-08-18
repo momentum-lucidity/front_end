@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import { getEventsList } from '../../api'
@@ -16,15 +16,19 @@ import {
 } from '@heroicons/react/outline'
 
 export const EventsList = (props) => {
+  const hasFetchedEvents = useRef(false)
   const { token, authUser } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
-    getEventsList()
-      .then((data) => setAllEvents(data.results))
-    console.log(allEvents)
-  })
+    if (!hasFetchedEvents.current) {
+      getEventsList()
+        .then((data) => setAllEvents(data.results))
+      hasFetchedEvents.current = true
+      console.log(allEvents)
+    }
+  }, [allEvents])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -304,7 +308,7 @@ export const EventsList = (props) => {
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>
-                {allEvents.results && allEvents.results.map((event, idx) => (
+                {allEvents && allEvents.map((event, idx) => (
                   <li
                     key={event.eventpk}
                     className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'

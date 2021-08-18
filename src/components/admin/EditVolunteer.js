@@ -38,12 +38,11 @@ export const EditVolunteer = (props) => {
   const [preferredEvent, setPreferredEvent] = useState(`${userDetails.preferred_event}`)
   const history = useHistory()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log(id)
-    console.log(token)
-    editUser(token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent)
-    history.push('/volunteers')
+    const success = await editUser(token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent)
+      .then((res) => res.data)
+    if (success) history.push('/volunteers')
   }
 
   const navigation = [
