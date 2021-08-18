@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import { getEventsList } from '../../api'
@@ -16,15 +16,19 @@ import {
 } from '@heroicons/react/outline'
 
 export const EventsList = (props) => {
+  const hasFetchedEvents = useRef(false)
   const { token, authUser } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
-    getEventsList()
-      .then((data) => setAllEvents(data.results))
-    console.log(allEvents)
-  })
+    if (!hasFetchedEvents.current) {
+      getEventsList()
+        .then((data) => setAllEvents(data.results))
+      hasFetchedEvents.current = true
+      console.log(allEvents)
+    }
+  }, [allEvents])
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },

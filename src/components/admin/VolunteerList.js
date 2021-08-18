@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import {
@@ -37,14 +37,18 @@ function classNames (...classes) {
 }
 
 export const VolunteerList = (props) => {
+  const hasFetchedVolunteers = useRef(false)
   const { token, authUser } = props
-  const [allVolunteers, setAllVolunteers] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [allVolunteers, setAllVolunteers] = useState([])
 
   useEffect(() => {
-    getVolunteerList()
-      .then((data) => setAllVolunteers(data.results))
-  })
+    if (!hasFetchedVolunteers.current) {
+      getVolunteerList()
+        .then((data) => setAllVolunteers(data))
+      hasFetchedVolunteers.current = true
+    }
+  }, [allVolunteers])
 
   return (
     <div className='h-screen bg-white overflow-hidden flex'>
