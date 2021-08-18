@@ -1,9 +1,10 @@
 import { Fragment, useState, useEffect, useRef } from 'react'
-import { getEventDetails, deleteEvent, getAllSlots } from '../../api'
+import { getEventDetails, deleteEvent, getAllSlots, newVSlot } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
 import { useParams, useHistory } from 'react-router-dom'
+import { TimeIncrements } from '../TimeIncrements'
 
 export const EventDetail = (props) => {
   const { token, authUser } = props
@@ -13,6 +14,9 @@ export const EventDetail = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [event, setEvent] = useState('')
   const [allVSlots, setAllVSlots] = useState([])
+  const [slotText, setSlotText] = useState('')
+  const [amPm, setAmPm] = useState(false)
+  const [volStart, setVolStart] = useState([])
   const history = useHistory()
 
   useEffect(() => {
@@ -32,6 +36,11 @@ export const EventDetail = (props) => {
       fetchedAllSlots.current = true
     }
   }, [allVSlots, token])
+
+  const handleSubmit = (id, token, slotText, volStart) => {
+    newVSlot(id, token, slotText, volStart)
+      .then((res) => history.push(`/events/${id}/`))
+  }
 
   const handleDelete = async () => {
     const deleted = await deleteEvent(token, id)
@@ -385,14 +394,14 @@ export const EventDetail = (props) => {
                                             <Avatar name={slot.user} size='40' round />
                                           </div>
                                           <div className='ml-4'>
-                                            <div className='text-sm font-medium text-gray-900'>{slot.user}</div>
-                                            <div className='text-sm text-gray-500'>{slot.time}</div>
+                                            <div className='text-sm font-medium text-gray-900'>{event.event_header}</div>
+                                            <div className='text-sm text-gray-500'>{slot.slotText}</div>
                                           </div>
                                         </div>
                                       </td>
                                       <td className='px-6 py-4 whitespace-nowrap'>
-                                        <div className='text-sm text-gray-900'>{event.event_header}</div>
-                                        <div className='text-sm text-gray-500'>{event.date}</div>
+                                        <div className='text-sm text-gray-900'>{slot.user}</div>
+                                        <div className='text-sm text-gray-500'>{slot.time}</div>
                                       </td>
                                       <td className='px-6 py-4 whitespace-nowrap'>
                                         <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
@@ -416,102 +425,75 @@ export const EventDetail = (props) => {
 
                       Add a Volunteer Slot
                       <div className='sm:col-span-6'>
+
                         <label
                           htmlFor='vol-duties'
                           className='block text-sm font-medium text-gray-700'
                         >
                           Volunteer Duties
                         </label>
+
                         <div className='mt-1'>
                           <textarea
                             id='vol-duties'
                             name='vol-duties'
                             className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                            defaultValue=''
+                            value='3:00'
+                            // onChange={(event) => setSlotText(event.target.value)}
                           />
                         </div>
+
                       </div>
+
                       <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                        <div className='sm:col-span-3'>
-                          <label
-                            htmlFor='volunteer-start-time'
-                            className='block text-sm font-medium text-gray-700'
+
+                        <div className='mt-1 sm:mt-0 sm:col-span-2'>
+                          <select
+                            id='AMPM'
+                            name='AMPM'
+                            className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                            value={amPm}
+                            onChange={(event) => setAmPm(!amPm)}
                           >
-                            Volunteer Start Time
-                          </label>
-                          <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                            <select
-                              id='volunteer-start-time'
-                              name='volunteer-start-time'
-                              autoComplete='volunteer-start-time'
-                              className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                            >
-                              <option>12:00</option>
-                              <option>1:00</option>
-                              <option>2:00</option>
-                            </select>
-                          </div>
+
+                            <option>am</option>
+                            <option>pm</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className='sm:col-span-3'>
+                        <label
+                          htmlFor='volunteer-start-time' className='block text-sm font-medium text-gray-700'
+                        >Volunteer Start Time
+                        </label>
+                        <div className='mt-1 sm:mt-0 sm:col-span-2'>
+                          <select
+                            id='volunteer-start-time'
+                            name='volunteer-start-time'
+                            className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                            value={volStart}
+                            onChange={(event) => setVolStart(event.target.value)}
+                          >
+                            {amPm === false
+                              ? TimeIncrements.amTimes.map((time) => (
+                                <option key={time.time}>{time.time}</option>
+                                ))
+                              : TimeIncrements.pmTimes.map((time) => (
+                                <option key={time.time}>{time.time}</option>
+                              ))}
+                          </select>
                         </div>
 
-                        <div className='sm:col-span-3'>
-                          <label
-                            htmlFor='volunteer-end-time'
-                            className='block text-sm font-medium text-gray-700'
-                          >
-                            Volunteer End time
-                          </label>
-                          <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                            <select
-                              id='volunteer-end-time'
-                              name='volunteer-end-time'
-                              autoComplete='volunteer-end-time'
-                              className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                            >
-                              <option>12:00</option>
-                              <option>1:00</option>
-                              <option>2:00</option>
-                            </select>
-                          </div>
-                        </div>
                         <button
                           type='button'
                           className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                          onClick={handleSubmit}
                         >
                           Add Volunteer
                         </button>
                       </div>
                     </div>
-                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                      <div className='relative rounded-lg border border-green-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
-                        <div className='flex-1 min-w-0'>
-                          <span
-                            className='absolute inset-0'
-                            aria-hidden='true'
-                          />
-                          <p className='text-sm font-medium text-gray-900'>
-                            Volunteer Slot
-                          </p>
-                          <p className='text-sm font-medium text-gray-500' />
-                          <p className='text-sm text-gray-500 truncate' />
-                        </div>
-                      </div>
-                    </div>
-                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                      <div className='relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
-                        <div className='flex-1 min-w-0'>
-                          <span
-                            className='absolute inset-0'
-                            aria-hidden='true'
-                          />
-                          <p className='text-sm font-medium text-gray-900'>
-                            Volunteer Slot
-                          </p>
-                          <p className='text-sm font-medium text-gray-500' />
-                          <p className='text-sm text-gray-500 truncate' />
-                        </div>
-                      </div>
-                    </div>
-
                   </dl>
                 </div>
               </div>
