@@ -1,28 +1,27 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useRef } from 'react'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 import { CreateAnnoucements } from './CreateAnnouncements.js'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { getAnnouncements, deleteAnnouncement, editAnnouncement } from '../../api'
+import { getAnnouncements } from '../../api'
 import Avatar from 'react-avatar'
 import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
-import { useHistory, Link } from 'react-router-dom'
 
 export const AnnouncementsList = (props) => {
+  const hasFetchedAnnouncements = useRef(false)
   const { token, authUser, loading, setLoading } = props
   const [announcements, setAnnouncements] = useState([])
-  const [currentPage] = useState(1)
-  const [announcementsPerPage] = useState(2)
-  const [selectedPK, setSelectedPK] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const history = useHistory()
 
   useEffect(() => {
-    getAnnouncements()
+    if (!hasFetchedAnnouncements.current) {
+      getAnnouncements()
       .then((data) => {
       setAnnouncements(data)
       setLoading(false)})
-  }, [setLoading])
+      hasFetchedAnnouncements.current = true
+  }
+}, [setLoading, announcements])
 
 
   const sortedAnnouncements = orderBy(
@@ -30,20 +29,6 @@ export const AnnouncementsList = (props) => {
     [(object) => new moment(object.date)],
     ['desc']
   )
-
-  // pagination based
-  const indexOfLastAnnouncement = currentPage * announcementsPerPage;
-  const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
-  const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
-
-  const viewButtons = selectedPK
-  
-  const handleDelete = async () => {
-    const deleteWorked = await deleteAnnouncement(selectedPK)
-    if (deleteWorked) {
-       history.push('/announcements')}
-    }
-
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -306,13 +291,13 @@ export const AnnouncementsList = (props) => {
         </div>
         <div className='overflow-y-auto px-4 sm:px-6 md:px-0'>
           {/* Replace with your content */}
-          <CreateAnnoucements token={token} authUser={authUser} setAnnouncements={setAnnouncements} />
+          <CreateAnnoucements token={token} authUser={authUser} setAnnouncements={setAnnouncements} setLoading={setLoading} />
           <div>
             <h1 className='flex items-left text-med font-medium'>
               Current Announcements
             </h1>
             <ul className='divide-y divide-gray-200'>
-              {currentAnnouncements.map((announcement, idx) => (
+              {sortedAnnouncements.map((announcement, idx) => (
                 <li
                   key={announcement.alertpk}
                   className='py-4 sm:border-t sm:border-gray-200'
@@ -326,56 +311,25 @@ export const AnnouncementsList = (props) => {
                         <h3 className='text-sm font-medium'>
                           {announcement.alert_header}
                         </h3>
-                        <p className='text-sm text-gray-500'>posted by:</p>
+                        <p className='text-sm text-gray-500'>posted at: {moment(announcement.date).format('LT')}</p>
                       </div>
                       <p className='items-center text-sm text-gray-500'>
                         {announcement.text}
                       </p>
+                      <a href={`/announcements/${announcement.alertpk}`}>
                       <span className='hidden sm:block'>
                         <button
                           type='button'
-                          className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
-                          onClick={() => setSelectedPK(announcement.alertpk)}  
+                          className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'                          
                         >
                           <PencilIcon
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'
                             aria-hidden='true'
                           />
-                          Announcement Options
+                          Announcement Details
                         </button>
                       </span>
-                    {viewButtons ? (<>
-                      <span className='hidden sm:block'>
-                        <Link to={{pathname: `/announcements/edit/${selectedPK}/`,
-                                  state: { sortedAnnouncements: sortedAnnouncements }
-                                }}>
-                        <button
-                          type='button'
-                          className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
-                          
-                        >
-                          <PencilIcon
-                            className='-ml-1 mr-2 h-5 w-5 text-gray-400'
-                            aria-hidden='true'
-                          />
-                          Edit
-                        </button>
-                        </Link>
-                      </span>
-                      <span className='hidden sm:block'>
-                        <button
-                          type='button'
-                          className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
-                          onClick={handleDelete}                     
-
-                        >
-                          <TrashIcon
-                            className='-ml-1 mr-2 h-5 w-5 text-gray-400'
-                            aria-hidden='true'
-                          />
-                          Delete
-                        </button>
-                      </span></> ) : (<></>)}
+                      </a>
                     </div>
                   </div>
                 </li>

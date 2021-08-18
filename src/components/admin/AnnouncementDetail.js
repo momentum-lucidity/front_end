@@ -1,5 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import moment from "moment";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import { deleteAnnouncement, getAnnouncementDetails } from "../../api";
+import Avatar from "react-avatar";
 import {
+  PencilIcon,
   ChevronRightIcon,
   CalendarIcon,
   FolderIcon,
@@ -8,30 +13,29 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import Avatar from "react-avatar";
-import { useLocation, useHistory, Link, useParams } from "react-router-dom";
-import { editAnnouncement } from "../../api";
+import { useHistory, Link, useParams } from "react-router-dom";
 
-export const EditAnnouncement = (props) => {
+export const AnnouncementDetail = (props) => {
   const { token, authUser } = props;
-  const location = useLocation()
-  const { announcement } = location.state
-  const [alertHeader, setAlertHeader] = useState(`${announcement.alert_header}`);
-  const [text, setText] = useState(`${announcement.text}`);
-  const user = authUser.id;
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const history = useHistory()
   const { id } = useParams();
+  const [announcement, setAnnouncement] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const history = useHistory();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    const editWorked = await editAnnouncement(token, id, user, alertHeader, text)
-    .then((res) => res.data)
-    if (editWorked) 
-      history.push('/announcements')
-  }
+    console.log(id)
+  useEffect(() => {
+    getAnnouncementDetails(token, id).then((data) => {
+      console.log(data);
+      setAnnouncement(data);
+    });
+  }, []);
+
+  const handleDelete =  () => {
+    deleteAnnouncement(token, id);
+    history.push("/announcements");
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -60,7 +64,7 @@ export const EditAnnouncement = (props) => {
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
     { name: "All Announcements", href: "/announcements", current: false },
-    { name: "Edit Announcement", href: "/announcements/:id", current: true },
+    { name: "Announcement Details", href: "/announcements/:id", current: true },
   ];
 
   function classNames(...classes) {
@@ -291,84 +295,71 @@ export const EditAnnouncement = (props) => {
             </Menu>
           </div>
         </div>
-        <main className='flex-1 relative focus:outline-none'>
-      <div className='py-6'>
-        <form
-          className='space-y-8 divide-y divide-gray-200'
-        >
-          <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
-            <div className='pt-8 space-y-8 '>
-              <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Edit Announcement
-                </h3>
-              </div>
-
-              <div className='sm:col-span-6'>
-                <label
-                  htmlFor='announcement-heading'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Announcement Heading
-                </label>
-                <div className='mt-1'>
-                  <input
-                    id='announcement-heading'
-                    name='announcement-heading'
-                    value={alertHeader}
-                    onChange={(event) => setAlertHeader(event.target.value)}
-                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                  />
-                </div>
-              </div>
-
-              <div className='sm:col-span-6'>
-                <label
-                  htmlFor='about'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Announcement Body
-                </label>
-                <div className='mt-1'>
-                  <textarea
-                    id='about'
-                    name='about'
-                    rows={3}
-                    value={text}
-                    onChange={(event) => setText(event.target.value)}
-                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                  />
-                </div>
-                <p className='mt-2 text-sm text-gray-500'>
-                  Write your the body of your announcement here.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className='pt-5'>
-            <div className='flex justify-end'>
-              <Link to='/announcements'>
-              <button
-                type='button'
-                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+        <div className="overflow-y-auto px-4 sm:px-6 md:px-0">
+          {/* Replace with your content */}
+          <div>
+            <h1 className="flex items-left text-med font-medium">
+              Announcement Details
+            </h1>
+            <ul className="divide-y divide-gray-200">
+              <li
+                key={announcement.alertpk}
+                className="py-4 sm:border-t sm:border-gray-200"
               >
-                Cancel
-              </button>
-              <button
-                type='submit'
-                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                onClick={handleSubmit}
-              >
-                Save
-              </button>
-              </Link>
-            </div>
+                <div className="flex space-x-3">
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-gray-500">
+                        {moment(announcement.date).format("LL")}
+                      </p>
+                      <h3 className="text-sm font-medium">
+                        {announcement.alert_header}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        posted at: {moment(announcement.date).format("LT")}
+                      </p>
+                    </div>
+                    <p className="items-center text-sm text-gray-500">
+                      {announcement.text}
+                    </p>
+                    <span className="hidden sm:block">
+                      <Link
+                        to={{
+                          pathname: `/announcements/edit/${id}/`,
+                          state: { announcement: announcement },
+                        }}
+                      >
+                        <button
+                          type="button"
+                          className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                        >
+                          <PencilIcon
+                            className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          Edit
+                        </button>
+                      </Link>
+                    </span>
+                    <span className="hidden sm:block">
+                      <button
+                        type="button"
+                        className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                        onClick={handleDelete}
+                      >
+                        <TrashIcon
+                          className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Delete
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-        </form>
-        {/* /End replace */}
-      </div>
-    </main>
+        </div>
       </div>
     </div>
   );
