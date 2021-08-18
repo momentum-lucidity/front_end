@@ -40,16 +40,13 @@ export const AnnouncementsList = (props) => {
        history.push('/announcements')}
     }
 
+    const viewButtons = selectedPK
+
   const setPK = (event) => {
     if (event.target.className)setSelectedPK(event.target.value)
     console.log(selectedPK)
   }
 
-  // const handlePK = async (event) => {
-  //   setSelectedPK(event.target.value)
-  //   handleDelete()
-  //   console.log(selectedPK)
-  // }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -345,9 +342,10 @@ export const AnnouncementsList = (props) => {
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'
                             aria-hidden='true'
                           />
-                          Select Announcement
+                          Announcement Options
                         </button>
                       </span>
+                    {viewButtons ? (<>
                       <span className='hidden sm:block'>
                         <button
                           type='button'
@@ -376,7 +374,7 @@ export const AnnouncementsList = (props) => {
                           />
                           Delete
                         </button>
-                      </span> 
+                      </span></> ) : (<></>)}
                     </div>
                   </div>
                 </li>
