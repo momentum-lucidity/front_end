@@ -12,7 +12,7 @@ export const AnnouncementsList = (props) => {
   const { token, authUser, loading, setLoading } = props
   const [announcements, setAnnouncements] = useState([])
   const [currentPage] = useState(1)
-  const [announcementsPerPage] = useState(5)
+  const [announcementsPerPage] = useState(2)
   const [selectedPK, setSelectedPK] = useState(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const history = useHistory()
@@ -346,7 +346,7 @@ export const AnnouncementsList = (props) => {
                       </span>
                     {viewButtons ? (<>
                       <span className='hidden sm:block'>
-                        <Link to={{pathname: `/volunteers/edit/${selectedPK}/`,
+                        <Link to={{pathname: `/announcements/edit/${selectedPK}/`,
                                   state: { sortedAnnouncements: sortedAnnouncements }
                                 }}>
                         <button
