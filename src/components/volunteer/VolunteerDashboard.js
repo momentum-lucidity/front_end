@@ -32,10 +32,6 @@ export const VolunteerDashboard = (props) => {
               <h1 className='text-2xl font-bold text-gray-900'>
                 Welcome, {authUser.display_name}
               </h1>
-              <p className='text-sm font-medium text-gray-500'>
-                joined{' '}
-                on <time dateTime='2020-08-25'>August 25, 2020</time>
-              </p>
             </div>
             <nav aria-label='Progress'>
               <ol className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
@@ -73,7 +69,6 @@ export const VolunteerDashboard = (props) => {
                     {stepIdx !== steps.length - 1
                       ? (
                         <>
-                          {/* Arrow separator for lg screens and up */}
                           <div className='hidden md:block absolute top-0 right-0 h-full w-5' aria-hidden='true'>
                             <svg
                               className='h-full w-full text-gray-300'

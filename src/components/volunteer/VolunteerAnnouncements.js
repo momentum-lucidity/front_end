@@ -21,33 +21,40 @@ export const VolunteerAnnouncements = (props) => {
   }
 
   return (
-    <div className="h-screen overflow-y-auto bg-white overflow-hidden flex">
+    <div className="flex flex-col h-screen overflow-y-auto bg-white overflow-hidden flex">
       <div>
-        <h1 className="flex items-left text-med font-medium">
+        <h1 className="flex flex-col items-left text-med font-medium">
           Current Announcements
         </h1>
-        <ul className="divide-y divide-gray-200">
+        <ul className="flex flex-col justify-start divide-y divide-gray-200">
           {sortedAnnouncements.map((announcement, idx) => (
             <li
               key={announcement.alertpk}
-              className="py-4 sm:border-t sm:border-gray-200"
+              className="flex flex-col py-4 sm:border-t sm:border-gray-200"
             >
-              <div className="flex space-x-3">
-                <div className="flex-1 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-500">
-                      {moment(announcement.date).format("LL")}
-                    </p>
-                    <h3 className="text-sm font-medium">
-                      {announcement.alert_header}
-                    </h3>
-                    <p className="text-sm text-gray-500">posted by:</p>
+              <ul>
+                <div className="flex flex-col justify-start space-x-3">
+                  <div className="flex flex-col flex-1 justify-start space-y-1">
+                    <div className="flex flex-col flex justify-start justify-between">
+                      <div className="divide-y divide-gray-200">
+                        <li className="text-sm text-gray-500">
+                          {moment(announcement.date).format("LL")}
+                        </li>
+                      </div>
+                      <div className="divide-y divide-gray-200">
+                        <li className="text-sm font-medium">
+                          {announcement.alert_header}
+                        </li>
+                      </div>
+                      <div className="divide-y divide-gray-200">
+                        <li className="items-center text-sm text-gray-500">
+                          {announcement.text}
+                        </li>
+                      </div>
+                    </div>
                   </div>
-                  <p className="items-center text-sm text-gray-500">
-                    {announcement.text}
-                  </p>
                 </div>
-              </div>
+              </ul>
             </li>
           ))}
         </ul>
