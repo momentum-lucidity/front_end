@@ -10,7 +10,7 @@ import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, Inbox
 export const AnnouncementsList = (props) => {
   const { token, authUser } = props
   const [announcements, setAnnouncements] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage] = useState(1)
   const [announcementsPerPage] = useState(5)
   const [selectedPK, setSelectedPK] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -27,16 +27,19 @@ export const AnnouncementsList = (props) => {
     ['desc']
   )
 
+  // pagination based
   const indexOfLastAnnouncement = currentPage * announcementsPerPage;
   const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
   const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
   
   const handleDelete = () => {
     deleteAnnouncement(selectedPK)
   }
 
+  const setPK = (event) => {
+    setSelectedPK(event.target.value)
+    console.log(selectedPK)
+  }
   const handlePK = (event) => {
     setSelectedPK(event.target.value)
     handleDelete()
@@ -331,6 +334,8 @@ export const AnnouncementsList = (props) => {
                         <button
                           type='button'
                           className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
+                          onClick={setPK}
+                          value={announcement.alertpk}
                         >
                           <PencilIcon
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'
