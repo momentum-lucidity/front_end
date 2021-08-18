@@ -1,25 +1,26 @@
-import { React, useEffect, useState } from 'react'
-import { getAuthUser, getVolunteerList } from './api'
-import { useLocalStorageState } from 'use-local-storage-state'
-import { AdminDashboard } from './components/admin/AdminDashboard'
-import { AdminLogin } from './components/admin/AdminLogin'
-import { VolunteerList } from './components/admin/VolunteerList'
-import { VolunteerDetails } from './components/admin/VolunteerDetails'
-import { EventsList } from './components/admin/EventsList'
-import { EventDetail } from './components/admin/EventDetail'
-import { EventForm } from './components/admin/EventForm'
-import { DocumentList } from './components/admin/DocumentList'
-import { Registration } from './components/admin/Registration'
-import { AnnouncementsList } from './components/admin/AnnouncementsList'
-import { EditVolunteer } from './components/admin/EditVolunteer'
-import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
-import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
-import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import 'tailwindcss/tailwind.css'
-import { AdminLogout } from './components/admin/AdminLogout'
-import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
-import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
+import { React, useEffect, useState } from 'react';
+import { getAuthUser, getVolunteerList } from './api';
+import { useLocalStorageState } from 'use-local-storage-state';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminLogin } from './components/admin/AdminLogin';
+import { VolunteerList } from './components/admin/VolunteerList';
+import { VolunteerDetails } from './components/admin/VolunteerDetails';
+import { EventsList } from './components/admin/EventsList';
+import { EventDetail } from './components/admin/EventDetail';
+import { EditEvent } from './components/admin/EditEvent';
+import { EventForm } from './components/admin/EventForm';
+import { DocumentList } from './components/admin/DocumentList';
+import { Registration } from './components/admin/Registration';
+import { AnnouncementsList } from './components/admin/AnnouncementsList';
+import { EditVolunteer } from './components/admin/EditVolunteer';
+import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard';
+import { VolunteerProfile } from './components/volunteer/VolunteerProfile';
+import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
+import { AdminLogout } from './components/admin/AdminLogout';
+import { VolunteerLogin } from './components/volunteer/VolunteerLogin';
+import { VolunteerLogout } from './components/volunteer/VolunteerLogout';
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
@@ -27,17 +28,16 @@ function App () {
   const [allVolunteers, setAllVolunteers] = useState([])
 
   useEffect(() => {
-    getAuthUser(token)
-      .then((data) => setAuthUser(data))
+    getAuthUser(token).then((data) => setAuthUser(data))
   }, [setAuthUser, token])
 
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Switch>
           <Route
             exact
-            path="/"
+            path='/'
             component={() => (
               <AdminLogin
                 token={token}
@@ -49,7 +49,7 @@ function App () {
           />
           <Route
             exact
-            path="/admin/logout"
+            path='/admin/logout'
             component={() => (
               <AdminLogout
                 token={token}
@@ -61,7 +61,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/login"
+            path='/dreamcenter/login'
             component={() => (
               <VolunteerLogin
                 token={token}
@@ -73,7 +73,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/logout"
+            path='/dreamcenter/logout'
             component={() => (
               <VolunteerLogout
                 token={token}
@@ -84,7 +84,7 @@ function App () {
             )}
           />
           <Route
-            path="/registration"
+            path='/registration'
             component={() => (
               <Registration
                 token={token}
@@ -97,7 +97,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/registration"
+            path='/dreamcenter/registration'
             component={() => (
               <VolunteerRegistration
                 token={token}
@@ -110,7 +110,7 @@ function App () {
           />
           <Route
             exact
-            path="/admindash"
+            path='/admindash'
             component={() => (
               <AdminDashboard
                 token={token}
@@ -122,7 +122,7 @@ function App () {
           />
           <Route
             exact
-            path="/events"
+            path='/events'
             component={() => (
               <EventsList
                 token={token}
@@ -135,7 +135,7 @@ function App () {
           />
           <Route
             exact
-            path="/events/eventform"
+            path='/events/eventform'
             component={() => (
               <EventForm
                 token={token}
@@ -147,7 +147,8 @@ function App () {
             )}
           />
           <Route
-            path="/events/:id"
+            exact
+            path='/events/:id'
             component={() => (
               <EventDetail
                 token={token}
@@ -160,7 +161,20 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers"
+            path='/events/edit/:id'
+            component={() => (
+              <EditEvent
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                allVolunteers={setAllVolunteers}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/volunteers'
             component={() => (
               <VolunteerList
                 token={token}
@@ -174,7 +188,7 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers/:id"
+            path='/volunteers/:id'
             component={() => (
               <VolunteerDetails
                 token={token}
@@ -188,7 +202,7 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers/edit/:eventpk"
+            path='/volunteers/edit/:eventpk'
             component={() => (
               <EditVolunteer
                 token={token}
@@ -201,7 +215,7 @@ function App () {
           />
           <Route
             exact
-            path="/documents"
+            path='/documents'
             component={() => (
               <DocumentList
                 token={token}
@@ -213,7 +227,7 @@ function App () {
           />
           <Route
             exact
-            path="/announcements"
+            path='/announcements'
             component={() => (
               <AnnouncementsList
                 token={token}
@@ -225,7 +239,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/volunteerdash"
+            path='/dreamcenter/volunteerdash'
             component={() => (
               <VolunteerDashboard
                 token={token}
@@ -237,7 +251,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/profile"
+            path='/dreamcenter/profile'
             component={() => (
               <VolunteerProfile
                 token={token}
@@ -250,7 +264,7 @@ function App () {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
