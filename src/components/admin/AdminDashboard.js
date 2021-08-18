@@ -234,7 +234,6 @@ export const AdminDashboard = (props) => {
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
 
-            {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -287,7 +286,6 @@ export const AdminDashboard = (props) => {
               <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <div className='rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px'>
                 {actions.map((action, actionIdx) => (
                   <div
@@ -318,7 +316,6 @@ export const AdminDashboard = (props) => {
                     <div className='mt-8'>
                       <h3 className='text-lg font-medium'>
                         <a href={action.href} className='focus:outline-none'>
-                          {/* Extend touch target to entire panel */}
                           <span className='absolute inset-0' aria-hidden='true' />
                           {action.title}
                         </a>
@@ -345,7 +342,6 @@ export const AdminDashboard = (props) => {
                   </div>
                 ))}
               </div>
-              {/* /End replace */}
             </div>
           </div>
         </main>

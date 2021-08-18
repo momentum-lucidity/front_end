@@ -306,7 +306,6 @@ export const EventsList = (props) => {
               </Link>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>
                 {allEvents && allEvents.map((event, idx) => (
                   <li
@@ -343,17 +342,10 @@ export const EventsList = (props) => {
                           </span>
                         </a>
                       </div>
-                      {/* <time
-                dateTime={event.datetime}
-                className="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"
-              >
-                {event.time}
-              </time> */}
                     </div>
                   </li>
                 ))}
               </ul>
-              {/* /End replace */}
             </div>
           </div>
         </main>

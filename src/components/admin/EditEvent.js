@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
+import { editEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import {
   ChevronRightIcon,
@@ -12,18 +13,21 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline';
-import axios from 'axios';
 
-export const EventForm = (props) => {
+export const EditEvent = (props) => {
+  const location = useLocation()
+  const { event } = location.state
   const { token, authUser } = props
-  const [eventHeader, setEventHeader] = useState('')
-  const [date, setDate] = useState('')
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
-  const [type, setType] = useState('')
-  const [description, setDescription] = useState('')
+  const [eventHeader, setEventHeader] = useState(`${event.event_header}`)
+  const [date, setDate] = useState(`${event.date}`)
+  const [startTime, setStartTime] = useState(`${event.start_time}`)
+  const [endTime, setEndTime] = useState(`${event.end_time}`)
+  const [type, setType] = useState(`${event.type}`)
+  const [description, setDescription] = useState(`${event.description}`)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const history = useHistory()
+  const user = authUser.id
+  const { id } = useParams();
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -61,37 +65,9 @@ export const EventForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const user = authUser.id
-    alert('Your event has been submitted!')
-    const success = await axios
-      .post(
-        'https://momentum-lucidity.herokuapp.com/events/',
-        {
-          user: [user],
-          event_header: eventHeader,
-          date: date,
-          start_time: startTime,
-          end_time: endTime,
-          type: type,
-          description: description
-        },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      .then((response) => response.data)
-    if (success) {
-      setEventHeader('')
-      setDate('')
-      setStartTime('')
-      setEndTime('')
-      setType('')
-      setDescription('')
-      history.push('/events')
-    }
+    const success = await editEvent(token, id, user, eventHeader, date, startTime, endTime, type, description)
+      .then((res) => res.data)
+    if (success) history.push('/events')
   }
 
   return (
@@ -323,7 +299,7 @@ export const EventForm = (props) => {
             <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Create an Event
+                  Edit Event
                 </h3>
               </div>
               <div className='space-y-6 sm:space-y-5'>
