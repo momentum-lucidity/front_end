@@ -13,16 +13,26 @@ import {
 } from "@heroicons/react/outline";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Avatar from "react-avatar";
-import { useParams } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import { editAnnouncement } from "../../api";
 
 export const EditAnnouncement = (props) => {
   const { token, authUser } = props;
-  const { id } = useParams()
-  const [alertHeader, setAlertHeader] = useState("");
-  const [text, setText] = useState("");
+  const location = useLocation()
+  const { sortedAnnouncements } = location.state
+  const  id  = sortedAnnouncements.alertPK
+  const [alertHeader, setAlertHeader] = useState(`${sortedAnnouncements.alertHeader}`);
+  const [text, setText] = useState(`${sortedAnnouncements.text}`);
   const user = authUser.id;
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const history = useHistory()
+
+  const handleSubmit = async () => {
+    const editWorked = await editAnnouncement([user], id, token, alertHeader, text)
+    if (editWorked) {
+      history.push('/announcements')
+    }
+  }
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -285,7 +295,7 @@ export const EditAnnouncement = (props) => {
       <div className='py-6'>
         <form
           className='space-y-8 divide-y divide-gray-200'
-        //   onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
         >
           <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
             <div className='pt-8 space-y-8 '>

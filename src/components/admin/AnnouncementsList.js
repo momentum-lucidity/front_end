@@ -3,14 +3,15 @@ import moment from 'moment'
 import { orderBy } from 'lodash'
 import { CreateAnnoucements } from './CreateAnnouncements.js'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { getAnnouncements, deleteAnnouncement } from '../../api'
+import { getAnnouncements, deleteAnnouncement, editAnnouncement } from '../../api'
 import Avatar from 'react-avatar'
 import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 export const AnnouncementsList = (props) => {
   const { token, authUser } = props
   const [announcements, setAnnouncements] = useState([])
+  const [loading, setLoading] = useState(true)
   const [currentPage] = useState(1)
   const [announcementsPerPage] = useState(5)
   const [selectedPK, setSelectedPK] = useState(null)
@@ -19,7 +20,9 @@ export const AnnouncementsList = (props) => {
 
   useEffect(() => {
     getAnnouncements()
-      .then((data) => setAnnouncements(data))
+      .then((data) => {
+      setAnnouncements(data)
+      setLoading(false)})
   }, [])
 
 
@@ -33,19 +36,14 @@ export const AnnouncementsList = (props) => {
   const indexOfLastAnnouncement = currentPage * announcementsPerPage;
   const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
   const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
+
+  const viewButtons = selectedPK
   
   const handleDelete = async () => {
     const deleteWorked = await deleteAnnouncement(selectedPK)
     if (deleteWorked) {
        history.push('/announcements')}
     }
-
-    const viewButtons = selectedPK
-
-  const setPK = (event) => {
-    if (event.target.className)setSelectedPK(event.target.value)
-    console.log(selectedPK)
-  }
 
 
   const navigation = [
@@ -81,7 +79,9 @@ export const AnnouncementsList = (props) => {
     return classes.filter(Boolean).join(' ')
   }
 
-  return (
+  return loading 
+  ? 'Announcements are Loading...'
+  :(
     <div className='h-screen overflow-y-auto bg-white overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
@@ -347,11 +347,13 @@ export const AnnouncementsList = (props) => {
                       </span>
                     {viewButtons ? (<>
                       <span className='hidden sm:block'>
+                        <Link to={{pathname: `/volunteers/edit/${selectedPK}/`,
+                                  state: { sortedAnnouncements: sortedAnnouncements }
+                                }}>
                         <button
                           type='button'
                           className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
-                          onClick={setPK} 
-                          value={announcement.alertpk}
+                          
                         >
                           <PencilIcon
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'
@@ -359,11 +361,11 @@ export const AnnouncementsList = (props) => {
                           />
                           Edit
                         </button>
+                        </Link>
                       </span>
                       <span className='hidden sm:block'>
                         <button
                           type='button'
-                          value={announcement.alertpk}
                           className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'
                           onClick={handleDelete}                     
 
