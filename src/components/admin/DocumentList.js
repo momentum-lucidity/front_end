@@ -308,7 +308,7 @@ export const DocumentList = (props) => {
         <main className="flex flex-col relative overflow-y-auto focus:outline-none">
           <div className="py-8">
             <div className="px-6 sm:px-6 md:px-0">
-              <h1 className="text-2xl font-semibold text-gray-900">
+              <h1 className="text-2xl pb-6 font-semibold text-gray-900">
                 Document List
               </h1>
             </div>

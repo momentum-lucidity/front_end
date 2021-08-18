@@ -281,7 +281,7 @@ export const AdminDashboard = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0'>
+            <div className='px-6 pb-6 sm:px-8 md:px-2'>
               <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
