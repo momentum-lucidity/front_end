@@ -4,13 +4,14 @@ import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   ChevronRightIcon,
   CalendarIcon,
-  CashIcon,
+  SpeakerphoneIcon,
   FolderIcon,
   HomeIcon,
   InboxIcon,
   MenuAlt2Icon,
   UsersIcon,
-  XIcon
+  XIcon,
+  DocumentDuplicateIcon
 } from '@heroicons/react/outline'
 
 const navigation = [
@@ -31,7 +32,7 @@ const actions = [
     title: 'Volunteers',
     href: '/volunteers',
     icon: UsersIcon,
-    iconForeground: 'text-teal-700',
+    iconForeground: 'text-teal-500',
     iconBackground: 'bg-teal-50'
   },
   {
@@ -44,14 +45,14 @@ const actions = [
   {
     title: 'Documents',
     href: '/documents',
-    icon: UsersIcon,
-    iconForeground: 'text-sky-700',
-    iconBackground: 'bg-sky-50'
+    icon: DocumentDuplicateIcon,
+    iconForeground: 'text-teal-700',
+    iconBackground: 'bg-teal-50'
   },
   {
     title: 'Announcements',
     href: '/announcements',
-    icon: CashIcon,
+    icon: SpeakerphoneIcon,
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50'
   }
@@ -157,10 +158,8 @@ export const AdminDashboard = (props) => {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className='hidden md:flex md:flex-shrink-0'>
         <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
@@ -310,7 +309,7 @@ export const AdminDashboard = (props) => {
                           'rounded-lg inline-flex p-3 ring-4 ring-white'
                         )}
                       >
-                        <action.icon className='h-6 w-6' aria-hidden='true' />
+                        <action.icon className='h-6 w-6' aria-hidden='false' />
                       </span>
                     </div>
                     <div className='mt-8'>
@@ -321,9 +320,6 @@ export const AdminDashboard = (props) => {
                         </a>
                       </h3>
                       <p className='mt-2 text-sm text-gray-500'>
-                        Doloribus dolores nostrum quia qui natus officia quod et
-                        dolorem. Sit repellendus qui ut at blanditiis et quo et
-                        molestiae.
                       </p>
                     </div>
                     <span
