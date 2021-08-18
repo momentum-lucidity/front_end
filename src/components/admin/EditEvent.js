@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { editEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import { Link, useHistory } from 'react-router-dom';
 import Avatar from 'react-avatar';
@@ -14,7 +15,7 @@ import {
 } from '@heroicons/react/outline';
 import axios from 'axios';
 
-export const EventForm = (props) => {
+export const EditEvent = (props) => {
   const { token, authUser } = props
   const [eventHeader, setEventHeader] = useState('')
   const [date, setDate] = useState('')
@@ -61,37 +62,9 @@ export const EventForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const user = authUser.id
-    alert('Your event has been submitted!')
-    const success = await axios
-      .post(
-        'https://momentum-lucidity.herokuapp.com/events/',
-        {
-          user: [user],
-          event_header: eventHeader,
-          date: date,
-          start_time: startTime,
-          end_time: endTime,
-          type: type,
-          description: description
-        },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      .then((response) => response.data)
-    if (success) {
-      setEventHeader('')
-      setDate('')
-      setStartTime('')
-      setEndTime('')
-      setType('')
-      setDescription('')
-      history.push('/events')
-    }
+    const success = await editEvent(token, id, user, event_header, date, start_time, end_time, type, description)
+      .then((res) => res.data)
+    if (success) history.push('/events')
   }
 
   return (
@@ -323,7 +296,7 @@ export const EventForm = (props) => {
             <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Create an Event
+                  Edit Event
                 </h3>
               </div>
               <div className='space-y-6 sm:space-y-5'>
