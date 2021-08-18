@@ -1,7 +1,7 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Link, useHistory } from 'react-router-dom'
-import Avatar from 'react-avatar'
+import { Fragment, useState } from 'react';
+import { Dialog, Menu, Transition } from '@headlessui/react';
+import { Link, useHistory } from 'react-router-dom';
+import Avatar from 'react-avatar';
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -11,8 +11,8 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon
-} from '@heroicons/react/outline'
-import axios from 'axios'
+} from '@heroicons/react/outline';
+import axios from 'axios';
 
 export const EventForm = (props) => {
   const { token, authUser } = props
@@ -60,45 +60,39 @@ export const EventForm = (props) => {
     return classes.filter(Boolean).join(' ')
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const user = authUser.id
     alert('Your event has been submitted!')
-    axios
+    const success = await axios
       .post(
         'https://momentum-lucidity.herokuapp.com/events/',
         {
-<<<<<<< HEAD
-          user: [authUser.id],
-          event_header: event_header,
-=======
+          user: [user],
           event_header: eventHeader,
->>>>>>> main
           date: date,
           start_time: startTime,
           end_time: endTime,
           type: type,
           description: description
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
         }
-        // {
-        //   headers: {
-        //     Authorization: `Token ${token}`,
-        //     'Content-Type': 'application/json'
-        //   }
-        // }
       )
-      .then((response) => {
-<<<<<<< HEAD
-=======
-        console.log({ startTime })
->>>>>>> main
-        history.push('/events')
-      })
-    event.preventDefault()
-    setEventHeader('')
-    setDate('')
-    setStartTime('')
-    setEndTime('')
-    setType('')
-    setDescription('')
+      .then((response) => response.data)
+    if (success) {
+      setEventHeader('')
+      setDate('')
+      setStartTime('')
+      setEndTime('')
+      setType('')
+      setDescription('')
+      history.push('/events')
+    }
   }
 
   return (
@@ -531,4 +525,4 @@ export const EventForm = (props) => {
       </div>
     </div>
   )
-}
+};
