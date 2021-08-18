@@ -26,6 +26,7 @@ function App () {
   const [token, setToken] = useLocalStorageState('token', '')
   const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
   const [allVolunteers, setAllVolunteers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getAuthUser(token)
@@ -221,6 +222,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                loading={loading}
+                setLoading={setLoading}
               />
             )}
           />

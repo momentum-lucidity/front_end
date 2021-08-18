@@ -9,9 +9,9 @@ import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, Inbox
 import { useHistory, Link } from 'react-router-dom'
 
 export const AnnouncementsList = (props) => {
-  const { token, authUser } = props
+  const { token, authUser, loading, setLoading } = props
   const [announcements, setAnnouncements] = useState([])
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [currentPage] = useState(1)
   const [announcementsPerPage] = useState(5)
   const [selectedPK, setSelectedPK] = useState(null)
