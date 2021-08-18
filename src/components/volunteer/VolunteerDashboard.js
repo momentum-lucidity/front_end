@@ -1,10 +1,7 @@
 import { VolunteerHeader } from './VolunteerHeader.js'
 import { VolunteerEvents } from './VolunteerEvents.js'
-import {
-  CheckIcon,
-  ThumbUpIcon,
-  UserIcon
-} from '@heroicons/react/solid'
+import { VolunteerAnnouncements } from './VolunteerAnnouncements.js'
+import { CheckIcon } from '@heroicons/react/solid'
 
 const steps = [
   { id: '01', name: 'Registration', status: 'complete' },
@@ -106,16 +103,8 @@ export const VolunteerDashboard = (props) => {
           <div className='space-y-6 lg:col-start-1 lg:col-span-4 row-span-5'>
             <section aria-labelledby='applicant-information-title'>
               <div className='bg-white shadow sm:rounded-lg'>
-                <div className='px-4 py-5 sm:px-6'>
-                  <h2
-                    id='applicant-information-title'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    Upcoming Events
-                  </h2>
-                </div>
                 <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
-                  <VolunteerEvents />
+                  <VolunteerAnnouncements />
                 </div>
               </div>
             </section>
