@@ -11,7 +11,6 @@ import { useHistory, Link } from 'react-router-dom'
 export const AnnouncementsList = (props) => {
   const { token, authUser, loading, setLoading } = props
   const [announcements, setAnnouncements] = useState([])
-  // const [loading, setLoading] = useState(true)
   const [currentPage] = useState(1)
   const [announcementsPerPage] = useState(5)
   const [selectedPK, setSelectedPK] = useState(null)
@@ -23,7 +22,7 @@ export const AnnouncementsList = (props) => {
       .then((data) => {
       setAnnouncements(data)
       setLoading(false)})
-  }, [])
+  }, [setLoading])
 
 
   const sortedAnnouncements = orderBy(
