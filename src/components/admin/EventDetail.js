@@ -311,7 +311,11 @@ export const EventDetail = (props) => {
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
                     {event.event_header}
                   </h3>
-                  <Link to='/events/edit/${id}/'>
+                  <Link to={{
+                                  pathname: `/events/edit/${id}/`,
+                                  state: { event: event }
+                                }}
+                              >
                     <button
                       type="button"
                       className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { editEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
 import Avatar from 'react-avatar';
 import {
   ChevronRightIcon,
@@ -13,18 +13,21 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline';
-import axios from 'axios';
 
 export const EditEvent = (props) => {
+  const location = useLocation()
+  const { event } = location.state
   const { token, authUser } = props
-  const [eventHeader, setEventHeader] = useState('')
-  const [date, setDate] = useState('')
-  const [startTime, setStartTime] = useState('')
-  const [endTime, setEndTime] = useState('')
-  const [type, setType] = useState('')
-  const [description, setDescription] = useState('')
+  const [eventHeader, setEventHeader] = useState(`${event.event_header}`)
+  const [date, setDate] = useState(`${event.date}`)
+  const [startTime, setStartTime] = useState(`${event.start_time}`)
+  const [endTime, setEndTime] = useState(`${event.end_time}`)
+  const [type, setType] = useState(`${event.type}`)
+  const [description, setDescription] = useState(`${event.description}`)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const history = useHistory()
+  const user = authUser.id
+  const { id } = useParams();
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -62,7 +65,7 @@ export const EditEvent = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const success = await editEvent(token, id, user, event_header, date, start_time, end_time, type, description)
+    const success = await editEvent(token, id, user, eventHeader, date, startTime, endTime, type, description)
       .then((res) => res.data)
     if (success) history.push('/events')
   }
