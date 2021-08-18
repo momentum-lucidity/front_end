@@ -314,7 +314,7 @@ export const EventsList = (props) => {
                         <a
                           href={`/events/${event.eventpk}`}
                           className='block focus:outline-none'
-                        >eventpk {event.eventpk}
+                        >
                           <span
                             className='absolute inset-0'
                             aria-hidden='true'

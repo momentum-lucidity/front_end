@@ -16,7 +16,6 @@ import axios from 'axios'
 
 export const EventForm = (props) => {
   const { token, authUser } = props
-  // const [eventpk, setEventpk] = useState("");
   const [event_header, setEventHeader] = useState('')
   const [date, setDate] = useState('')
   const [start_time, setStartTime] = useState('')
@@ -73,16 +72,15 @@ export const EventForm = (props) => {
           end_time: end_time,
           type: type,
           description: description
-        },
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-            'Content-Type': 'application/json'
-          }
         }
+        // {
+        //   headers: {
+        //     Authorization: `Token ${token}`,
+        //     'Content-Type': 'application/json'
+        //   }
+        // }
       )
       .then((response) => {
-        console.log({ start_time })
         history.push('/events')
       })
     event.preventDefault()
