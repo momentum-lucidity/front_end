@@ -240,6 +240,7 @@ export const deleteAnnouncement = (selectedPK, token) => {
 };
 
 export const editEvent = (
+  token,
   id,
   user,
   event_header,
@@ -253,10 +254,10 @@ export const editEvent = (
     `https://momentum-lucidity.herokuapp.com/events/${id}/`,
     {
       user: [user],
-      event_header: eventHeader,
+      event_header: event_header,
       date: date,
-      start_time: startTime,
-      end_time: endTime,
+      start_time: start_time,
+      end_time: end_time,
       type: type,
       description: description,
     },
