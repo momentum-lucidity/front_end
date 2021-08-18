@@ -60,7 +60,7 @@ export const EditAnnouncement = (props) => {
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
     { name: "All Announcements", href: "/announcements", current: false },
-    { name: "Edit Announcement", href: "/announcements/:id", current: true },
+    { name: "Edit Announcement", href: `/announcements/${announcement.alertpk}`, current: true },
   ];
 
   function classNames(...classes) {
