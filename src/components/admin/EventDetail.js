@@ -1,34 +1,30 @@
-import { Fragment, useState, useEffect } from 'react'
-import { getEventDetails, deleteEvent } from '../../api'
+import { Fragment, useState, useEffect, useRef } from 'react'
+import { getEventDetails, deleteEvent, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-  TrashIcon
-} from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
 import { useParams, useHistory } from 'react-router-dom'
 
 export const EventDetail = (props) => {
   const { token, authUser } = props
   const { id } = useParams()
+  const fetchedEventDetails = useRef(false)
+  const fetchedAllSlots = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [event, setEvent] = useState('')
+  const [allVSlots, setAllVSlots] = useState([])
   const history = useHistory()
 
-  console.log(id)
   useEffect(() => {
-    getEventDetails(token, id).then((data) => {
-      console.log(data)
-      setEvent(data)
-    })
-  }, [])
+    if (!fetchedEventDetails.current && !fetchedAllSlots) {
+      getEventDetails(token, id).then((data) => {
+        console.log(data)
+        setEvent(data)
+        getAllSlots(token)
+          .then((data) => setAllVSlots(data))
+      })
+    }
+  }, [token, id, allVSlots])
 
   const handleDelete = () => {
     deleteEvent(token, id)
@@ -298,172 +294,220 @@ export const EventDetail = (props) => {
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
               <h1 className='text-2xl font-semibold text-gray-900'>
-                Upcoming Events
+                {event.event_header} Details
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
-                <div
-                  key={event.id}
-                  className='bg-white shadow overflow-hidden sm:rounded-lg'
-                >
-                  <div className='px-4 py-5 sm:px-6'>
-                    <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                      {event.event_header}
-                    </h3>
-                    <p className='text-sm text-gray-500'>
-                      {event.description} {event.type}
-                    </p>
-                  </div>
-                  <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
-                    <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
-                      <div className='sm:col-span-1'>
-                        <dt className='text-sm font-medium text-gray-500'>
-                          When
-                        </dt>
-                        <dd className='mt-1 text-sm text-gray-900'>
-                          {event.date} {event.start_time}
-                        </dd>
+              <div
+                key={event.id}
+                className='bg-white shadow overflow-hidden sm:rounded-lg'
+              >
+                <div className='px-4 py-5 sm:px-6'>
+                  <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                    {event.event_header}
+                  </h3>
+                  <p className='text-sm text-gray-500'>
+                    {event.description} {event.type}
+                  </p>
+                </div>
+                <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
+                  <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
+                    <div className='sm:col-span-1'>
+                      <dt className='text-sm font-medium text-gray-500'>
+                        When
+                      </dt>
+                      <dd className='mt-1 text-sm text-gray-900'>
+                        {event.date} {event.start_time}
+                      </dd>
+                    </div>
+                    <div className='sm:col-span-1'>
+                      <dt className='text-sm font-medium text-gray-500'>
+                        Where
+                      </dt>
+                    </div>
+
+                    <div className='sm:col-span-2'>
+                      <div>
+                        <h3 className='text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900'>
+                          Volunteers Roster
+                        </h3>
                       </div>
-                      <div className='sm:col-span-1'>
-                        <dt className='text-sm font-medium text-gray-500'>
-                          Where
-                        </dt>
-                      </div>
-                      <div className='sm:col-span-2'>
-                        <div>
-                          <h3 className='text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900'>
-                            Volunteers Needed
-                          </h3>
+                      <div className='flex flex-col'>
+                        <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                          <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                            <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
+                              <table className='min-w-full divide-y divide-gray-200'>
+                                <thead className='bg-gray-50'>
+                                  <tr>
+                                    <th
+                                      scope='col'
+                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                                    >
+                                      Name
+                                    </th>
+                                    <th
+                                      scope='col'
+                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                                    >
+                                      Title
+                                    </th>
+                                    <th
+                                      scope='col'
+                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                                    >
+                                      Status
+                                    </th>
+                                    <th
+                                      scope='col'
+                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                                    >
+                                      Role
+                                    </th>
+                                    <th scope='col' className='relative px-6 py-3'>
+                                      <span className='sr-only'>Edit</span>
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody className='bg-white divide-y divide-gray-200'>
+                                  {allVSlots.map((person) => (
+                                    <tr key={person.email}>
+                                      <td className='px-6 py-4 whitespace-nowrap'>
+                                        <div className='flex items-center'>
+                                          <div className='flex-shrink-0 h-10 w-10'>
+                                            <img className='h-10 w-10 rounded-full' src={person.image} alt='' />
+                                          </div>
+                                          <div className='ml-4'>
+                                            <div className='text-sm font-medium text-gray-900'>{person.name}</div>
+                                            <div className='text-sm text-gray-500'>{person.email}</div>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td className='px-6 py-4 whitespace-nowrap'>
+                                        <div className='text-sm text-gray-900'>{person.title}</div>
+                                        <div className='text-sm text-gray-500'>{person.department}</div>
+                                      </td>
+                                      <td className='px-6 py-4 whitespace-nowrap'>
+                                        <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+                                          Active
+                                        </span>
+                                      </td>
+                                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{person.role}</td>
+                                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                                        <a href='#' className='text-indigo-600 hover:text-indigo-900'>
+                                          Edit
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
-                        <div className='sm:col-span-6'>
+                      </div>
+
+                      Add a Volunteer Slot
+                      <div className='sm:col-span-6'>
+                        <label
+                          htmlFor='vol-duties'
+                          className='block text-sm font-medium text-gray-700'
+                        >
+                          Volunteer Duties
+                        </label>
+                        <div className='mt-1'>
+                          <textarea
+                            id='vol-duties'
+                            name='vol-duties'
+                            className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
+                            defaultValue=''
+                          />
+                        </div>
+                      </div>
+                      <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                        <div className='sm:col-span-3'>
                           <label
-                            htmlFor='vol-duties'
+                            htmlFor='volunteer-start-time'
                             className='block text-sm font-medium text-gray-700'
                           >
-                            Volunteer Duties
+                            Volunteer Start Time
                           </label>
-                          <div className='mt-1'>
-                            <textarea
-                              id='vol-duties'
-                              name='vol-duties'
-                              className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                              defaultValue=''
-                            />
+                          <div className='mt-1 sm:mt-0 sm:col-span-2'>
+                            <select
+                              id='volunteer-start-time'
+                              name='volunteer-start-time'
+                              autoComplete='volunteer-start-time'
+                              className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                            >
+                              <option>12:00</option>
+                              <option>1:00</option>
+                              <option>2:00</option>
+                            </select>
                           </div>
                         </div>
-                        <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                          <div className='sm:col-span-3'>
-                            <label
-                              htmlFor='volunteer-start-time'
-                              className='block text-sm font-medium text-gray-700'
-                            >
-                              Volunteer Start Time
-                            </label>
-                            <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                              <select
-                                id='volunteer-start-time'
-                                name='volunteer-start-time'
-                                autoComplete='volunteer-start-time'
-                                className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                              >
-                                <option>12:00</option>
-                                <option>1:00</option>
-                                <option>2:00</option>
-                              </select>
-                            </div>
-                          </div>
 
-                          <div className='sm:col-span-3'>
-                            <label
-                              htmlFor='volunteer-end-time'
-                              className='block text-sm font-medium text-gray-700'
+                        <div className='sm:col-span-3'>
+                          <label
+                            htmlFor='volunteer-end-time'
+                            className='block text-sm font-medium text-gray-700'
+                          >
+                            Volunteer End time
+                          </label>
+                          <div className='mt-1 sm:mt-0 sm:col-span-2'>
+                            <select
+                              id='volunteer-end-time'
+                              name='volunteer-end-time'
+                              autoComplete='volunteer-end-time'
+                              className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                             >
-                              Volunteer End time
-                            </label>
-                            <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                              <select
-                                id='volunteer-end-time'
-                                name='volunteer-end-time'
-                                autoComplete='volunteer-end-time'
-                                className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                              >
-                                <option>12:00</option>
-                                <option>1:00</option>
-                                <option>2:00</option>
-                              </select>
-                            </div>
-                          </div>
-                          <button
-                            type='button'
-                            className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                          >
-                            Add Volunteer
-                          </button>
-                        </div>
-                      </div>
-                      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                        <div className='relative rounded-lg border border-green-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
-                          <div className='flex-1 min-w-0'>
-                            <span
-                              className='absolute inset-0'
-                              aria-hidden='true'
-                            />
-                            <p className='text-sm font-medium text-gray-900'>
-                              Volunteer Slot
-                            </p>
-                            <p className='text-sm font-medium text-gray-500'>
-                              
-                            </p>
-                            <p className='text-sm text-gray-500 truncate'>
-                              
-                            </p>
+                              <option>12:00</option>
+                              <option>1:00</option>
+                              <option>2:00</option>
+                            </select>
                           </div>
                         </div>
+                        <button
+                          type='button'
+                          className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                        >
+                          Add Volunteer
+                        </button>
                       </div>
-                      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                        <div className='relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
-                          <div className='flex-1 min-w-0'>
-                            <span
-                              className='absolute inset-0'
-                              aria-hidden='true'
-                            />
-                            <p className='text-sm font-medium text-gray-900'>
-                              Volunteer Slot
-                            </p>
-                            <p className='text-sm font-medium text-gray-500'>
-                              
-                            </p>
-                            <p className='text-sm text-gray-500 truncate'>
-                              
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                        <div className='w-0 flex-1 flex items-center'>
-                          <TrashIcon
-                            className='flex-shrink-0 h-5 w-5 text-gray-400'
-                            aria-hidden='false'
+                    </div>
+                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                      <div className='relative rounded-lg border border-green-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
+                        <div className='flex-1 min-w-0'>
+                          <span
+                            className='absolute inset-0'
+                            aria-hidden='true'
                           />
-                          <span className='ml-2 flex-1 w-0 truncate'>
-                            Delete Event
-                          </span>
-                        </div>
-                        <div className='ml-4 flex-shrink-0'>
-                          <a
-                            href='#'
-                            className='font-medium text-indigo-600 hover:text-indigo-500'
-                            onClick={handleDelete}
-                          >
-                            Delete Event
-                          </a>
+                          <p className='text-sm font-medium text-gray-900'>
+                            Volunteer Slot
+                          </p>
+                          <p className='text-sm font-medium text-gray-500' />
+                          <p className='text-sm text-gray-500 truncate' />
                         </div>
                       </div>
-                    </dl>
-                  </div>
+                    </div>
+                    <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+                      <div className='relative rounded-lg border border-red-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'>
+                        <div className='flex-1 min-w-0'>
+                          <span
+                            className='absolute inset-0'
+                            aria-hidden='true'
+                          />
+                          <p className='text-sm font-medium text-gray-900'>
+                            Volunteer Slot
+                          </p>
+                          <p className='text-sm font-medium text-gray-500' />
+                          <p className='text-sm text-gray-500 truncate' />
+                        </div>
+                      </div>
+                    </div>
+
+                  </dl>
                 </div>
-              ))}
+              </div>
               {/* /End replace */}
             </div>
           </div>

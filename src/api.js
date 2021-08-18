@@ -79,6 +79,22 @@ export const getEventsList = () => {
     .then((res) => res.data)
 }
 
+export const getAllSlots = (token) => {
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/volunteerops',
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((res) => res.data)
+  )
+}
+
 export const getEventDetails = (token, id) => {
   return (
     axios
