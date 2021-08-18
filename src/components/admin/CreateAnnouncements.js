@@ -1,6 +1,6 @@
-import { data } from 'autoprefixer'
-import { useState } from 'react'
-import { newAnnouncement } from '../../api'
+import { data } from 'autoprefixer';
+import { useState } from 'react';
+import { newAnnouncement } from '../../api';
 
 export const CreateAnnoucements = (props) => {
   const { token, authUser, setAnnouncements } = props
@@ -11,8 +11,12 @@ export const CreateAnnoucements = (props) => {
     event.preventDefault()
     console.log(authUser.id)
     const user = authUser.id
-    const success = await newAnnouncement([user], alertHeader, text, token)
-      .then((res) => res.data)
+    const success = await newAnnouncement(
+      [user],
+      alertHeader,
+      text,
+      token
+    ).then((res) => res.data)
     if (success) {
       setAnnouncements(data)
       setAlertHeader('')
@@ -98,4 +102,4 @@ export const CreateAnnoucements = (props) => {
       </div>
     </main>
   )
-}
+};
