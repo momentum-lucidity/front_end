@@ -37,8 +37,8 @@ export const VolunteerAnnouncements = (props) => {
                   <div className="flex flex-col flex-1 justify-start space-y-1">
                     <div className="flex flex-col flex justify-start justify-between">
                       <div className="divide-y divide-gray-200">
-                        <li className="text-sm text-gray-500">
-                          {moment(announcement.date).format("LL")}
+                        <li className="text-sm text-gray-700">
+                          Posted on: {moment(announcement.date).format("LL")}
                         </li>
                       </div>
                       <div className="divide-y divide-gray-200">
@@ -47,7 +47,7 @@ export const VolunteerAnnouncements = (props) => {
                         </li>
                       </div>
                       <div className="divide-y divide-gray-200">
-                        <li className="items-center text-sm text-gray-500">
+                        <li className="items-center text-sm text-gray-700">
                           {announcement.text}
                         </li>
                       </div>
