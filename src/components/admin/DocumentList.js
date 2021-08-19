@@ -14,15 +14,13 @@ import {
 } from "@heroicons/react/outline";
 import { getDocuments, deleteDocument } from "../../api";
 import { CreateDocument } from "./CreateDocument";
-import { useHistory } from "react-router-dom";
 
 export const DocumentList = (props) => {
   const hasFetchedDocuments = useRef(false);
   const { token, authUser, loading, setLoading } = props;
   const [documents, setDocuments] = useState([]);
-  const [documentPK, setDocumentPK] = useState([]);
+  const [documentPK, setDocumentPK] = useState('');
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const history = useHistory();
   useEffect(() => {
     if (!hasFetchedDocuments.current) {
       getDocuments().then((data) => {
@@ -33,9 +31,13 @@ export const DocumentList = (props) => {
     }
   }, [documents, setLoading]);
 
-  const handleDelete = () => {
-    deleteDocument(token, documentPK);
-    history.push("/documents");
+  const handleDelete = async () => {
+  const success = await deleteDocument(token, documentPK);
+  if (success) {
+    getDocuments()
+    .then((data) => {setDocuments(data)
+    setLoading(false)})      
+  }
   };
 
   const navigation = [
@@ -312,6 +314,7 @@ export const DocumentList = (props) => {
               authUser={authUser}
               setDocuments={setDocuments}
               setLoading={setLoading}
+              documents={documents}
             />
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">

@@ -19,9 +19,9 @@ export const CreateDocument = (props) => {
     if (success) {
       getDocuments()
       .then((data) => {setDocuments(data)
-      setLoading(false)})      
+      setLoading(false)
       setDocHeader('')
-      setUrl('')
+      setUrl('')})      
     }
   }
 
