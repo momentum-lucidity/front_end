@@ -258,7 +258,6 @@ export const DocumentList = (props) => {
             </nav>
           </div>
           <div className="ml-4 flex items-center md:ml-6">
-            {/* Profile dropdown */}
             <Menu as="div" className="ml-3 relative">
               {({ open }) => (
                 <>
