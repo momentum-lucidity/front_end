@@ -39,13 +39,13 @@ export const VolunteerEventDetails = (props) => {
   return (
     <>
       <VolunteerHeader />
-      <div className="h-screen bg-white overflow-hidden flex">
+      <div className="h-screen bg-white overflow-hidden flex bg-indigo-600 bg-opacity-5">
         <div className="flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0">
           <main className="flex-1 relative overflow-y-auto focus:outline-none">
             <div className="py-6">
               <div className="px-4 sm:px-6 md:px-0">
-                <h1 className="text-2xl font-semibold text-gray-900">
-                  {event.event_header} Details
+                <h1 className="text-2xl pt-2 pb-4 font-semibold text-gray-900">
+                  Full Event Details
                 </h1>
               </div>
               <div className="px-4 sm:px-6 md:px-0">
