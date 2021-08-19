@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import Avatar from 'react-avatar'
 
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
@@ -15,7 +16,6 @@ export const VolunteerHeader = (props) => {
           <div className='max-w-7xl mx-auto px-2 sm:px-6 lg:px-8'>
             <div className='relative flex justify-between h-16'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
-                {/* Mobile menu button */}
                 <Disclosure.Button className='inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
                   <span className='sr-only'>Open main menu</span>
                   {open ? (
@@ -62,10 +62,10 @@ export const VolunteerHeader = (props) => {
                       <div>
                         <Menu.Button className='bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                           <span className='sr-only'>Open user menu</span>
-                          <span className='inline-flex items-center justify-center h-10 w-10 rounded-full bg-purple-500'>
+                          <span className='inline-flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500'>
                             <span className='font-medium leading-none text-white'>
-                              DC
                             </span>
+                            {/* <Avatar name={authUser.legal_name} size='40' round /> */}
                           </span>
                         </Menu.Button>
                       </div>
