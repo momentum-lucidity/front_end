@@ -42,7 +42,7 @@ export const VolunteerEvents = (props) => {
                     <div className='flex justify-between space-x-3'>
                       <div className='min-w-0 flex-1'>
                         <a
-                          href={`/events/${event.eventpk}`}
+                          href={`volunteer/events/${event.eventpk}`}
                           className='block focus:outline-none'
                         >
                           <span

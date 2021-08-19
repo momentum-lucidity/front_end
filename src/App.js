@@ -1,28 +1,29 @@
-import { React, useEffect, useState } from 'react'
-import { getAuthUser, getVolunteerList } from './api'
-import { useLocalStorageState } from 'use-local-storage-state'
-import { AdminDashboard } from './components/admin/AdminDashboard'
-import { AdminLogin } from './components/admin/AdminLogin'
-import { VolunteerList } from './components/admin/VolunteerList'
-import { VolunteerDetails } from './components/admin/VolunteerDetails'
-import { EventsList } from './components/admin/EventsList'
-import { EventDetail } from './components/admin/EventDetail'
-import { EditEvent } from './components/admin/EditEvent'
-import { EventForm } from './components/admin/EventForm'
-import { DocumentList } from './components/admin/DocumentList'
-import { Registration } from './components/admin/Registration'
-import { AnnouncementsList } from './components/admin/AnnouncementsList'
-import { AnnouncementDetail } from './components/admin/AnnouncementDetail'
-import { EditAnnouncement } from './components/admin/EditAnnouncement'
-import { EditVolunteer } from './components/admin/EditVolunteer'
-import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
-import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
-import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import 'tailwindcss/tailwind.css'
-import { AdminLogout } from './components/admin/AdminLogout'
-import { VolunteerLogin } from './components/volunteer/VolunteerLogin'
-import { VolunteerLogout } from './components/volunteer/VolunteerLogout'
+import { React, useEffect, useState } from 'react';
+import { getAuthUser, getVolunteerList } from './api';
+import { useLocalStorageState } from 'use-local-storage-state';
+import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminLogin } from './components/admin/AdminLogin';
+import { VolunteerList } from './components/admin/VolunteerList';
+import { VolunteerDetails } from './components/admin/VolunteerDetails';
+import { EventsList } from './components/admin/EventsList';
+import { EventDetail } from './components/admin/EventDetail';
+import { EditEvent } from './components/admin/EditEvent';
+import { EventForm } from './components/admin/EventForm';
+import { DocumentList } from './components/admin/DocumentList';
+import { Registration } from './components/admin/Registration';
+import { AnnouncementsList } from './components/admin/AnnouncementsList';
+import { AnnouncementDetail } from './components/admin/AnnouncementDetail';
+import { EditAnnouncement } from './components/admin/EditAnnouncement';
+import { EditVolunteer } from './components/admin/EditVolunteer';
+import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard';
+import { VolunteerProfile } from './components/volunteer/VolunteerProfile';
+import { VolunteerRegistration } from './components/volunteer/VolunteerRegistration';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
+import { AdminLogout } from './components/admin/AdminLogout';
+import { VolunteerLogin } from './components/volunteer/VolunteerLogin';
+import { VolunteerLogout } from './components/volunteer/VolunteerLogout';
+import { VolunteerEventDetails } from './components/volunteer/VolunteerEventDetails';
 
 function App () {
   const [token, setToken] = useLocalStorageState('token', '')
@@ -256,7 +257,6 @@ function App () {
               />
             )}
           />
-            />
           <Route
             exact
             path='/announcements/edit/:id/'
@@ -290,6 +290,19 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/dreamcenter/volunteer/events/:id'
+            component={() => (
+              <VolunteerEventDetails
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                allVolunteers={allVolunteers}
               />
             )}
           />
