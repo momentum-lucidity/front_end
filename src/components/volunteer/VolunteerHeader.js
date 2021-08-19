@@ -1,6 +1,6 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
@@ -39,7 +39,6 @@ export const VolunteerHeader = (props) => {
                   />
                 </div>
                 <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
-                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <a
                     href='/dreamcenter/profile'
                     className='border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
@@ -47,7 +46,9 @@ export const VolunteerHeader = (props) => {
                     Profile
                   </a>
                   <a
-                    href='/handbook'
+                    href='https://docs.google.com/document/d/11V1bi6IcLS8H2TBtBzN9H_sc2mc76YBJ/edit'
+                    target='_blank'
+                    rel='noreferrer noopener'
                     className='border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 focus:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium'
                   >
                     Handbook
@@ -55,8 +56,6 @@ export const VolunteerHeader = (props) => {
                 </div>
               </div>
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-
-                {/* Profile dropdown */}
                 <Menu as='div' className='ml-3 relative'>
                   {({ open }) => (
                     <>
@@ -121,7 +120,6 @@ export const VolunteerHeader = (props) => {
 
           <Disclosure.Panel className='sm:hidden'>
             <div className='pt-2 pb-4 space-y-1'>
-              {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
               <a
                 href='#'
                 className='bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium'
@@ -152,4 +150,4 @@ export const VolunteerHeader = (props) => {
       )}
     </Disclosure>
   )
-}
+};
