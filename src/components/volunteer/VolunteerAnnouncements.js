@@ -23,10 +23,10 @@ export const VolunteerAnnouncements = (props) => {
   return (
     <div className="flex flex-col h-screen overflow-y-auto bg-white overflow-hidden flex">
       <div>
-        <h1 className="flex flex-col items-left text-med font-medium">
+        <h1 className="flex flex-col items-left text-lg font-medium">
           Current Announcements
         </h1>
-        <ul className="flex flex-col justify-start divide-y divide-gray-200">
+        <ul className="flex flex-col justify-start divide-y divide-gray-500">
           {sortedAnnouncements.map((announcement, idx) => (
             <li
               key={announcement.alertpk}
