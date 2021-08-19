@@ -244,7 +244,7 @@ export const deleteAnnouncement = (token, id) => {
 export const editAnnouncement = (token, id, user, alert_header, text) => {
   return (
     axios
-      .put(`https://momentum-lucidity.herokuapp.com/announcements/${id}`,
+      .put(`https://momentum-lucidity.herokuapp.com/announcements/${id}/`,
       {
         user: [user],
         alertpk : `${id}`,

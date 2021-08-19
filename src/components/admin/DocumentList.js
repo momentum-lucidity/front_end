@@ -62,7 +62,7 @@ export const DocumentList = (props) => {
     {
       name: "Volunteer Handbook",
       initials: DocumentIcon,
-      href: "#",
+      href: "https://docs.google.com/document/d/11V1bi6IcLS8H2TBtBzN9H_sc2mc76YBJ/edit?usp=sharing&ouid=101295966358202048056&rtpof=true&sd=true",
       bgColor: "bg-yellow-500",
     },
     {

@@ -20,8 +20,9 @@ export const AnnouncementsList = (props) => {
       setAnnouncements(data)
       setLoading(false)})
       hasFetchedAnnouncements.current = true
+      console.log(announcements)
   }
-}, [setLoading, announcements])
+}, [announcements, setLoading])
 
 
   const sortedAnnouncements = orderBy(

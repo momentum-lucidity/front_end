@@ -18,7 +18,7 @@ import {
 import { useHistory, Link, useParams } from "react-router-dom";
 
 export const AnnouncementDetail = (props) => {
-  const { token, authUser } = props;
+  const { token, authUser, loading, setLoading } = props;
   const { id } = useParams();
   const [announcement, setAnnouncement] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -28,7 +28,8 @@ export const AnnouncementDetail = (props) => {
   useEffect(() => {
     getAnnouncementDetails(token, id).then((data) => {
       console.log(data);
-      setAnnouncement(data);
+      setAnnouncement(data)
+      setLoading(false);
     });
   }, []);
 
@@ -71,7 +72,9 @@ export const AnnouncementDetail = (props) => {
     return classes.filter(Boolean).join(" ");
   }
 
-  return (
+  return loading 
+  ? "Announcement details loading..."
+  : (
     <div className="h-screen overflow-y-auto bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog

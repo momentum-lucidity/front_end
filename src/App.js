@@ -259,7 +259,7 @@ function App () {
             />
           <Route
             exact
-            path='/announcements/edit/:alertpk'
+            path='/announcements/edit/:id/'
             component={() => (
               <EditAnnouncement
                 token={token}
