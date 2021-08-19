@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useRef, useEffect } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Avatar from "react-avatar";
 import {
@@ -12,10 +12,24 @@ import {
   XIcon,
   DocumentIcon,
 } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
+import { getDocuments } from "../../api";
 
 export const DocumentList = (props) => {
-  const { token, authUser } = props;
+  const hasFetchedDocuments = useRef(false)
+  const { token, authUser, loading, setLoading } = props;
+  const [documents, setDocuments] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    if (!hasFetchedDocuments.current) {
+      getDocuments()
+      .then((data) => {
+      setDocuments(data)
+      setLoading(false)})
+      hasFetchedDocuments.current = true
+  }
+}, [documents, setLoading])
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -44,33 +58,6 @@ export const DocumentList = (props) => {
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
     { name: "All Documents", href: "/documents", current: true },
-  ];
-
-  const projects = [
-    {
-      name: "Dream Center Site",
-      initials: DocumentIcon,
-      href: "https://citygatedreamcenter.com/",
-      bgColor: "bg-pink-600",
-    },
-    {
-      name: "Intake Form",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-purple-600",
-    },
-    {
-      name: "Volunteer Handbook",
-      initials: DocumentIcon,
-      href: "https://docs.google.com/document/d/11V1bi6IcLS8H2TBtBzN9H_sc2mc76YBJ/edit?usp=sharing&ouid=101295966358202048056&rtpof=true&sd=true",
-      bgColor: "bg-yellow-500",
-    },
-    {
-      name: "Background Check Site",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-green-500",
-    },
   ];
 
   const items = [
@@ -308,7 +295,7 @@ export const DocumentList = (props) => {
           <div className="py-8">
             <div className="px-6 sm:px-6 md:px-0">
               <h1 className="text-2xl pb-6 font-semibold text-gray-900">
-                Document List
+                Admin Resources
               </h1>
             </div>
             <div className="flex-col px-6 sm:px-8 md:px-4">
@@ -319,33 +306,29 @@ export const DocumentList = (props) => {
                     className="flex-col justify-start bg-white shadow overflow-hidden rounded-md px-6 py-4"
                   >
                     <div className="flex-col justify-start">
-                      <ul className="mt-5 grid-flow-col grid-cols-3 gap-8 sm:gap-8 sm:grid-cols-4 lg:grid-cols-4">
-                        {projects.map((project) => (
+                      <ul className="mt-5 grid-flow-col grid-cols-3 gap-8 sm:gap-10 sm:grid-cols-4 lg:grid-cols-4">
+                        {documents.map((document, idx) => (
                           <li
-                            key={project.name}
-                            className="col-span-1 flex shadow-sm rounded-md"
+                            key={document.docpk}
+                            className="col-span-1 flex shadow-sm rounded-md bg-color bg-pink-600"
                           >
                             <div
                               className={classNames(
-                                project.bgColor,
+                                document.bgColor,
                                 "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
                               )}
                             >
-                              {project.initials}
                             </div>
                             <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
                               <div className="flex-1 px-4 py-2 text-sm truncate">
                                 <a
-                                  href={project.href}
+                                  href={document.url}
                                   className="text-gray-900 font-medium hover:text-gray-600"
                                   target="_blank"
                                   rel="noreferrer noopener"
                                 >
-                                  {project.name}
+                                  {document.doc_header}
                                 </a>
-                                <p className="text-gray-500">
-                                  {project.members}
-                                </p>
                               </div>
                             </div>
                           </li>

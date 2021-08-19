@@ -343,3 +343,26 @@ export const editEvent = (
     }
   );
 };
+
+export const getDocuments = () => {
+  return axios
+    .get("https://momentum-lucidity.herokuapp.com/docs/")
+    .then((res) => res.data.results);
+};
+
+export const createDocument = ([user], token, doc_header, url) => {
+  return axios
+    .post("https://momentum-lucidity.herokuapp.com/docs/", 
+    {
+      user: [user],
+      doc_header: doc_header,
+      url: url
+    },
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+    )
+}

@@ -311,7 +311,7 @@ export const AnnouncementsList = (props) => {
                         <h3 className='text-sm font-medium'>
                           {announcement.alert_header}
                         </h3>
-                        <p className='text-sm text-gray-500'>posted by: {authUser.display_name}</p>
+                        <p className='text-sm text-gray-500'>posted on: {moment(announcement.date).format('LT')}</p>
                       </div>
                       <p className='items-center text-sm text-gray-500'>
                         {announcement.text}
