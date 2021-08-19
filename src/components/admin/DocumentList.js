@@ -10,28 +10,33 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  DocumentIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
-import { getDocuments } from "../../api";
+import { getDocuments, deleteDocument } from "../../api";
 import { CreateDocument } from "./CreateDocument";
-import { set } from "harmony-reflect";
+import { useHistory } from "react-router-dom";
 
 export const DocumentList = (props) => {
-  const hasFetchedDocuments = useRef(false)
+  const hasFetchedDocuments = useRef(false);
   const { token, authUser, loading, setLoading } = props;
-  const [documents, setDocuments] = useState([])
+  const [documents, setDocuments] = useState([]);
+  const [documentPK, setDocumentPK] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const history = useHistory();
   useEffect(() => {
     if (!hasFetchedDocuments.current) {
-      getDocuments()
-      .then((data) => {
-      setDocuments(data)
-      setLoading(false)})
-      hasFetchedDocuments.current = true
-  }
-}, [documents, setLoading])
+      getDocuments().then((data) => {
+        setDocuments(data);
+        setLoading(false);
+      });
+      hasFetchedDocuments.current = true;
+    }
+  }, [documents, setLoading]);
+
+  const handleDelete = () => {
+    deleteDocument(token, documentPK);
+    history.push("/documents");
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -71,9 +76,9 @@ export const DocumentList = (props) => {
     return classes.filter(Boolean).join(" ");
   }
 
-  return loading
-  ? "Resources are loading..."
-  : (
+  return loading ? (
+    "Resources are loading..."
+  ) : (
     <div className="h-screen bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
@@ -302,7 +307,12 @@ export const DocumentList = (props) => {
                 Admin Resources
               </h1>
             </div>
-            <CreateDocument token={token} authUser={authUser} setDocuments={setDocuments} setLoading={setLoading} />
+            <CreateDocument
+              token={token}
+              authUser={authUser}
+              setDocuments={setDocuments}
+              setLoading={setLoading}
+            />
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">
                 {items.map((item) => (
@@ -322,10 +332,9 @@ export const DocumentList = (props) => {
                                 document.bgColor,
                                 "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
                               )}
-                            >
-                            </div>
-                            <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                              <div className="flex-1 px-4 py-2 text-sm truncate">
+                            ></div>
+                            <div className="flex-1 flex-row items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                              <div className="flex justify-between px-4 py-2 text-sm truncate">
                                 <a
                                   href={document.url}
                                   className="text-gray-900 font-medium hover:text-gray-600"
@@ -334,6 +343,20 @@ export const DocumentList = (props) => {
                                 >
                                   {document.doc_header}
                                 </a>
+                                <button>      
+                                <TrashIcon
+                                  className="-ml-1 mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                  onClick={() => setDocumentPK(document.docpk)}
+                                />
+                                </button>   
+                                <button>      
+                                <TrashIcon
+                                  className="-ml-1 mr-2 h-5 w-5"
+                                  aria-hidden="true"
+                                  onClick={handleDelete}
+                                />
+                                </button>  
                               </div>
                             </div>
                           </li>
@@ -348,6 +371,7 @@ export const DocumentList = (props) => {
           </div>
         </main>
       </div>
+      {console.log(documentPK)}
     </div>
   );
 };

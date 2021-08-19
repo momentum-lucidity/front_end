@@ -366,3 +366,18 @@ export const createDocument = ([user], docHeader, url, token) => {
     }
     )
 }
+
+export const deleteDocument = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/docs/${id}`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        }
+      )
+  )
+}
