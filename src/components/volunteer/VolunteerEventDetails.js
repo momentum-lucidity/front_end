@@ -54,27 +54,39 @@ export const VolunteerEventDetails = (props) => {
                   className="bg-white shadow overflow-hidden sm:rounded-lg"
                 >
                   <div className="px-4 py-5 sm:px-6">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    <h3 className="text-lg pb-3 leading-6 font-medium text-gray-900">
                       {event.event_header}
                     </h3>
-                    <p className="text-sm text-gray-500">
-                      {event.description} {event.type}
+                    <p className="text-sm pb-2 font-semibold text-black-500">
+                      Description:
+                    </p>
+                    <p className="text-sm text-black-500">
+                      {event.description}
+                    </p>
+                    <p className="text-sm font-semibold pt-2 pb-2 text-black-500">
+                      Event Type:<br></br>
+                    </p>
+                    <p className="text-sm text-black-500">
+                      {event.type}
                     </p>
                   </div>
                   <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
                     <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">
-                          When
+                        <dt className="text-sm font-semibold pt-2 pb-2 text-black-500">
+                          Date
                         </dt>
                         <dd className="mt-1 text-sm text-gray-900">
-                          {event.date} {event.start_time}
+                          {event.date}
                         </dd>
                       </div>
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">
-                          Where
+                        <dt className="text-sm font-semibold pt-2 pb-2 text-black-500">
+                          Time
                         </dt>
+                        <dd className="mt-1 text-sm text-gray-900">
+                          {event.start_time} to {event.end_time}
+                        </dd>
                       </div>
                     </dl>
                   </div>
