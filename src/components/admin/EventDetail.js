@@ -1,19 +1,18 @@
 import { Fragment, useState, useEffect, useRef } from 'react'
-import { getEventDetails, deleteEvent, getAllSlots, newVSlot } from '../../api'
+import { getEventDetails, deleteEvent, newVSlot } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
 import { useParams, useHistory } from 'react-router-dom'
 import { TimeIncrements } from '../TimeIncrements'
+import { VolunteerSlotRoster } from './VolunteerSlotRoster'
 
 export const EventDetail = (props) => {
   const { token, authUser } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
-  const fetchedAllSlots = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [event, setEvent] = useState('')
-  const [allVSlots, setAllVSlots] = useState([])
+  const [eventDetails, setEventDetails] = useState('')
   const [slotText, setSlotText] = useState('')
   const [amPm, setAmPm] = useState(false)
   const [volStart, setVolStart] = useState([])
@@ -23,19 +22,11 @@ export const EventDetail = (props) => {
     if (!fetchedEventDetails.current) {
       getEventDetails(token, id).then((data) => {
         console.log(data)
-        setEvent(data)
+        setEventDetails(data)
         fetchedEventDetails.current = true
       })
     }
-  }, [event, token, id])
-
-  useEffect(() => {
-    if (!fetchedAllSlots.current) {
-      getAllSlots(token)
-        .then((data) => setAllVSlots(data))
-      fetchedAllSlots.current = true
-    }
-  }, [allVSlots, token])
+  }, [eventDetails, token, id])
 
   const handleSubmit = (id, token, slotText, volStart) => {
     newVSlot(id, token, slotText, volStart)
@@ -310,21 +301,21 @@ export const EventDetail = (props) => {
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
               <h1 className='text-2xl font-semibold text-gray-900'>
-                {event.event_header} Details
+                {eventDetails.event_header} Details
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               {/* Replace with your content */}
               <div
-                key={event.id}
+                key={eventDetails.id}
                 className='bg-white shadow overflow-hidden sm:rounded-lg'
               >
                 <div className='px-4 py-5 sm:px-6'>
                   <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                    {event.event_header}
+                    {eventDetails.event_header}
                   </h3>
                   <p className='text-sm text-gray-500'>
-                    {event.description} {event.type}
+                    {eventDetails.description} {eventDetails.type}
                   </p>
                 </div>
                 <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
@@ -334,7 +325,7 @@ export const EventDetail = (props) => {
                         When
                       </dt>
                       <dd className='mt-1 text-sm text-gray-900'>
-                        {event.date} {event.start_time}
+                        {eventDetails.date} {eventDetails.start_time}
                       </dd>
                     </div>
                     <div className='sm:col-span-1'>
@@ -349,79 +340,8 @@ export const EventDetail = (props) => {
                           Volunteers Roster
                         </h3>
                       </div>
-                      <div className='flex flex-col'>
-                        <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-                          <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
-                            <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-                              <table className='min-w-full divide-y divide-gray-200'>
-                                <thead className='bg-gray-50'>
-                                  <tr>
-                                    <th
-                                      scope='col'
-                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                                    >
-                                      Name
-                                    </th>
-                                    <th
-                                      scope='col'
-                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                                    >
-                                      Title
-                                    </th>
-                                    <th
-                                      scope='col'
-                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                                    >
-                                      Status
-                                    </th>
-                                    <th
-                                      scope='col'
-                                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                                    >
-                                      Role
-                                    </th>
-                                    <th scope='col' className='relative px-6 py-3'>
-                                      <span className='sr-only'>Edit</span>
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody className='bg-white divide-y divide-gray-200'>
-                                  {allVSlots.map((slot) => (
-                                    <tr key={slot.slotpk}>
-                                      <td className='px-6 py-4 whitespace-nowrap'>
-                                        <div className='flex items-center'>
-                                          <div className='flex-shrink-0 h-10 w-10'>
-                                            <Avatar name={slot.user} size='40' round />
-                                          </div>
-                                          <div className='ml-4'>
-                                            <div className='text-sm font-medium text-gray-900'>{event.event_header}</div>
-                                            <div className='text-sm text-gray-500'>{slot.slotText}</div>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className='px-6 py-4 whitespace-nowrap'>
-                                        <div className='text-sm text-gray-900'>{slot.user}</div>
-                                        <div className='text-sm text-gray-500'>{slot.time}</div>
-                                      </td>
-                                      <td className='px-6 py-4 whitespace-nowrap'>
-                                        <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-                                          Open/filled
-                                        </span>
-                                      </td>
-                                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{event.type}</td>
-                                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                                        <a href='#' className='text-indigo-600 hover:text-indigo-900'>
-                                          Edit
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+
+                      <VolunteerSlotRoster token={token} eventDetails={eventDetails} />
 
                       Add a Volunteer Slot
                       <div className='sm:col-span-6'>
@@ -504,4 +424,4 @@ export const EventDetail = (props) => {
       </div>
     </div>
   )
-};
+}

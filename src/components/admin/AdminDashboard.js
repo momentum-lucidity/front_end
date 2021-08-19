@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react'
 import Avatar from 'react-avatar'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -121,11 +122,7 @@ export const AdminDashboard = (props) => {
                 </div>
               </Transition.Child>
               <div className='flex-shrink-0 px-4 flex items-center'>
-                <img
-                  className='h-8 w-auto'
-                  src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
-                  alt='Workflow'
-                />
+                {/* logo here */}
               </div>
               <div className='mt-5 flex-1 h-0 overflow-y-auto'>
                 <nav className='px-2 space-y-1'>
@@ -162,11 +159,7 @@ export const AdminDashboard = (props) => {
         <div className='w-64 flex flex-col'>
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
-              <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
-                alt='Workflow'
-              />
+              {/* logo here */}
             </div>
             <div className='flex-grow mt-5 flex flex-col'>
               <nav className='flex-1 bg-white px-2 space-y-1'>
@@ -319,8 +312,7 @@ export const AdminDashboard = (props) => {
                           {action.title}
                         </a>
                       </h3>
-                      <p className='mt-2 text-sm text-gray-500'>
-                      </p>
+                      <p className='mt-2 text-sm text-gray-500' />
                     </div>
                     <span
                       className='pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400'
