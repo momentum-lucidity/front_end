@@ -14,6 +14,8 @@ import {
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { getDocuments } from "../../api";
+import { CreateDocument } from "./CreateDocument";
+import { set } from "harmony-reflect";
 
 export const DocumentList = (props) => {
   const hasFetchedDocuments = useRef(false)
@@ -69,7 +71,9 @@ export const DocumentList = (props) => {
     return classes.filter(Boolean).join(" ");
   }
 
-  return (
+  return loading
+  ? "Resources are loading..."
+  : (
     <div className="h-screen bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
@@ -298,6 +302,7 @@ export const DocumentList = (props) => {
                 Admin Resources
               </h1>
             </div>
+            <CreateDocument token={token} authUser={authUser} setDocuments={setDocuments} setLoading={setLoading} />
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">
                 {items.map((item) => (

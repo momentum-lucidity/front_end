@@ -225,6 +225,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                loading={loading}
+                setLoading={setLoading}
               />
             )}
           />

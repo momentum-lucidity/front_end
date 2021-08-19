@@ -74,15 +74,13 @@ export const CreateAnnoucements = (props) => {
                   <textarea
                     id='about'
                     name='about'
-                    rows={3}
+                    rows={2}
                     value={text}
                     onChange={(event) => setText(event.target.value)}
                     className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
+                    placeholder='Write your the body of your announcement here.'
                   />
                 </div>
-                <p className='mt-2 text-sm text-gray-500'>
-                  Write your the body of your announcement here.
-                </p>
               </div>
             </div>
           </div>

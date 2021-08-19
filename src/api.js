@@ -350,12 +350,12 @@ export const getDocuments = () => {
     .then((res) => res.data.results);
 };
 
-export const createDocument = ([user], token, doc_header, url) => {
+export const createDocument = ([user], docHeader, url, token) => {
   return axios
     .post("https://momentum-lucidity.herokuapp.com/docs/", 
     {
       user: [user],
-      doc_header: doc_header,
+      doc_header: docHeader,
       url: url
     },
     {
