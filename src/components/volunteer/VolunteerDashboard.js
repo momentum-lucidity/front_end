@@ -1,10 +1,7 @@
 import { VolunteerHeader } from './VolunteerHeader.js'
 import { VolunteerEvents } from './VolunteerEvents.js'
-import {
-  CheckIcon,
-  ThumbUpIcon,
-  UserIcon
-} from '@heroicons/react/solid'
+import { VolunteerAnnouncements } from './VolunteerAnnouncements.js'
+import { CheckIcon } from '@heroicons/react/solid'
 
 const steps = [
   { id: '01', name: 'Registration', status: 'complete' },
@@ -35,10 +32,6 @@ export const VolunteerDashboard = (props) => {
               <h1 className='text-2xl font-bold text-gray-900'>
                 Welcome, {authUser.display_name}
               </h1>
-              <p className='text-sm font-medium text-gray-500'>
-                joined{' '}
-                on <time dateTime='2020-08-25'>August 25, 2020</time>
-              </p>
             </div>
             <nav aria-label='Progress'>
               <ol className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
@@ -76,7 +69,6 @@ export const VolunteerDashboard = (props) => {
                     {stepIdx !== steps.length - 1
                       ? (
                         <>
-                          {/* Arrow separator for lg screens and up */}
                           <div className='hidden md:block absolute top-0 right-0 h-full w-5' aria-hidden='true'>
                             <svg
                               className='h-full w-full text-gray-300'
@@ -103,20 +95,11 @@ export const VolunteerDashboard = (props) => {
         </div>
 
         <div className='mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-3 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3'>
-          <div className='space-y-6 lg:col-start-1 lg:col-span-4 row-span-4'>
-            {/* Description list */}
+          <div className='space-y-6 lg:col-start-1 lg:col-span-4 row-span-5'>
             <section aria-labelledby='applicant-information-title'>
               <div className='bg-white shadow sm:rounded-lg'>
-                <div className='px-4 py-5 sm:px-6'>
-                  <h2
-                    id='applicant-information-title'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    Upcoming Events
-                  </h2>
-                </div>
                 <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
-                  <VolunteerEvents />
+                  <VolunteerAnnouncements />
                 </div>
               </div>
             </section>
@@ -127,39 +110,7 @@ export const VolunteerDashboard = (props) => {
             className='lg:col-start-5 lg:col-span-1'
           >
             <div className='bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6'>
-              <h2
-                id='timeline-title'
-                className='text-lg font-medium text-gray-900'
-              >
-                Announcements
-              </h2>
-
-              <div className='mt-6 flow-root'>
-                <ul className='-mb-8'>
-                  <li>
-                    <div className='relative pb-8'>
-                      <div className='relative flex space-x-3'>
-                        <div>
-                          <span
-                            className='h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
-                          />
-                        </div>
-                        <div className='min-w-0 flex-1 pt-1.5 flex justify-between space-x-4'>
-                          <div>
-                            <h3 className='text-black-500'>
-                              Announcement #1
-                            </h3>
-                            <p className='text-sm text-gray-600'>If anyone is free, we need two more volunteers for Saturday's soccer game and Dream Center!</p>
-                          </div>
-                          <div className='text-right text-sm whitespace-nowrap text-gray-500'>
-                            <time dateTime=''>posted at 11:59 am</time>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <VolunteerEvents />
             </div>
           </section>
           <section

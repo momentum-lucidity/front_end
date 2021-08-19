@@ -7,10 +7,13 @@ import { VolunteerList } from './components/admin/VolunteerList'
 import { VolunteerDetails } from './components/admin/VolunteerDetails'
 import { EventsList } from './components/admin/EventsList'
 import { EventDetail } from './components/admin/EventDetail'
+import { EditEvent } from './components/admin/EditEvent'
 import { EventForm } from './components/admin/EventForm'
 import { DocumentList } from './components/admin/DocumentList'
 import { Registration } from './components/admin/Registration'
 import { AnnouncementsList } from './components/admin/AnnouncementsList'
+import { AnnouncementDetail } from './components/admin/AnnouncementDetail'
+import { EditAnnouncement } from './components/admin/EditAnnouncement'
 import { EditVolunteer } from './components/admin/EditVolunteer'
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard'
 import { VolunteerProfile } from './components/volunteer/VolunteerProfile'
@@ -25,19 +28,19 @@ function App () {
   const [token, setToken] = useLocalStorageState('token', '')
   const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
   const [allVolunteers, setAllVolunteers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getAuthUser(token)
-      .then((data) => setAuthUser(data))
+    getAuthUser(token).then((data) => setAuthUser(data))
   }, [setAuthUser, token])
 
   return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <Switch>
           <Route
             exact
-            path="/"
+            path='/'
             component={() => (
               <AdminLogin
                 token={token}
@@ -49,7 +52,7 @@ function App () {
           />
           <Route
             exact
-            path="/admin/logout"
+            path='/admin/logout'
             component={() => (
               <AdminLogout
                 token={token}
@@ -61,7 +64,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/login"
+            path='/dreamcenter/login'
             component={() => (
               <VolunteerLogin
                 token={token}
@@ -73,7 +76,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/logout"
+            path='/dreamcenter/logout'
             component={() => (
               <VolunteerLogout
                 token={token}
@@ -84,7 +87,7 @@ function App () {
             )}
           />
           <Route
-            path="/registration"
+            path='/registration'
             component={() => (
               <Registration
                 token={token}
@@ -97,7 +100,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/registration"
+            path='/dreamcenter/registration'
             component={() => (
               <VolunteerRegistration
                 token={token}
@@ -110,7 +113,7 @@ function App () {
           />
           <Route
             exact
-            path="/admindash"
+            path='/admindash'
             component={() => (
               <AdminDashboard
                 token={token}
@@ -122,7 +125,7 @@ function App () {
           />
           <Route
             exact
-            path="/events"
+            path='/events'
             component={() => (
               <EventsList
                 token={token}
@@ -135,7 +138,7 @@ function App () {
           />
           <Route
             exact
-            path="/events/eventform"
+            path='/events/eventform'
             component={() => (
               <EventForm
                 token={token}
@@ -147,7 +150,8 @@ function App () {
             )}
           />
           <Route
-            path="/events/:id"
+            exact
+            path='/events/:id'
             component={() => (
               <EventDetail
                 token={token}
@@ -160,7 +164,20 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers"
+            path='/events/edit/:id'
+            component={() => (
+              <EditEvent
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                allVolunteers={setAllVolunteers}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/volunteers'
             component={() => (
               <VolunteerList
                 token={token}
@@ -174,7 +191,7 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers/:id"
+            path='/volunteers/:id'
             component={() => (
               <VolunteerDetails
                 token={token}
@@ -188,7 +205,7 @@ function App () {
           />
           <Route
             exact
-            path="/volunteers/edit/:eventpk"
+            path='/volunteers/edit/:eventpk'
             component={() => (
               <EditVolunteer
                 token={token}
@@ -201,7 +218,7 @@ function App () {
           />
           <Route
             exact
-            path="/documents"
+            path='/documents'
             component={() => (
               <DocumentList
                 token={token}
@@ -213,9 +230,38 @@ function App () {
           />
           <Route
             exact
-            path="/announcements"
+            path='/announcements'
             component={() => (
               <AnnouncementsList
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                loading={loading}
+                setLoading={setLoading}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/announcements/:id'
+            component={() => (
+              <AnnouncementDetail
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+                loading={loading}
+                setLoading={setLoading}
+              />
+            )}
+          />
+            />
+          <Route
+            exact
+            path='/announcements/edit/:id/'
+            component={() => (
+              <EditAnnouncement
                 token={token}
                 setToken={setToken}
                 authUser={authUser}
@@ -225,7 +271,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/volunteerdash"
+            path='/dreamcenter/volunteerdash'
             component={() => (
               <VolunteerDashboard
                 token={token}
@@ -237,7 +283,7 @@ function App () {
           />
           <Route
             exact
-            path="/dreamcenter/profile"
+            path='/dreamcenter/profile'
             component={() => (
               <VolunteerProfile
                 token={token}
@@ -250,7 +296,7 @@ function App () {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

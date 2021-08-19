@@ -504,4 +504,4 @@ export const EventDetail = (props) => {
       </div>
     </div>
   )
-}
+};

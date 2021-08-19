@@ -1,9 +1,8 @@
-import { data } from 'autoprefixer'
-import { useState } from 'react'
-import { newAnnouncement } from '../../api'
+import { useState } from 'react';
+import { getAnnouncements, newAnnouncement } from '../../api';
 
 export const CreateAnnoucements = (props) => {
-  const { token, authUser, setAnnouncements } = props
+  const { token, authUser, setAnnouncements, setLoading } = props
   const [alertHeader, setAlertHeader] = useState('')
   const [text, setText] = useState('')
 
@@ -11,13 +10,24 @@ export const CreateAnnoucements = (props) => {
     event.preventDefault()
     console.log(authUser.id)
     const user = authUser.id
-    const success = await newAnnouncement([user], alertHeader, text, token)
-      .then((res) => res.data)
+    const success = await newAnnouncement(
+      [user],
+      alertHeader,
+      text,
+      token
+    ).then((res) => res.data)
     if (success) {
-      setAnnouncements(data)
+      getAnnouncements()
+      .then((data) => {setAnnouncements(data)
+      setLoading(false)})      
       setAlertHeader('')
       setText('')
     }
+  }
+
+  const cancel = () => {
+    setAlertHeader('')
+    setText('')
   }
 
   return (
@@ -81,13 +91,14 @@ export const CreateAnnoucements = (props) => {
             <div className='flex justify-end'>
               <button
                 type='button'
-                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
+                onClick={cancel}
               >
                 Cancel
               </button>
               <button
                 type='submit'
-                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none'
               >
                 Save
               </button>
@@ -98,4 +109,4 @@ export const CreateAnnoucements = (props) => {
       </div>
     </main>
   )
-}
+};

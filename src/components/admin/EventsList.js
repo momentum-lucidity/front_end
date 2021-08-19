@@ -290,12 +290,12 @@ export const EventsList = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0'>
+            <div className='px-4 pb-5 sm:px-6 md:px-0'>
               <h1 className='text-2xl font-semibold text-gray-900'>
                 Upcoming Events
               </h1>
             </div>
-            <div className='ml-4 mt-2 flex-shrink-0'>
+            <div className='ml-4 mt-2 pb-4 flex-shrink-0'>
               <Link to='/events/eventform'>
                 <button
                   type='button'
@@ -306,7 +306,6 @@ export const EventsList = (props) => {
               </Link>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <ul className='divide-y divide-gray-200'>
                 {allEvents && allEvents.map((event, idx) => (
                   <li
@@ -318,7 +317,7 @@ export const EventsList = (props) => {
                         <a
                           href={`/events/${event.eventpk}`}
                           className='block focus:outline-none'
-                        >eventpk {event.eventpk}
+                        >
                           <span
                             className='absolute inset-0'
                             aria-hidden='true'
@@ -343,17 +342,10 @@ export const EventsList = (props) => {
                           </span>
                         </a>
                       </div>
-                      {/* <time
-                dateTime={event.datetime}
-                className="flex-shrink-0 whitespace-nowrap text-sm text-gray-500"
-              >
-                {event.time}
-              </time> */}
                     </div>
                   </li>
                 ))}
               </ul>
-              {/* /End replace */}
             </div>
           </div>
         </main>
