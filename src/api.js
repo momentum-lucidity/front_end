@@ -100,6 +100,43 @@ export const getEventsList = () => {
     .then((res) => res.data);
 };
 
+export const getAllSlots = (token) => {
+  return (
+    axios
+      .get('https://momentum-lucidity.herokuapp.com/volunteerops/',
+        {},
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((res) => res.data.results)
+  )
+}
+
+export const newVSlot = (id, token, slotText, volStart) => {
+  return (
+    axios
+      .post('https://momentum-lucidity.herokuapp.com/volunteerops/',
+        {
+          user: [],
+          vslot_text: slotText,
+          event: id,
+          time: volStart
+        },
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      .then((res) => res.data)
+  )
+}
+
 export const getEventDetails = (token, id) => {
   return axios
     .get(
