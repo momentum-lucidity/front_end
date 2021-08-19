@@ -20,7 +20,6 @@ export const AnnouncementsList = (props) => {
       setAnnouncements(data)
       setLoading(false)})
       hasFetchedAnnouncements.current = true
-      console.log(announcements)
   }
 }, [announcements, setLoading])
 
@@ -312,7 +311,7 @@ export const AnnouncementsList = (props) => {
                         <h3 className='text-sm font-medium'>
                           {announcement.alert_header}
                         </h3>
-                        <p className='text-sm text-gray-500'>posted at: {moment(announcement.date).format('LT')}</p>
+                        <p className='text-sm text-gray-500'>posted by: {authUser.display_name}</p>
                       </div>
                       <p className='items-center text-sm text-gray-500'>
                         {announcement.text}
@@ -321,7 +320,7 @@ export const AnnouncementsList = (props) => {
                       <span className='hidden sm:block'>
                         <button
                           type='button'
-                          className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500'                          
+                          className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'                          
                         >
                           <PencilIcon
                             className='-ml-1 mr-2 h-5 w-5 text-gray-400'

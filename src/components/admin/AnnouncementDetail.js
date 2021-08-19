@@ -24,10 +24,8 @@ export const AnnouncementDetail = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const history = useHistory();
 
-    console.log(id)
   useEffect(() => {
     getAnnouncementDetails(token, id).then((data) => {
-      console.log(data);
       setAnnouncement(data)
       setLoading(false);
     });
@@ -334,10 +332,10 @@ export const AnnouncementDetail = (props) => {
                       >
                         <button
                           type="button"
-                          className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                          className="inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200"
                         >
                           <PencilIcon
-                            className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                            className="-ml-1 mr-2 h-5 w-5 text-green-500"
                             aria-hidden="true"
                           />
                           Edit
@@ -347,11 +345,11 @@ export const AnnouncementDetail = (props) => {
                     <span className="hidden sm:block">
                       <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                        className="inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                         onClick={handleDelete}
                       >
                         <TrashIcon
-                          className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                          className="-ml-1 mr-2 h-5 w-5 text-red-500"
                           aria-hidden="true"
                         />
                         Delete
