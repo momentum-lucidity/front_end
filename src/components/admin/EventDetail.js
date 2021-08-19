@@ -1,11 +1,11 @@
 import { Fragment, useState, useEffect, useRef } from 'react'
-import { getEventDetails, deleteEvent, newVSlot } from '../../api'
+import { getEventDetails } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
-import { useParams, useHistory } from 'react-router-dom'
-import { TimeIncrements } from '../TimeIncrements'
+import { useParams } from 'react-router-dom'
 import { VolunteerSlotRoster } from './VolunteerSlotRoster'
+import { VolunteerSlotPost } from './VolunteerSlotPost'
 
 export const EventDetail = (props) => {
   const { token, authUser } = props
@@ -13,10 +13,7 @@ export const EventDetail = (props) => {
   const fetchedEventDetails = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [eventDetails, setEventDetails] = useState('')
-  const [slotText, setSlotText] = useState('')
-  const [amPm, setAmPm] = useState(false)
-  const [volStart, setVolStart] = useState([])
-  const history = useHistory()
+  console.log(`this is the event id ${id}`)
 
   useEffect(() => {
     if (!fetchedEventDetails.current) {
@@ -27,16 +24,6 @@ export const EventDetail = (props) => {
       })
     }
   }, [eventDetails, token, id])
-
-  const handleSubmit = (id, token, slotText, volStart) => {
-    newVSlot(id, token, slotText, volStart)
-      .then((res) => history.push(`/events/${id}/`))
-  }
-
-  const handleDelete = async () => {
-    const deleted = await deleteEvent(token, id)
-    if (deleted) history.push('/events')
-  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -342,77 +329,7 @@ export const EventDetail = (props) => {
                       </div>
 
                       <VolunteerSlotRoster token={token} eventDetails={eventDetails} />
-
-                      Add a Volunteer Slot
-                      <div className='sm:col-span-6'>
-
-                        <label
-                          htmlFor='vol-duties'
-                          className='block text-sm font-medium text-gray-700'
-                        >
-                          Volunteer Duties
-                        </label>
-
-                        <div className='mt-1'>
-                          <textarea
-                            id='vol-duties'
-                            name='vol-duties'
-                            className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                            value='3:00'
-                            // onChange={(event) => setSlotText(event.target.value)}
-                          />
-                        </div>
-
-                      </div>
-
-                      <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-
-                        <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                          <select
-                            id='AMPM'
-                            name='AMPM'
-                            className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                            value={amPm}
-                            onChange={(event) => setAmPm(!amPm)}
-                          >
-
-                            <option>am</option>
-                            <option>pm</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className='sm:col-span-3'>
-                        <label
-                          htmlFor='volunteer-start-time' className='block text-sm font-medium text-gray-700'
-                        >Volunteer Start Time
-                        </label>
-                        <div className='mt-1 sm:mt-0 sm:col-span-2'>
-                          <select
-                            id='volunteer-start-time'
-                            name='volunteer-start-time'
-                            className='max-w-lg block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
-                            value={volStart}
-                            onChange={(event) => setVolStart(event.target.value)}
-                          >
-                            {amPm === false
-                              ? TimeIncrements.amTimes.map((time) => (
-                                <option key={time.time}>{time.time}</option>
-                                ))
-                              : TimeIncrements.pmTimes.map((time) => (
-                                <option key={time.time}>{time.time}</option>
-                              ))}
-                          </select>
-                        </div>
-
-                        <button
-                          type='button'
-                          className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                          onClick={handleSubmit}
-                        >
-                          Add Volunteer
-                        </button>
-                      </div>
+                      <VolunteerSlotPost token={token} eventDetails={eventDetails} id={id} />
                     </div>
                   </dl>
                 </div>
