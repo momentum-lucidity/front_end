@@ -226,17 +226,54 @@ export const newAnnouncement = ([user], alertHeader, text, token) => {
   );
 };
 
-export const deleteAnnouncement = (selectedPK, token) => {
-  return axios.delete(
-    `https://momentum-lucidity.herokuapp.com/announcements/${selectedPK}`,
-    {},
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
+export const deleteAnnouncement = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/announcements/${id}`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        }
+      )
+  )
+}
+
+export const editAnnouncement = (token, id, user, alert_header, text) => {
+  return (
+    axios
+      .put(`https://momentum-lucidity.herokuapp.com/announcements/${id}/`,
+      {
+        user: [user],
+        alertpk : `${id}`,
+        alert_header: alert_header,
+        text: text
       },
-    }
-  );
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+  )
+}
+
+export const getAnnouncementDetails = (token, id) => {
+  return axios
+    .get(
+      `https://momentum-lucidity.herokuapp.com/announcements/${id}/`,
+      {},
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res) => res.data);
 };
 
 export const editEvent = (

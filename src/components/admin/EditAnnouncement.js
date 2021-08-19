@@ -1,6 +1,4 @@
-import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
-import Avatar from "react-avatar";
+import React, { Fragment, useState } from "react";
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -10,12 +8,30 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  DocumentIcon,
 } from "@heroicons/react/outline";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import Avatar from "react-avatar";
+import { useLocation, useHistory, Link, useParams } from "react-router-dom";
+import { editAnnouncement } from "../../api";
 
-export const DocumentList = (props) => {
+export const EditAnnouncement = (props) => {
   const { token, authUser } = props;
+  const location = useLocation()
+  const { announcement } = location.state
+  const [alertHeader, setAlertHeader] = useState(`${announcement.alert_header}`);
+  const [text, setText] = useState(`${announcement.text}`);
+  const user = authUser.id;
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const history = useHistory()
+  const { id } = useParams();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const editWorked = await editAnnouncement(token, id, user, alertHeader, text)
+    .then((res) => res.data)
+    if (editWorked) 
+      history.push('/announcements')
+  }
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -30,52 +46,21 @@ export const DocumentList = (props) => {
       name: "Announcements",
       href: "/announcements",
       icon: CalendarIcon,
-      current: false,
+      current: true,
     },
-    { name: "Documents", href: "/documents", icon: InboxIcon, current: true },
+    { name: "Documents", href: "/documents", icon: InboxIcon, current: false },
   ];
 
   const userNavigation = [
     { name: "Your Profile", href: "#" },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Sign out", href: "/admin/logout" },
   ];
 
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
-    { name: "All Documents", href: "/documents", current: true },
-  ];
-
-  const projects = [
-    {
-      name: "Dream Center Site",
-      initials: DocumentIcon,
-      href: "https://citygatedreamcenter.com/",
-      bgColor: "bg-pink-600",
-    },
-    {
-      name: "Intake Form",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-purple-600",
-    },
-    {
-      name: "Volunteer Handbook",
-      initials: DocumentIcon,
-      href: "https://docs.google.com/document/d/11V1bi6IcLS8H2TBtBzN9H_sc2mc76YBJ/edit?usp=sharing&ouid=101295966358202048056&rtpof=true&sd=true",
-      bgColor: "bg-yellow-500",
-    },
-    {
-      name: "Background Check Site",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-green-500",
-    },
-  ];
-
-  const items = [
-    { id: 1 },
-    // More items...
+    { name: "All Announcements", href: "/announcements", current: false },
+    { name: "Edit Announcement", href: `/announcements/${announcement.alertpk}`, current: true },
   ];
 
   function classNames(...classes) {
@@ -83,7 +68,7 @@ export const DocumentList = (props) => {
   }
 
   return (
-    <div className="h-screen bg-white overflow-hidden flex">
+    <div className="h-screen overflow-y-auto bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -174,8 +159,10 @@ export const DocumentList = (props) => {
         </Dialog>
       </Transition.Root>
 
+      {/* Static sidebar for desktop */}
       <div className="hidden md:flex md:flex-shrink-0">
         <div className="w-64 flex flex-col">
+          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
             <div className="flex-shrink-0 px-4 flex items-center">
               <img
@@ -304,62 +291,84 @@ export const DocumentList = (props) => {
             </Menu>
           </div>
         </div>
+        <main className='flex-1 relative focus:outline-none'>
+      <div className='py-6'>
+        <form
+          className='space-y-8 divide-y divide-gray-200'
+        >
+          <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
+            <div className='pt-8 space-y-8 '>
+              <div>
+                <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                  Edit Announcement
+                </h3>
+              </div>
 
-        <main className="flex flex-col relative overflow-y-auto focus:outline-none">
-          <div className="py-8">
-            <div className="px-6 sm:px-6 md:px-0">
-              <h1 className="text-2xl pb-6 font-semibold text-gray-900">
-                Document List
-              </h1>
-            </div>
-            <div className="flex-col px-6 sm:px-8 md:px-4">
-              <ul className="flex-col space-y-4">
-                {items.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex-col justify-start bg-white shadow overflow-hidden rounded-md px-6 py-4"
-                  >
-                    <div className="flex-col justify-start">
-                      <ul className="mt-5 grid-flow-col grid-cols-3 gap-8 sm:gap-8 sm:grid-cols-4 lg:grid-cols-4">
-                        {projects.map((project) => (
-                          <li
-                            key={project.name}
-                            className="col-span-1 flex shadow-sm rounded-md"
-                          >
-                            <div
-                              className={classNames(
-                                project.bgColor,
-                                "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
-                              )}
-                            >
-                              {project.initials}
-                            </div>
-                            <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                              <div className="flex-1 px-4 py-2 text-sm truncate">
-                                <a
-                                  href={project.href}
-                                  className="text-gray-900 font-medium hover:text-gray-600"
-                                  target="_blank"
-                                  rel="noreferrer noopener"
-                                >
-                                  {project.name}
-                                </a>
-                                <p className="text-gray-500">
-                                  {project.members}
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {/* /End replace */}
+              <div className='sm:col-span-6'>
+                <label
+                  htmlFor='announcement-heading'
+                  className='block text-sm font-medium text-gray-700'
+                >
+                  Announcement Heading
+                </label>
+                <div className='mt-1'>
+                  <input
+                    id='announcement-heading'
+                    name='announcement-heading'
+                    value={alertHeader}
+                    onChange={(event) => setAlertHeader(event.target.value)}
+                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
+                  />
+                </div>
+              </div>
+
+              <div className='sm:col-span-6'>
+                <label
+                  htmlFor='about'
+                  className='block text-sm font-medium text-gray-700'
+                >
+                  Announcement Body
+                </label>
+                <div className='mt-1'>
+                  <textarea
+                    id='about'
+                    name='about'
+                    rows={3}
+                    value={text}
+                    onChange={(event) => setText(event.target.value)}
+                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
+                  />
+                </div>
+                <p className='mt-2 text-sm text-gray-500'>
+                  Write your the body of your announcement here.
+                </p>
+              </div>
             </div>
           </div>
-        </main>
+
+          <div className='pt-5'>
+            <div className='flex justify-end'>
+              <Link to='/announcements'>
+              <button
+                type='button'
+                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              >
+                Cancel
+              </button>
+              <button
+                type='submit'
+                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
+              </Link>
+            </div>
+          </div>
+        </form>
+        {/* /End replace */}
+      </div>
+    </main>
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import moment from "moment";
 import { Dialog, Menu, Transition } from "@headlessui/react";
+import { deleteAnnouncement, getAnnouncementDetails } from "../../api";
 import Avatar from "react-avatar";
 import {
+  PencilIcon,
   ChevronRightIcon,
   CalendarIcon,
   FolderIcon,
@@ -10,12 +13,30 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  DocumentIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
+import { useHistory, Link, useParams } from "react-router-dom";
 
-export const DocumentList = (props) => {
-  const { token, authUser } = props;
+export const AnnouncementDetail = (props) => {
+  const { token, authUser, loading, setLoading } = props;
+  const { id } = useParams();
+  const [announcement, setAnnouncement] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const history = useHistory();
+
+    console.log(id)
+  useEffect(() => {
+    getAnnouncementDetails(token, id).then((data) => {
+      console.log(data);
+      setAnnouncement(data)
+      setLoading(false);
+    });
+  }, []);
+
+  const handleDelete =  () => {
+    deleteAnnouncement(token, id);
+    history.push("/announcements");
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -30,60 +51,31 @@ export const DocumentList = (props) => {
       name: "Announcements",
       href: "/announcements",
       icon: CalendarIcon,
-      current: false,
+      current: true,
     },
-    { name: "Documents", href: "/documents", icon: InboxIcon, current: true },
+    { name: "Documents", href: "/documents", icon: InboxIcon, current: false },
   ];
 
   const userNavigation = [
     { name: "Your Profile", href: "#" },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
+    { name: "Sign out", href: "/admin/logout" },
   ];
 
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
-    { name: "All Documents", href: "/documents", current: true },
-  ];
-
-  const projects = [
-    {
-      name: "Dream Center Site",
-      initials: DocumentIcon,
-      href: "https://citygatedreamcenter.com/",
-      bgColor: "bg-pink-600",
-    },
-    {
-      name: "Intake Form",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-purple-600",
-    },
-    {
-      name: "Volunteer Handbook",
-      initials: DocumentIcon,
-      href: "https://docs.google.com/document/d/11V1bi6IcLS8H2TBtBzN9H_sc2mc76YBJ/edit?usp=sharing&ouid=101295966358202048056&rtpof=true&sd=true",
-      bgColor: "bg-yellow-500",
-    },
-    {
-      name: "Background Check Site",
-      initials: DocumentIcon,
-      href: "#",
-      bgColor: "bg-green-500",
-    },
-  ];
-
-  const items = [
-    { id: 1 },
-    // More items...
+    { name: "All Announcements", href: "/announcements", current: false },
+    { name: "Announcement Details", href: "/announcements/:id", current: true },
   ];
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
 
-  return (
-    <div className="h-screen bg-white overflow-hidden flex">
+  return loading 
+  ? "Announcement details loading..."
+  : (
+    <div className="h-screen overflow-y-auto bg-white overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -174,8 +166,10 @@ export const DocumentList = (props) => {
         </Dialog>
       </Transition.Root>
 
+      {/* Static sidebar for desktop */}
       <div className="hidden md:flex md:flex-shrink-0">
         <div className="w-64 flex flex-col">
+          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
             <div className="flex-shrink-0 px-4 flex items-center">
               <img
@@ -304,62 +298,71 @@ export const DocumentList = (props) => {
             </Menu>
           </div>
         </div>
-
-        <main className="flex flex-col relative overflow-y-auto focus:outline-none">
-          <div className="py-8">
-            <div className="px-6 sm:px-6 md:px-0">
-              <h1 className="text-2xl pb-6 font-semibold text-gray-900">
-                Document List
-              </h1>
-            </div>
-            <div className="flex-col px-6 sm:px-8 md:px-4">
-              <ul className="flex-col space-y-4">
-                {items.map((item) => (
-                  <li
-                    key={item.id}
-                    className="flex-col justify-start bg-white shadow overflow-hidden rounded-md px-6 py-4"
-                  >
-                    <div className="flex-col justify-start">
-                      <ul className="mt-5 grid-flow-col grid-cols-3 gap-8 sm:gap-8 sm:grid-cols-4 lg:grid-cols-4">
-                        {projects.map((project) => (
-                          <li
-                            key={project.name}
-                            className="col-span-1 flex shadow-sm rounded-md"
-                          >
-                            <div
-                              className={classNames(
-                                project.bgColor,
-                                "flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md"
-                              )}
-                            >
-                              {project.initials}
-                            </div>
-                            <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                              <div className="flex-1 px-4 py-2 text-sm truncate">
-                                <a
-                                  href={project.href}
-                                  className="text-gray-900 font-medium hover:text-gray-600"
-                                  target="_blank"
-                                  rel="noreferrer noopener"
-                                >
-                                  {project.name}
-                                </a>
-                                <p className="text-gray-500">
-                                  {project.members}
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
+        <div className="overflow-y-auto px-4 sm:px-6 md:px-0">
+          {/* Replace with your content */}
+          <div>
+            <h1 className="flex items-left text-med font-medium">
+              Announcement Details
+            </h1>
+            <ul className="divide-y divide-gray-200">
+              <li
+                key={announcement.alertpk}
+                className="py-4 sm:border-t sm:border-gray-200"
+              >
+                <div className="flex space-x-3">
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-gray-500">
+                        {moment(announcement.date).format("LL")}
+                      </p>
+                      <h3 className="text-sm font-medium">
+                        {announcement.alert_header}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        posted at: {moment(announcement.date).format("LT")}
+                      </p>
                     </div>
-                  </li>
-                ))}
-              </ul>
-              {/* /End replace */}
-            </div>
+                    <p className="items-center text-sm text-gray-500">
+                      {announcement.text}
+                    </p>
+                    <span className="hidden sm:block">
+                      <Link
+                        to={{
+                          pathname: `/announcements/edit/${id}/`,
+                          state: { announcement: announcement },
+                        }}
+                      >
+                        <button
+                          type="button"
+                          className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                        >
+                          <PencilIcon
+                            className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          Edit
+                        </button>
+                      </Link>
+                    </span>
+                    <span className="hidden sm:block">
+                      <button
+                        type="button"
+                        className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-purple-500"
+                        onClick={handleDelete}
+                      >
+                        <TrashIcon
+                          className="-ml-1 mr-2 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                        Delete
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );
