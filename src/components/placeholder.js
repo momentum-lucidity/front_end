@@ -1,4 +1,7 @@
  // pagination based
+ const [currentPage, setCurrentPage] = useState(1)
+ const [announcementsPerPage, setAnnouncementsPerPage] = useState(5)
+ 
  const indexOfLastAnnouncement = currentPage * announcementsPerPage;
  const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
  const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
