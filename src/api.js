@@ -374,3 +374,41 @@ export const editEvent = (
     }
   )
 }
+
+export const getDocuments = () => {
+  return axios
+    .get('https://momentum-lucidity.herokuapp.com/docs/')
+    .then((res) => res.data.results)
+}
+
+export const createDocument = ([user], docHeader, url, token) => {
+  return axios
+    .post('https://momentum-lucidity.herokuapp.com/docs/',
+      {
+        user: [user],
+        doc_header: docHeader,
+        url: url
+      },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    )
+}
+
+export const deleteDocument = (token, id) => {
+  return (
+    axios
+      .delete(`https://momentum-lucidity.herokuapp.com/docs/${id}`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
+          }
+        }
+      )
+  )
+}
