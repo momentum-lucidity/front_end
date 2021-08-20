@@ -357,9 +357,7 @@ export const EditAnnouncement = (props) => {
               <div className="pt-5">
                 <div className="flex justify-end">
                   <Link
-                    to={{
-                      pathname: `/announcements/${id}/`,
-                    }}
+                    to='/announcements'
                   >
                     <button
                       type="button"

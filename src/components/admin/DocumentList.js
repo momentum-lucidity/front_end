@@ -345,13 +345,6 @@ export const DocumentList = (props) => {
                                 >
                                   {document.doc_header}
                                 </a>
-                                {/* <button>      
-                                <TrashIcon
-                                  className="-ml-1 mr-2 h-5 w-5"
-                                  aria-hidden="true"
-                                  onClick={() => setDocumentPK(document.docpk)}
-                                />
-                                </button>    */}
                                 <button>      
                                 <TrashIcon
                                   className="-ml-1 mr-2 h-5 w-5"
@@ -373,7 +366,6 @@ export const DocumentList = (props) => {
           </div>
         </main>
       </div>
-      {console.log(documentPK)}
     </div>
   );
 };
