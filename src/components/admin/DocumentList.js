@@ -314,7 +314,6 @@ export const DocumentList = (props) => {
               authUser={authUser}
               setDocuments={setDocuments}
               setLoading={setLoading}
-              documents={documents}
             />
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">
