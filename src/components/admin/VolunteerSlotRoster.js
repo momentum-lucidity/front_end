@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { deleteVolunteerSlot, getAllSlots } from '../../api'
 import Avatar from 'react-avatar'
-import { VolunteerSlotDelete } from './VolunteerSlotDelete'
-import { Switch } from '@headlessui/react'
+import { VolunteerSlotEdit } from './VolunteerSlotEdit'
 
 export const VolunteerSlotRoster = (props) => {
-  const { token, eventDetails, allVolunteers } = props
+  const { token, eventDetails } = props
   const [allVSlots, setAllVSlots] = useState([])
   const [selectedSlotID, setSelectedSlotID] = useState('')
-  const [enabled, setEnabled] = useState(false)
+  const [expand, setExpand] = useState(false)
   const fetchedAllSlots = useRef(false)
   const eventID = eventDetails.eventpk
-  console.log(`eventID - ${eventID}`)
 
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
@@ -37,6 +34,11 @@ export const VolunteerSlotRoster = (props) => {
         .then((data) => setAllVSlots(data))
     }
   }
+  const handleClick = () => {
+    setExpand(!expand)
+    console.log(`expand ${expand}`)
+  }
+
   console.log(`this is what you are looking for ${selectedSlotID}`)
   return (
     <div className='flex flex-col'>
@@ -115,18 +117,13 @@ export const VolunteerSlotRoster = (props) => {
 
                       <span className='hidden sm:block'>
 
-                        <Link
-                          to='#'
+                        <button
+                          type='button'
+                          className='inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200'
+                          onClick={handleClick}
                         >
-
-                          <button
-                            type='button'
-                            className='inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200'
-                          >
-                            Edit
-                          </button>
-
-                        </Link>
+                          Edit
+                        </button>
 
                       </span>
 
@@ -143,6 +140,10 @@ export const VolunteerSlotRoster = (props) => {
                       </span>
 
                     </tr>
+                    <div>
+                      {expand &&
+                        <VolunteerSlotEdit token={token} setExpand={setExpand} />}
+                    </div>
                   </div>
                 ))}
               </tbody>
