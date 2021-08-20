@@ -1,33 +1,33 @@
 import { useState } from 'react';
-import { getAnnouncements, newAnnouncement } from '../../api';
+import { getDocuments, createDocument } from '../../api';
 
-export const CreateAnnoucements = (props) => {
-  const { token, authUser, setAnnouncements, setLoading } = props
-  const [alertHeader, setAlertHeader] = useState('')
-  const [text, setText] = useState('')
+export const CreateDocument = (props) => {
+  const { token, authUser, setDocuments, setLoading } = props
+  const [docHeader, setDocHeader] = useState('')
+  const [url, setUrl] = useState('')
+  const user = authUser.id
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     console.log(authUser.id)
-    const user = authUser.id
-    const success = await newAnnouncement(
+    const success = await createDocument(
       [user],
-      alertHeader,
-      text,
+      docHeader,
+      url,
       token
     ).then((res) => res.data)
     if (success) {
-      getAnnouncements()
-      .then((data) => {setAnnouncements(data)
-      setLoading(false)})      
-      setAlertHeader('')
-      setText('')
+      getDocuments()
+      .then((data) => {setDocuments(data)
+      setLoading(false)
+      setDocHeader('')
+      setUrl('')})      
     }
   }
 
   const cancel = () => {
-    setAlertHeader('')
-    setText('')
+    setDocHeader('')
+    setUrl('')
   }
 
   return (
@@ -41,7 +41,7 @@ export const CreateAnnoucements = (props) => {
             <div className='pt-8 space-y-8 '>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Add A New Announcement
+                  Add A New Resource
                 </h3>
               </div>
 
@@ -50,14 +50,14 @@ export const CreateAnnoucements = (props) => {
                   htmlFor='announcement-heading'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Announcement Heading
+                  Resource Heading
                 </label>
                 <div className='mt-1'>
                   <input
                     id='announcement-heading'
                     name='announcement-heading'
-                    value={alertHeader}
-                    onChange={(event) => setAlertHeader(event.target.value)}
+                    value={docHeader}
+                    onChange={(event) => setDocHeader(event.target.value)}
                     className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
                   />
                 </div>
@@ -65,20 +65,18 @@ export const CreateAnnoucements = (props) => {
 
               <div className='sm:col-span-6'>
                 <label
-                  htmlFor='about'
+                  htmlFor='announcement-body'
                   className='block text-sm font-medium text-gray-700'
                 >
-                  Announcement Body
+                  Resource Url
                 </label>
                 <div className='mt-1'>
-                  <textarea
-                    id='about'
-                    name='about'
-                    rows={2}
-                    value={text}
-                    onChange={(event) => setText(event.target.value)}
+                  <input
+                    id='announcement-body'
+                    name='announcement-body'
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}
                     className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    placeholder='Write your the body of your announcement here.'
                   />
                 </div>
               </div>

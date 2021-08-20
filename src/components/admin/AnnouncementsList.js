@@ -3,13 +3,15 @@ import moment from 'moment'
 import { orderBy } from 'lodash'
 import { CreateAnnoucements } from './CreateAnnouncements.js'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { getAnnouncements } from '../../api'
+import { getAnnouncements, deleteAnnouncement } from '../../api'
 import Avatar from 'react-avatar'
 import { PencilIcon, ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
+import { Link } from 'react-router-dom'
 
 export const AnnouncementsList = (props) => {
   const hasFetchedAnnouncements = useRef(false)
   const { token, authUser, loading, setLoading } = props
+  const [announcementPK, setAnnouncementPK] = useState('');
   const [announcements, setAnnouncements] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
@@ -29,6 +31,15 @@ export const AnnouncementsList = (props) => {
     [(object) => new moment(object.date)],
     ['desc']
   )
+
+  const handleDelete = async () => {
+    const success = await deleteAnnouncement(token, announcementPK);
+    if (success) {
+      getAnnouncements()
+      .then((data) => {setAnnouncements(data)
+      setLoading(false)})      
+    }
+    };
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -303,7 +314,7 @@ export const AnnouncementsList = (props) => {
                   className='py-4 sm:border-t sm:border-gray-200'
                 >
                   <div className='flex space-x-3'>
-                    <div className='flex-1 space-y-1'>
+                    <div onClickCapture={() => setAnnouncementPK(announcement.alertpk)} className='flex-1 space-y-1'>
                       <div className='flex items-center justify-between'>
                         <p className='text-sm text-gray-500'>
                           {moment(announcement.date).format('LL')}
@@ -311,25 +322,43 @@ export const AnnouncementsList = (props) => {
                         <h3 className='text-sm font-medium'>
                           {announcement.alert_header}
                         </h3>
-                        <p className='text-sm text-gray-500'>posted by: {authUser.display_name}</p>
+                        <p className='text-sm text-gray-500'>posted on: {moment(announcement.date).format('LT')}</p>
                       </div>
                       <p className='items-center text-sm text-gray-500'>
                         {announcement.text}
                       </p>
-                      <a href={`/announcements/${announcement.alertpk}`}>
-                      <span className='hidden sm:block'>
+                      <span className="hidden sm:block">
+                      <Link
+                        to={{
+                          pathname: `/announcements/edit/${announcement.alertpk}/`,
+                          state: { announcement: announcement },
+                        }}
+                      >
                         <button
-                          type='button'
-                          className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'                          
+                          type="button"
+                          className="inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200"
                         >
                           <PencilIcon
-                            className='-ml-1 mr-2 h-5 w-5 text-gray-400'
-                            aria-hidden='true'
+                            className="-ml-1 mr-2 h-5 w-5 text-green-500"
+                            aria-hidden="true"
                           />
-                          Announcement Details
+                          Edit
                         </button>
-                      </span>
-                      </a>
+                      </Link>
+                    </span>
+                      <span className="hidden sm:block">
+                      <button
+                        type="button"
+                        className="inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                        onClick={handleDelete}
+                      >
+                        <TrashIcon
+                          className="-ml-1 mr-2 h-5 w-5 text-red-500"
+                          aria-hidden="true"
+                        />
+                        Delete
+                      </button>
+                    </span>
                     </div>
                   </div>
                 </li>

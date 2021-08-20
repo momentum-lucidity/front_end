@@ -16,22 +16,28 @@ import { editAnnouncement } from "../../api";
 
 export const EditAnnouncement = (props) => {
   const { token, authUser } = props;
-  const location = useLocation()
-  const { announcement } = location.state
-  const [alertHeader, setAlertHeader] = useState(`${announcement.alert_header}`);
+  const location = useLocation();
+  const { announcement } = location.state;
+  const [alertHeader, setAlertHeader] = useState(
+    `${announcement.alert_header}`
+  );
   const [text, setText] = useState(`${announcement.text}`);
   const user = authUser.id;
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const history = useHistory()
+  const history = useHistory();
   const { id } = useParams();
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    const editWorked = await editAnnouncement(token, id, user, alertHeader, text)
-    .then((res) => res.data)
-    if (editWorked) 
-      history.push('/announcements')
-  }
+    event.preventDefault();
+    const editWorked = await editAnnouncement(
+      token,
+      id,
+      user,
+      alertHeader,
+      text
+    ).then((res) => res.data);
+    if (editWorked) history.push("/announcements");
+  };
 
   const navigation = [
     { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
@@ -60,7 +66,11 @@ export const EditAnnouncement = (props) => {
   const pages = [
     { name: "Dashboard", href: "/admindash", current: false },
     { name: "All Announcements", href: "/announcements", current: false },
-    { name: "Edit Announcement", href: `/announcements/${announcement.alertpk}`, current: true },
+    {
+      name: "Edit Announcement",
+      href: `/announcements/${announcement.alertpk}`,
+      current: true,
+    },
   ];
 
   function classNames(...classes) {
@@ -291,84 +301,84 @@ export const EditAnnouncement = (props) => {
             </Menu>
           </div>
         </div>
-        <main className='flex-1 relative focus:outline-none'>
-      <div className='py-6'>
-        <form
-          className='space-y-8 divide-y divide-gray-200'
-        >
-          <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
-            <div className='pt-8 space-y-8 '>
-              <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Edit Announcement
-                </h3>
-              </div>
+        <main className="flex-1 relative focus:outline-none">
+          <div className="py-6">
+            <form className="space-y-8 divide-y divide-gray-200">
+              <div className="space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200">
+                <div className="pt-8 space-y-8 ">
+                  <div>
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                      Edit Announcement
+                    </h3>
+                  </div>
 
-              <div className='sm:col-span-6'>
-                <label
-                  htmlFor='announcement-heading'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Announcement Heading
-                </label>
-                <div className='mt-1'>
-                  <input
-                    id='announcement-heading'
-                    name='announcement-heading'
-                    value={alertHeader}
-                    onChange={(event) => setAlertHeader(event.target.value)}
-                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                  />
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="announcement-heading"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Announcement Heading
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        id="announcement-heading"
+                        name="announcement-heading"
+                        value={alertHeader}
+                        onChange={(event) => setAlertHeader(event.target.value)}
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="about"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Announcement Body
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="about"
+                        name="about"
+                        rows={3}
+                        value={text}
+                        onChange={(event) => setText(event.target.value)}
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                      />
+                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Write your the body of your announcement here.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className='sm:col-span-6'>
-                <label
-                  htmlFor='about'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Announcement Body
-                </label>
-                <div className='mt-1'>
-                  <textarea
-                    id='about'
-                    name='about'
-                    rows={3}
-                    value={text}
-                    onChange={(event) => setText(event.target.value)}
-                    className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                  />
+              <div className="pt-5">
+                <div className="flex justify-end">
+                  <Link
+                    to='/announcements'
+                  >
+                    <button
+                      type="button"
+                      className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={handleSubmit}
+                    >
+                      Save
+                    </button>
+                  </Link>
                 </div>
-                <p className='mt-2 text-sm text-gray-500'>
-                  Write your the body of your announcement here.
-                </p>
               </div>
-            </div>
+            </form>
+            {/* /End replace */}
           </div>
-
-          <div className='pt-5'>
-            <div className='flex justify-end'>
-              <Link to='/announcements'>
-              <button
-                type='button'
-                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-              >
-                Cancel
-              </button>
-              <button
-                type='submit'
-                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                onClick={handleSubmit}
-              >
-                Save
-              </button>
-              </Link>
-            </div>
-          </div>
-        </form>
-        {/* /End replace */}
-      </div>
-    </main>
+        </main>
       </div>
     </div>
   );

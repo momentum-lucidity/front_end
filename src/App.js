@@ -12,7 +12,6 @@ import { EventForm } from './components/admin/EventForm';
 import { DocumentList } from './components/admin/DocumentList';
 import { Registration } from './components/admin/Registration';
 import { AnnouncementsList } from './components/admin/AnnouncementsList';
-import { AnnouncementDetail } from './components/admin/AnnouncementDetail';
 import { EditAnnouncement } from './components/admin/EditAnnouncement';
 import { EditVolunteer } from './components/admin/EditVolunteer';
 import { VolunteerDashboard } from './components/volunteer/VolunteerDashboard';
@@ -30,6 +29,8 @@ function App () {
   const [authUser, setAuthUser] = useLocalStorageState('authUser', '')
   const [allVolunteers, setAllVolunteers] = useState([])
   const [loading, setLoading] = useState(true)
+  const [errors, setErrors] = useState()
+
 
   useEffect(() => {
     getAuthUser(token).then((data) => setAuthUser(data))
@@ -226,6 +227,10 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                loading={loading}
+                setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -234,20 +239,6 @@ function App () {
             path='/announcements'
             component={() => (
               <AnnouncementsList
-                token={token}
-                setToken={setToken}
-                authUser={authUser}
-                setAuthUser={setAuthUser}
-                loading={loading}
-                setLoading={setLoading}
-              />
-            )}
-          />
-          <Route
-            exact
-            path='/announcements/:id'
-            component={() => (
-              <AnnouncementDetail
                 token={token}
                 setToken={setToken}
                 authUser={authUser}
