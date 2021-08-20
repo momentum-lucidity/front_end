@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect, useRef } from 'react'
-import { getEventDetails } from '../../api'
+import { getEventDetails, newVSlot } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
@@ -13,17 +13,21 @@ export const EventDetail = (props) => {
   const fetchedEventDetails = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [eventDetails, setEventDetails] = useState('')
-  console.log(`this is the event id ${id}`)
+  const [allVSlots, setAllVSlots] = useState([])
+  const [expandNew, setExpandNew] = useState(false)
 
   useEffect(() => {
     if (!fetchedEventDetails.current) {
       getEventDetails(token, id).then((data) => {
-        console.log(data)
         setEventDetails(data)
         fetchedEventDetails.current = true
       })
     }
   }, [eventDetails, token, id])
+
+  const handleClick = () => {
+    setExpandNew(!expandNew)
+  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -280,54 +284,69 @@ export const EventDetail = (props) => {
             </Menu>
           </div>
         </div>
-
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>{/* Content goes here */}</div>
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>
-                {eventDetails.event_header} Details
-              </h1>
+              <div className='pb-5 border-b border-gray-200'>
+                <h3 className='text-lg leading-6 font-medium text-gray-900'>{eventDetails.event_header}</h3>
+              </div>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              <div
-                key={eventDetails.id}
-                className='bg-white shadow overflow-hidden sm:rounded-lg'
-              >
-                <div className='px-4 py-5 sm:px-6'>
-                  <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                    {eventDetails.event_header}
-                  </h3>
-                  <p className='text-sm text-gray-500'>
-                    {eventDetails.description} {eventDetails.type}
-                  </p>
-                </div>
+              <div key={eventDetails.id} className='bg-white shadow overflow-hidden sm:rounded-lg'>
+
                 <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
-                  <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
-                    <div className='sm:col-span-1'>
-                      <dt className='text-sm font-medium text-gray-500'>
-                        When
-                      </dt>
-                      <dd className='mt-1 text-sm text-gray-900'>
-                        {eventDetails.date} {eventDetails.start_time}
-                      </dd>
-                    </div>
-                    <div className='sm:col-span-1'>
-                      <dt className='text-sm font-medium text-gray-500'>
-                        Where
-                      </dt>
-                    </div>
-
-                    <div className='sm:col-span-2'>
-                      <div>
-                        <h3 className='text-lg leading-6 sm:border-t sm:border-gray-200 sm:pt-5 font-medium text-gray-900'>
-                          Volunteers Roster
-                        </h3>
+                  <div className='px-4 py-4'>
+                    <dt className='text-sm font-medium text-gray-500'>
+                      Event Details
+                    </dt>
+                    <dd className='text-sm font-medium text-gray-900'>
+                      {eventDetails.description}
+                    </dd>
+                  </div>
+                  <div className='px-4 py-4'>
+                    <dl className='grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
+                      <div className='sm:col-span-1'>
+                        <dt className='text-sm font-medium text-gray-500'>
+                          Date
+                        </dt>
+                        <dd className='mt-1 text-sm text-gray-900'>
+                          {eventDetails.date}
+                        </dd>
                       </div>
+                      <div className='sm:col-span-1'>
+                        <dt className='text-sm font-medium text-gray-500'>
+                          Time
+                        </dt>
+                        <dd className='mt-1 text-sm text-gray-900'>
+                          Start {eventDetails.start_time}
+                        </dd>
+                        <dd className='mt-1 text-sm text-gray-900'>
+                          End {eventDetails.end_time}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
 
-                      <VolunteerSlotRoster token={token} eventDetails={eventDetails} />
-                      <VolunteerSlotPost token={token} eventDetails={eventDetails} id={id} />
+                  <div className='pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between'>
+                    <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Roster</h3>
+                    <div className='mt-3 sm:mt-0 sm:ml-4'>
+                      <button
+                        type='button'
+                        className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                        onClick={handleClick}
+                      >
+                        Create New Slot
+                      </button>
                     </div>
-                  </dl>
+                  </div>
+                  <div className='px-4 py-4'>
+                    {expandNew &&
+                      <VolunteerSlotPost token={token} eventID={id} setExpandNew={setExpandNew} allVSlots={allVSlots} setAllVSlots={setAllVSlots} />}
+                  </div>
+
+                  <VolunteerSlotRoster token={token} eventDetails={eventDetails} allVSlots={allVSlots} setAllVSlots={setAllVSlots} />
+
                 </div>
               </div>
             </div>

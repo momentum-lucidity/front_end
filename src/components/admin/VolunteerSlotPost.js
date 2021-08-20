@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
-import { newVSlot } from '../../api'
+import { newVSlot, getAllSlots } from '../../api'
 
 export const VolunteerSlotPost = (props) => {
-  const { token, eventDetails, id } = props
+  const { token, eventID, setExpandNew, setAllVSlots } = props
   const [slotText, setSlotText] = useState('')
-  const [amPm, setAmPm] = useState(false)
   const [volStart, setVolStart] = useState('')
   const [volEnd, setVolEnd] = useState('')
+  const [date, setDate] = useState('')
   const history = useHistory()
-  const eventID = eventDetails.id
-  console.log(`slot post id ${id}`)
 
-  const handleSubmit = () => {
-    console.log(id, token, slotText, volStart)
-    newVSlot(id, token, slotText, volStart)
-      .then((res) => history.push(`/events/${id}/`))
+  const handleSubmit = async () => {
+    const success = await newVSlot(eventID, token, slotText, volStart, volEnd)
+    if (success) {
+      getAllSlots()
+        .then((data) => setAllVSlots(data))
+      setExpandNew(false)
+      history.push(`/events/${eventID}/`)
+    }
+  }
+
+  const handleCancel = () => {
+    setExpandNew(false)
   }
 
   return (
@@ -31,18 +37,6 @@ export const VolunteerSlotPost = (props) => {
           <div className='mt-5 md:mt-0 md:col-span-2'>
             <form action='#' method='POST'>
               <div className='grid grid-cols-6 gap-6'>
-                <div className='col-span-6'>
-                  <label htmlFor='street-address' className='block text-sm font-medium text-gray-700'>
-                    Volunteer Assigned
-                  </label>
-                  <input
-                    type='text'
-                    name='street-address'
-                    id='street-address'
-                    autoComplete='street-address'
-                    className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                  />
-                </div>
 
                 <div className='col-span-6 sm:col-span-3'>
                   <label htmlFor='first-name' className='block text-sm font-medium text-gray-700'>
@@ -50,7 +44,7 @@ export const VolunteerSlotPost = (props) => {
                   </label>
                   <input
                     type='text'
-                    id='first-name'
+                    id='description'
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                     value={slotText}
                     onChange={(event) => setSlotText(event.target.value)}
@@ -62,11 +56,13 @@ export const VolunteerSlotPost = (props) => {
                     Date
                   </label>
                   <input
-                    type='text'
-                    name='last-name'
-                    id='last-name'
+                    type='date'
+                    name='date'
+                    value={date}
+                    id='date'
                     autoComplete='family-name'
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                    onChange={(event) => setDate(event.target.value)}
                   />
                 </div>
 
@@ -107,7 +103,7 @@ export const VolunteerSlotPost = (props) => {
                     autoComplete='country'
                     className='mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                     value={volEnd}
-                    onChange={(event) => setVolStart(event.target.value)}
+                    onChange={(event) => setVolEnd(event.target.value)}
                   >
                     <option>12:00</option>
                     <option>01:00</option>
@@ -133,6 +129,7 @@ export const VolunteerSlotPost = (props) => {
         <button
           type='button'
           className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+          onClick={handleCancel}
         >
           Cancel
         </button>

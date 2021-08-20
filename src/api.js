@@ -132,7 +132,7 @@ export const getSelectedSlot = (token, slotpk) => {
   )
 }
 
-export const newVSlot = (eventID, token, slotText, volStart, volEnd, date) => {
+export const newVSlot = (eventID, token, slotText, volStart, volEnd) => {
   return (
     axios
       .post('https://momentum-lucidity.herokuapp.com/volunteerops/',
@@ -142,7 +142,7 @@ export const newVSlot = (eventID, token, slotText, volStart, volEnd, date) => {
           event: eventID,
           starttime: volStart,
           endtime: volEnd,
-          date: date
+          date: null
         },
         {
           headers: {

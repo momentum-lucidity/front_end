@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
 
 export const VolunteerSlotEdit = (props) => {
-  const { token, eventDetails, id, setExpand } = props
+  const { token, id, setExpand } = props
   const [slotText, setSlotText] = useState('')
   const [volStart, setVolStart] = useState('')
   const [volEnd, setVolEnd] = useState('')
@@ -12,7 +12,6 @@ export const VolunteerSlotEdit = (props) => {
   console.log(`slot post id ${id}`)
 
   const handleSubmit = () => {
-    console.log(id, token, slotText, volStart)
     editVSlot(id, token, slotText, volStart)
       .then((res) => history.push(`/events/${id}/`))
   }
@@ -28,7 +27,7 @@ export const VolunteerSlotEdit = (props) => {
       <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>
-            <h3 className='text-lg font-medium leading-6 text-gray-900'>Create A New Volunteer Slot</h3>
+            <h3 className='text-lg font-medium leading-6 text-gray-900'>Edit Volunteer Slot</h3>
             <p className='mt-1 text-sm text-gray-500'>Use a permanent address where you can receive mail.</p>
           </div>
           <div className='mt-5 md:mt-0 md:col-span-2'>
