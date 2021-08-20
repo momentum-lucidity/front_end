@@ -21,7 +21,7 @@ export const Registration = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const success = await adminRegistration(
+    adminRegistration(
       email,
       username,
       password,
@@ -35,14 +35,14 @@ export const Registration = (props) => {
       state,
       zip,
       preferredEvent)
-   if (success) {requestLogin(username, password)
-      .then((data) => {
+     await requestLogin(username, password)
+      .then((data) => { 
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
           setAuthUser(data.data.username)
           history.push('/admindash')
         }
-      })}
+      })
   }
   return (
     <>
