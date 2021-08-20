@@ -5,7 +5,7 @@ import { VolunteerSlotDelete } from './VolunteerSlotDelete'
 import { Switch } from '@headlessui/react'
 
 export const VolunteerSlotRoster = (props) => {
-  const { token, eventDetails } = props
+  const { token, eventDetails, allVolunteers } = props
   const [allVSlots, setAllVSlots] = useState([])
   const [selectedSlotPK, setSelectedSlotPK] = useState('')
   const [enabled, setEnabled] = useState(false)
@@ -76,21 +76,21 @@ export const VolunteerSlotRoster = (props) => {
 
                         </div>
                         <div className='ml-4'>
-                          <div className='text-sm font-medium text-gray-900'>{eventDetails.event_header}</div>
-                          <div className='text-sm text-gray-500'>this is the slotpk{slot.slotpk}</div>
+                          <div className='text-sm font-medium text-gray-900'>event_header:{eventDetails.event_header}</div>
+                          <div className='text-sm text-gray-500'>this is the slotpk:{slot.slotpk}</div>
                         </div>
                       </div>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
-                      <div className='text-sm text-gray-900'>{slot.user}</div>
-                      <div className='text-sm text-gray-500'>{slot.time}</div>
+                      <div className='text-sm text-gray-900'>user id:{slot.user}</div>
+                      <div className='text-sm text-gray-500'>vlot_text:{slot.vslot_text}</div>
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap'>
                       <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-                        Open/filled
+                        event id: {slot.event}
                       </span>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>{eventDetails.type}</td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>event type:{eventDetails.type}</td>
                   </tr>
                 ))}
               </tbody>
