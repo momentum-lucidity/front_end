@@ -1,20 +1,21 @@
 import { Fragment, useState, useEffect, useRef } from 'react'
-import { getEventDetails, newVSlot } from '../../api'
+import { deleteEvent, getEventDetails, getEventsList } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
-import { useParams } from 'react-router-dom'
+import { useParams, Link, useHistory } from 'react-router-dom'
 import { VolunteerSlotRoster } from './VolunteerSlotRoster'
 import { VolunteerSlotPost } from './VolunteerSlotPost'
 
 export const EventDetail = (props) => {
-  const { token, authUser } = props
+  const { token, authUser, setAllEvents } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [eventDetails, setEventDetails] = useState('')
   const [allVSlots, setAllVSlots] = useState([])
   const [expandNew, setExpandNew] = useState(false)
+  const history = useHistory()
 
   useEffect(() => {
     if (!fetchedEventDetails.current) {
@@ -27,6 +28,15 @@ export const EventDetail = (props) => {
 
   const handleClick = () => {
     setExpandNew(!expandNew)
+  }
+
+  const handleDelete = async () => {
+    const success = await deleteEvent(token, id)
+    if (success) {
+      getEventsList()
+        .then((data) => setAllEvents(data))
+      history.push('/events/')
+    }
   }
 
   const navigation = [
@@ -287,9 +297,30 @@ export const EventDetail = (props) => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>{/* Content goes here */}</div>
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0'>
-              <div className='pb-5 border-b border-gray-200'>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>{eventDetails.event_header}</h3>
+
+            <div className='pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between'>
+              <h3 className='text-lg leading-6 font-medium text-gray-900'>{eventDetails.event_header}</h3>
+              <div className='mt-3 flex sm:mt-0 sm:ml-4'>
+                <Link
+                  to={{
+                    pathname: `/events/edit/${eventDetails.eventpk}/`,
+                    state: { eventDetails: eventDetails }
+                  }}
+                >
+                  <button
+                    type='button'
+                    className='ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  >
+                    Edit
+                  </button>
+                </Link>
+                <button
+                  type='button'
+                  className='ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
               </div>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
@@ -336,7 +367,7 @@ export const EventDetail = (props) => {
                         className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                         onClick={handleClick}
                       >
-                        Create New Slot
+                        New Slot
                       </button>
                     </div>
                   </div>

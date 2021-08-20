@@ -1,33 +1,24 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react'
 import { editEvent } from '../../api'
-import { Dialog, Menu, Transition } from '@headlessui/react';
-import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
-import Avatar from 'react-avatar';
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon
-} from '@heroicons/react/outline';
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Link, useHistory, useParams, useLocation } from 'react-router-dom'
+import Avatar from 'react-avatar'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
 
 export const EditEvent = (props) => {
   const location = useLocation()
-  const { event } = location.state
+  const { eventDetails } = location.state
   const { token, authUser } = props
-  const [eventHeader, setEventHeader] = useState(`${event.event_header}`)
-  const [date, setDate] = useState(`${event.date}`)
-  const [startTime, setStartTime] = useState(`${event.start_time}`)
-  const [endTime, setEndTime] = useState(`${event.end_time}`)
-  const [type, setType] = useState(`${event.type}`)
-  const [description, setDescription] = useState(`${event.description}`)
+  const [eventHeader, setEventHeader] = useState(`${eventDetails.event_header}`)
+  const [date, setDate] = useState('')
+  const [startTime, setStartTime] = useState(`${eventDetails.start_time}`)
+  const [endTime, setEndTime] = useState(`${eventDetails.end_time}`)
+  const [type, setType] = useState(`${eventDetails.type}`)
+  const [description, setDescription] = useState(`${eventDetails.description}`)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const history = useHistory()
   const user = authUser.id
-  const { id } = useParams();
+  const { id } = useParams()
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -500,4 +491,4 @@ export const EditEvent = (props) => {
       </div>
     </div>
   )
-};
+}

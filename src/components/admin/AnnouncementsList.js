@@ -11,20 +11,20 @@ import { Link } from 'react-router-dom'
 export const AnnouncementsList = (props) => {
   const hasFetchedAnnouncements = useRef(false)
   const { token, authUser, loading, setLoading } = props
-  const [announcementPK, setAnnouncementPK] = useState('');
+  const [announcementPK, setAnnouncementPK] = useState('')
   const [announcements, setAnnouncements] = useState([])
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
     if (!hasFetchedAnnouncements.current) {
       getAnnouncements()
-      .then((data) => {
-      setAnnouncements(data)
-      setLoading(false)})
+        .then((data) => {
+          setAnnouncements(data)
+          setLoading(false)
+        })
       hasFetchedAnnouncements.current = true
-  }
-}, [announcements, setLoading])
-
+    }
+  }, [announcements, setLoading])
 
   const sortedAnnouncements = orderBy(
     announcements.results,
@@ -33,13 +33,15 @@ export const AnnouncementsList = (props) => {
   )
 
   const handleDelete = async () => {
-    const success = await deleteAnnouncement(token, announcementPK);
+    const success = await deleteAnnouncement(token, announcementPK)
     if (success) {
       getAnnouncements()
-      .then((data) => {setAnnouncements(data)
-      setLoading(false)})      
+        .then((data) => {
+          setAnnouncements(data)
+          setLoading(false)
+        })
     }
-    };
+  }
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -74,19 +76,19 @@ export const AnnouncementsList = (props) => {
     return classes.filter(Boolean).join(' ')
   }
 
-  return loading 
-  ? 'Announcements are Loading...'
-  :(
-    <div className='h-screen overflow-y-auto bg-white overflow-hidden flex'>
-      <Transition.Root show={sidebarOpen} as={Fragment}>
-        <Dialog
-          as='div'
-          static
-          className='fixed inset-0 z-40 flex md:hidden'
-          open={sidebarOpen}
-          onClose={setSidebarOpen}
-        >
-          <Transition.Child
+  return loading
+    ? 'Announcements are Loading...'
+    : (
+      <div className='h-screen overflow-y-auto bg-white overflow-hidden flex'>
+        <Transition.Root show={sidebarOpen} as={Fragment}>
+          <Dialog
+            as='div'
+            static
+            className='fixed inset-0 z-40 flex md:hidden'
+            open={sidebarOpen}
+            onClose={setSidebarOpen}
+          >
+            <Transition.Child
             as={Fragment}
             enter='transition-opacity ease-linear duration-300'
             enterFrom='opacity-0'
@@ -97,7 +99,7 @@ export const AnnouncementsList = (props) => {
           >
             <Dialog.Overlay className='fixed inset-0 bg-gray-600 bg-opacity-75' />
           </Transition.Child>
-          <Transition.Child
+            <Transition.Child
             as={Fragment}
             enter='transition ease-in-out duration-300 transform'
             enterFrom='-translate-x-full'
@@ -162,17 +164,17 @@ export const AnnouncementsList = (props) => {
               </div>
             </div>
           </Transition.Child>
-          <div className='flex-shrink-0 w-14'>
+            <div className='flex-shrink-0 w-14'>
             {/* Dummy element to force sidebar to shrink to fit close icon */}
           </div>
-        </Dialog>
-      </Transition.Root>
+          </Dialog>
+        </Transition.Root>
 
-      {/* Static sidebar for desktop */}
-      <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
+        {/* Static sidebar for desktop */}
+        <div className='hidden md:flex md:flex-shrink-0'>
+          <div className='w-64 flex flex-col'>
+            {/* Sidebar component, swap this element with another sidebar if you like */}
+            <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
                 className='h-8 w-auto'
@@ -208,18 +210,18 @@ export const AnnouncementsList = (props) => {
               </nav>
             </div>
           </div>
+          </div>
         </div>
-      </div>
-      <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex'>
-          <button
+        <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
+          <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex'>
+            <button
             className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
             onClick={() => setSidebarOpen(true)}
           >
             <span className='sr-only'>Open sidebar</span>
             <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-          <div className='flex-1 flex'>
+            <div className='flex-1 flex'>
             <nav className='flex' aria-label='Breadcrumb'>
               <ol className='flex items-center space-x-4'>
                 <li>
@@ -253,7 +255,7 @@ export const AnnouncementsList = (props) => {
               </ol>
             </nav>
           </div>
-          <div className='ml-4 flex items-center md:ml-6'>
+            <div className='ml-4 flex items-center md:ml-6'>
             {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
@@ -299,11 +301,11 @@ export const AnnouncementsList = (props) => {
               )}
             </Menu>
           </div>
-        </div>
-        <div className='overflow-y-auto px-4 sm:px-6 md:px-0'>
-          {/* Replace with your content */}
-          <CreateAnnoucements token={token} authUser={authUser} setAnnouncements={setAnnouncements} setLoading={setLoading} />
-          <div>
+          </div>
+          <div className='overflow-y-auto px-4 sm:px-6 md:px-0'>
+            {/* Replace with your content */}
+            <CreateAnnoucements token={token} authUser={authUser} setAnnouncements={setAnnouncements} setLoading={setLoading} />
+            <div>
             <h1 className='flex items-left text-med font-medium'>
               Current Announcements
             </h1>
@@ -327,46 +329,46 @@ export const AnnouncementsList = (props) => {
                       <p className='items-center text-sm text-gray-500'>
                         {announcement.text}
                       </p>
-                      <span className="hidden sm:block">
-                      <Link
-                        to={{
-                          pathname: `/announcements/edit/${announcement.alertpk}/`,
-                          state: { announcement: announcement },
-                        }}
-                      >
-                        <button
-                          type="button"
-                          className="inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200"
+                      <span className='hidden sm:block'>
+                        <Link
+                          to={{
+                            pathname: `/announcements/edit/${announcement.alertpk}/`,
+                            state: { announcement: announcement }
+                          }}
                         >
-                          <PencilIcon
-                            className="-ml-1 mr-2 h-5 w-5 text-green-500"
-                            aria-hidden="true"
+                          <button
+                            type='button'
+                            className='inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200'
+                          >
+                            <PencilIcon
+                              className='-ml-1 mr-2 h-5 w-5 text-green-500'
+                              aria-hidden='true'
+                            />
+                            Edit
+                          </button>
+                        </Link>
+                      </span>
+                      <span className='hidden sm:block'>
+                        <button
+                          type='button'
+                          className='inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+                          onClick={handleDelete}
+                        >
+                          <TrashIcon
+                            className='-ml-1 mr-2 h-5 w-5 text-red-500'
+                            aria-hidden='true'
                           />
-                          Edit
+                          Delete
                         </button>
-                      </Link>
-                    </span>
-                      <span className="hidden sm:block">
-                      <button
-                        type="button"
-                        className="inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                        onClick={handleDelete}
-                      >
-                        <TrashIcon
-                          className="-ml-1 mr-2 h-5 w-5 text-red-500"
-                          aria-hidden="true"
-                        />
-                        Delete
-                      </button>
-                    </span>
+                      </span>
                     </div>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
+          </div>
         </div>
       </div>
-    </div>
-  )
+      )
 }
