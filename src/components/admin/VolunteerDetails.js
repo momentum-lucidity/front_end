@@ -3,6 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
+import { IntakeStatus } from './IntakeStatus'
 
 import {
   ChevronRightIcon,
@@ -297,12 +298,12 @@ export const VolunteerDetails = (props) => {
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
                   Profile
                 </h3>
               </div>
+              <IntakeStatus status_bar_id={userDetails.intake_status} />
               <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
                 <div className='px-4 py-5 sm:px-6'>
                   <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Information</h3>
