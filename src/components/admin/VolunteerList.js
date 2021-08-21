@@ -262,7 +262,7 @@ export const VolunteerList = (props) => {
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-4 pb-6 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
+              <h1 className='text-2xl font-semibold text-gray-900'>View All Volunteers</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               <div className='flex flex-col'>
@@ -288,7 +288,7 @@ export const VolunteerList = (props) => {
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                             >
-                              Status
+                              Intake Status
                             </th>
                             <th
                               scope='col'
@@ -317,7 +317,6 @@ export const VolunteerList = (props) => {
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap'>
                                 <div className='text-sm text-gray-900'>{person.pronouns}</div>
-                                <div className='text-sm text-gray-500'>{person.department}</div>
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap'>
                                 <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>

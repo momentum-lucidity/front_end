@@ -3,10 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { VolunteerIntakeStatus } from './VolunteerIntakeStatus'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, PencilIcon } from '@heroicons/react/outline'
 import Avatar from 'react-avatar'
-<<<<<<< HEAD
-import { IntakeStatus } from './IntakeStatus'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -16,12 +13,9 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  CheckIcon,
   TrashIcon,
   PencilIcon
 } from '@heroicons/react/outline'
-=======
->>>>>>> main
 
 export const VolunteerDetails = (props) => {
   const { token, authUser } = props

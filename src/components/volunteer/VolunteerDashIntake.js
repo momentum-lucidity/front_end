@@ -1,32 +1,32 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
+import { StatusOptions } from "../StatusOptions";
 
-export const IntakeStatus = (props) => {
-  const [status, setStatus] = useState();
-  const [userDetails, setUserDetails] = useState([]);
-  const url = "https://momentum-lucidity.herokuapp.com/status/2/";
-
-  const steps = [
-    { id: "01", name: "Registration", status: `${userDetails.intake_status}` },
-    {
-      id: "02",
-      name: "Pending Approval",
-      status: `${userDetails.intake_status}`,
-    },
-    { id: "03", name: "Approved!", status: `${userDetails.intake_status}` },
-  ];
+export const VolunteerDashIntake = (props) => {
+  const { token, authUser } = props;
+  const [currentStatus, setCurrentStatus] = useState(StatusOptions.created);
 
   useEffect(() => {
-    axios.get(url).then((data) => console.log(data));
-  }, []);
-
+    if (authUser.intake_status === "Application Created") {
+      setCurrentStatus(StatusOptions.created);
+    }
+    if (authUser.intake_status === "Approval Pending") {
+      setCurrentStatus(StatusOptions.pending);
+    }
+    if (authUser.intake_status === "Approved") {
+      setCurrentStatus(StatusOptions.approved);
+    }
+  }, [currentStatus, authUser.intake_status]);
+  console.log(currentStatus);
   return (
     <nav aria-label="Progress">
-      <ol className="border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0">
-        {steps.map((step, stepIdx) => (
+      <l
+        role="list"
+        className="border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0"
+      >
+        {currentStatus.map((step, stepIdx) => (
           <li key={step.name} className="relative md:flex-1 md:flex">
-            {step.status === "approved" ? (
+            {step.status === "complete" ? (
               <a href={step.href} className="group flex items-center w-full">
                 <span className="px-6 py-4 flex items-center text-sm font-medium">
                   <span className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-indigo-600 rounded-full group-hover:bg-indigo-800">
@@ -40,7 +40,7 @@ export const IntakeStatus = (props) => {
                   </span>
                 </span>
               </a>
-            ) : step.status === "pending" ? (
+            ) : step.status === "current" ? (
               <a
                 href={step.href}
                 className="px-6 py-4 flex items-center text-sm font-medium"
@@ -68,8 +68,9 @@ export const IntakeStatus = (props) => {
               </a>
             )}
 
-            {stepIdx !== steps.length - 1 ? (
+            {stepIdx !== currentStatus.length - 1 ? (
               <>
+                {/* Arrow separator for lg screens and up */}
                 <div
                   className="hidden md:block absolute top-0 right-0 h-full w-5"
                   aria-hidden="true"
@@ -92,7 +93,7 @@ export const IntakeStatus = (props) => {
             ) : null}
           </li>
         ))}
-      </ol>
+      </l>
     </nav>
   );
 };
