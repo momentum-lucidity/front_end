@@ -15,6 +15,8 @@ import {
   XIcon
 } from '@heroicons/react/outline'
 import { EventsListPagination } from './EventsListPagination'
+import { orderBy } from 'lodash'
+import moment from 'moment'
 
 export const EventsList = (props) => {
   const hasFetchedEvents = useRef(false)
@@ -33,9 +35,15 @@ export const EventsList = (props) => {
     }
   }, [allEvents])
 
+  const sortedEvents = orderBy(
+    allEvents,
+    [(object) => new moment(object.date)],
+    ['desc']
+  )
+
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = allEvents.slice(indexOfFirstEvent, indexOfLastEvent)
+  const currentEvents = sortedEvents.slice(indexOfFirstEvent, indexOfLastEvent)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
