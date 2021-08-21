@@ -25,27 +25,16 @@ export const CreateDocument = (props) => {
     }
   }
 
-  const cancel = () => {
-    setDocHeader('')
-    setUrl('')
-  }
-
   return (
     <main className='flex-1 relative focus:outline-none'>
-      <div className='py-6'>
+      <div>
         <form
-          className='space-y-8 divide-y divide-gray-200'
+          className='space-y-5 my-8'
           onSubmit={handleSubmit}
         >
-          <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
-            <div className='pt-8 space-y-8 '>
+          <div className='space-y-8 divide-y divide-gray-200'>
+            <div className='space-y-8 '>
               <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Add A New Resource
-                </h3>
-              </div>
-
-              <div className='sm:col-span-6'>
                 <label
                   htmlFor='announcement-heading'
                   className='block text-sm font-medium text-gray-700'
@@ -85,13 +74,6 @@ export const CreateDocument = (props) => {
 
           <div className='pt-5'>
             <div className='flex justify-end'>
-              <button
-                type='button'
-                className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'
-                onClick={cancel}
-              >
-                Cancel
-              </button>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none'

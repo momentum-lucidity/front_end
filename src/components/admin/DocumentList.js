@@ -20,6 +20,7 @@ export const DocumentList = (props) => {
   const { token, authUser, loading, setLoading } = props;
   const [documents, setDocuments] = useState([]);
   const [documentPK, setDocumentPK] = useState('');
+  const [expand, setExpand] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   useEffect(() => {
     if (!hasFetchedDocuments.current) {
@@ -38,6 +39,10 @@ export const DocumentList = (props) => {
     .then((data) => {setDocuments(data)
     setLoading(false)})      
   }
+  };
+
+  const handleClick = () => {
+    setExpand(!expand);
   };
 
   const navigation = [
@@ -304,17 +309,28 @@ export const DocumentList = (props) => {
 
         <main className="flex flex-col relative overflow-y-auto focus:outline-none">
           <div className="py-8">
-            <div className="px-6 sm:px-6 md:px-0">
-              <h1 className="text-2xl pb-6 font-semibold text-gray-900">
+          <div className="mx-1 my-10 ">
+            <div className="sm:flex sm:items-center sm:justify-between">
+              <h1 className="text-xl leading-6 font-medium text-gray-900">
                 Admin Resources
               </h1>
+              <button
+                type="button"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onClick={handleClick}
+              >
+                Add A New Resource
+              </button>
             </div>
-            <CreateDocument
-              token={token}
-              authUser={authUser}
-              setDocuments={setDocuments}
-              setLoading={setLoading}
-            />
+            {expand && (
+              <CreateDocument
+                token={token}
+                authUser={authUser}
+                setDocuments={setDocuments}
+                setLoading={setLoading}
+              />
+            )}
+          </div>
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">
                 {items.map((item) => (

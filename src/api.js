@@ -249,9 +249,16 @@ export const deleteUser = (token, id) => {
   )
 }
 
-export const getAnnouncements = () => {
+export const getAnnouncements = (token) => {
   return axios
-    .get('https://momentum-lucidity.herokuapp.com/announcements/')
+    .get('https://momentum-lucidity.herokuapp.com/announcements/',
+    {},
+    {
+      headers: {
+        Authorization: `Token ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
     .then((res) => res.data)
 }
 
