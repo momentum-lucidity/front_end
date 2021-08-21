@@ -288,14 +288,14 @@ export const VolunteerDetails = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>
+            <div className='px-4 sm:px-6 pb-2 md:px-0'>
+              <h1 className='text-2xl font-semibold pb-1 text-gray-900'>
                 {userDetails.legal_name}
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                <h3 className='text-lg pb-3 leading-6 font-medium text-gray-900'>
                   Profile
                 </h3>
               </div>
