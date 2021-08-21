@@ -42,7 +42,7 @@ export const EditVolunteer = (props) => {
     event.preventDefault()
     const success = await editUser(token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent)
       .then((res) => res.data)
-    if (success) history.push('/volunteers')
+    if (success) history.push(`/volunteers/${id}`)
   }
 
   const navigation = [
@@ -61,7 +61,7 @@ export const EditVolunteer = (props) => {
   const userNavigation = [
     { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' }
+    { name: 'Sign out', href: '/admin/logout' }
   ]
 
   const pages = [

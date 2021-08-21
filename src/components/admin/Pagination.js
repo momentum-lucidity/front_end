@@ -1,12 +1,4 @@
- // pagination based
- const [currentPage, setCurrentPage] = useState(1)
- const [announcementsPerPage, setAnnouncementsPerPage] = useState(5)
- 
- const indexOfLastAnnouncement = currentPage * announcementsPerPage;
- const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
- const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
-
- import React from 'react';
+import React from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 
 
@@ -97,4 +89,3 @@ return (
     </div>
   </div>
 )
-  
