@@ -1,11 +1,11 @@
 import React from "react";
 
-export const Pagination = ({ announcementsPerPage, totalAnnouncements, paginate }) => {
+export const EventsListPagination = ({ eventsPerPage, totalEvents, paginate }) => {
   const pageNumbers = [];
 
   for (
     let i = 1;
-    i <= Math.ceil(totalAnnouncements / announcementsPerPage);
+    i <= Math.ceil(totalEvents / eventsPerPage);
     i++
   ) {
     pageNumbers.push(i);

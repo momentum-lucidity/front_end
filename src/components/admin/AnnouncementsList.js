@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState, useRef } from 'react'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 import { CreateAnnoucements } from './CreateAnnouncements.js'
-import { Pagination } from './Pagination.js'
+import { AnnouncementPagination } from './AnnouncementPagination.js'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { getAnnouncements, deleteAnnouncement } from '../../api'
 import Avatar from 'react-avatar'
@@ -374,7 +374,7 @@ export const AnnouncementsList = (props) => {
                   </div>
                 </li>
               ))}
-              <Pagination announcementsPerPage={announcementsPerPage} totalAnnouncements={sortedAnnouncements.length} paginate={paginate}/>
+              <AnnouncementPagination announcementsPerPage={announcementsPerPage} totalAnnouncements={sortedAnnouncements.length} paginate={paginate}/>
             </ul>
           </div>
           </div>

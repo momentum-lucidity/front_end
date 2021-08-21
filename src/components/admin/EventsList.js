@@ -14,12 +14,15 @@ import {
   UsersIcon,
   XIcon
 } from '@heroicons/react/outline'
+import { EventsListPagination } from './EventsListPagination'
 
 export const EventsList = (props) => {
   const hasFetchedEvents = useRef(false)
   const { token, authUser } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [allEvents, setAllEvents] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [eventsPerPage] = useState(3)
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
@@ -29,6 +32,12 @@ export const EventsList = (props) => {
       console.log(allEvents)
     }
   }, [allEvents])
+
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = allEvents.slice(indexOfFirstEvent, indexOfLastEvent)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const navigation = [
     { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -305,7 +314,7 @@ export const EventsList = (props) => {
             </div>
 
             <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
-              {allEvents && allEvents.map((event, idx) => (
+              {currentEvents && currentEvents.map((event, idx) => (
                 <div key={event.idx}>
                   <div
                     key={event.idx}
@@ -348,6 +357,7 @@ export const EventsList = (props) => {
                   </div>
                 </div>
               ))}
+              <EventsListPagination eventsPerPage={eventsPerPage} totalEvents={allEvents.length} paginate={paginate} />
             </div>
 
           </div>
