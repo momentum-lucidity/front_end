@@ -89,7 +89,6 @@ export const CreateDocument = (props) => {
             </div>
           </div>
         </form>
-        {/* /End replace */}
       </div>
     </main>
   )

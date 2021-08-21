@@ -3,8 +3,19 @@ import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { VolunteerIntakeStatus } from './VolunteerIntakeStatus'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, PencilIcon } from '@heroicons/react/outline'
 import Avatar from 'react-avatar'
+import {
+  ChevronRightIcon,
+  CalendarIcon,
+  FolderIcon,
+  HomeIcon,
+  InboxIcon,
+  MenuAlt2Icon,
+  UsersIcon,
+  XIcon,
+  TrashIcon,
+  PencilIcon
+} from '@heroicons/react/outline'
 
 export const VolunteerDetails = (props) => {
   const { token, authUser } = props
@@ -45,13 +56,7 @@ export const VolunteerDetails = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Volunteers', href: '/volunteers', current: true },
-    { name: 'Margot Foster Profile', href: `/volunteers/${id}`, current: true }
-  ]
-
-  const steps = [
-    { id: '01', name: 'Registration', status: `${userDetails.intake_status}` },
-    { id: '02', name: 'Pending Approval', status: `${userDetails.intake_status}` },
-    { id: '03', name: 'Approved!', status: `${userDetails.intake_status}` }
+    { name: 'Profile', href: `/volunteers/${id}`, current: true }
   ]
 
   function classNames (...classes) {
@@ -150,10 +155,8 @@ export const VolunteerDetails = (props) => {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className='hidden md:flex md:flex-shrink-0'>
         <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
@@ -236,7 +239,6 @@ export const VolunteerDetails = (props) => {
             </nav>
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
-            {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -285,15 +287,14 @@ export const VolunteerDetails = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0'>
-              <h1 className='text-2xl font-semibold text-gray-900'>
+            <div className='px-4 sm:px-6 pb-2 md:px-0'>
+              <h1 className='text-2xl font-semibold pb-1 text-gray-900'>
                 {userDetails.legal_name}
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                <h3 className='text-lg pb-3 leading-6 font-medium text-gray-900'>
                   Profile
                 </h3>
               </div>

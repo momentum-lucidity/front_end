@@ -13,13 +13,18 @@ import {
   UsersIcon,
   XIcon,
   DocumentDuplicateIcon
-} from '@heroicons/react/outline'
+} from '@heroicons/react/outline';
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: true },
   { name: 'Volunteers', href: '/volunteers', icon: UsersIcon, current: false },
   { name: 'Events', href: '/events', icon: FolderIcon, current: false },
-  { name: 'Announcements', href: '/announcements', icon: CalendarIcon, current: false },
+  {
+    name: 'Announcements',
+    href: '/announcements',
+    icon: CalendarIcon,
+    current: false
+  },
   { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
 ]
 
@@ -32,6 +37,8 @@ const actions = [
   {
     title: 'Volunteers',
     href: '/volunteers',
+    description:
+      'View all registered volunteers, manage volunteer information and status',
     icon: UsersIcon,
     iconForeground: 'text-teal-500',
     iconBackground: 'bg-teal-50'
@@ -39,13 +46,15 @@ const actions = [
   {
     title: 'Events',
     href: '/events',
+    description: 'Create, edit, delete events here. Volunteers will then be able to view posted events on their dashboard',
     icon: CalendarIcon,
     iconForeground: 'text-purple-700',
     iconBackground: 'bg-purple-50'
   },
   {
-    title: 'Documents',
+    title: 'Admin Resources',
     href: '/documents',
+    description: 'Add and view any additional external links admin may use as resources',
     icon: DocumentDuplicateIcon,
     iconForeground: 'text-teal-700',
     iconBackground: 'bg-teal-50'
@@ -53,15 +62,14 @@ const actions = [
   {
     title: 'Announcements',
     href: '/announcements',
+    description: 'Post announcements for volunteers to view',
     icon: SpeakerphoneIcon,
     iconForeground: 'text-yellow-700',
     iconBackground: 'bg-yellow-50'
   }
 ]
 
-const pages = [
-  { name: 'Dashboard', href: '/admindash', current: true }
-]
+const pages = [{ name: 'Dashboard', href: '/admindash', current: true }]
 
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
@@ -139,7 +147,9 @@ export const AdminDashboard = (props) => {
                     >
                       <item.icon
                         className={classNames(
-                          item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                          item.current
+                            ? 'text-gray-500'
+                            : 'text-gray-400 group-hover:text-gray-500',
                           'mr-4 flex-shrink-0 h-6 w-6'
                         )}
                         aria-hidden='true'
@@ -151,7 +161,9 @@ export const AdminDashboard = (props) => {
               </div>
             </div>
           </Transition.Child>
-          <div className='flex-shrink-0 w-14'>{/* Dummy element to force sidebar to shrink to fit close icon */}</div>
+          <div className='flex-shrink-0 w-14'>
+            {/* Dummy element to force sidebar to shrink to fit close icon */}
+          </div>
         </Dialog>
       </Transition.Root>
 
@@ -168,13 +180,17 @@ export const AdminDashboard = (props) => {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                      item.current
+                        ? 'bg-gray-100 text-gray-900'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                       'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
                     )}
                   >
                     <item.icon
                       className={classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                        item.current
+                          ? 'text-gray-500'
+                          : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
                       )}
                       aria-hidden='true'
@@ -202,7 +218,10 @@ export const AdminDashboard = (props) => {
                 <li>
                   <div>
                     <a href='/' className='text-gray-400 hover:text-gray-500'>
-                      <HomeIcon className='flex-shrink-0 h-5 w-5' aria-hidden='true' />
+                      <HomeIcon
+                        className='flex-shrink-0 h-5 w-5'
+                        aria-hidden='true'
+                      />
                       <span className='sr-only'>Home</span>
                     </a>
                   </div>
@@ -210,7 +229,10 @@ export const AdminDashboard = (props) => {
                 {pages.map((page) => (
                   <li key={page.name}>
                     <div className='flex items-center'>
-                      <ChevronRightIcon className='flex-shrink-0 h-5 w-5 text-gray-400' aria-hidden='true' />
+                      <ChevronRightIcon
+                        className='flex-shrink-0 h-5 w-5 text-gray-400'
+                        aria-hidden='true'
+                      />
                       <a
                         href={page.href}
                         className='ml-4 text-sm font-medium text-gray-500 hover:text-gray-700'
@@ -225,7 +247,6 @@ export const AdminDashboard = (props) => {
             </nav>
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
-
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -275,10 +296,12 @@ export const AdminDashboard = (props) => {
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='px-6 pb-6 sm:px-8 md:px-2'>
-              <h1 className='text-2xl font-semibold text-gray-900'>{authUser.display_name}'s Dashboard</h1>
+              <h1 className='text-2xl font-semibold text-gray-900'>
+                {authUser.display_name}'s Dashboard
+              </h1>
             </div>
-            <div className='px-4 sm:px-6 md:px-0'>
-              <div className='rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px'>
+            <div className='px-4 sm:px-6 md:px-0 shadow-lg border-solid border-2 border-light-blue-500 rounded-lg'>
+              <div className='rounded-lg bg-gray-300 overflow-hidden shadow divide-y divide-gray-400 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px'>
                 {actions.map((action, actionIdx) => (
                   <div
                     key={action.title}
@@ -287,7 +310,9 @@ export const AdminDashboard = (props) => {
                         ? 'rounded-tl-lg rounded-tr-lg sm:rounded-tr-none'
                         : '',
                       actionIdx === 1 ? 'sm:rounded-tr-lg' : '',
-                      actionIdx === actions.length - 2 ? 'sm:rounded-bl-lg' : '',
+                      actionIdx === actions.length - 2
+                        ? 'sm:rounded-bl-lg'
+                        : '',
                       actionIdx === actions.length - 1
                         ? 'rounded-bl-lg rounded-br-lg sm:rounded-bl-none'
                         : '',
@@ -308,11 +333,16 @@ export const AdminDashboard = (props) => {
                     <div className='mt-8'>
                       <h3 className='text-lg font-medium'>
                         <a href={action.href} className='focus:outline-none'>
-                          <span className='absolute inset-0' aria-hidden='true' />
+                          <span
+                            className='absolute inset-0'
+                            aria-hidden='true'
+                          />
                           {action.title}
                         </a>
                       </h3>
-                      <p className='mt-2 text-sm text-gray-500' />
+                      <p className='mt-2 text-sm font-semibold text-gray-700'>
+                        {action.description}
+                      </p>
                     </div>
                     <span
                       className='pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400'
@@ -336,4 +366,4 @@ export const AdminDashboard = (props) => {
       </div>
     </div>
   )
-}
+};
