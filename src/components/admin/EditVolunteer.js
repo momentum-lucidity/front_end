@@ -4,16 +4,8 @@ import { editUser } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon
-} from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
+import { StatusDropdown } from './StatusDropdown'
 
 export const EditVolunteer = (props) => {
   const { token, authUser } = props
@@ -37,6 +29,12 @@ export const EditVolunteer = (props) => {
   const [intakeStatus, setIntakeStatus] = useState(`${userDetails.intake_status}`)
   const [preferredEvent, setPreferredEvent] = useState(`${userDetails.preferred_event}`)
   const history = useHistory()
+
+  const option = [
+    { status: 'Application Created' },
+    { status: 'Approval Pending' },
+    { status: 'Approved' }
+  ]
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -335,17 +333,11 @@ export const EditVolunteer = (props) => {
 
                               <div className='col-span-6 sm:col-span-4'>
                                 <label htmlFor='intake-status' className='block text-sm font-medium text-gray-700'>
-                                  Intake Status
+                                  Current Intake Status:  {userDetails.intake_status}
                                 </label>
-                                <input
-                                  type='text'
-                                  name='intake-status'
-                                  id='intake-status'
-                                  value={intakeStatus}
-                                  onChange={(event) => setIntakeStatus(event.target.value)}
-                                  autoComplete='street-address'
-                                  className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                                />
+
+                                <StatusDropdown intakeStatus={intakeStatus} setIntakeStatus={setIntakeStatus} option={option} />
+
                               </div>
 
                               <div className='col-span-6 sm:col-span-4'>

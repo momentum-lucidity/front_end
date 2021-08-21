@@ -20,21 +20,7 @@ export const getAuthUser = (token) => {
     .then((res) => res.data)
 }
 
-export const registrationInfo = (
-  email,
-  username,
-  password,
-  displayName,
-  legalName,
-  pronouns,
-  availability,
-  telephone,
-  address2,
-  city,
-  state,
-  zip,
-  preferredEvent
-) => {
+export const registrationInfo = (email, username, password, displayName, legalName, pronouns, availability, telephone, address2, city, state, zip, preferredEvent) => {
   return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     username: `${username}`,
     password: `${password}`,
@@ -48,27 +34,13 @@ export const registrationInfo = (
     city: `${city}`,
     state: `${state}`,
     zipcode: `${zip}`,
-    user_status: 'volunteer',
-    intake_status: 'registered',
+    user_status: 'Volunteer',
+    intake_status: 'Account Created',
     preferred_event: `${preferredEvent}`
   })
 }
 
-export const adminRegistration = (
-  email,
-  username,
-  password,
-  displayName,
-  legalName,
-  pronouns,
-  availability,
-  telephone,
-  address2,
-  city,
-  state,
-  zip,
-  preferredEvent
-) => {
+export const adminRegistration = (email, username, password, displayName, legalName, pronouns, availability, telephone, address2, city, state, zip, preferredEvent) => {
   return axios.post('https://momentum-lucidity.herokuapp.com/auth/users/', {
     username: `${username}`,
     password: `${password}`,
@@ -82,8 +54,8 @@ export const adminRegistration = (
     city: `${city}`,
     state: `${state}`,
     zipcode: `${zip}`,
-    user_status: 'coordinator',
-    intake_status: 'approved',
+    user_status: 'Coordinator',
+    intake_status: 'Approved',
     preferred_event: `${preferredEvent}`
   })
 }
@@ -235,25 +207,7 @@ export const deleteEvent = (token, id) => {
   )
 }
 
-export const editUser = (
-  token,
-  id,
-  username,
-  password,
-  displayName,
-  legalName,
-  pronouns,
-  availability,
-  email,
-  telephone,
-  address2,
-  city,
-  state,
-  zip,
-  userStatus,
-  intakeStatus,
-  preferredEvent
-) => {
+export const editUser = (token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent) => {
   return axios.put(
     `https://momentum-lucidity.herokuapp.com/users/${id}/`,
     {

@@ -2,7 +2,10 @@ import { Fragment, useEffect, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import { VolunteerIntakeStatus } from './VolunteerIntakeStatus'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, PencilIcon } from '@heroicons/react/outline'
 import Avatar from 'react-avatar'
+<<<<<<< HEAD
 import { IntakeStatus } from './IntakeStatus'
 import {
   ChevronRightIcon,
@@ -17,6 +20,8 @@ import {
   TrashIcon,
   PencilIcon
 } from '@heroicons/react/outline'
+=======
+>>>>>>> main
 
 export const VolunteerDetails = (props) => {
   const { token, authUser } = props
@@ -299,7 +304,7 @@ export const VolunteerDetails = (props) => {
                   Profile
                 </h3>
               </div>
-              <IntakeStatus status_bar_id={userDetails.intake_status} />
+              <VolunteerIntakeStatus token={token} userDetails={userDetails} />
               <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
                 <div className='px-4 py-5 sm:px-6'>
                   <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Information</h3>
