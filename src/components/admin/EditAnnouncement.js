@@ -303,7 +303,7 @@ export const EditAnnouncement = (props) => {
         </div>
         <main className="flex-1 relative focus:outline-none">
           <div className="py-6">
-            <form className="space-y-8 divide-y divide-gray-200">
+            <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
               <div className="space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200">
                 <div className="pt-8 space-y-8 ">
                   <div>
@@ -368,7 +368,6 @@ export const EditAnnouncement = (props) => {
                     <button
                       type="submit"
                       className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onClick={handleSubmit}
                     >
                       Save
                     </button>
