@@ -361,7 +361,6 @@ export const DocumentList = (props) => {
                   </li>
                 ))}
               </ul>
-              {/* /End replace */}
             </div>
           </div>
         </main>

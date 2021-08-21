@@ -65,7 +65,7 @@ export const EditVolunteer = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Volunteers', href: '/volunteers', current: true },
-    { name: 'Margot Foster Profile', href: `/volunteers/${userDetails.id}`, current: true }
+    { name: 'Profile', href: `/volunteers/${userDetails.id}`, current: true }
   ]
 
   function classNames (...classes) {
@@ -164,10 +164,8 @@ export const EditVolunteer = (props) => {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className='hidden md:flex md:flex-shrink-0'>
         <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
@@ -250,7 +248,6 @@ export const EditVolunteer = (props) => {
             </nav>
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
-            {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -305,7 +302,6 @@ export const EditVolunteer = (props) => {
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
-              {/* Replace with your content */}
               <>
                 <div className='mt-10 sm:mt-0'>
                   <div className='md:grid md:grid-cols-3 md:gap-6'>
@@ -557,9 +553,7 @@ export const EditVolunteer = (props) => {
                     </div>
                   </div>
                 </div>
-
               </>
-              {/* /End replace */}
             </div>
           </div>
         </main>
