@@ -337,7 +337,7 @@ export const EditVolunteer = (props) => {
 
                               <div className='col-span-6 sm:col-span-4'>
                                 <label htmlFor='intake-status' className='block text-sm font-medium text-gray-700'>
-                                  Current Intake Status:  {intakeStatus}
+                                  Current Intake Status:  {userDetails.intake_status}
                                 </label>
 
                                 <StatusDropdown intakeStatus={intakeStatus} setIntakeStatus={setIntakeStatus} option={option} />

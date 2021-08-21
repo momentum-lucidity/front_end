@@ -6,8 +6,14 @@ function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const option = [
+  { status: 'Application Created' },
+  { status: 'Approval Pending' },
+  { status: 'Approved' }
+]
+
 export const StatusDropdown = (props) => {
-  const { option, intakeStatus, setIntakeStatus } = props
+  const { intakeStatus, setIntakeStatus } = props
 
   return (
 
