@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState, useRef } from 'react'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 import { CreateAnnoucements } from './CreateAnnouncements.js'
+import { Pagination } from './Pagination.js'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { getAnnouncements, deleteAnnouncement } from '../../api'
 import Avatar from 'react-avatar'
@@ -13,6 +14,8 @@ export const AnnouncementsList = (props) => {
   const { token, authUser, loading, setLoading } = props
   const [announcementPK, setAnnouncementPK] = useState('')
   const [announcements, setAnnouncements] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [announcementsPerPage] = useState(3)
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   useEffect(() => {
@@ -31,6 +34,12 @@ export const AnnouncementsList = (props) => {
     [(object) => new moment(object.date)],
     ['desc']
   )
+
+  const indexOfLastAnnouncement = currentPage * announcementsPerPage;
+  const indexOfFirstAnnouncement = indexOfLastAnnouncement - announcementsPerPage;
+  const currentAnnouncements = sortedAnnouncements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const handleDelete = async () => {
     const success = await deleteAnnouncement(token, announcementPK)
@@ -310,7 +319,7 @@ export const AnnouncementsList = (props) => {
               Current Announcements
             </h1>
             <ul className='divide-y divide-gray-200'>
-              {sortedAnnouncements.map((announcement, idx) => (
+              {currentAnnouncements.map((announcement, idx) => (
                 <li
                   key={announcement.alertpk}
                   className='py-4 sm:border-t sm:border-gray-200'
@@ -365,6 +374,7 @@ export const AnnouncementsList = (props) => {
                   </div>
                 </li>
               ))}
+              <Pagination announcementsPerPage={announcementsPerPage} totalAnnouncements={sortedAnnouncements.length} paginate={paginate}/>
             </ul>
           </div>
           </div>

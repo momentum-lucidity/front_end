@@ -32,7 +32,7 @@ export const CreateAnnoucements = (props) => {
           className='space-y-8 divide-y divide-gray-200'
           onSubmit={handleSubmit}
         >
-          <div className='space-y-8 divide-y divide-gray-200 '>
+          <div className='space-y-8 divide-y divide-gray-200'>
             <div className='pt-8 space-y-8 '>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
