@@ -42,7 +42,7 @@ export const EditVolunteer = (props) => {
     event.preventDefault()
     const success = await editUser(token, id, username, password, displayName, legalName, pronouns, availability, email, telephone, address2, city, state, zip, userStatus, intakeStatus, preferredEvent)
       .then((res) => res.data)
-    if (success) history.push('/volunteers')
+    if (success) history.push(`/volunteers/${id}`)
   }
 
   const navigation = [
@@ -67,7 +67,7 @@ export const EditVolunteer = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Volunteers', href: '/volunteers', current: true },
-    { name: 'Margot Foster Profile', href: `/volunteers/${userDetails.id}`, current: true }
+    { name: 'Profile', href: `/volunteers/${userDetails.id}`, current: true }
   ]
 
   function classNames (...classes) {

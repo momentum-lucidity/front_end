@@ -4,7 +4,6 @@ import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
 import { IntakeStatus } from './IntakeStatus'
-
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -58,7 +57,7 @@ export const VolunteerDetails = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Volunteers', href: '/volunteers', current: true },
-    { name: 'Margot Foster Profile', href: `/volunteers/${id}`, current: true }
+    { name: 'Profile', href: `/volunteers/${id}`, current: true }
   ]
 
   function classNames (...classes) {
@@ -157,10 +156,8 @@ export const VolunteerDetails = (props) => {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className='hidden md:flex md:flex-shrink-0'>
         <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
@@ -243,7 +240,6 @@ export const VolunteerDetails = (props) => {
             </nav>
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
-            {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>

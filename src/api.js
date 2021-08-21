@@ -255,7 +255,7 @@ export const editUser = (
   preferredEvent
 ) => {
   return axios.put(
-    `https://momentum-lucidity.herokuapp.com/auth/users/${id}/`,
+    `https://momentum-lucidity.herokuapp.com/users/${id}/`,
     {
       username: username,
       password: password,

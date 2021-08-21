@@ -138,10 +138,8 @@ export const VolunteerList = (props) => {
         </Dialog>
       </Transition.Root>
 
-      {/* Static sidebar for desktop */}
       <div className='hidden md:flex md:flex-shrink-0'>
         <div className='w-64 flex flex-col'>
-          {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-0 px-4 flex items-center'>
               <img
@@ -215,7 +213,6 @@ export const VolunteerList = (props) => {
           </div>
           <div className='ml-4 flex items-center md:ml-6'>
 
-            {/* Profile dropdown */}
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -279,13 +276,13 @@ export const VolunteerList = (props) => {
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                             >
-                              Name
+                              Preferred Name/Legal Name
                             </th>
                             <th
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                             >
-                              Title
+                              Pronouns
                             </th>
                             <th
                               scope='col'
@@ -297,7 +294,7 @@ export const VolunteerList = (props) => {
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                             >
-                              Role
+                              Telephone
                             </th>
                             <th scope='col' className='relative px-6 py-3'>
                               <span className='sr-only'>Edit</span>
@@ -341,7 +338,6 @@ export const VolunteerList = (props) => {
                   </div>
                 </div>
               </div>
-              {/* /End replace */}
             </div>
           </div>
         </main>
