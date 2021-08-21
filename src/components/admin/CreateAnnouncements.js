@@ -27,19 +27,13 @@ export const CreateAnnoucements = (props) => {
 
   return (
     <main className='flex-1 relative focus:outline-none'>
-      <div className='py-6'>
+      <div>
         <form
-          className='space-y-8 divide-y divide-gray-200'
+          className='space-y-5 my-8'
           onSubmit={handleSubmit}
         >
           <div className='space-y-8 divide-y divide-gray-200'>
-            <div className='pt-8 space-y-8 '>
-              <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Add A New Announcement
-                </h3>
-              </div>
-
+            <div className='space-y-8'>
               <div className='sm:col-span-6'>
                 <label
                   htmlFor='announcement-heading'
@@ -80,7 +74,7 @@ export const CreateAnnoucements = (props) => {
             </div>
           </div>
 
-          <div className='pt-5'>
+          <div className='pt-1'>
             <div className='flex justify-end'>
               <button
                 type='submit'
