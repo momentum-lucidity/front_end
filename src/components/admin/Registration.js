@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { adminRegistration, requestLogin } from '../../api'
 
 export const Registration = (props) => {
-  const { setToken, setAuthUser } = props
+  const { setToken } = props
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -21,7 +21,7 @@ export const Registration = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-     await adminRegistration(
+  const success = await adminRegistration(
       email,
       username,
       password,
@@ -35,14 +35,12 @@ export const Registration = (props) => {
       state,
       zip,
       preferredEvent)
-    await  requestLogin(username, password)
+  if (success) requestLogin(username, password)
       .then((data) => { 
-        if (data && data.data.auth_token) {
+        if (data && data.data.auth_token) 
           setToken(data.data.auth_token)
-          setAuthUser(data.data.username)
-        }
-      })
-       history.push('/admindash') 
+        })
+      history.push('/admindash') 
   }
   return (
     <>
