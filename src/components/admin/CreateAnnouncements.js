@@ -34,7 +34,7 @@ export const CreateAnnoucements = (props) => {
         >
           <div className='space-y-8 divide-y divide-gray-200'>
             <div className='space-y-8'>
-              <div className='sm:col-span-6'>
+              <div>
                 <label
                   htmlFor='announcement-heading'
                   className='block text-sm font-medium text-gray-700'

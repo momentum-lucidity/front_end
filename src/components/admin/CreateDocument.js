@@ -27,20 +27,14 @@ export const CreateDocument = (props) => {
 
   return (
     <main className='flex-1 relative focus:outline-none'>
-      <div className='py-6'>
+      <div>
         <form
-          className='space-y-8 divide-y divide-gray-200'
+          className='space-y-5 my-8'
           onSubmit={handleSubmit}
         >
-          <div className='space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200'>
-            <div className='pt-8 space-y-8 '>
+          <div className='space-y-8 divide-y divide-gray-200'>
+            <div className='space-y-8 '>
               <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
-                  Add A New Resource
-                </h3>
-              </div>
-
-              <div className='sm:col-span-6'>
                 <label
                   htmlFor='announcement-heading'
                   className='block text-sm font-medium text-gray-700'

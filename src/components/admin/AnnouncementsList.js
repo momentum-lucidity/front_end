@@ -27,7 +27,7 @@ export const AnnouncementsList = (props) => {
   const [announcements, setAnnouncements] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [announcementsPerPage] = useState(3);
-  const [expandNew, setExpandNew] = useState(false);
+  const [expand, setExpand] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const AnnouncementsList = (props) => {
   };
 
   const handleClick = () => {
-    setExpandNew(!expandNew);
+    setExpand(!expand);
   };
 
   const navigation = [
@@ -340,7 +340,7 @@ export const AnnouncementsList = (props) => {
                 Add A New Announcement
               </button>
             </div>
-            {expandNew && (
+            {expand && (
               <CreateAnnoucements
                 token={token}
                 authUser={authUser}
