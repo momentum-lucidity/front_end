@@ -300,8 +300,8 @@ export const AdminDashboard = (props) => {
                 {authUser.display_name}'s Dashboard
               </h1>
             </div>
-            <div className='px-4 sm:px-6 md:px-0'>
-              <div className='rounded-lg bg-gray-200 overflow-hidden shadow divide-y divide-gray-200 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px'>
+            <div className='px-4 sm:px-6 md:px-0 shadow-lg border-solid border-2 border-light-blue-500 rounded-lg'>
+              <div className='rounded-lg bg-gray-300 overflow-hidden shadow divide-y divide-gray-400 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-px'>
                 {actions.map((action, actionIdx) => (
                   <div
                     key={action.title}
@@ -340,13 +340,9 @@ export const AdminDashboard = (props) => {
                           {action.title}
                         </a>
                       </h3>
-<<<<<<< HEAD
                       <p className='mt-2 text-sm font-semibold text-gray-700'>
                         {action.description}
                       </p>
-=======
-                      <p className='mt-2 text-sm text-gray-500' />
->>>>>>> main
                     </div>
                     <span
                       className='pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-gray-400'
