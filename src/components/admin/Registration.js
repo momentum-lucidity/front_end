@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { adminRegistration, requestLogin } from '../../api'
 
@@ -21,7 +21,7 @@ export const Registration = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    adminRegistration(
+     await adminRegistration(
       email,
       username,
       password,
@@ -35,14 +35,14 @@ export const Registration = (props) => {
       state,
       zip,
       preferredEvent)
-     await requestLogin(username, password)
+    await  requestLogin(username, password)
       .then((data) => { 
         if (data && data.data.auth_token) {
           setToken(data.data.auth_token)
           setAuthUser(data.data.username)
-          history.push('/admindash')
         }
       })
+       history.push('/admindash') 
   }
   return (
     <>
@@ -55,7 +55,7 @@ export const Registration = (props) => {
             </div>
           </div>
           <div className='mt-5 md:mt-0 md:col-span-2'>
-            <form action='#' method='POST' onSubmit={handleSubmit}>
+            <form action='#' method='POST' onSubmit={handleSubmit} >
               <div className='shadow overflow-hidden sm:rounded-md'>
                 <div className='px-4 py-5 bg-white sm:p-6'>
                   <div className='grid grid-cols-6 gap-6'>
