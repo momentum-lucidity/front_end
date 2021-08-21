@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { adminRegistration, requestLogin } from '../../api'
 
 export const Registration = (props) => {
-  const { setToken, setAuthUser } = props
+  const { setToken } = props
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -19,9 +19,9 @@ export const Registration = (props) => {
   const [preferredEvent, setPreferredEvent] = useState('')
   const history = useHistory()
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    adminRegistration(
+  const success = await adminRegistration(
       email,
       username,
       password,
@@ -35,14 +35,12 @@ export const Registration = (props) => {
       state,
       zip,
       preferredEvent)
-    requestLogin(username, password)
-      .then((data) => {
-        if (data && data.data.auth_token) {
+  if (success) requestLogin(username, password)
+      .then((data) => { 
+        if (data && data.data.auth_token) 
           setToken(data.data.auth_token)
-          setAuthUser(data.data.username)
-          history.push('/admindash')
-        }
-      })
+        })
+      history.push('/admindash') 
   }
   return (
     <>
@@ -55,7 +53,7 @@ export const Registration = (props) => {
             </div>
           </div>
           <div className='mt-5 md:mt-0 md:col-span-2'>
-            <form action='#' method='POST' onSubmit={handleSubmit}>
+            <form action='#' method='POST' onSubmit={handleSubmit} >
               <div className='shadow overflow-hidden sm:rounded-md'>
                 <div className='px-4 py-5 bg-white sm:p-6'>
                   <div className='grid grid-cols-6 gap-6'>
