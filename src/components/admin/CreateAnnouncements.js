@@ -103,7 +103,6 @@ export const CreateAnnoucements = (props) => {
             </div>
           </div>
         </form>
-        {/* /End replace */}
       </div>
     </main>
   )
