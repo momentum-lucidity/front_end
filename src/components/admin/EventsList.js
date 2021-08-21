@@ -337,7 +337,7 @@ export const EventsList = (props) => {
                             <div className='sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800'>
                               Volunteers Needed
                             </div>
-                            <div className='sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
+                            <div className='git sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
                               Volunteers Signed Up
                             </div>
                           </div>
