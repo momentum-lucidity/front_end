@@ -325,9 +325,9 @@ export const EditAnnouncement = (props) => {
                 </div>
               )}
               <div className='space-y-8 divide-y divide-gray-200'>
-                <div className='pt-8 space-y-8 '>
+                <div className='pt-8 space-y-8'>
                   <div>
-                    <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                    <h3 className='text-lg leading-6 font-medium text-gray-900 sm:border-b sm:border-gray-200 sm:pb-5'>
                       Edit Announcement
                     </h3>
                   </div>

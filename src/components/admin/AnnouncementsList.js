@@ -391,7 +391,7 @@ export const AnnouncementsList = (props) => {
                           {announcement.alert_header}
                         </h3>
                         <p className="text-sm text-gray-500">
-                          posted on: {moment(announcement.date).format("LT")}
+                          posted at: {moment(announcement.date).format("LT")}
                         </p>
                       </div>
                       <p className="items-center text-sm text-gray-500">
