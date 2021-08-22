@@ -15,7 +15,7 @@ import { useLocation, useHistory, Link, useParams } from "react-router-dom";
 import { editAnnouncement } from "../../api";
 
 export const EditAnnouncement = (props) => {
-  const { token, authUser } = props;
+  const { token, authUser, setErrors, errors } = props;
   const location = useLocation();
   const { announcement } = location.state;
   const [alertHeader, setAlertHeader] = useState(
@@ -35,7 +35,10 @@ export const EditAnnouncement = (props) => {
       user,
       alertHeader,
       text
-    ).then((res) => res.data);
+    ).then((res) => res.data)
+    .catch((error) => {
+      setErrors(error.message);
+    });
     if (editWorked) history.push("/announcements");
   };
 
@@ -299,9 +302,15 @@ export const EditAnnouncement = (props) => {
           </div>
         </div>
         <main className="flex-1 relative focus:outline-none">
-          <div className="py-6">
+          <div className="py-3">
             <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-              <div className="space-y-8 divide-y divide-gray-200 sm:border-t sm:border-gray-200">
+            {errors && (
+            <div className="text-red-600">
+              Submit Failed: You must fill out all of the fields. <br /> Please
+              try again.
+            </div>
+          )}
+              <div className="space-y-8 divide-y divide-gray-200">
                 <div className="pt-8 space-y-8 ">
                   <div>
                     <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -359,16 +368,17 @@ export const EditAnnouncement = (props) => {
                     <button
                       type="button"
                       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={() => setErrors()}
                     >
                       Cancel
                     </button>
+                    </Link>
                     <button
                       type="submit"
                       className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                       Save
                     </button>
-                  </Link>
                 </div>
               </div>
             </form>

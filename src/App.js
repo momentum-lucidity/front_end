@@ -261,6 +261,8 @@ function App () {
                 setAuthUser={setAuthUser}
                 loading={loading}
                 setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -273,6 +275,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />

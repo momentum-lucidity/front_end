@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 
 export const AnnouncementsList = (props) => {
   const hasFetchedAnnouncements = useRef(false);
-  const { token, authUser, loading, setLoading } = props;
+  const { token, authUser, loading, setLoading, errors, setErrors } = props;
   const [announcementPK, setAnnouncementPK] = useState("");
   const [announcements, setAnnouncements] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +67,8 @@ export const AnnouncementsList = (props) => {
   };
 
   const handleClick = () => {
-    setExpand(!expand);
+    setExpand(!expand)
+    setErrors();
   };
 
   const navigation = [
@@ -346,9 +347,17 @@ export const AnnouncementsList = (props) => {
                 authUser={authUser}
                 setAnnouncements={setAnnouncements}
                 setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           </div>
+          {errors && (
+            <div className="text-red-600">
+              Submit Failed: You must fill out all of the fields. <br /> Please
+              try again.
+            </div>
+          )}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-1">
             <ul className="divide-y divide-gray-200">
               {currentAnnouncements.map((announcement, idx) => (

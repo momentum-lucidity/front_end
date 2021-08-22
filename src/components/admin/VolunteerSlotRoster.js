@@ -43,6 +43,7 @@ export const VolunteerSlotRoster = (props) => {
   return (
 
     <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
+      
       {filteredSlots.map((slot) => (
         <div
           key={slot.slotpk}
