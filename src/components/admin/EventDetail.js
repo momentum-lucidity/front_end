@@ -70,7 +70,6 @@ export const EventDetail = (props) => {
 
   const userNavigation = [
     { name: "Your Profile", href: "/adminprofile" },
-    { name: "Settings", href: "#" },
     { name: "Sign out", href: "/admin/logout" },
   ];
 

@@ -67,10 +67,8 @@ export const EditAnnouncement = (props) => {
 
   const userNavigation = [
     { name: 'Your Profile', href: '/adminprofile' },
-    { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '/admin/logout' }
   ]
-
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Announcements', href: '/announcements', current: false },
