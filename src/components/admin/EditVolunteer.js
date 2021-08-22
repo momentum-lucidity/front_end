@@ -94,8 +94,8 @@ export const EditVolunteer = (props) => {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Sign out", href: "/admin/logout" }
+    { name: "Your Profile", href: "/adminprofile" },
+    { name: "Sign out", href: "/admin/logout" },
   ];
 
   const pages = [

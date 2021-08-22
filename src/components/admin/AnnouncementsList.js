@@ -91,7 +91,7 @@ export const AnnouncementsList = (props) => {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
+    { name: "Your Profile", href: "/adminprofile" },
     { name: "Sign out", href: "/admin/logout" },
   ];
 
