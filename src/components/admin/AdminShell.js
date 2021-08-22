@@ -1,71 +1,11 @@
-import { Fragment, useEffect, useState, useRef } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { Link } from 'react-router-dom'
-import { getEventsList } from '../../api'
+import React, { Fragment } from 'react'
+import { Transition, Dialog, Menu } from '@headlessui/react'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
 import Avatar from 'react-avatar'
 import Logo from '../images/1x/logo.png'
 
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
-import { EventsListPagination } from './EventsListPagination'
-import { orderBy } from 'lodash'
-import moment from 'moment'
-
-export const EventsList = (props) => {
-  const hasFetchedEvents = useRef(false)
-  const { token, authUser } = props
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [allEvents, setAllEvents] = useState([])
-  const [currentPage, setCurrentPage] = useState(1)
-  const [eventsPerPage] = useState(3)
-
-  useEffect(() => {
-    if (!hasFetchedEvents.current) {
-      getEventsList(token)
-        .then((data) => setAllEvents(data.results))
-      hasFetchedEvents.current = true
-      console.log(allEvents)
-    }
-  }, [allEvents])
-
-  const sortedEvents = orderBy(
-    allEvents,
-    [(object) => new moment(object.date)],
-    ['desc']
-  )
-
-  const indexOfLastEvent = currentPage * eventsPerPage
-  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage
-  const currentEvents = sortedEvents.slice(indexOfFirstEvent, indexOfLastEvent)
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-  const navigation = [
-    { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
-    {
-      name: 'Volunteers',
-      href: '/volunteers',
-      icon: UsersIcon,
-      current: false
-    },
-    { name: 'Events', href: '/events', icon: FolderIcon, current: true },
-    {
-      name: 'Announcements',
-      href: '/announcements',
-      icon: CalendarIcon,
-      current: false
-    },
-    { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
-  ]
-
-  const userNavigation = [
-    { name: 'Your Profile', href: '/adminprofile' },
-    { name: 'Sign out', href: '/admin/logout' }
-  ]
-
-  const pages = [
-    { name: 'Dashboard', href: '/admindash', current: false },
-    { name: 'All Events', href: '/events', current: true }
-  ]
+export const AdminShell = (props) => {
+  const { navigation, pages, authUser, userNavigation, sidebarOpen, setSidebarOpen } = props
 
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
@@ -291,73 +231,6 @@ export const EventsList = (props) => {
             </Menu>
           </div>
         </div>
-
-        <main className='flex-1 relative overflow-y-auto focus:outline-none'>
-          <div className='py-6'>
-            <div className='pb-5 border-gray-200 sm:flex sm:items-center sm:justify-between'>
-              <h3 className='text-3xl leading-6 font-semibold text-gray-900'>Upcoming Events</h3>
-              <div className='mt-3 sm:mt-0 sm:ml-4'>
-                <Link to='/events/eventform'>
-                  <button
-                    type='button'
-                    className='relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                  >
-                    New Event
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
-              {currentEvents && currentEvents.map((event, idx) => (
-                <div key={event.idx}>
-                  <div
-                    key={event.idx}
-                    className='relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500'
-                  >
-                    <div className='flex-shrink-0' id='img_holder' />
-                    <div className='grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2'>
-                      <Link
-                        to={{
-
-                          pathname: `/events/${event.eventpk}/`,
-                          state: { event: event }
-                        }}
-                      >
-                        <a
-                          href={`/events/${event.eventpk}`}
-                          className='block focus:outline-none'
-                        >
-                          <p className='text-sm font-medium text-gray-900 truncate'>
-                            {event.event_header}
-                          </p>
-                          <div className='grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2'>
-                            <p className='sm:col-span-1 text-sm text-gray-500 truncate'>
-                              {event.date}
-                            </p>
-                            <p className='sm:col-span-1 text-sm text-gray-500 truncate'>
-                              {event.time}
-                            </p>
-                            <div className='sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800'>
-                              Volunteers Needed
-                            </div>
-                            <div className='git sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
-                              Volunteers Signed Up
-                            </div>
-                          </div>
-
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              <div className='flex items-center justify-center'>
-                <EventsListPagination eventsPerPage={eventsPerPage} totalEvents={allEvents.length} paginate={paginate} />
-              </div>
-            </div>
-          </div>
-        </main>
       </div>
     </div>
   )
