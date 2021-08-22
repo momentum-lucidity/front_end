@@ -25,7 +25,7 @@ export const EventsList = (props) => {
       hasFetchedEvents.current = true
       console.log(allEvents)
     }
-  }, [allEvents])
+  }, [allEvents, token])
 
   const sortedEvents = orderBy(
     allEvents,

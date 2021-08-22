@@ -373,7 +373,7 @@ export const DocumentList = (props) => {
                               >
                                 <a
                                   href={document.url}
-                                  className='text-gray-900 font-medium hover:text-gray-600'
+                                  className='text-gray-900 font-medium hover:text-gray-200'
                                   target='_blank'
                                   rel='noreferrer noopener'
                                 >

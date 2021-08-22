@@ -28,32 +28,32 @@ const actions = [
     description:
       'View all registered volunteers, manage volunteer information and status',
     icon: UsersIcon,
-    iconForeground: 'text-teal-500',
-    iconBackground: 'bg-teal-50'
+    iconForeground: 'text-pink-700',
+    iconBackground: 'bg-pink-50'
   },
   {
     title: 'Events',
     href: '/events',
     description: 'Create, edit, delete events here. Volunteers will then be able to view posted events on their dashboard',
     icon: CalendarIcon,
-    iconForeground: 'text-purple-700',
-    iconBackground: 'bg-purple-50'
+    iconForeground: 'text-blue-700',
+    iconBackground: 'bg-blue-50'
   },
   {
     title: 'Admin Resources',
     href: '/documents',
     description: 'Add and view any additional external links admin may use as resources',
     icon: DocumentDuplicateIcon,
-    iconForeground: 'text-teal-700',
-    iconBackground: 'bg-teal-50'
+    iconForeground: 'text-purple-700',
+    iconBackground: 'bg-purple-50'
   },
   {
     title: 'Announcements',
     href: '/announcements',
     description: 'Post announcements for volunteers to view',
     icon: SpeakerphoneIcon,
-    iconForeground: 'text-yellow-700',
-    iconBackground: 'bg-yellow-50'
+    iconForeground: 'text-green-700',
+    iconBackground: 'bg-green-50'
   }
 ]
 
