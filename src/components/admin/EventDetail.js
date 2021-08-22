@@ -296,17 +296,10 @@ export const EventDetail = (props) => {
         <div>
           {/* Content goes here */}
         </div>
-<<<<<<< HEAD
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
             <div className='pb-8 border-gray-200 sm:flex sm:items-center sm:justify-between'>
               <h3 className='text-3xl leading-6 font-medium text-gray-900'>
-=======
-        <main className="flex-1 relative overflow-y-auto focus:outline-none">
-          <div className="py-6">
-            <div className="pb-5  sm:flex sm:items-center sm:justify-between">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
->>>>>>> main
                 {eventDetails.event_header}
               </h3>
               <div className='mt-3 flex sm:mt-0 sm:ml-4'>
