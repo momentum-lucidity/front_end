@@ -1,38 +1,16 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import Logo from '../images/1x/logo.png'
-import Avatar from 'react-avatar'
+import React, { Fragment } from 'react'
+import { Transition, Dialog, Menu } from '@headlessui/react'
 import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
+import Avatar from 'react-avatar'
+import Logo from '../images/1x/logo.png'
 
-const navigation = [
-  { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: true },
-  { name: 'Volunteers', href: '/volunteers', icon: UsersIcon, current: false },
-  { name: 'Events', href: '/events', icon: FolderIcon, current: false },
-  {
-    name: 'Announcements',
-    href: '/announcements',
-    icon: CalendarIcon,
-    current: false
-  },
-  { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
-]
+export const AdminShell = (props) => {
+  const { navigation, pages, authUser, userNavigation, sidebarOpen, setSidebarOpen } = props
 
-const userNavigation = [
-  { name: 'Your Profile', href: '/adminprofile' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '/admin/logout' }
-]
+  function classNames (...classes) {
+    return classes.filter(Boolean).join(' ')
+  }
 
-const pages = [{ name: 'Dashboard', href: '/admindash', current: true }]
-
-function classNames (...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export const AdminProfile = (props) => {
-  const { authUser } = props
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  console.log(authUser)
   return (
     <div className='h-screen bg-gray-50 overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -251,109 +229,6 @@ export const AdminProfile = (props) => {
                 </>
               )}
             </Menu>
-          </div>
-        </div>
-
-        <div className='bg-white shadow overflow-hidden sm:rounded-xl mt-16 mb-8 overflow-y-auto pb-4'>
-          <div className='px-4 py-5 sm:px-6'>
-            <h1 className='text-2xl font-semibold text-gray-900'>
-              {authUser.display_name}'s Profile
-            </h1>
-            <p className='mt-1 max-w-2xl text-sm text-gray-600'>
-              Personal details
-            </p>
-          </div>
-          <div className='border-t border-gray-400 px-4 py-5 sm:p-0'>
-            <dl className='sm:divide-y sm:divide-gray-300'>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Full name
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.legal_name}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Preferred Name
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.display_name}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Prounouns
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.pronouns}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Email address
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.email}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Telephone Number
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.telephone}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Street Address
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.address2}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  City
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.city}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  State
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.state}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Zipcode
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.zipcode}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Availibility
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.availability}
-                </dd>
-              </div>
-              <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                <dt className='text-sm font-medium font-semibold text-gray-600'>
-                  Preferred Events
-                </dt>
-                <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                  {authUser.preferred_event}
-                </dd>
-              </div>
-            </dl>
           </div>
         </div>
       </div>
