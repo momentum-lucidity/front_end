@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { getAuthUser, getVolunteerList } from './api';
 import { useLocalStorageState } from 'use-local-storage-state';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminProfile } from './components/admin/AdminProfile';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { VolunteerList } from './components/admin/VolunteerList';
 import { VolunteerDetails } from './components/admin/VolunteerDetails';
@@ -126,6 +127,18 @@ function App () {
             path='/admindash'
             component={() => (
               <AdminDashboard
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/adminprofile'
+            component={() => (
+              <AdminProfile
                 token={token}
                 setToken={setToken}
                 authUser={authUser}
