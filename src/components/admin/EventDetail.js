@@ -309,7 +309,7 @@ export const EventDetail = (props) => {
         </div>
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6">
-            <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+            <div className="pb-5  sm:flex sm:items-center sm:justify-between">
               <h3 className="text-lg leading-6 font-medium text-gray-900">
                 {eventDetails.event_header}
               </h3>
