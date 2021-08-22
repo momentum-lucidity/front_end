@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getDocuments, createDocument } from '../../api';
 
 export const CreateDocument = (props) => {
-  const { token, authUser, setDocuments, setLoading } = props
+  const { token, authUser, setDocuments, setLoading, setErrors } = props
   const [docHeader, setDocHeader] = useState('')
   const [url, setUrl] = useState('')
   const user = authUser.id
@@ -51,7 +51,6 @@ export const CreateDocument = (props) => {
                   />
                 </div>
               </div>
-
               <div className='sm:col-span-6'>
                 <label
                   htmlFor='announcement-body'

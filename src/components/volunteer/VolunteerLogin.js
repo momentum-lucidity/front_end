@@ -6,14 +6,15 @@ import { requestLogin } from '../../api'
 export const VolunteerLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken, token } = props
+  const { setToken, setErrors, errors } = props
   const history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     requestLogin(username, password)
-      .then((data) => setToken(data.data.auth_token))
-    history.push('/dreamcenter/volunteerdash')
+      .then((data) => {setToken(data.data.auth_token)
+    history.push('/dreamcenter/volunteerdash')})
+    .catch((error) => {setErrors(error.message)})
   }
 
   return (
@@ -34,6 +35,7 @@ export const VolunteerLogin = (props) => {
           </p>
         </div>
         <form className='mt-8 space-y-6' action='#' method='POST' onSubmit={handleSubmit}>
+        { errors && <div className='text-red-600'>Login Failed: Your user ID or password is incorrect. <br /> Please try logging in again.</div>}
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>

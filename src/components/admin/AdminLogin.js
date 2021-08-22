@@ -6,14 +6,15 @@ import { requestLogin } from '../../api'
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = props
+  const { setToken, errors, setErrors } = props
   const history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     requestLogin(username, password)
-      .then((data) => setToken(data.data.auth_token))
-    history.push('/admindash')
+      .then((data) => {setToken(data.data.auth_token)
+      history.push('/admindash')})
+      .catch((error) => {setErrors(error.message)})
   }
 
   return (
@@ -40,6 +41,7 @@ export const AdminLogin = (props) => {
           </p>
         </div>
         <form className='mt-8 space-y-6' action='#' method='POST' onSubmit={handleSubmit}>
+        { errors && <div className='text-red-600'>Login Failed: Your user ID or password is incorrect. <br /> Please try logging in again.</div>}
           <input type='hidden' name='remember' defaultValue='true' />
           <div className='rounded-md shadow-sm -space-y-px'>
             <div>

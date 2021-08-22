@@ -49,6 +49,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -73,6 +75,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -97,6 +101,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -110,6 +116,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />

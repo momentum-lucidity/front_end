@@ -17,7 +17,7 @@ import { CreateDocument } from "./CreateDocument";
 
 export const DocumentList = (props) => {
   const hasFetchedDocuments = useRef(false);
-  const { token, authUser, loading, setLoading } = props;
+  const { token, authUser, loading, setLoading, errors, setErrors } = props;
   const [documents, setDocuments] = useState([]);
   const [documentPK, setDocumentPK] = useState('');
   const [expand, setExpand] = useState(false);
@@ -328,6 +328,8 @@ export const DocumentList = (props) => {
                 authUser={authUser}
                 setDocuments={setDocuments}
                 setLoading={setLoading}
+                errors={errors}
+                setError={setErrors}
               />
             )}
           </div>
