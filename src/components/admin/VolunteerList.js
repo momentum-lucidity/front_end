@@ -164,7 +164,7 @@ export const VolunteerList = (props) => {
         </div>
       </div>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-16 bg-gray-50 border-b border-gray-200 flex'>
+        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex'>
           <button
             className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
             onClick={() => setSidebarOpen(true)}
@@ -250,7 +250,7 @@ export const VolunteerList = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-8'>
-            <div className='pb-8 md:px-8'>
+            <div className='pb-8 md:px-0'>
               <h1 className='text-3xl font-semibold text-gray-900'>Volunteer Roster</h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>

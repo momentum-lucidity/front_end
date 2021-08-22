@@ -4,16 +4,7 @@ import { Link } from 'react-router-dom'
 import { getEventsList } from '../../api'
 import Avatar from 'react-avatar'
 
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon
-} from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
 import { EventsListPagination } from './EventsListPagination'
 import { orderBy } from 'lodash'
 import moment from 'moment'
@@ -28,7 +19,7 @@ export const EventsList = (props) => {
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
-      getEventsList()
+      getEventsList(token)
         .then((data) => setAllEvents(data.results))
       hasFetchedEvents.current = true
       console.log(allEvents)
@@ -41,8 +32,8 @@ export const EventsList = (props) => {
     ['desc']
   )
 
-  const indexOfLastEvent = currentPage * eventsPerPage;
-  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const indexOfLastEvent = currentPage * eventsPerPage
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage
   const currentEvents = sortedEvents.slice(indexOfFirstEvent, indexOfLastEvent)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber)

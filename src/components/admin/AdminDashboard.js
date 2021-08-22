@@ -291,7 +291,7 @@ export const AdminDashboard = (props) => {
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-8'>
-            <div className='pb-8 md:px-8'>
+            <div className='pb-8 md:px-0'>
               <h1 className='text-3xl font-semibold text-gray-900'>
                 Welcome {authUser.display_name}!
               </h1>
