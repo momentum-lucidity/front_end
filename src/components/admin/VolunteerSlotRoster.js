@@ -3,6 +3,7 @@ import { deleteVolunteerSlot, getAllSlots } from '../../api'
 import Avatar from 'react-avatar'
 import { VolunteerSlotEdit } from './VolunteerSlotEdit'
 import { useHistory } from 'react-router-dom'
+import { XCircleIcon } from '@heroicons/react/outline'
 
 export const VolunteerSlotRoster = (props) => {
   const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors } = props
@@ -38,6 +39,7 @@ export const VolunteerSlotRoster = (props) => {
   }
   const handleClick = () => {
     setExpand(!expand)
+    setErrors()
   }
 
   return (

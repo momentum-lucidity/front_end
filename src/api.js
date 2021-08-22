@@ -179,7 +179,7 @@ export const editVSlot = (
   date,
   slotpk
 ) => {
-  return (axios.put`https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}/`,
+  return axios.put(`https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}/`,
   {
     user: [],
     vslot_text: slotText,
