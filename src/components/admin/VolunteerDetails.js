@@ -4,18 +4,8 @@ import { getUserDetails, deleteUser, getAllSlots } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { VolunteerIntakeStatus } from './VolunteerIntakeStatus'
 import Avatar from 'react-avatar'
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-  TrashIcon,
-  PencilIcon
-} from '@heroicons/react/outline'
+import Logo from '../images/1x/logo.png'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, PencilIcon } from '@heroicons/react/outline'
 
 export const VolunteerDetails = (props) => {
   const { token, authUser } = props
@@ -63,7 +53,7 @@ export const VolunteerDetails = (props) => {
   }
 
   return (
-    <div className='bg-white overflow-hidden flex'>
+    <div className='h-screen bg-gray-50 overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as='div'
@@ -81,7 +71,7 @@ export const VolunteerDetails = (props) => {
             leaveFrom='opacity-100'
             leaveTo='opacity-0'
           >
-            <Dialog.Overlay className='fixed inset-0 bg-gray-600 bg-opacity-75' />
+            <Dialog.Overlay className='fixed inset-0 bg-gray-700 bg-opacity-75' />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
@@ -112,14 +102,13 @@ export const VolunteerDetails = (props) => {
                   </button>
                 </div>
               </Transition.Child>
-              <div className='flex-shrink-0 px-4 flex items-center'>
+              <div className='sm:mx-auto sm:w-9/12 sm:max-h-4'>
                 <img
-                  className='h-8 w-auto'
-                  src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
-                  alt='Workflow'
+                  src={Logo}
+                  alt='lucidity'
                 />
               </div>
-              <div className='mt-5 flex-1 h-0 overflow-y-auto'>
+              <div className='mt-5 flex-1 h-0 bg-white overflow-y-auto'>
                 <nav className='px-2 space-y-1'>
                   {navigation.map((item) => (
                     <a
@@ -145,23 +134,23 @@ export const VolunteerDetails = (props) => {
                     </a>
                   ))}
                 </nav>
-              </div>0
+              </div>
             </div>
           </Transition.Child>
-          <div className='flex-shrink-0 w-14'>
+          <div className=' bg-white flex-shrink-0 w-14'>
             {/* Dummy element to force sidebar to shrink to fit close icon */}
           </div>
         </Dialog>
       </Transition.Root>
 
       <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 flex flex-col'>
+        <div className='w-64 bg-white flex flex-col'>
           <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
-            <div className='flex-shrink-0 px-4 flex items-center'>
+            <div className='flex-shrink-1 px-4 flex items-center'>
               <img
-                className='h-8 w-auto'
-                src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
-                alt='Workflow'
+                className='w-full, bg-white'
+                src={Logo}
+                alt='Lucidity Logo'
               />
             </div>
             <div className='flex-grow mt-5 flex flex-col'>
@@ -195,7 +184,7 @@ export const VolunteerDetails = (props) => {
         </div>
       </div>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex'>
+        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex'>
           <button
             className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
             onClick={() => setSidebarOpen(true)}
@@ -203,14 +192,14 @@ export const VolunteerDetails = (props) => {
             <span className='sr-only'>Open sidebar</span>
             <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-          <div className='flex-1 flex'>
+          <div className='flex-1 flex bg-gray-50'>
             <nav className='flex' aria-label='Breadcrumb'>
               <ol className='flex items-center space-x-4'>
                 <li>
                   <div>
-                    <a href='/' className='text-gray-400 hover:text-gray-500'>
+                    <a href='/' className='text-gray-700 hover:text-indigo-500'>
                       <HomeIcon
-                        className='flex-shrink-0 h-5 w-5'
+                        className='flex-shrink-0 h-7 w-7'
                         aria-hidden='true'
                       />
                       <span className='sr-only'>Home</span>
@@ -221,12 +210,12 @@ export const VolunteerDetails = (props) => {
                   <li key={page.name}>
                     <div className='flex items-center'>
                       <ChevronRightIcon
-                        className='flex-shrink-0 h-5 w-5 text-gray-400'
+                        className='flex-shrink-0 h-8 w-8 text-gray-700'
                         aria-hidden='true'
                       />
                       <a
                         href={page.href}
-                        className='ml-4 text-sm font-medium text-gray-500 hover:text-gray-700'
+                        className='ml-4 text-md font-medium text-gray-700 hover:text-indigo-500'
                         aria-current={page.current ? 'page' : undefined}
                       >
                         {page.name}
@@ -237,14 +226,14 @@ export const VolunteerDetails = (props) => {
               </ol>
             </nav>
           </div>
-          <div className='ml-4 flex items-center md:ml-6'>
+          <div className='ml-4 flex items-center bg-gray-50 md:ml-6'>
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
                   <div>
                     <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                       <span className='sr-only'>Open user menu</span>
-                      <Avatar name={authUser.legal_name} size='40' round />
+                      <Avatar name={authUser.legal_name} size='60' round />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -285,10 +274,10 @@ export const VolunteerDetails = (props) => {
         </div>
 
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
-          <div className='py-6'>
+          <div className='py-8'>
             <div className='px-4 sm:px-6 pb-2 md:px-0'>
-              <h1 className='text-2xl font-semibold pb-1 text-gray-900'>
-                {userDetails.legal_name}
+              <h1 className='text-3xl font-semibold pb-1 text-gray-900'>
+                {userDetails.legal_name}'s
               </h1>
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
@@ -297,8 +286,10 @@ export const VolunteerDetails = (props) => {
                   Profile
                 </h3>
               </div>
-              <VolunteerIntakeStatus token={token} userDetails={userDetails} />
-              <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
+              <div className='mb-8'>
+                <VolunteerIntakeStatus token={token} userDetails={userDetails} />
+              </div>
+              <div className='bg-white shadow overflow-hidden border border-gray-200 sm:rounded-xl'>
                 <div className='px-4 py-5 sm:px-6'>
                   <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Information</h3>
                   <p className='mt-1 max-w-2xl text-sm text-gray-500'>Personal details and application.</p>
