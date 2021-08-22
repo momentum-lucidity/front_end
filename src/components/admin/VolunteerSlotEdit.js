@@ -3,13 +3,13 @@ import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
 
 export const VolunteerSlotEdit = (props) => {
-  const { token, id, setExpand, setErrors } = props
+  const { token, id, setExpand, setErrors, selectedSlotID } = props
   const [slotText, setSlotText] = useState('')
   const [volStart, setVolStart] = useState('')
   const [volEnd, setVolEnd] = useState('')
   const history = useHistory()
 
-  console.log(`slot post id ${id}`)
+  console.log(`slot post id ${selectedSlotID}`)
 
   const handleSubmit = () => {
     editVSlot(id, token, slotText, volStart)
@@ -24,7 +24,6 @@ export const VolunteerSlotEdit = (props) => {
   }
 
   return (
-
     <div className='space-y-6'>
 
       <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
