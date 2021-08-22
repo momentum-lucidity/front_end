@@ -1,20 +1,8 @@
 import { Fragment, useState } from 'react'
 import Avatar from 'react-avatar'
-import { Dialog, Menu, Transition } from '@headlessui/react'
 import Logo from '../images/1x/logo.png'
-
-import {
-  ChevronRightIcon,
-  CalendarIcon,
-  SpeakerphoneIcon,
-  FolderIcon,
-  HomeIcon,
-  InboxIcon,
-  MenuAlt2Icon,
-  UsersIcon,
-  XIcon,
-  DocumentDuplicateIcon
-} from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, SpeakerphoneIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, DocumentDuplicateIcon } from '@heroicons/react/outline'
+import { Dialog, Menu, Transition } from '@headlessui/react'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: true },
@@ -134,7 +122,6 @@ export const AdminDashboard = (props) => {
                 <img
                   src={Logo}
                   alt='lucidity'
-
                 />
               </div>
               <div className='mt-5 flex-1 h-0 bg-white overflow-y-auto'>
