@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { requestLogin } from '../../api'
 import Logo from '../images/1x/logo.png'
-import LogoText from '../images/logoText.svg'
-import LogoGraphic from '../images/logoGraphic.svg'
 
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
@@ -26,7 +24,7 @@ export const AdminLogin = (props) => {
         <img
           className='w-full mt-'
           src={Logo}
-          alt='Workflow'
+          alt='Lucidity Logo'
         />
         <h2 className='mt-0 text-center text-l font-bold text-gray-900'>Sign in to your account</h2>
         <p className='mt-2 text-center text-xsm text-gray-600'>
