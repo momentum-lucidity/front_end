@@ -3,7 +3,7 @@ import { editEvent } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import { Link, useHistory, useParams, useLocation } from 'react-router-dom'
 import Avatar from 'react-avatar'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, XCircleIcon } from '@heroicons/react/outline'
 
 export const EditEvent = (props) => {
   const location = useLocation()
@@ -288,14 +288,20 @@ export const EditEvent = (props) => {
           </div>
         </div>
         <>
-          <form className='space-y-8 divide-y divide-gray-200 overflow-y-auto'>
+          <form className='space-y-2 pt-5 overflow-y-auto'>
           {errors && (
-              <div className="text-red-600">
-                Submit Failed: All fields must be filled out. <br /> Please try
-                again.
+                <div className="rounded-md bg-red-50 p-4 mt-2">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">Submit Failed: All fields must be filled out.</h3>
+                  </div>
+                </div>
               </div>
             )}
-            <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
+            <div className='pt-8 space-y-3 sm:pt-10 sm:space-y-5'>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>
                   Edit Event

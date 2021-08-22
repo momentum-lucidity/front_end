@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { registrationInfo, requestLogin } from "../../api";
+import { XCircleIcon } from "@heroicons/react/solid";
 
 export const VolunteerRegistration = (props) => {
   const { setToken, setErrors, errors } = props;
@@ -313,12 +314,24 @@ export const VolunteerRegistration = (props) => {
                   </div>
                 </div>
                 {errors && (
-                  <div className="text-red-600">
-                    Registration Failed: You must have at minimum a valid Email,
-                    User Name, Password, Legal Name and Preferred Name. <br />{" "}
-                    Please try to register again.
+                  <div className="rounded-md bg-red-50 p-4 mt-2 mb-5">
+                    <div className="flex">
+                      <div className="flex-shrink-0">
+                        <XCircleIcon
+                          className="h-5 w-5 text-red-400"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-red-800">
+                          Registration Failed: You must have at minimum a valid
+                          Email, User Name, Password, Legal Name and Preferred
+                          Name.
+                        </h3>
+                      </div>
+                    </div>
                   </div>
-                )}
+                )}{" "}
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     type="submit"

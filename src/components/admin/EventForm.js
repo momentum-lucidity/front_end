@@ -11,6 +11,7 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  XCircleIcon
 } from "@heroicons/react/outline";
 import axios from "axios";
 
@@ -320,14 +321,25 @@ export const EventForm = (props) => {
           </div>
         </div>
         <>
-          <form className="space-y-8 divide-y divide-gray-200 overflow-y-auto">
-            {errors && (
-              <div className="text-red-600">
-                Submit Failed: All fields must be filled out. <br /> Please try
-                again.
+          <form className="overflow-y-auto">
+          {errors && (
+              <div className="rounded-md bg-red-50 p-4 mt-5">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Submit Failed: All fields must be filled out.
+                    </h3>
+                  </div>
+                </div>
               </div>
             )}
-            <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+            <div className="pt-8 space-y- sm:pt-10 sm:space-y-5">
               <div>
                 <h3 className="text-lg leading-6 font-medium text-gray-900">
                   Create an Event
@@ -510,6 +522,7 @@ export const EventForm = (props) => {
                       <button
                         type="button"
                         className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={() => setErrors()}
                       >
                         Cancel
                       </button>

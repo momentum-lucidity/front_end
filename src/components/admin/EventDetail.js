@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect, useRef } from 'react'
 import { deleteEvent, getEventDetails, getEventsList } from '../../api'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import Avatar from 'react-avatar'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, XCircleIcon} from '@heroicons/react/outline'
 import { useParams, Link, useHistory } from 'react-router-dom'
 import { VolunteerSlotRoster } from './VolunteerSlotRoster'
 import { VolunteerSlotPost } from './VolunteerSlotPost'
@@ -372,11 +372,17 @@ export const EventDetail = (props) => {
                     </div>
                   </div>
                   {errors && (
-                <div className="text-red-600">
-                  Submit Failed: All fields must be filled out. <br /> Please
-                  try again.
+                <div className="rounded-md bg-red-50 p-4 mt-2">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">Submit Failed: All fields must be filled out.</h3>
+                  </div>
                 </div>
-              )}
+              </div>
+            )}
                   <div className='px-4 py-4'>
                     {expandNew &&
                       <VolunteerSlotPost token={token} eventID={id} setExpandNew={setExpandNew} allVSlots={allVSlots} setAllVSlots={setAllVSlots} errors={errors} setErrors={setErrors} />}

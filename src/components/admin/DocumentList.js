@@ -11,6 +11,7 @@ import {
   UsersIcon,
   XIcon,
   TrashIcon,
+  XCircleIcon,
 } from "@heroicons/react/outline";
 import { getDocuments, deleteDocument } from "../../api";
 import { CreateDocument } from "./CreateDocument";
@@ -19,7 +20,7 @@ export const DocumentList = (props) => {
   const hasFetchedDocuments = useRef(false);
   const { token, authUser, loading, setLoading, errors, setErrors } = props;
   const [documents, setDocuments] = useState([]);
-  const [documentPK, setDocumentPK] = useState('');
+  const [documentPK, setDocumentPK] = useState("");
   const [expand, setExpand] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   useEffect(() => {
@@ -33,16 +34,18 @@ export const DocumentList = (props) => {
   }, [documents, setLoading]);
 
   const handleDelete = async () => {
-  const success = await deleteDocument(token, documentPK);
-  if (success) {
-    getDocuments()
-    .then((data) => {setDocuments(data)
-    setLoading(false)})      
-  }
+    const success = await deleteDocument(token, documentPK);
+    if (success) {
+      getDocuments().then((data) => {
+        setDocuments(data);
+        setLoading(false);
+      });
+    }
   };
 
   const handleClick = () => {
     setExpand(!expand);
+    setErrors();
   };
 
   const navigation = [
@@ -66,7 +69,7 @@ export const DocumentList = (props) => {
   const userNavigation = [
     { name: "Your Profile", href: "#" },
     { name: "Settings", href: "#" },
-    { name: "Sign out", href: '/admin/logout' },
+    { name: "Sign out", href: "/admin/logout" },
   ];
 
   const pages = [
@@ -309,30 +312,50 @@ export const DocumentList = (props) => {
 
         <main className="flex flex-col relative overflow-y-auto focus:outline-none">
           <div className="py-8">
-          <div className="mx-1 my-10 ">
-            <div className="sm:flex sm:items-center sm:justify-between">
-              <h1 className="text-xl leading-6 font-medium text-gray-900">
-                Admin Resources
-              </h1>
-              <button
-                type="button"
-                className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={handleClick}
-              >
-                Add A New Resource
-              </button>
-            </div>
-            {expand && (
-              <CreateDocument
-                token={token}
-                authUser={authUser}
-                setDocuments={setDocuments}
-                setLoading={setLoading}
-                errors={errors}
-                setError={setErrors}
-              />
+            {errors && (
+              <div className="rounded-md bg-red-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Submit Failed: All fields must be filled out.
+                    </h3>
+                    <div className="mt-2 text-sm text-red-800">
+                      <p>Make sure you are using a valid URL.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             )}
-          </div>
+            <div className="mx-1 my-10 ">
+              <div className="sm:flex sm:items-center sm:justify-between">
+                <h1 className="text-xl leading-6 font-medium text-gray-900">
+                  Admin Resources
+                </h1>
+                <button
+                  type="button"
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  onClick={handleClick}
+                >
+                  Add A New Resource
+                </button>
+              </div>
+              {expand && (
+                <CreateDocument
+                  token={token}
+                  authUser={authUser}
+                  setDocuments={setDocuments}
+                  setLoading={setLoading}
+                  errors={errors}
+                  setErrors={setErrors}
+                />
+              )}
+            </div>
             <div className="flex-col px-6 sm:px-8 md:px-4">
               <ul className="flex-col space-y-4">
                 {items.map((item) => (
@@ -354,7 +377,12 @@ export const DocumentList = (props) => {
                               )}
                             ></div>
                             <div className="flex-1 flex-row items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                              <div onClickCapture={() => setDocumentPK(document.docpk)} className="flex justify-between px-4 py-2 text-sm truncate">
+                              <div
+                                onClickCapture={() =>
+                                  setDocumentPK(document.docpk)
+                                }
+                                className="flex justify-between px-4 py-2 text-sm truncate"
+                              >
                                 <a
                                   href={document.url}
                                   className="text-gray-900 font-medium hover:text-gray-600"
@@ -363,13 +391,13 @@ export const DocumentList = (props) => {
                                 >
                                   {document.doc_header}
                                 </a>
-                                <button>      
-                                <TrashIcon
-                                  className="-ml-1 mr-2 h-5 w-5"
-                                  aria-hidden="true"
-                                  onClick={handleDelete}
-                                />
-                                </button>  
+                                <button>
+                                  <TrashIcon
+                                    className="-ml-1 mr-2 h-5 w-5"
+                                    aria-hidden="true"
+                                    onClick={handleDelete}
+                                  />
+                                </button>
                               </div>
                             </div>
                           </li>

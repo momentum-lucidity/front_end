@@ -8,6 +8,7 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  XCircleIcon
 } from "@heroicons/react/outline";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Avatar from "react-avatar";
@@ -35,11 +36,15 @@ export const EditAnnouncement = (props) => {
       user,
       alertHeader,
       text
-    ).then((res) => res.data)
-    .catch((error) => {
-      setErrors(error.message);
-    });
-    if (editWorked) history.push("/announcements");
+    )
+      .then((res) => res.data)
+      .catch((error) => {
+        setErrors(error.message);
+      });
+    if (editWorked) {
+      history.push("/announcements");
+      setErrors();
+    }
   };
 
   const navigation = [
@@ -303,13 +308,27 @@ export const EditAnnouncement = (props) => {
         </div>
         <main className="flex-1 relative focus:outline-none">
           <div className="py-3">
-            <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit}>
-            {errors && (
-            <div className="text-red-600">
-              Submit Failed: You must fill out all of the fields. <br /> Please
-              try again.
-            </div>
-          )}
+            <form
+              className="space-y-1"
+              onSubmit={handleSubmit}
+            >
+          {errors && (
+              <div className="rounded-md bg-red-50 p-4 mt-5">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Submit Failed: All fields must be filled out.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
               <div className="space-y-8 divide-y divide-gray-200">
                 <div className="pt-8 space-y-8 ">
                   <div>
@@ -362,9 +381,7 @@ export const EditAnnouncement = (props) => {
 
               <div className="pt-5">
                 <div className="flex justify-end">
-                  <Link
-                    to='/announcements'
-                  >
+                  <Link to="/announcements">
                     <button
                       type="button"
                       className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -372,13 +389,13 @@ export const EditAnnouncement = (props) => {
                     >
                       Cancel
                     </button>
-                    </Link>
-                    <button
-                      type="submit"
-                      className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                      Save
-                    </button>
+                  </Link>
+                  <button
+                    type="submit"
+                    className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </form>

@@ -16,6 +16,9 @@ export const CreateDocument = (props) => {
       url,
       token
     ).then((res) => res.data)
+    .catch((error) => {
+      setErrors(error.message);
+    });
     if (success) {
       getDocuments()
       .then((data) => {setDocuments(data)

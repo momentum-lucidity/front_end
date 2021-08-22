@@ -17,6 +17,7 @@ import {
   UsersIcon,
   XIcon,
   TrashIcon,
+  XCircleIcon
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
@@ -329,6 +330,23 @@ export const AnnouncementsList = (props) => {
         </div>
         <div className="overflow-y-auto px-4 sm:px-6 md:px-0">
           <div className="mx-1 my-10 ">
+          {errors && (
+              <div className="rounded-md bg-red-50 p-4 mb-10">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Submit Failed: All fields must be filled out.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="sm:flex sm:items-center sm:justify-between">
               <h1 className="text-xl leading-6 font-medium text-gray-900">
                 Current Announcements
@@ -352,12 +370,6 @@ export const AnnouncementsList = (props) => {
               />
             )}
           </div>
-          {errors && (
-            <div className="text-red-600">
-              Submit Failed: You must fill out all of the fields. <br /> Please
-              try again.
-            </div>
-          )}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-1">
             <ul className="divide-y divide-gray-200">
               {currentAnnouncements.map((announcement, idx) => (
