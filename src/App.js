@@ -49,6 +49,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -73,6 +75,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -97,6 +101,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -110,6 +116,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -148,6 +156,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -161,6 +171,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -174,6 +186,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -215,6 +229,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -245,6 +261,8 @@ function App () {
                 setAuthUser={setAuthUser}
                 loading={loading}
                 setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -257,6 +275,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
