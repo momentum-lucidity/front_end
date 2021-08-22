@@ -8,7 +8,7 @@ import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAl
 export const EditEvent = (props) => {
   const location = useLocation()
   const { eventDetails } = location.state
-  const { token, authUser } = props
+  const { token, authUser, setErrors, errors } = props
   const [eventHeader, setEventHeader] = useState(`${eventDetails.event_header}`)
   const [date, setDate] = useState('')
   const [startTime, setStartTime] = useState(`${eventDetails.start_time}`)
@@ -47,7 +47,8 @@ export const EditEvent = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Events', href: '/events', current: false },
-    { name: 'Event Form', href: '/events/eventform', current: true }
+    { name: 'Event Details', href: `/events/${id}`, current: false },
+    { name: 'Edit Event', current: true }
   ]
 
   function classNames (...classes) {
@@ -58,6 +59,9 @@ export const EditEvent = (props) => {
     event.preventDefault()
     const success = await editEvent(token, id, user, eventHeader, date, startTime, endTime, type, description)
       .then((res) => res.data)
+      .catch((error) => {
+        setErrors(error.message);
+      });
     if (success) history.push('/events')
   }
 
@@ -285,6 +289,12 @@ export const EditEvent = (props) => {
         </div>
         <>
           <form className='space-y-8 divide-y divide-gray-200 overflow-y-auto'>
+          {errors && (
+              <div className="text-red-600">
+                Submit Failed: All fields must be filled out. <br /> Please try
+                again.
+              </div>
+            )}
             <div className='pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
               <div>
                 <h3 className='text-lg leading-6 font-medium text-gray-900'>

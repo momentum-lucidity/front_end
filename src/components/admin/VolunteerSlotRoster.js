@@ -5,7 +5,7 @@ import { VolunteerSlotEdit } from './VolunteerSlotEdit'
 import { useHistory } from 'react-router-dom'
 
 export const VolunteerSlotRoster = (props) => {
-  const { token, eventDetails, allVSlots, setAllVSlots } = props
+  const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors } = props
   const [selectedSlotID, setSelectedSlotID] = useState('')
   const [expand, setExpand] = useState(false)
   const fetchedAllSlots = useRef(false)
@@ -79,7 +79,7 @@ export const VolunteerSlotRoster = (props) => {
               </div>
               <div>
                 {expand &&
-                  <VolunteerSlotEdit token={token} setExpand={setExpand} />}
+                  <VolunteerSlotEdit token={token} setExpand={setExpand} errors={errors} setErrors={setErrors} />}
               </div>
             </div>
           </div>

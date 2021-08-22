@@ -156,6 +156,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -169,6 +171,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -182,6 +186,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -223,6 +229,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />

@@ -8,7 +8,7 @@ import { VolunteerSlotRoster } from './VolunteerSlotRoster'
 import { VolunteerSlotPost } from './VolunteerSlotPost'
 
 export const EventDetail = (props) => {
-  const { token, authUser, setAllEvents } = props
+  const { token, authUser, setAllEvents, errors, setErrors } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -66,7 +66,7 @@ export const EventDetail = (props) => {
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
     { name: 'All Events', href: '/events', current: false },
-    { name: 'Event Details', href: '/events/:id', current: true }
+    { name: 'Event Details', href: `/events/${id}`, current: true }
   ]
 
   function classNames (...classes) {
@@ -297,7 +297,12 @@ export const EventDetail = (props) => {
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>{/* Content goes here */}</div>
         <main className='flex-1 relative overflow-y-auto focus:outline-none'>
           <div className='py-6'>
-
+          {errors && (
+                <div className="text-red-600">
+                  Submit Failed: All fields must be filled out. <br /> Please
+                  try again.
+                </div>
+              )}
             <div className='pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between'>
               <h3 className='text-lg leading-6 font-medium text-gray-900'>{eventDetails.event_header}</h3>
               <div className='mt-3 flex sm:mt-0 sm:ml-4'>
@@ -373,10 +378,10 @@ export const EventDetail = (props) => {
                   </div>
                   <div className='px-4 py-4'>
                     {expandNew &&
-                      <VolunteerSlotPost token={token} eventID={id} setExpandNew={setExpandNew} allVSlots={allVSlots} setAllVSlots={setAllVSlots} />}
+                      <VolunteerSlotPost token={token} eventID={id} setExpandNew={setExpandNew} allVSlots={allVSlots} setAllVSlots={setAllVSlots} errors={errors} setErrors={setErrors} />}
                   </div>
 
-                  <VolunteerSlotRoster token={token} eventDetails={eventDetails} allVSlots={allVSlots} setAllVSlots={setAllVSlots} />
+                  <VolunteerSlotRoster token={token} eventDetails={eventDetails} allVSlots={allVSlots} setAllVSlots={setAllVSlots} errors={errors} setErrors={setErrors} />
 
                 </div>
               </div>
