@@ -8,7 +8,7 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  XCircleIcon
+  XCircleIcon,
 } from "@heroicons/react/outline";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import Avatar from "react-avatar";
@@ -308,27 +308,24 @@ export const EditAnnouncement = (props) => {
         </div>
         <main className="flex-1 relative focus:outline-none">
           <div className="py-3">
-            <form
-              className="space-y-1"
-              onSubmit={handleSubmit}
-            >
-          {errors && (
-              <div className="rounded-md bg-red-50 p-4 mt-5">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <XCircleIcon
-                      className="h-5 w-5 text-red-400"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">
-                      Submit Failed: All fields must be filled out.
-                    </h3>
+            <form className="space-y-1" onSubmit={handleSubmit}>
+              {errors && (
+                <div className="rounded-md bg-red-50 p-4 mt-5">
+                  <div className="flex">
+                    <div className="flex-shrink-0">
+                      <XCircleIcon
+                        className="h-5 w-5 text-red-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-sm font-medium text-red-800">
+                        Submit Failed: All fields must be filled out.
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
               <div className="space-y-8 divide-y divide-gray-200">
                 <div className="pt-8 space-y-8 ">
                   <div>

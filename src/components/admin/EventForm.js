@@ -11,7 +11,7 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  XCircleIcon
+  XCircleIcon,
 } from "@heroicons/react/outline";
 import axios from "axios";
 
@@ -322,7 +322,7 @@ export const EventForm = (props) => {
         </div>
         <>
           <form className="overflow-y-auto">
-          {errors && (
+            {errors && (
               <div className="rounded-md bg-red-50 p-4 mt-5">
                 <div className="flex">
                   <div className="flex-shrink-0">
