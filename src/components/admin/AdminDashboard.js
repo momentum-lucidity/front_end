@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react'
 import Avatar from 'react-avatar'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import Logo from '../images/logo.svg'
 
 import {
   ChevronRightIcon,
@@ -13,7 +14,7 @@ import {
   UsersIcon,
   XIcon,
   DocumentDuplicateIcon
-} from '@heroicons/react/outline';
+} from '@heroicons/react/outline'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: true },
@@ -130,7 +131,11 @@ export const AdminDashboard = (props) => {
                 </div>
               </Transition.Child>
               <div className='flex-shrink-0 px-4 flex items-center'>
-                {/* logo here */}
+                <img
+                  src={Logo}
+                  alt='lucidity'
+
+                />
               </div>
               <div className='mt-5 flex-1 h-0 overflow-y-auto'>
                 <nav className='px-2 space-y-1'>
@@ -366,4 +371,4 @@ export const AdminDashboard = (props) => {
       </div>
     </div>
   )
-};
+}
