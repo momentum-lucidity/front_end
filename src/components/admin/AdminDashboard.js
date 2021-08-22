@@ -40,8 +40,8 @@ const actions = [
     description:
       'View all registered volunteers, manage volunteer information and status',
     icon: UsersIcon,
-    iconForeground: 'text-teal-500',
-    iconBackground: 'bg-teal-50'
+    iconForeground: 'text-pink-700',
+    iconBackground: 'bg-pink-50'
   },
   {
     title: 'Events',
@@ -56,8 +56,8 @@ const actions = [
     href: '/documents',
     description: 'Add and view any additional external links admin may use as resources',
     icon: DocumentDuplicateIcon,
-    iconForeground: 'text-teal-700',
-    iconBackground: 'bg-teal-50'
+    iconForeground: 'text-indigo-700',
+    iconBackground: 'bg-indigo-50'
   },
   {
     title: 'Announcements',
