@@ -310,7 +310,7 @@ export const DocumentList = (props) => {
         </div>
 
         <main className='flex flex-col relative overflow-y-auto focus:outline-none'>
-          <div className='py-8'>
+          <div>
             {errors && (
               <div className='rounded-md bg-red-50 p-4'>
                 <div className='flex'>
@@ -331,7 +331,7 @@ export const DocumentList = (props) => {
                 </div>
               </div>
             )}
-            <div className='mx-1 my-10 '>
+            <div className='mx-1 my-10'>
               <div className='sm:flex sm:items-center sm:justify-between'>
                 <h1 className='text-xl leading-6 font-medium text-gray-900'>
                   Admin Resources
@@ -355,8 +355,8 @@ export const DocumentList = (props) => {
                 />
               )}
             </div>
-            <div className='flex-col px-6 sm:px-8 md:px-4'>
-              <ul className='flex-col space-y-4'>
+            <div className='flex-col px-6 sm:px-8 md:px-4 border-t border-gray-200'>
+              <ul className='flex-col space-y-4 mt-8'>
                 {items.map((item) => (
                   <li
                     key={item.id}
@@ -367,7 +367,7 @@ export const DocumentList = (props) => {
                         {documents.map((document, idx) => (
                           <li
                             key={document.docpk}
-                            className='col-span-1 flex shadow-sm rounded-md bg-color bg-pink-600'
+                            className='col-span-1 flex shadow-sm rounded-md bg-color bg-pink-600 m-3'
                           >
                             <div
                               className={classNames(
@@ -383,7 +383,7 @@ export const DocumentList = (props) => {
                               >
                                 <a
                                   href={document.url}
-                                  className='text-gray-900 font-medium hover:text-gray-600'
+                                  className='text-gray-900 font-medium hover:text-gray-200'
                                   target='_blank'
                                   rel='noreferrer noopener'
                                 >
