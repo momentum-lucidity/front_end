@@ -45,7 +45,7 @@ export const EventForm = (props) => {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
+    { name: "Your Profile", href: "/adminprofile" },
     { name: "Settings", href: "#" },
     { name: "Sign out", href: "/admin/logout" },
   ];
