@@ -2,6 +2,7 @@ import { React, useEffect, useState } from 'react';
 import { getAuthUser, getVolunteerList } from './api';
 import { useLocalStorageState } from 'use-local-storage-state';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminProfile } from './components/admin/AdminProfile';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { VolunteerList } from './components/admin/VolunteerList';
 import { VolunteerDetails } from './components/admin/VolunteerDetails';
@@ -49,6 +50,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -73,6 +76,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -97,6 +102,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -110,6 +117,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 setAllVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -118,6 +127,18 @@ function App () {
             path='/admindash'
             component={() => (
               <AdminDashboard
+                token={token}
+                setToken={setToken}
+                authUser={authUser}
+                setAuthUser={setAuthUser}
+              />
+            )}
+          />
+          <Route
+            exact
+            path='/adminprofile'
+            component={() => (
+              <AdminProfile
                 token={token}
                 setToken={setToken}
                 authUser={authUser}
@@ -148,6 +169,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -161,6 +184,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={allVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -174,6 +199,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -215,6 +242,8 @@ function App () {
                 authUser={authUser}
                 setAuthUser={setAuthUser}
                 allVolunteers={setAllVolunteers}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -245,6 +274,8 @@ function App () {
                 setAuthUser={setAuthUser}
                 loading={loading}
                 setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />
@@ -257,6 +288,8 @@ function App () {
                 setToken={setToken}
                 authUser={authUser}
                 setAuthUser={setAuthUser}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           />

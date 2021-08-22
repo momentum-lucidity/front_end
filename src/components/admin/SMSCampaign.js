@@ -30,8 +30,7 @@ export const SMSCampaign = () => {
   ]
 
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
+    { name: 'Your Profile', href: '/adminprofile' },
     { name: 'Sign out', href: '/admin/logout' }
   ]
 

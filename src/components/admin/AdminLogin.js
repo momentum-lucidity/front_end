@@ -1,4 +1,4 @@
-import { LockClosedIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { requestLogin } from '../../api'
@@ -7,22 +7,26 @@ import Logo from '../images/1x/logo.png'
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken } = props
+  const { setToken, errors, setErrors } = props
   const history = useHistory()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     requestLogin(username, password)
-      .then((data) => setToken(data.data.auth_token))
-    history.push('/admindash')
+      .then((data) => {
+        setToken(data.data.auth_token)
+        history.push('/admindash')
+      })
+      .catch((error) => {
+        setErrors(error.message)
+      })
   }
 
   return (
-
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center '>
       <div className='sm:mx-auto sm:w-full sm:max-w-lg'>
         <img
-          className='w-full mt-'
+          className='w-full'
           src={Logo}
           alt='Lucidity Logo'
         />
@@ -41,6 +45,24 @@ export const AdminLogin = (props) => {
       <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-sm'>
         <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-12 mb-10'>
           <form className='space-y-6' action='#' method='POST' onSubmit={handleSubmit}>
+            {errors && (
+              <div className='rounded-md bg-red-50 p-4 mt-2'>
+                <div className='flex'>
+                  <div className='flex-shrink-0'>
+                    <XCircleIcon
+                      className='h-5 w-5 text-red-400'
+                      aria-hidden='true'
+                    />
+                  </div>
+                  <div className='ml-3'>
+                    <h3 className='text-sm font-medium text-red-800'>
+                      Login Failed: Your user ID or password is incorrect.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}{' '}
+            <input type='hidden' name='remember' defaultValue='true' />
             <div>
               <label htmlFor='username' className='block text-sm font-medium text-gray-700'>
                 Username
@@ -54,7 +76,7 @@ export const AdminLogin = (props) => {
                   onChange={(event) => setUsername(event.target.value)}
                   autoComplete='username'
                   required
-                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                   placeholder='username'
                 />
               </div>
@@ -73,7 +95,7 @@ export const AdminLogin = (props) => {
                   onChange={(event) => setPassword(event.target.value)}
                   autoComplete='current-password'
                   required
-                  className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                  className='relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
                   placeholder='Password'
                 />
               </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { adminRegistration, requestLogin } from "../../api";
+import { XCircleIcon } from "@heroicons/react/solid";
 
 export const Registration = (props) => {
-  const { setToken } = props;
+  const { setToken, errors, setErrors } = props;
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,12 +36,21 @@ export const Registration = (props) => {
       state,
       zip,
       preferredEvent
-    );
+    ).catch((error) => {
+      setErrors(error.message);
+    });
+
     if (success)
-      requestLogin(username, password).then((data) => {
-        if (data && data.data.auth_token) setToken(data.data.auth_token);
-      });
-    history.push("/admindash");
+      requestLogin(username, password)
+        .then((data) => {
+          if (data && data.data.auth_token) {
+            setToken(data.data.auth_token);
+            history.push("/admindash");
+          }
+        })
+        .catch((error) => {
+          setErrors(error.message);
+        });
   };
   return (
     <>
@@ -112,6 +122,7 @@ export const Registration = (props) => {
                         onChange={(event) => setPassword(event.target.value)}
                         autoComplete="password"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                        placeholder="Password must be 8 or more characters"
                       />
                     </div>
                     <div className="col-span-6 sm:col-span-4">
@@ -304,6 +315,25 @@ export const Registration = (props) => {
                     </div>
                   </div>
                 </div>
+                {errors && (
+                  <div className="rounded-md bg-red-50 p-4 mt-2 mb-5">
+                    <div className="flex">
+                      <div className="flex-shrink-0">
+                        <XCircleIcon
+                          className="h-5 w-5 text-red-400"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-red-800">
+                          Registration Failed: You must have at minimum a valid
+                          Email, User Name, Password, Legal Name and Preferred
+                          Name.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                )}{" "}
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     type="submit"

@@ -17,12 +17,13 @@ import {
   UsersIcon,
   XIcon,
   TrashIcon,
+  XCircleIcon,
 } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 
 export const AnnouncementsList = (props) => {
   const hasFetchedAnnouncements = useRef(false);
-  const { token, authUser, loading, setLoading } = props;
+  const { token, authUser, loading, setLoading, errors, setErrors } = props;
   const [announcementPK, setAnnouncementPK] = useState("");
   const [announcements, setAnnouncements] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,6 +69,7 @@ export const AnnouncementsList = (props) => {
 
   const handleClick = () => {
     setExpand(!expand);
+    setErrors();
   };
 
   const navigation = [
@@ -89,8 +91,7 @@ export const AnnouncementsList = (props) => {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
+    { name: "Your Profile", href: "/adminprofile" },
     { name: "Sign out", href: "/admin/logout" },
   ];
 
@@ -197,10 +198,10 @@ export const AnnouncementsList = (props) => {
         </Dialog>
       </Transition.Root>
 
-        <div className='hidden md:flex md:flex-shrink-0'>
-          <div className='w-64 flex flex-col'>
-            <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
-            <div className='flex-shrink-0 px-4 flex items-center'>
+      <div className="hidden md:flex md:flex-shrink-0">
+        <div className="w-64 flex flex-col">
+          <div className="border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
+            <div className="flex-shrink-0 px-4 flex items-center">
               <img
                 className="h-8 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
@@ -280,8 +281,8 @@ export const AnnouncementsList = (props) => {
               </ol>
             </nav>
           </div>
-            <div className='ml-4 flex items-center md:ml-6'>
-            <Menu as='div' className='ml-3 relative'>
+          <div className="ml-4 flex items-center md:ml-6">
+            <Menu as="div" className="ml-3 relative">
               {({ open }) => (
                 <>
                   <div>
@@ -328,6 +329,23 @@ export const AnnouncementsList = (props) => {
         </div>
         <div className="overflow-y-auto px-4 sm:px-6 md:px-0">
           <div className="mx-1 my-10 ">
+            {errors && (
+              <div className="rounded-md bg-red-50 p-4 mb-10">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      Submit Failed: All fields must be filled out.
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="sm:flex sm:items-center sm:justify-between">
               <h1 className="text-xl leading-6 font-medium text-gray-900">
                 Current Announcements
@@ -346,6 +364,8 @@ export const AnnouncementsList = (props) => {
                 authUser={authUser}
                 setAnnouncements={setAnnouncements}
                 setLoading={setLoading}
+                errors={errors}
+                setErrors={setErrors}
               />
             )}
           </div>

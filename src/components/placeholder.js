@@ -1,4 +1,8 @@
- 
+Submit Failed: All fields must be filled out. <br /> Please try
+again. 
+
+{ errors && <div className='text-red-600'>Login Failed: Your user ID or password is incorrect. <br /> Please try logging in again.</div>}
+
 
   const steps = [
     { id: '01', name: 'Registration', status: `${userDetails.intake_status}` },
