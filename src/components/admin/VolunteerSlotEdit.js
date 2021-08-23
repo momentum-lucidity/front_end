@@ -11,7 +11,8 @@ export const VolunteerSlotEdit = (props) => {
 
   console.log(`slot post id ${selectedSlotID}`)
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     editVSlot(id, token, slotText, volStart)
       .then((res) => history.push(`/events/${id}/`))
       .catch((error) => {

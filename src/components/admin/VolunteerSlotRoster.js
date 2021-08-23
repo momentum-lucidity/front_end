@@ -36,9 +36,10 @@ export const VolunteerSlotRoster = (props) => {
       history.push(`/events/${eventID}`)
     }
   }
-  const handleClick = (selectedSlotID) => {
+  const handleClick = (event) => {
+        console.log(selectedSlotID)
         setExpand(!expand)
-       setErrors()
+        setErrors()
   }
 
   return (
@@ -64,7 +65,9 @@ export const VolunteerSlotRoster = (props) => {
               <div className='px-6 py-2 whitespace-nowrap text-right text-sm font-medium'>
                 <button
                   type='button'
+                  id={slot.slotpk}
                   className='text-indigo-600 hover:text-indigo-900'
+                  aria-label='more options'
                   onClick={handleClick}
                 >
                   Edit
@@ -80,7 +83,7 @@ export const VolunteerSlotRoster = (props) => {
                 </button>
               </div>
               <div>
-                {expand &&
+            {expand && 
                   <VolunteerSlotEdit token={token} selectedSlotID={selectedSlotID} setExpand={setExpand} errors={errors} setErrors={setErrors} />}
               </div>
             </div>
