@@ -1,6 +1,6 @@
-import React from 'react'
+// import React from 'react'
 
-export const YourVolunteerSlots = (props) => {
-  const { token, authUser } = props
+// export const YourVolunteerSlots = (props) => {
+//   const { token, authUser } = props
 
 }
