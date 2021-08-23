@@ -36,16 +36,9 @@ export const VolunteerSlotRoster = (props) => {
       history.push(`/events/${eventID}`)
     }
   }
-  const handleClick = index => {
-    setAllVSlots(filteredSlots.map((slot, idx) => {
-      if (idx === index) {
+  const handleClick = (selectedSlotID) => {
         setExpand(!expand)
-      } else {
-        setExpand(false)
-      }
-      return slot
-    })) 
-    setErrors()
+       setErrors()
   }
 
   return (
@@ -88,7 +81,7 @@ export const VolunteerSlotRoster = (props) => {
               </div>
               <div>
                 {expand &&
-                  <VolunteerSlotEdit slot={slot} token={token} selectedSlotID={selectedSlotID} setExpand={setExpand} errors={errors} setErrors={setErrors} />}
+                  <VolunteerSlotEdit token={token} selectedSlotID={selectedSlotID} setExpand={setExpand} errors={errors} setErrors={setErrors} />}
               </div>
             </div>
           </div>
