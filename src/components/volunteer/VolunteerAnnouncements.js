@@ -1,13 +1,14 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 import { getAnnouncements } from '../../api'
 
 export const VolunteerAnnouncements = (props) => {
+  const { token } = props
   const [announcements, setAnnouncements] = useState([])
 
   useEffect(() => {
-    getAnnouncements().then((data) => setAnnouncements(data))
+    getAnnouncements(token).then((data) => setAnnouncements(data))
   }, [])
 
   const sortedAnnouncements = orderBy(
