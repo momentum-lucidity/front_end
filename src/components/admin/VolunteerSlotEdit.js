@@ -3,17 +3,17 @@ import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
 
 export const VolunteerSlotEdit = (props) => {
-  const { token, id, setExpand } = props
-  const [slotText, setSlotText] = useState('')
-  const [volStart, setVolStart] = useState('')
-  const [volEnd, setVolEnd] = useState('')
+  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, expand, setExpand, fetchedAllSlots } = props
   const history = useHistory()
 
-  console.log(`slot post id ${id}`)
+  console.log(`slot post id ${selectedSlotID}`)
 
-  const handleSubmit = () => {
-    editVSlot(id, token, slotText, volStart)
-      .then((res) => history.push(`/events/${id}/`))
+  const handleSubmit = async () => {
+    const success = await editVSlot(eventID, selectedSlotID, token, slotText, volStart, volEnd, date)
+    if (success) {
+      setExpand(!expand)
+      history.push(`/events/${eventID}/`)
+    }
   }
 
   const handleCancel = () => {
@@ -64,10 +64,11 @@ export const VolunteerSlotEdit = (props) => {
                     Date
                   </label>
                   <input
-                    type='text'
-                    name='last-name'
-                    id='last-name'
-                    autoComplete='family-name'
+                    type='date'
+                    name='date'
+                    id='date'
+                    value={date}
+                    onChange={(event) => setDate(event.target.value)}
                     className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                   />
                 </div>
