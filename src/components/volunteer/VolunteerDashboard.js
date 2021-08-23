@@ -16,7 +16,7 @@ export const VolunteerDashboard = (props) => {
   const { token, authUser } = props
   return (
     <>
-      <VolunteerHeader authUser={authUser} />
+      <VolunteerHeader authUser={authUser} token={token} />
       <main className='py-10 bg-indigo-600 bg-opacity-5'>
         <div className='max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8'>
           <div className='flex items-center space-x-5'>
@@ -43,7 +43,7 @@ export const VolunteerDashboard = (props) => {
             <section aria-labelledby='applicant-information-title'>
               <div className='bg-white shadow sm:rounded-lg'>
                 <div className='border-t border-gray-200 px-4 py-5 sm:px-6'>
-                  <VolunteerAnnouncements />
+                  <VolunteerAnnouncements authUser={authUser} token={token} />
                 </div>
               </div>
             </section>
@@ -54,7 +54,7 @@ export const VolunteerDashboard = (props) => {
             className='lg:col-start-5 lg:col-span-1'
           >
             <div className='bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6'>
-              <VolunteerEvents />
+              <VolunteerEvents authUser={authUser} token={token} />
             </div>
           </section>
           <section
