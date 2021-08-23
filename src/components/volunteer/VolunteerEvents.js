@@ -9,7 +9,7 @@ export const VolunteerEvents = (props) => {
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
-      getEventsList()
+      getEventsList(token)
         .then((data) => setAllEvents(data.results))
       console.log(allEvents)
       hasFetchedEvents.current = true

@@ -3,11 +3,11 @@ import moment from 'moment'
 import { orderBy } from 'lodash'
 import { getAnnouncements } from '../../api'
 
-export const VolunteerAnnouncements = (props) => {
+export const VolunteerAnnouncements = ({token}) => {
   const [announcements, setAnnouncements] = useState([])
 
   useEffect(() => {
-    getAnnouncements().then((data) => setAnnouncements(data))
+    getAnnouncements(token).then((data) => setAnnouncements(data))
   }, [])
 
   const sortedAnnouncements = orderBy(
