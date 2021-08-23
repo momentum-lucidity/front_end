@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export const requestLogin = (username, password) => {
   return axios.post(
@@ -8,7 +8,7 @@ export const requestLogin = (username, password) => {
       password: password
     }
   )
-};
+}
 
 export const getAuthUser = (token) => {
   return axios
@@ -18,7 +18,7 @@ export const getAuthUser = (token) => {
       }
     })
     .then((res) => res.data)
-};
+}
 
 export const registrationInfo = (
   email,
@@ -52,7 +52,7 @@ export const registrationInfo = (
     intake_status: 'Account Created',
     preferred_event: `${preferredEvent}`
   })
-};
+}
 
 export const adminRegistration = (
   email,
@@ -86,12 +86,12 @@ export const adminRegistration = (
     intake_status: 'Approved',
     preferred_event: `${preferredEvent}`
   })
-};
+}
 
 export const getVolunteerList = () => {
   return axios
     .get(
-      'https://momentum-lucidity.herokuapp.com/users',
+      'https://momentum-lucidity.herokuapp.com/users'
       // {},
       // {
       //   headers: {
@@ -101,28 +101,26 @@ export const getVolunteerList = () => {
       // }
     )
     .then((res) => res.data.results)
-};
+}
 
-export const getEventsList = () => {
+export const getEventsList = (token) => {
   return axios
     .get(
-      'https://momentum-lucidity.herokuapp.com/events/'
-      // {},
-      // {
-      //   headers: {
-      //     Authorization: `Token ${token}`,
-      //     "Content-Type": "application/json",
-      //   },
-      // }
+      'https://momentum-lucidity.herokuapp.com/events/',
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
     )
     .then((res) => res.data)
-};
+}
 
 export const getAllSlots = (token) => {
   return axios
     .get(
       'https://momentum-lucidity.herokuapp.com/volunteerops/',
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
@@ -131,13 +129,12 @@ export const getAllSlots = (token) => {
       }
     )
     .then((res) => res.data.results)
-};
+}
 
 export const getSelectedSlot = (token, slotpk) => {
   return axios
     .get(
       `https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}`,
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
@@ -146,7 +143,7 @@ export const getSelectedSlot = (token, slotpk) => {
       }
     )
     .then((res) => res.data.results)
-};
+}
 
 export const newVSlot = (eventID, token, slotText, volStart, volEnd) => {
   return axios
@@ -168,7 +165,7 @@ export const newVSlot = (eventID, token, slotText, volStart, volEnd) => {
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const editVSlot = (
   eventID,
@@ -194,13 +191,12 @@ export const editVSlot = (
       'Content-Type': 'application/json'
     }
   }).then((res) => res.data)
-};
+}
 
 export const deleteVolunteerSlot = (token, slotpk) => {
   return axios
     .delete(
       `https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}/`,
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
@@ -209,13 +205,12 @@ export const deleteVolunteerSlot = (token, slotpk) => {
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const getEventDetails = (token, id) => {
   return axios
     .get(
       `https://momentum-lucidity.herokuapp.com/events/${id}/`,
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
@@ -224,27 +219,25 @@ export const getEventDetails = (token, id) => {
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const getUserDetails = (token, id) => {
   return axios
     .get(
       `https://momentum-lucidity.herokuapp.com/users/${id}`,
-      {},
       {
         headers: {
-          Authorization: `Token ${token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`
         }
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const deleteEvent = (token, id) => {
   return axios.delete(
     `https://momentum-lucidity.herokuapp.com/events/${id}/`,
-    {},
     {
       headers: {
         'Content-Type': 'application/json',
@@ -252,7 +245,7 @@ export const deleteEvent = (token, id) => {
       }
     }
   )
-};
+}
 
 export const editUser = (
   token,
@@ -299,7 +292,7 @@ export const editUser = (
       }
     }
   )
-};
+}
 
 export const deleteUser = (token, id) => {
   return axios.delete(
@@ -312,13 +305,12 @@ export const deleteUser = (token, id) => {
       }
     }
   )
-};
+}
 
 export const getAnnouncements = (token) => {
   return axios
     .get(
       'https://momentum-lucidity.herokuapp.com/announcements/',
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
@@ -327,7 +319,7 @@ export const getAnnouncements = (token) => {
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const newAnnouncement = ([user], alertHeader, text, token) => {
   return axios.post(
@@ -344,12 +336,11 @@ export const newAnnouncement = ([user], alertHeader, text, token) => {
       }
     }
   )
-};
+}
 
 export const deleteAnnouncement = (token, id) => {
   return axios.delete(
     `https://momentum-lucidity.herokuapp.com/announcements/${id}`,
-    {},
     {
       headers: {
         'Content-Type': 'application/json',
@@ -357,7 +348,7 @@ export const deleteAnnouncement = (token, id) => {
       }
     }
   )
-};
+}
 
 export const editAnnouncement = (token, id, user, alert_header, text) => {
   return axios.put(
@@ -375,7 +366,7 @@ export const editAnnouncement = (token, id, user, alert_header, text) => {
       }
     }
   )
-};
+}
 
 export const getAnnouncementDetails = (token, id) => {
   return axios
@@ -390,7 +381,7 @@ export const getAnnouncementDetails = (token, id) => {
       }
     )
     .then((res) => res.data)
-};
+}
 
 export const getDocuments = () => {
   return axios
@@ -400,21 +391,21 @@ export const getDocuments = () => {
       // {
       //   headers: {
       //     Authorization: `Token ${token}`,
-      //     'Content-Type': 'application/json'
+      //     'Content-Type': 'application/json'oh
       //   }
       // }
     )
     .then((res) => res.data.results)
-};
+}
 
 export const editEvent = (
   token,
   id,
   user,
-  event_header,
+  eventHeader,
   date,
-  start_time,
-  end_time,
+  startTime,
+  endTime,
   type,
   description
 ) => {
@@ -422,10 +413,10 @@ export const editEvent = (
     `https://momentum-lucidity.herokuapp.com/events/${id}/`,
     {
       user: [user],
-      event_header: event_header,
+      event_header: eventHeader,
       date: date,
-      start_time: start_time,
-      end_time: end_time,
+      start_time: startTime,
+      end_time: endTime,
       type: type,
       description: description
     },
@@ -436,7 +427,7 @@ export const editEvent = (
       }
     }
   )
-};
+}
 
 export const createDocument = ([user], docHeader, url, token) => {
   return axios.post(
@@ -453,7 +444,7 @@ export const createDocument = ([user], docHeader, url, token) => {
       }
     }
   )
-};
+}
 
 export const deleteDocument = (token, id) => {
   return axios.delete(
@@ -466,4 +457,4 @@ export const deleteDocument = (token, id) => {
       }
     }
   )
-};
+}
