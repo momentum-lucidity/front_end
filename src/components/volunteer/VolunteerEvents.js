@@ -10,7 +10,7 @@ export const VolunteerEvents = (props) => {
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
-      getEventsList().then((data) => setAllEvents(data.results));
+      getEventsList(token).then((data) => setAllEvents(data.results));
       console.log(allEvents);
       hasFetchedEvents.current = true;
     }
@@ -27,16 +27,11 @@ export const VolunteerEvents = (props) => {
   }
 
   return (
-    <div className="h-screen bg-white overflow-hidden flex">
+    <div className="h-screen bg-white overflow-hidden overflow-y-auto flex flex-initial">
       <div className="flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0">
-        <main className="flex-1 relative overflow-y-auto focus:outline-none">
+        <main className="flex-1 relative focus:outline-none">
           <div className="py-6">
-            <div className="px-4 sm:px-6 md:px-0">
-              <h1 className="text-2xl font-semibold text-gray-900">
-                All Upcoming Events
-              </h1>
-            </div>
-            <div className="px-4 sm:px-6 md:px-0 shadow-lg">
+            <div className="px-4 sm:px-6 md:px-0 overflow-y-auto ">
               <ul className="divide-y divide-gray-500">
                 {sortedEvents &&
                   sortedEvents.map((event, idx) => (
