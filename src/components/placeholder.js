@@ -92,3 +92,17 @@ again.
                   ))}
                 </ol>
               </nav>
+
+{person.intake_status === 'Approved'
+              ? (
+                <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+                                  {person.intake_status}
+                                </span>
+                )
+              : person.intake_status === 'Approval Pending'
+                ? (
+                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-green-800'>
+                                  {person.intake_status}
+                                </span>
+                  )
+                }
