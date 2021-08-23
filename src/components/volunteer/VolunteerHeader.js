@@ -1,7 +1,9 @@
-import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Avatar from 'react-avatar'
+import DCLogo from '../images/dclogo.svg'
+import DCBanner from '../images/dreambanner.png'
 
 function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
@@ -26,15 +28,15 @@ export const VolunteerHeader = (props) => {
                 </Disclosure.Button>
               </div>
               <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
-                <div className='flex-shrink-0 flex items-center'>
+                <div className='flex flex items-center'>
                   <img
                     className='block lg:hidden h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-                    alt='Workflow'
+                    src={DCBanner}
+                    alt='Dream Big'
                   />
                   <img
-                    className='hidden lg:block h-8 w-auto'
-                    src='https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg'
+                    className='hidden lg:block h-full w-full'
+                    src={DCBanner}
                     alt='Workflow'
                   />
                 </div>
@@ -63,8 +65,7 @@ export const VolunteerHeader = (props) => {
                         <Menu.Button className='bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                           <span className='sr-only'>Open user menu</span>
                           <span className='inline-flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500'>
-                            <span className='font-medium leading-none text-white'>
-                            </span>
+                            <span className='font-medium leading-none text-white' />
                             {/* <Avatar name={authUser.legal_name} size='40' round /> */}
                           </span>
                         </Menu.Button>
@@ -150,4 +151,4 @@ export const VolunteerHeader = (props) => {
       )}
     </Disclosure>
   )
-};
+}
