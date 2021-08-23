@@ -37,7 +37,7 @@ export const VolunteerSlotRoster = (props) => {
     }
   }
   const handleClick = (event) => {
-        console.log(selectedSlotID)
+    console.log(selectedSlotID)
         setExpand(!expand)
         setErrors()
   }
@@ -90,7 +90,6 @@ export const VolunteerSlotRoster = (props) => {
           </div>
         </div>
       ))}
-
     </div>
   )
 }
