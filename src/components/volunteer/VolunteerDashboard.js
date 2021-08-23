@@ -2,8 +2,8 @@ import { VolunteerHeader } from './VolunteerHeader.js'
 import { VolunteerEvents } from './VolunteerEvents.js'
 import { VolunteerAnnouncements } from './VolunteerAnnouncements.js'
 import { VolunteerDashIntake } from './VolunteerDashIntake.js'
+import { YourVolunteerSlots } from './YourVolunteerSlots.js'
 import { CheckIcon } from '@heroicons/react/solid'
-import { VolunteerIntakeStatus } from '../admin/VolunteerIntakeStatus.js'
 import DCLogo from '../images/dclogo.png'
 
 const steps = [
@@ -68,32 +68,10 @@ export const VolunteerDashboard = (props) => {
               >
                 Your Next Volunteer Position
               </h2>
+              <div>
+                <YourVolunteerSlots token={token} authUser={authUser} />
+              </div>
             </div>
-            <ul className='space-y-3'>
-              <li
-                className='bg-white shadow overflow-hidden rounded-md px-6 py-4'
-              >
-                <div>
-                  <ul className='mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4'>
-                    <li
-                      className='col-span-1 flex shadow-sm rounded-md'
-                    >
-                      <div
-                        className='bg-green-500 flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
-                      >
-                        DC
-                      </div>
-                      <div className='flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
-                        <div className='flex-1 px-4 py-2 text-sm truncate'>
-                          <h3>Event Title</h3>
-                          <p className='text-gray-500'>Time</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
           </section>
         </div>
       </main>

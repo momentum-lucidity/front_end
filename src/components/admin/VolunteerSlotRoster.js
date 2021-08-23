@@ -7,6 +7,10 @@ import { useHistory } from 'react-router-dom'
 export const VolunteerSlotRoster = (props) => {
   const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors } = props
   const [selectedSlotID, setSelectedSlotID] = useState('')
+  const [slotText, setSlotText] = useState('')
+  const [volStart, setVolStart] = useState('')
+  const [volEnd, setVolEnd] = useState('')
+  const [date, setDate] = useState('')
   const [expand, setExpand] = useState(false)
   const fetchedAllSlots = useRef(false)
   const history = useHistory()
@@ -37,15 +41,16 @@ export const VolunteerSlotRoster = (props) => {
     }
   }
   const handleClick = (event) => {
-    console.log(selectedSlotID)
-        setExpand(!expand)
-        setErrors()
+    console.log(`slot pk ${event.target.value}`)
+    setSelectedSlotID(event.target.value)
+    setExpand(!expand)
+    console.log(`selectedslotID ${selectedSlotID}`)
   }
 
   return (
 
     <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
-      
+
       {filteredSlots.map((slot) => (
         <div
           key={slot.slotpk}
@@ -65,7 +70,7 @@ export const VolunteerSlotRoster = (props) => {
               <div className='px-6 py-2 whitespace-nowrap text-right text-sm font-medium'>
                 <button
                   type='button'
-                  id={slot.slotpk}
+                  value={slot.slotpk}
                   className='text-indigo-600 hover:text-indigo-900'
                   aria-label='more options'
                   onClick={handleClick}
@@ -83,8 +88,25 @@ export const VolunteerSlotRoster = (props) => {
                 </button>
               </div>
               <div>
-            {expand && 
-                  <VolunteerSlotEdit token={token} selectedSlotID={selectedSlotID} setExpand={setExpand} errors={errors} setErrors={setErrors} />}
+                {expand &&
+                  <VolunteerSlotEdit
+                    token={token}
+                    selectedSlotID={selectedSlotID}
+                    slotText={slotText}
+                    setSlotText={setSlotText}
+                    volStart={volStart}
+                    setVolStart={setVolStart}
+                    volEnd={volEnd}
+                    setVolEnd={setVolEnd}
+                    date={date}
+                    setDate={setDate}
+                    eventID={eventID}
+                    expand={expand}
+                    setExpand={setExpand}
+                    errors={errors}
+                    setErrors={setErrors}
+                    fetchedAllSlots={fetchedAllSlots}
+                  />}
               </div>
             </div>
           </div>

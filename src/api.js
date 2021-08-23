@@ -167,30 +167,23 @@ export const newVSlot = (eventID, token, slotText, volStart, volEnd) => {
     .then((res) => res.data)
 }
 
-export const editVSlot = (
-  eventID,
-  token,
-  slotText,
-  volStart,
-  volEnd,
-  date,
-  slotpk
-) => {
-  return axios.put(`https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}/`,
-  {
-    user: [],
-    vslot_text: slotText,
-    event: eventID,
-    starttime: volStart,
-    endtime: volEnd,
-    date: date
-  },
-  {
-    headers: {
-      Authorization: `Token ${token}`,
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => res.data)
+export const editVSlot = (eventID, selectedSlotID, token, slotText, volStart, volEnd, date) => {
+  return axios
+    .put(`https://momentum-lucidity.herokuapp.com/volunteerops/${selectedSlotID}/`,
+      {
+        user: [],
+        vslot_text: slotText,
+        event: eventID,
+        starttime: volStart,
+        endtime: volEnd,
+        date: date
+      },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => res.data)
 }
 
 export const deleteVolunteerSlot = (token, slotpk) => {
