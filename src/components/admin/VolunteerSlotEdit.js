@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
 
 export const VolunteerSlotEdit = (props) => {
-  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, expand, setExpand, fetchedAllSlots } = props
+  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, slot, isActive, setIsActive } = props
   const history = useHistory()
 
   console.log(`slot post id ${selectedSlotID}`)
@@ -11,17 +11,17 @@ export const VolunteerSlotEdit = (props) => {
   const handleSubmit = async () => {
     const success = await editVSlot(eventID, selectedSlotID, token, slotText, volStart, volEnd, date)
     if (success) {
-      setExpand(!expand)
+      setIsActive(!isActive)
       history.push(`/events/${eventID}/`)
     }
   }
 
   const handleCancel = () => {
-    setExpand(false)
+    setIsActive(!isActive)
   }
 
   return (
-    <div className='space-y-6'>
+    <div className='space-y-6' id={slot.slotpk}>
 
       <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
