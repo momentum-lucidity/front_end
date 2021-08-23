@@ -4,6 +4,7 @@ import { VolunteerAnnouncements } from './VolunteerAnnouncements.js'
 import { VolunteerDashIntake } from './VolunteerDashIntake.js'
 import { CheckIcon } from '@heroicons/react/solid'
 import { VolunteerIntakeStatus } from '../admin/VolunteerIntakeStatus.js'
+import DCLogo from '../images/dclogo.png'
 
 const steps = [
   { id: '01', name: 'Registration', status: 'complete' },
@@ -15,23 +16,21 @@ export const VolunteerDashboard = (props) => {
   const { token, authUser } = props
   return (
     <>
-      <VolunteerHeader />
+      <VolunteerHeader authUser={authUser} />
       <main className='py-10 bg-indigo-600 bg-opacity-5'>
         <div className='max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8'>
           <div className='flex items-center space-x-5'>
             <div className='flex-shrink-0'>
               <div className='relative'>
-                <span className='inline-flex items-center justify-center h-14 w-14 rounded-full bg-indigo-600'>
-                  <span className='text-xl font-medium leading-none text-white'>DC</span>
-                </span>
-                <span
-                  className='absolute inset-0 shadow-inner rounded-full'
-                  aria-hidden='true'
+                <img
+                  className='block h-28 w-auto'
+                  src={DCLogo}
+                  alt='Dream Big'
                 />
               </div>
             </div>
             <div>
-              <h1 className='text-2xl font-bold text-gray-900'>
+              <h1 className='text-3xl font-bold text-gray-900 mr-8'>
                 Welcome, {authUser.display_name}
               </h1>
             </div>
