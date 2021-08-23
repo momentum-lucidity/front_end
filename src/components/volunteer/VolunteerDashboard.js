@@ -1,16 +1,11 @@
-import { VolunteerHeader } from './VolunteerHeader.js';
-import { VolunteerEvents } from './VolunteerEvents.js';
-import { VolunteerAnnouncements } from './VolunteerAnnouncements.js';
-import { VolunteerDashIntake } from './VolunteerDashIntake.js';
-import { CheckIcon } from '@heroicons/react/solid';
-import { VolunteerIntakeStatus } from '../admin/VolunteerIntakeStatus.js';
-import DCLogo from '../images/dclogo.png';
+import { VolunteerHeader } from './VolunteerHeader.js'
+import { VolunteerEvents } from './VolunteerEvents.js'
+import { VolunteerAnnouncements } from './VolunteerAnnouncements.js'
+import { VolunteerDashIntake } from './VolunteerDashIntake.js'
+// import { YourVolunteerSlots } from './YourVolunteerSlots.js'
+import { CheckIcon } from '@heroicons/react/solid'
+import DCLogo from '../images/dclogo.png'
 
-const steps = [
-  { id: '01', name: 'Registration', status: 'complete' },
-  { id: '02', name: 'Pending Approval', status: 'current' },
-  { id: '03', name: 'Approved!', status: 'upcoming' }
-]
 
 export const VolunteerDashboard = (props) => {
   const { token, authUser } = props
@@ -60,6 +55,9 @@ export const VolunteerDashboard = (props) => {
               >
                 Your Next Volunteer Position
               </h2>
+              <div>
+                {/* <YourVolunteerSlots token={token} authUser={authUser} /> */}
+              </div>
             </div>
             <ul className='space-y-3'>
               <li className='bg-white shadow overflow-hidden rounded-md px-6 py-4'>

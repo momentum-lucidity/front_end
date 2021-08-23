@@ -22,7 +22,7 @@ export const AnnouncementsList = (props) => {
 
   useEffect(() => {
     if (!hasFetchedAnnouncements.current) {
-      getAnnouncements().then((data) => {
+      getAnnouncements(token).then((data) => {
         setAnnouncements(data)
         setLoading(false)
       })
