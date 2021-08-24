@@ -16,6 +16,10 @@ export const EventDetail = (props) => {
   const [eventDetails, setEventDetails] = useState('')
   const [allVSlots, setAllVSlots] = useState([])
   const [expandNew, setExpandNew] = useState(false)
+  const [slotText, setSlotText] = useState('')
+  const [volStart, setVolStart] = useState('')
+  const [volEnd, setVolEnd] = useState('')
+  const [date, setDate] = useState('')
   const history = useHistory()
 
   useEffect(() => {
@@ -404,6 +408,14 @@ export const EventDetail = (props) => {
                         setAllVSlots={setAllVSlots}
                         errors={errors}
                         setErrors={setErrors}
+                        slotText={slotText}
+                        setSlotText={setSlotText}
+                        volStart={volStart}
+                        setVolStart={setVolStart}
+                        volEnd={volEnd}
+                        setVolEnd={setVolEnd}
+                        date={date}
+                        setDate={setDate}
                       />
                     )}
                   </div>
