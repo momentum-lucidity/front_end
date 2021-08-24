@@ -88,17 +88,16 @@ export const adminRegistration = (
   })
 }
 
-export const getVolunteerList = () => {
+export const getVolunteerList = (token) => {
   return axios
     .get(
-      'https://momentum-lucidity.herokuapp.com/users'
-      // {},
-      // {
-      //   headers: {
-      //     Authorization: `Token ${token}`,
-      //     'Content-Type': 'application/json'
-      //   }
-      // }
+      'https://momentum-lucidity.herokuapp.com/users',
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
     )
     .then((res) => res.data.results)
 }
