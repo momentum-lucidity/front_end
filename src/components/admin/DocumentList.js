@@ -16,7 +16,7 @@ export const DocumentList = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   useEffect(() => {
     if (!hasFetchedDocuments.current) {
-      getDocuments().then((data) => {
+      getDocuments(token).then((data) => {
         setDocuments(data)
         setLoading(false)
       })

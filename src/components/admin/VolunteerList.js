@@ -273,7 +273,7 @@ export const VolunteerList = (props) => {
           </div>
         </div>
 
-        <main className='flex-1 relative overflow-y-auto focus:outline-none'>
+        <main className='flex-1 relative overflow-auto focus:outline-none'>
           <div className='py-8'>
             <div className='pb-8 md:px-0'>
               <h1 className='text-3xl font-semibold text-gray-900'>
@@ -282,7 +282,7 @@ export const VolunteerList = (props) => {
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               <div className='flex flex-col'>
-                <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                <div className='-my-2 sm:-mx-6 lg:-mx-8'>
                   <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                     <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
                       <table className='min-w-full divide-y divide-gray-700 rounded-xl'>

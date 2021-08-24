@@ -1,6 +1,7 @@
 import { VolunteerSlotEdit } from "./VolunteerSlotEdit";
 import Avatar from "react-avatar";
 import { useState } from "react";
+import { XCircleIcon } from "@heroicons/react/outline";
 
 export const VolunteerRoster = (props) => {
   const [isActive, setIsActive] = useState(false);
@@ -51,7 +52,8 @@ export const VolunteerRoster = (props) => {
           <p className="text-sm text-gray-500 truncate">
             Role/Duties: {slot.vslot_text}
           </p>
-          <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium">
+          <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium"
+          onClickCapture={() => setErrors()}>
             <button
               type="button"
               value={slot.slotpk}

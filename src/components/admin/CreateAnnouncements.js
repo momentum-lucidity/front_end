@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { getAnnouncements, newAnnouncement } from '../../api';
 
 export const CreateAnnoucements = (props) => {
-  const { token, authUser, setAnnouncements, setLoading, setErrors } =
+  const { token, authUser, setAnnouncements, setLoading, setErrors, expand, setExpand } =
     props
   const [alertHeader, setAlertHeader] = useState('')
   const [text, setText] = useState('')
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault()
     console.log(authUser.id)
@@ -23,6 +23,7 @@ export const CreateAnnoucements = (props) => {
       })
       setAlertHeader('')
       setText('')
+      setExpand(!expand)
     }
   }
 

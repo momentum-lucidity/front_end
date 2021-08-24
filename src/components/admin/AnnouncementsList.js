@@ -357,6 +357,8 @@ export const AnnouncementsList = (props) => {
                   setLoading={setLoading}
                   errors={errors}
                   setErrors={setErrors}
+                  expand={expand}
+                  setExpand={setExpand}
                 />
               )}
             </div>

@@ -188,6 +188,8 @@ function App () {
                 allVolunteers={allVolunteers}
                 errors={errors}
                 setErrors={setErrors}
+                loading={loading}
+                setLoading={setLoading}
               />
             )}
           />
