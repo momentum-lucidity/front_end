@@ -4,7 +4,7 @@ import { VolunteerRoster } from "./VolunteerRoster";
 import { useHistory } from "react-router-dom";
 
 export const VolunteerSlotRoster = (props) => {
-  const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors, slotText, setSlotText } =
+  const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors, slotText, setSlotText, setLoading } =
     props;
   const [selectedSlotID, setSelectedSlotID] = useState("");
   const [volStart, setVolStart] = useState("");
@@ -33,8 +33,10 @@ export const VolunteerSlotRoster = (props) => {
   const handleDelete = async () => {
     const success = await deleteVolunteerSlot(token, selectedSlotID);
     if (success) {
-      getAllSlots(token).then((data) => setAllVSlots(data));
-      history.push(`/events/${eventID}`);
+      getAllSlots(token).then((data) => {
+        setAllVSlots(data)
+        setLoading(false)
+      });
     }
   };
   const handleClick = (event) => {

@@ -9,7 +9,7 @@ import Avatar from 'react-avatar'
 import Logo from '../images/1x/logo.png'
 
 export const EventDetail = (props) => {
-  const { token, authUser, setAllEvents, errors, setErrors } = props
+  const { token, authUser, setAllEvents, errors, setErrors, loading, setLoading } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
   const [slotText, setSlotText] = useState("");
@@ -26,6 +26,7 @@ export const EventDetail = (props) => {
     if (!fetchedEventDetails.current) {
       getEventDetails(token, id).then((data) => {
         setEventDetails(data)
+        setLoading(false)
         fetchedEventDetails.current = true
       })
     }
@@ -77,7 +78,9 @@ export const EventDetail = (props) => {
     return classes.filter(Boolean).join(' ')
   }
 
-  return (
+  return loading 
+  ? ("Events details are loading...")
+  : (
     <div className='h-screen bg-gray-50 overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
@@ -431,7 +434,8 @@ export const EventDetail = (props) => {
                     slotText={slotText}
                     volEnd={volEnd}
                     volStart={volStart}
-
+                    setLoading={setLoading}
+                    loading={loading}
                   />
                 </div>
               </div>
