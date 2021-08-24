@@ -218,6 +218,7 @@ export const getUserDetails = (token, id) => {
   return axios
     .get(
       `https://momentum-lucidity.herokuapp.com/users/${id}`,
+      {},
       {
         headers: {
           'Content-Type': 'application/json',
