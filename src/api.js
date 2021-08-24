@@ -379,7 +379,6 @@ export const getDocuments = (token) => {
   return axios
     .get(
       'https://momentum-lucidity.herokuapp.com/docs/',
-      {},
       {
         headers: {
           Authorization: `Token ${token}`,
