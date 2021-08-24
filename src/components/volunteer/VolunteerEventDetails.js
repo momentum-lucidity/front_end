@@ -82,10 +82,11 @@ export const VolunteerEventDetails = (props) => {
                 </div>
               </div>
             </div>
+            <VSlotList token={token} authUser={authUser} yourSlots={yourSlots} allEventSlots={allEventSlots} eventID={event.eventpk} />
           </main>
         </div>
       </div>
-      <VSlotList token={token} authUser={authUser} yourSlots={yourSlots} allEventSlots={allEventSlots} eventID={event.eventpk} />
+
     </>
   )
 }
