@@ -13,10 +13,9 @@ export const VolunteerEvents = (props) => {
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
-      getEventsList(token)
-        .then((data) => setAllEvents(data.results))
-      console.log(allEvents)
-      hasFetchedEvents.current = true
+      getEventsList(token).then((data) => setAllEvents(data.results));
+      console.log(allEvents);
+      hasFetchedEvents.current = true;
     }
   }, [allEvents]);
 
@@ -28,10 +27,12 @@ export const VolunteerEvents = (props) => {
 
   const indexOfLastVolEvent = currentPage * volEventsPerPage;
   const indexOfFirstVolEvent = indexOfLastVolEvent - volEventsPerPage;
-  const currentVolEvents = sortedEvents.slice(indexOfFirstVolEvent, indexOfLastVolEvent);
+  const currentVolEvents = sortedEvents.slice(
+    indexOfFirstVolEvent,
+    indexOfLastVolEvent
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -80,13 +81,13 @@ export const VolunteerEvents = (props) => {
                       </div>
                     </li>
                   ))}
-                                <div className="flex items-center justify-center">
-                <VolunteerEventsPagination
-                  volEventsPerPage={volEventsPerPage}
-                  totalEvents={allEvents.length}
-                  paginate={paginate}
-                />
-              </div>
+                <div className="flex items-center justify-center">
+                  <VolunteerEventsPagination
+                    volEventsPerPage={volEventsPerPage}
+                    totalEvents={allEvents.length}
+                    paginate={paginate}
+                  />
+                </div>
               </ul>
             </div>
           </div>
