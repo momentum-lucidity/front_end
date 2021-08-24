@@ -273,7 +273,7 @@ export const VolunteerList = (props) => {
           </div>
         </div>
 
-        <main className='flex-1 relative overflow-auto focus:outline-none'>
+        <main className='flex-1 relative overflow-y-auto overflow-x-hidden focus:outline-none'>
           <div className='py-8'>
             <div className='pb-8 md:px-0'>
               <h1 className='text-3xl font-semibold text-gray-900'>
@@ -292,7 +292,7 @@ export const VolunteerList = (props) => {
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-indigo-900 uppercase tracking-wider'
                             >
-                              Preferred Name/Legal Name
+                              Legal Name/Preferred Name
                             </th>
                             <th
                               scope='col'
@@ -346,11 +346,11 @@ export const VolunteerList = (props) => {
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap'>
                                 {person.intake_status === 'Approved' ? (
-                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-gray-700'>
                                     {person.intake_status}
                                   </span>
                                 ) : (
-                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-green-800'>
+                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-700'>
                                     {person.intake_status}
                                   </span>
                                 )}

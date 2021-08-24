@@ -376,20 +376,20 @@ export const AnnouncementsList = (props) => {
                         className='flex-1 space-y-1'
                       >
                         <div className='flex items-center justify-between'>
+                          <h3 className='text-md font-medium text-gray-900'>
+                            {announcement.alert_header}
+                          </h3>
                           <p className='text-sm text-gray-700'>
                             {moment(announcement.date).format('LL')}
                           </p>
-                          <h3 className='text-sm font-medium text-gray-900'>
-                            {announcement.alert_header}
-                          </h3>
                           <p className='text-sm text-gray-700'>
                             posted on: {moment(announcement.date).format('LT')}
                           </p>
                         </div>
-                        <p className='items-center text-sm text-gray-700'>
+                        <p className='items-center text-sm pb-1 text-gray-700'>
                           {announcement.text}
                         </p>
-                        <span className='hidden sm:block'>
+                        <span className='hidden sm:block space-x-1'>
                           <Link
                             to={{
                               pathname: `/announcements/edit/${announcement.alertpk}/`,
@@ -398,28 +398,28 @@ export const AnnouncementsList = (props) => {
                           >
                             <button
                               type='button'
-                              className='inline-flex items-center px-4 py-2 border border-green-200 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200'
+                              className='inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200'
                             >
                               <PencilIcon
-                                className='-ml-1 mr-2 h-5 w-5 text-green-500'
+                                className='-ml-1 mr-2 h-5 w-5 text-indigo-700'
                                 aria-hidden='true'
                               />
                               Edit
                             </button>
                           </Link>
-                        </span>
-                        <span className='hidden sm:block'>
                           <button
                             type='button'
-                            className='inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-black bg-transparent hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+                            className='inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
                             onClick={handleDelete}
                           >
                             <TrashIcon
-                              className='-ml-1 mr-2 h-5 w-5 text-red-500'
+                              className='-ml-1 mr-2 h-5 w-5 text-indigo-700'
                               aria-hidden='true'
                             />
                             Delete
                           </button>
+                        </span>
+                        <span className='hidden sm:block'>
                         </span>
                       </div>
                     </div>

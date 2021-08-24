@@ -47,21 +47,21 @@ export const VolunteerAnnouncements = (props) => {
               className="flex flex-col py-4 sm:border-t sm:border-gray-200"
             >
               <ul>
-                <div className="flex flex-col justify-start space-x-3">
-                  <div className="flex flex-col flex-1 justify-start space-y-1">
-                    <div className="flex flex-col flex justify-start justify-between">
-                      <div className="divide-y divide-gray-200">
-                        <li className="text-sm text-gray-700">
-                          Posted on: {moment(announcement.date).format("LL")}
-                        </li>
-                      </div>
-                      <div className="divide-y divide-gray-200">
-                        <li className="text-sm font-medium">
+                <div className='flex flex-col justify-start space-x-3'>
+                  <div className='flex flex-col flex-1 justify-start space-y-1'>
+                    <div className='flex flex-col flex justify-start justify-between'>
+                      <div className='divide-y divide-gray-200'>
+                        <li className='text-md font-medium'>
                           {announcement.alert_header}
                         </li>
                       </div>
-                      <div className="divide-y divide-gray-200">
-                        <li className="items-center text-sm text-gray-700">
+                      <div className='divide-y divide-gray-200'>
+                        <li className='text-sm pb-2 text-gray-800'>
+                          Posted on: {moment(announcement.date).format('LL')}
+                        </li>
+                      </div>
+                      <div className='divide-y divide-gray-200'>
+                        <li className='items-center text-sm text-gray-900'>
                           {announcement.text}
                         </li>
                       </div>
