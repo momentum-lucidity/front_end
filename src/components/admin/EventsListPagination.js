@@ -13,9 +13,9 @@ export const EventsListPagination = ({ eventsPerPage, totalEvents, paginate }) =
 
   return (
     <div className='px-4 py-3 flex items-center justify-between border-gray-200 sm:px-6'>
-      <div className='hidden sm:flex-1 sm:flex sm:items-center'>
+      <div className='hidden sm:flex-1 sm:flex sm:items-center space-x-1'>
         {pageNumbers.map(number => (
-          <div className='items-center justify-between' key={number}>
+          <div className='items-center justify-around' key={number}>
             <nav
               className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px'
               aria-label='Pagination'
