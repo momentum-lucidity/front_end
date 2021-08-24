@@ -27,7 +27,7 @@ export const DocumentList = (props) => {
   const handleDelete = async () => {
     const success = await deleteDocument(token, documentPK)
     if (success) {
-      getDocuments().then((data) => {
+      getDocuments(token).then((data) => {
         setDocuments(data)
         setLoading(false)
       })

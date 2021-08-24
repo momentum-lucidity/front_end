@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
+import { getAllSlots } from '../../api'
 
 export const VolunteerSlotEdit = (props) => {
-  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, slot, isActive, setIsActive } = props
+  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, slot, isActive, setIsActive, setAllVSlots } = props
   const history = useHistory()
 
   console.log(`slot post id ${selectedSlotID}`)
@@ -11,6 +12,7 @@ export const VolunteerSlotEdit = (props) => {
   const handleSubmit = async () => {
     const success = await editVSlot(eventID, selectedSlotID, token, slotText, volStart, volEnd, date)
     if (success) {
+      getAllSlots(token).then((data) => setAllVSlots(data));
       setIsActive(!isActive)
       history.push(`/events/${eventID}/`)
     }

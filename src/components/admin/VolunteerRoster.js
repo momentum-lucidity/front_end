@@ -24,6 +24,7 @@ export const VolunteerRoster = (props) => {
     setErrors,
     fetchedAllSlots,
     slot,
+    setAllVSlots
   } = props;
 
   return (
@@ -92,6 +93,7 @@ export const VolunteerRoster = (props) => {
                 fetchedAllSlots={fetchedAllSlots}
                 isActive={isActive}
                 setIsActive={setIsActive}
+                setAllVSlots={setAllVSlots}
               />
             )}
           </div>

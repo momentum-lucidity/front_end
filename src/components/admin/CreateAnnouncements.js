@@ -17,7 +17,7 @@ export const CreateAnnoucements = (props) => {
         setErrors(error.message)
       })
     if (success) {
-      getAnnouncements().then((data) => {
+      getAnnouncements(token).then((data) => {
         setAnnouncements(data)
         setLoading(false)
       })

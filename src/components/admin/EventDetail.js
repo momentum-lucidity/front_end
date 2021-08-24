@@ -12,6 +12,10 @@ export const EventDetail = (props) => {
   const { token, authUser, setAllEvents, errors, setErrors } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
+  const [slotText, setSlotText] = useState("");
+  const [volStart, setVolStart] = useState("");
+  const [volEnd, setVolEnd] = useState("");
+  const [date, setDate] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [eventDetails, setEventDetails] = useState('')
   const [allVSlots, setAllVSlots] = useState([])
@@ -404,6 +408,14 @@ export const EventDetail = (props) => {
                         setAllVSlots={setAllVSlots}
                         errors={errors}
                         setErrors={setErrors}
+                        setSlotText={setSlotText}
+                        slotText={slotText}
+                        volEnd={volEnd}
+                       volStart={volStart}
+                       date={date}
+                       setVolEnd={setVolEnd}
+                       setVolStart={setVolStart}
+                       setDate={setDate}
                       />
                     )}
                   </div>
@@ -415,6 +427,11 @@ export const EventDetail = (props) => {
                     setAllVSlots={setAllVSlots}
                     errors={errors}
                     setErrors={setErrors}
+                    setSlotText={setSlotText}
+                    slotText={slotText}
+                    volEnd={volEnd}
+                    volStart={volStart}
+
                   />
                 </div>
               </div>

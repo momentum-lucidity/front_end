@@ -17,7 +17,7 @@ export const VolunteerSlotPost = (props) => {
       setErrors(error.message)
     })
     if (success) {
-      getAllSlots().then((data) => setAllVSlots(data))
+      getAllSlots(token).then((data) => setAllVSlots(data))
       setExpandNew(false)
       history.push(`/events/${eventID}/`)
     }
