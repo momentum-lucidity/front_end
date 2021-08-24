@@ -17,7 +17,7 @@ export const VolunteerDashIntake = (props) => {
       setCurrentStatus(StatusOptions.approved)
     }
   }, [currentStatus, authUser.intake_status])
-  console.log(currentStatus)
+
   return (
     <nav aria-label='Progress'>
       <l

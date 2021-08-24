@@ -1,20 +1,21 @@
-import { useEffect, useState, useRef } from 'react';
-import { getEventsList } from '../../api';
-import moment from 'moment';
-import { orderBy } from 'lodash';
+import { useEffect, useState, useRef } from 'react'
+import { getEventsList } from '../../api'
+import { Link } from 'react-router-dom'
+import { orderBy } from 'lodash'
+import moment from 'moment'
 
 export const VolunteerEvents = (props) => {
   const hasFetchedEvents = useRef(false)
-  const { token, authUser } = props
+  const { token, authUser, allSlots, yourSlots } = props
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
       getEventsList(token).then((data) => setAllEvents(data.results))
-      console.log(allEvents)
+      console.log(`volunteer Events ${allEvents}`)
       hasFetchedEvents.current = true
     }
-  }, [allEvents])
+  })
 
   const sortedEvents = orderBy(
     allEvents,
@@ -25,7 +26,8 @@ export const VolunteerEvents = (props) => {
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
   }
-
+  console.log({ allSlots })
+  console.log({ yourSlots })
   return (
     <div className='h-screen bg-white overflow-hidden overflow-y-auto flex flex-initial'>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
@@ -41,9 +43,15 @@ export const VolunteerEvents = (props) => {
                     >
                       <div className='flex justify-between space-x-3'>
                         <div className='min-w-0 flex-1'>
-                          <a
-                            href={`volunteer/events/${event.eventpk}`}
-                            className='block focus:outline-none'
+                          <Link
+                            to={{
+
+                              pathname: `volunteer/events/${event.eventpk}/`,
+                              state: {
+                                allSlots: allSlots,
+                                yourSlots: yourSlots
+                              }
+                            }}
                           >
                             <span
                               className='absolute inset-0'
@@ -64,7 +72,8 @@ export const VolunteerEvents = (props) => {
                             <p className='line-clamp-2 pt-2 text-sm font-mono text-gray-600'>
                               Sign up to volunteer here!
                             </p>
-                          </a>
+
+                          </Link>
                         </div>
                       </div>
                     </li>
@@ -76,4 +85,4 @@ export const VolunteerEvents = (props) => {
       </div>
     </div>
   )
-};
+}
