@@ -273,7 +273,7 @@ export const VolunteerList = (props) => {
           </div>
         </div>
 
-        <main className='flex-1 relative overflow-y-auto focus:outline-none'>
+        <main className='flex-1 relative overflow-y-auto overflow-x-hidden focus:outline-none'>
           <div className='py-8'>
             <div className='pb-8 md:px-0'>
               <h1 className='text-3xl font-semibold text-gray-900'>
@@ -282,7 +282,7 @@ export const VolunteerList = (props) => {
             </div>
             <div className='px-4 sm:px-6 md:px-0'>
               <div className='flex flex-col'>
-                <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                <div className='-my-2 sm:-mx-6 lg:-mx-8'>
                   <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                     <div className='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
                       <table className='min-w-full divide-y divide-gray-700 rounded-xl'>
@@ -292,7 +292,7 @@ export const VolunteerList = (props) => {
                               scope='col'
                               className='px-6 py-3 text-left text-xs font-medium text-indigo-900 uppercase tracking-wider'
                             >
-                              Preferred Name/Legal Name
+                              Legal Name/Preferred Name
                             </th>
                             <th
                               scope='col'
@@ -346,11 +346,11 @@ export const VolunteerList = (props) => {
                               </td>
                               <td className='px-6 py-4 whitespace-nowrap'>
                                 {person.intake_status === 'Approved' ? (
-                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
+                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-gray-700'>
                                     {person.intake_status}
                                   </span>
                                 ) : (
-                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-green-800'>
+                                  <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-gray-700'>
                                     {person.intake_status}
                                   </span>
                                 )}
