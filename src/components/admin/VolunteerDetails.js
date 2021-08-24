@@ -1,134 +1,146 @@
-import { Fragment, useEffect, useState } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import { getUserDetails, deleteUser, getAllSlots } from '../../api'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import { VolunteerIntakeStatus } from './VolunteerIntakeStatus'
-import Avatar from 'react-avatar'
-import Logo from '../images/1x/logo.png'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, PencilIcon } from '@heroicons/react/outline'
+import { Fragment, useEffect, useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { getUserDetails, deleteUser, getAllSlots } from "../../api";
+import { Dialog, Menu, Transition } from "@headlessui/react";
+import { VolunteerIntakeStatus } from "./VolunteerIntakeStatus";
+import Avatar from "react-avatar";
+import Logo from "../images/1x/logo.png";
+import {
+  ChevronRightIcon,
+  CalendarIcon,
+  FolderIcon,
+  HomeIcon,
+  InboxIcon,
+  MenuAlt2Icon,
+  UsersIcon,
+  XIcon,
+  TrashIcon,
+  PencilIcon,
+} from "@heroicons/react/outline";
 
 export const VolunteerDetails = (props) => {
-  const { token, authUser } = props
-  const { id } = useParams()
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [userDetails, setUserDetails] = useState([])
-  const history = useHistory()
+  const { token, authUser } = props;
+  const { id } = useParams();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userDetails, setUserDetails] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    getUserDetails(token, id)
-      .then((data) => setUserDetails(data))
-  }, [id, token])
+    getUserDetails(token, id).then((data) => setUserDetails(data));
+  }, [id, token]);
 
   const handleDelete = async () => {
-    const success = await deleteUser(token, id)
-    if (success) history.push('/volunteers')
-  }
+    const success = await deleteUser(token, id);
+    if (success) history.push("/volunteers");
+  };
 
   const navigation = [
-    { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
-    { name: 'Volunteers', href: '/volunteers', icon: UsersIcon, current: true },
-    { name: 'Events', href: '/events', icon: FolderIcon, current: false },
+    { name: "Dashboard", href: "/admindash", icon: HomeIcon, current: false },
+    { name: "Volunteers", href: "/volunteers", icon: UsersIcon, current: true },
+    { name: "Events", href: "/events", icon: FolderIcon, current: false },
     {
-      name: 'Announcements',
-      href: '/announcements',
+      name: "Announcements",
+      href: "/announcements",
       icon: CalendarIcon,
-      current: false
+      current: false,
     },
-    { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: false }
-  ]
+    {
+      name: "Admin Resources",
+      href: "/documents",
+      icon: InboxIcon,
+      current: false,
+    },
+  ];
 
   const userNavigation = [
-    { name: 'Your Profile', href: '/adminprofile' },
-    { name: 'Sign out', href: '/admin/logout' }
-  ]
+    { name: "Your Profile", href: "/adminprofile" },
+    { name: "Sign out", href: "/admin/logout" },
+  ];
 
   const pages = [
-    { name: 'Dashboard', href: '/admindash', current: false },
-    { name: 'All Volunteers', href: '/volunteers', current: true },
-    { name: 'Profile', href: `/volunteers/${id}`, current: true }
-  ]
+    { name: "Dashboard", href: "/admindash", current: false },
+    { name: "All Volunteers", href: "/volunteers", current: true },
+    { name: "Profile", href: `/volunteers/${id}`, current: true },
+  ];
 
-  function classNames (...classes) {
-    return classes.filter(Boolean).join(' ')
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
   }
 
   return (
-    <div className='h-screen bg-gray-50 overflow-hidden flex'>
+    <div className="h-screen bg-gray-50 overflow-hidden flex">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
-          as='div'
+          as="div"
           static
-          className='fixed inset-0 z-40 flex md:hidden'
+          className="fixed inset-0 z-40 flex md:hidden"
           open={sidebarOpen}
           onClose={setSidebarOpen}
         >
           <Transition.Child
             as={Fragment}
-            enter='transition-opacity ease-linear duration-300'
-            enterFrom='opacity-0'
-            enterTo='opacity-100'
-            leave='transition-opacity ease-linear duration-300'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
+            enter="transition-opacity ease-linear duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity ease-linear duration-300"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <Dialog.Overlay className='fixed inset-0 bg-gray-700 bg-opacity-75' />
+            <Dialog.Overlay className="fixed inset-0 bg-gray-700 bg-opacity-75" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
-            enter='transition ease-in-out duration-300 transform'
-            enterFrom='-translate-x-full'
-            enterTo='translate-x-0'
-            leave='transition ease-in-out duration-300 transform'
-            leaveFrom='translate-x-0'
-            leaveTo='-translate-x-full'
+            enter="transition ease-in-out duration-300 transform"
+            enterFrom="-translate-x-full"
+            enterTo="translate-x-0"
+            leave="transition ease-in-out duration-300 transform"
+            leaveFrom="translate-x-0"
+            leaveTo="-translate-x-full"
           >
-            <div className='relative max-w-xs w-full bg-white pt-5 pb-4 flex-1 flex flex-col'>
+            <div className="relative max-w-xs w-full bg-white pt-5 pb-4 flex-1 flex flex-col">
               <Transition.Child
                 as={Fragment}
-                enter='ease-in-out duration-300'
-                enterFrom='opacity-0'
-                enterTo='opacity-100'
-                leave='ease-in-out duration-300'
-                leaveFrom='opacity-100'
-                leaveTo='opacity-0'
+                enter="ease-in-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in-out duration-300"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
               >
-                <div className='absolute top-0 right-0 -mr-12 pt-2'>
+                <div className="absolute top-0 right-0 -mr-12 pt-2">
                   <button
-                    className='ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
+                    className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     onClick={() => setSidebarOpen(false)}
                   >
-                    <span className='sr-only'>Close sidebar</span>
-                    <XIcon className='h-6 w-6 text-white' aria-hidden='true' />
+                    <span className="sr-only">Close sidebar</span>
+                    <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
                   </button>
                 </div>
               </Transition.Child>
-              <div className='sm:mx-auto sm:w-9/12 sm:max-h-4'>
-                <img
-                  src={Logo}
-                  alt='lucidity'
-                />
+              <div className="sm:mx-auto sm:w-9/12 sm:max-h-4">
+                <img src={Logo} alt="lucidity" />
               </div>
-              <div className='mt-5 flex-1 h-0 bg-white overflow-y-auto'>
-                <nav className='px-2 space-y-1'>
+              <div className="mt-5 flex-1 h-0 bg-white overflow-y-auto">
+                <nav className="px-2 space-y-1">
                   {navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? 'bg-gray-100 text-gray-900'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                        'group rounded-md py-2 px-2 flex items-center text-base font-medium'
+                          ? "bg-gray-100 text-gray-900"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                        "group rounded-md py-2 px-2 flex items-center text-base font-medium"
                       )}
                     >
                       <item.icon
                         className={classNames(
                           item.current
-                            ? 'text-gray-500'
-                            : 'text-gray-400 group-hover:text-gray-500',
-                          'mr-4 flex-shrink-0 h-6 w-6'
+                            ? "text-gray-500"
+                            : "text-gray-400 group-hover:text-gray-500",
+                          "mr-4 flex-shrink-0 h-6 w-6"
                         )}
-                        aria-hidden='true'
+                        aria-hidden="true"
                       />
                       {item.name}
                     </a>
@@ -137,43 +149,43 @@ export const VolunteerDetails = (props) => {
               </div>
             </div>
           </Transition.Child>
-          <div className=' bg-white flex-shrink-0 w-14'>
+          <div className=" bg-white flex-shrink-0 w-14">
             {/* Dummy element to force sidebar to shrink to fit close icon */}
           </div>
         </Dialog>
       </Transition.Root>
 
-      <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 bg-white flex flex-col'>
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
-            <div className='flex-shrink-1 px-4 flex items-center'>
+      <div className="hidden md:flex md:flex-shrink-0">
+        <div className="w-64 bg-white flex flex-col">
+          <div className="border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto">
+            <div className="flex-shrink-1 px-4 flex items-center">
               <img
-                className='w-full, bg-white'
+                className="w-full, bg-white"
                 src={Logo}
-                alt='Lucidity Logo'
+                alt="Lucidity Logo"
               />
             </div>
-            <div className='flex-grow mt-5 flex flex-col'>
-              <nav className='flex-1 bg-white px-2 space-y-1'>
+            <div className="flex-grow mt-5 flex flex-col">
+              <nav className="flex-1 bg-white px-2 space-y-1">
                 {navigation.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                      'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
+                        ? "bg-gray-100 text-gray-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                      "group rounded-md py-2 px-2 flex items-center text-sm font-medium"
                     )}
                   >
                     <item.icon
                       className={classNames(
                         item.current
-                          ? 'text-gray-500'
-                          : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 flex-shrink-0 h-6 w-6'
+                          ? "text-gray-500"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
-                      aria-hidden='true'
+                      aria-hidden="true"
                     />
                     {item.name}
                   </a>
@@ -183,40 +195,40 @@ export const VolunteerDetails = (props) => {
           </div>
         </div>
       </div>
-      <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex'>
+      <div className="flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0">
+        <div className="relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex">
           <button
-            className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
+            className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
             onClick={() => setSidebarOpen(true)}
           >
-            <span className='sr-only'>Open sidebar</span>
-            <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
+            <span className="sr-only">Open sidebar</span>
+            <MenuAlt2Icon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <div className='flex-1 flex bg-gray-50'>
-            <nav className='flex' aria-label='Breadcrumb'>
-              <ol className='flex items-center space-x-4'>
+          <div className="flex-1 flex bg-gray-50">
+            <nav className="flex" aria-label="Breadcrumb">
+              <ol className="flex items-center space-x-4">
                 <li>
                   <div>
-                    <a href='/' className='text-gray-700 hover:text-indigo-500'>
+                    <a href="/" className="text-gray-700 hover:text-indigo-500">
                       <HomeIcon
-                        className='flex-shrink-0 h-7 w-7'
-                        aria-hidden='true'
+                        className="flex-shrink-0 h-7 w-7"
+                        aria-hidden="true"
                       />
-                      <span className='sr-only'>Home</span>
+                      <span className="sr-only">Home</span>
                     </a>
                   </div>
                 </li>
                 {pages.map((page) => (
                   <li key={page.name}>
-                    <div className='flex items-center'>
+                    <div className="flex items-center">
                       <ChevronRightIcon
-                        className='flex-shrink-0 h-8 w-8 text-gray-700'
-                        aria-hidden='true'
+                        className="flex-shrink-0 h-8 w-8 text-gray-700"
+                        aria-hidden="true"
                       />
                       <a
                         href={page.href}
-                        className='ml-4 text-md font-medium text-gray-700 hover:text-indigo-500'
-                        aria-current={page.current ? 'page' : undefined}
+                        className="ml-4 text-md font-medium text-gray-700 hover:text-indigo-500"
+                        aria-current={page.current ? "page" : undefined}
                       >
                         {page.name}
                       </a>
@@ -226,29 +238,29 @@ export const VolunteerDetails = (props) => {
               </ol>
             </nav>
           </div>
-          <div className='ml-4 flex items-center bg-gray-50 md:ml-6'>
-            <Menu as='div' className='ml-3 relative'>
+          <div className="ml-4 flex items-center bg-gray-50 md:ml-6">
+            <Menu as="div" className="ml-3 relative">
               {({ open }) => (
                 <>
                   <div>
-                    <Menu.Button className='max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                      <span className='sr-only'>Open user menu</span>
-                      <Avatar name={authUser.legal_name} size='60' round />
+                    <Menu.Button className="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                      <span className="sr-only">Open user menu</span>
+                      <Avatar name={authUser.legal_name} size="60" round />
                     </Menu.Button>
                   </div>
                   <Transition
                     show={open}
                     as={Fragment}
-                    enter='transition ease-out duration-100'
-                    enterFrom='transform opacity-0 scale-95'
-                    enterTo='transform opacity-100 scale-100'
-                    leave='transition ease-in duration-75'
-                    leaveFrom='transform opacity-100 scale-100'
-                    leaveTo='transform opacity-0 scale-95'
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items
                       static
-                      className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none'
+                      className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                     >
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
@@ -256,8 +268,8 @@ export const VolunteerDetails = (props) => {
                             <a
                               href={item.href}
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block py-2 px-4 text-sm text-gray-700'
+                                active ? "bg-gray-100" : "",
+                                "block py-2 px-4 text-sm text-gray-700"
                               )}
                             >
                               {item.name}
@@ -273,98 +285,139 @@ export const VolunteerDetails = (props) => {
           </div>
         </div>
 
-        <main className='flex-1 relative overflow-y-auto focus:outline-none'>
-          <div className='py-8'>
-            <div className='px-4 sm:px-6 pb-2 md:px-0'>
-              <h1 className='text-3xl font-semibold pb-1 text-gray-900'>
+        <main className="flex-1 relative overflow-y-auto focus:outline-none">
+          <div className="py-8">
+            <div className="px-4 sm:px-6 pb-2 md:px-0">
+              <h1 className="text-3xl font-semibold pb-1 text-gray-900">
                 {userDetails.legal_name}'s
               </h1>
             </div>
-            <div className='px-4 sm:px-6 md:px-0'>
+            <div className="px-4 sm:px-6 md:px-0">
               <div>
-                <h3 className='text-lg pb-3 leading-6 font-medium text-gray-900'>
+                <h3 className="text-lg pb-3 leading-6 font-medium text-gray-900">
                   Profile
                 </h3>
               </div>
-              <div className='mb-8'>
-                <VolunteerIntakeStatus token={token} userDetails={userDetails} />
+              <div className="mb-8">
+                <VolunteerIntakeStatus
+                  token={token}
+                  userDetails={userDetails}
+                />
               </div>
-              <div className='bg-white shadow overflow-hidden border border-gray-200 sm:rounded-xl'>
-                <div className='px-4 py-5 sm:px-6'>
-                  <h3 className='text-lg leading-6 font-medium text-gray-900'>Volunteer Information</h3>
-                  <p className='mt-1 max-w-2xl text-sm text-gray-500'>Personal details and application.</p>
+              <div className="bg-white shadow overflow-hidden border border-gray-200 sm:rounded-xl">
+                <div className="px-4 py-5 sm:px-6">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Volunteer Information
+                  </h3>
+                  <p className="mt-1 max-w-2xl text-sm text-gray-500">
+                    Personal details and application.
+                  </p>
                 </div>
-                <div className='border-t border-gray-200 px-4 py-5 sm:p-0'>
-                  <dl className='sm:divide-y sm:divide-gray-200'>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Preferred Name</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.display_name}</dd>
+                <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
+                  <dl className="sm:divide-y sm:divide-gray-200">
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Preferred Name
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.display_name}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Pronouns</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.pronouns}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Pronouns
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.pronouns}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Full name</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.legal_name}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Full name
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.legal_name}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Telephone</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.telephone}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Telephone
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.telephone}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Email address</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.email}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Email address
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.email}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Street Address</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{userDetails.address2}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Street Address
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {userDetails.address2}
+                      </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>City, State, Zip</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>{`${userDetails.city}, ${userDetails.state} ${userDetails.zipcode}`}</dd>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        City, State, Zip
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{`${userDetails.city}, ${userDetails.state} ${userDetails.zipcode}`}</dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Availability</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Availability
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                         {userDetails.availability}
                       </dd>
                     </div>
-                    <div className='py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'>
-                      <dt className='text-sm font-medium text-gray-500'>Update</dt>
-                      <dd className='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2'>
-                        <ul className='border border-gray-200 rounded-md divide-y divide-gray-200'>
-                          <li className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'>
-                            <div className='w-0 flex-1 flex items-center'>
-                              <PencilIcon className='flex-shrink-0 h-5 w-5 text-gray-400' aria-hidden='true' />
-                              <span className='ml-2 flex-1 w-0 truncate'>Edit Profile</span>
-                            </div>
-                            <div className='ml-4 flex-shrink-0'>
+                    <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500">
+                        Update
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        <ul className="border border-white rounded-md divide-y divide-white inline-flex">
+                          <li className="pl-3 pr-4 py-3 flex text-sm">
+                            <div className="ml-4 flex-shrink-0">
                               <Link
                                 to={{
-
                                   pathname: `/volunteers/edit/${id}/`,
-                                  state: { userDetails: userDetails }
+                                  state: { userDetails: userDetails },
                                 }}
-                                className='font-medium text-indigo-600 hover:text-indigo-500'
+                                className="font-medium text-indigo-600 hover:text-indigo-500"
                               >
-                                Edit
+                                <button
+                                  type="button"
+                                  className="inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                >
+                                  <PencilIcon
+                                    className="-ml-1 mr-2 h-5 w-5 text-indigo-700"
+                                    aria-hidden="true"
+                                  />
+                                  Edit User
+                                </button>
                               </Link>
                             </div>
                           </li>
-                          <li className='pl-3 pr-4 py-3 flex items-center justify-between text-sm'>
-                            <div className='w-0 flex-1 flex items-center'>
-                              <TrashIcon className='flex-shrink-0 h-5 w-5 text-gray-400' aria-hidden='true' />
-                              <span className='ml-2 flex-1 w-0 truncate'>Delete Profile</span>
-                            </div>
-                            <div className='ml-4 flex-shrink-0'>
-                              <a
-                                href='#'
-                                className='font-medium text-indigo-600 hover:text-indigo-500'
+                          <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
+                            <div className="ml-4 flex-shrink-0">
+                              <button
+                                type="button"
+                                className="inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                                 onClick={handleDelete}
                               >
-                                Delete
-                              </a>
+                                <TrashIcon
+                                  className="-ml-1 mr-2 h-5 w-5 text-indigo-700"
+                                  aria-hidden="true"
+                                />
+                                Delete User
+                              </button>
                             </div>
                           </li>
                         </ul>
@@ -373,11 +426,24 @@ export const VolunteerDetails = (props) => {
                   </dl>
                 </div>
               </div>
-              {/* /End replace */}
             </div>
           </div>
         </main>
       </div>
     </div>
-  )
+  );
+};
+
+{
+  /* <button
+type='button'
+className='inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+onClick={handleDelete}
+>
+<TrashIcon
+  className='-ml-1 mr-2 h-5 w-5 text-indigo-700'
+  aria-hidden='true'
+/>
+Delete
+</button> */
 }
