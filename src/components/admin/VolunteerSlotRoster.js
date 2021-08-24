@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
-import { deleteVolunteerSlot, getAllSlots } from "../../api";
+import { deleteVolunteerSlot, getAllSlots, getEventDetails } from "../../api";
 import { VolunteerRoster } from "./VolunteerRoster";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export const VolunteerSlotRoster = (props) => {
-  const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors, slotText, setSlotText, setLoading } =
+  const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors, slotText, setSlotText, setLoading, setEventDetails} =
     props;
   const [selectedSlotID, setSelectedSlotID] = useState("");
   const [volStart, setVolStart] = useState("");
@@ -31,12 +31,12 @@ export const VolunteerSlotRoster = (props) => {
   });
 
   const handleDelete = async () => {
-    const success = await deleteVolunteerSlot(token, selectedSlotID);
-    if (success) {
-      getAllSlots(token).then((data) => {
-        setAllVSlots(data)
-        setLoading(false)
-      });
+  const success = await  deleteVolunteerSlot(token, selectedSlotID);
+  window.location.reload()
+  if (success) {
+      getEventDetails(token, eventID).then((data) => {
+        setEventDetails(data)
+        setLoading(false)});
     }
   };
   const handleClick = (event) => {

@@ -448,6 +448,7 @@ export const EventDetail = (props) => {
                     volStart={volStart}
                     setLoading={setLoading}
                     loading={loading}
+                    setEventDetails={setEventDetails}
                   />
                 </div>
               </div>
