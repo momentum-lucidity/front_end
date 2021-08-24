@@ -54,7 +54,7 @@ export const VolunteerList = (props) => {
 
   useEffect(() => {
     if (!hasFetchedVolunteers.current) {
-      getVolunteerList().then((data) => setAllVolunteers(data))
+      getVolunteerList(token).then((data) => setAllVolunteers(data))
       hasFetchedVolunteers.current = true
     }
   }, [allVolunteers])
