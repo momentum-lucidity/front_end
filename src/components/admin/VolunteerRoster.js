@@ -52,7 +52,8 @@ export const VolunteerRoster = (props) => {
           <p className="text-sm text-gray-500 truncate">
             Role/Duties: {slot.vslot_text}
           </p>
-          <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium">
+          <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium"
+          onClickCapture={() => setErrors()}>
             <button
               type="button"
               value={slot.slotpk}

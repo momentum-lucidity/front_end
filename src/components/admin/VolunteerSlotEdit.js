@@ -11,13 +11,13 @@ export const VolunteerSlotEdit = (props) => {
 
   const handleSubmit = async () => {
     const success = await editVSlot(eventID, selectedSlotID, token, slotText, volStart, volEnd, date)
+    .catch((error) => {
+      setErrors(error.message)
+    })
     if (success) {
-      getAllSlots(token).then((data) => {setAllVSlots(data);
+      getAllSlots(token).then((data) => setAllVSlots(data));
       setIsActive(!isActive)
-      history.push(`/events/${eventID}/`)})
-      .catch((error) => {
-        setErrors(error.message)
-      })
+      history.push(`/events/${eventID}/`)
     }
   }
 
