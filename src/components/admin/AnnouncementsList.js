@@ -49,7 +49,7 @@ export const AnnouncementsList = (props) => {
   const handleDelete = async () => {
     const success = await deleteAnnouncement(token, announcementPK)
     if (success) {
-      getAnnouncements().then((data) => {
+      getAnnouncements(token).then((data) => {
         setAnnouncements(data)
         setLoading(false)
       })

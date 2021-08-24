@@ -7,13 +7,14 @@ import Logo from '../images/1x/logo.png'
 export const AdminLogin = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setToken, errors, setErrors } = props
+  const { setToken, errors, setErrors, authUser } = props
   const history = useHistory()
 
   const handleSubmit = (event) => {
+    console.log (authUser)
     event.preventDefault()
     requestLogin(username, password)
-      .then((data) => {
+    .then((data) => {
         setToken(data.data.auth_token)
         history.push('/admindash')
       })
