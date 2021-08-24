@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { editVSlot } from '../../api'
 import { getAllSlots } from '../../api'
-
+import { XCircleIcon } from '@heroicons/react/outline'
 export const VolunteerSlotEdit = (props) => {
-  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, slot, isActive, setIsActive, setAllVSlots } = props
+  const { token, eventID, selectedSlotID, slotText, volStart, volEnd, date, setSlotText, setVolStart, setVolEnd, setDate, slot, isActive, setIsActive, setAllVSlots, setErrors, errors } = props
   const history = useHistory()
 
   console.log(`slot post id ${selectedSlotID}`)
@@ -15,6 +15,9 @@ export const VolunteerSlotEdit = (props) => {
       getAllSlots(token).then((data) => setAllVSlots(data));
       setIsActive(!isActive)
       history.push(`/events/${eventID}/`)
+      .catch((error) => {
+        setErrors(error.message)
+      })
     }
   }
 
@@ -24,7 +27,6 @@ export const VolunteerSlotEdit = (props) => {
 
   return (
     <div className='space-y-6' id={slot.slotpk}>
-
       <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
         <div className='md:grid md:grid-cols-3 md:gap-6'>
           <div className='md:col-span-1'>

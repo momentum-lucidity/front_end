@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { deleteVolunteerSlot, getAllSlots, getEventDetails } from "../../api";
 import { VolunteerRoster } from "./VolunteerRoster";
 import { useHistory, useParams } from "react-router-dom";
+import { XCircleIcon } from "@heroicons/react/outline";
 
 export const VolunteerSlotRoster = (props) => {
   const { token, eventDetails, allVSlots, setAllVSlots, setErrors, errors, slotText, setSlotText, setLoading, setEventDetails} =

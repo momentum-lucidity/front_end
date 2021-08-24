@@ -1,6 +1,7 @@
 import { VolunteerSlotEdit } from "./VolunteerSlotEdit";
 import Avatar from "react-avatar";
 import { useState } from "react";
+import { XCircleIcon } from "@heroicons/react/outline";
 
 export const VolunteerRoster = (props) => {
   const [isActive, setIsActive] = useState(false);
