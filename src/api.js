@@ -188,7 +188,7 @@ export const editVSlot = (eventID, selectedSlotID, token, slotText, volStart, vo
 export const deleteVolunteerSlot = (token, slotpk) => {
   return axios
     .delete(
-      `https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}/`,
+      `https://momentum-lucidity.herokuapp.com/volunteerops/${slotpk}`,
       {
         headers: {
           Authorization: `Token ${token}`,

@@ -21,9 +21,9 @@ import Logo from "../images/1x/logo.png";
 import moment from "moment";
 
 export const EventDetail = (props) => {
-  const { token, authUser, setAllEvents, errors, setErrors } = props;
-  const { id } = useParams();
-  const fetchedEventDetails = useRef(false);
+  const { token, authUser, setAllEvents, errors, setErrors, loading, setLoading } = props
+  const { id } = useParams()
+  const fetchedEventDetails = useRef(false)
   const [slotText, setSlotText] = useState("");
   const [volStart, setVolStart] = useState("");
   const [volEnd, setVolEnd] = useState("");
@@ -37,9 +37,10 @@ export const EventDetail = (props) => {
   useEffect(() => {
     if (!fetchedEventDetails.current) {
       getEventDetails(token, id).then((data) => {
-        setEventDetails(data);
-        fetchedEventDetails.current = true;
-      });
+        setEventDetails(data)
+        setLoading(false)
+        fetchedEventDetails.current = true
+      })
     }
   }, [eventDetails, token, id]);
 
@@ -94,8 +95,10 @@ export const EventDetail = (props) => {
     return classes.filter(Boolean).join(" ");
   }
 
-  return (
-    <div className="h-screen bg-gray-50 overflow-hidden flex">
+  return loading 
+  ? ("Events details are loading...")
+  : (
+    <div className='h-screen bg-gray-50 overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -443,6 +446,9 @@ export const EventDetail = (props) => {
                     slotText={slotText}
                     volEnd={volEnd}
                     volStart={volStart}
+                    setLoading={setLoading}
+                    loading={loading}
+                    setEventDetails={setEventDetails}
                   />
                 </div>
               </div>

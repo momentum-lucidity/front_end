@@ -2,18 +2,20 @@ import { useEffect, useState, useRef } from "react";
 import { getEventsList } from "../../api";
 import moment from "moment";
 import { orderBy } from "lodash";
+import { VolunteerEventsPagination } from "./VolunteerEventsPagination";
 
 export const VolunteerEvents = (props) => {
   const hasFetchedEvents = useRef(false);
   const { token, authUser } = props;
   const [allEvents, setAllEvents] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [volEventsPerPage] = useState(4);
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
-      getEventsList(token)
-        .then((data) => setAllEvents(data.results))
-      console.log(allEvents)
-      hasFetchedEvents.current = true
+      getEventsList(token).then((data) => setAllEvents(data.results));
+      console.log(allEvents);
+      hasFetchedEvents.current = true;
     }
   }, [allEvents]);
 
@@ -22,6 +24,15 @@ export const VolunteerEvents = (props) => {
     [(object) => new moment(object.date)],
     ["asc"]
   );
+
+  const indexOfLastVolEvent = currentPage * volEventsPerPage;
+  const indexOfFirstVolEvent = indexOfLastVolEvent - volEventsPerPage;
+  const currentVolEvents = sortedEvents.slice(
+    indexOfFirstVolEvent,
+    indexOfLastVolEvent
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -34,8 +45,8 @@ export const VolunteerEvents = (props) => {
           <div className="py-6">
             <div className="px-4 sm:px-6 md:px-0 overflow-y-auto ">
               <ul className="divide-y divide-gray-500">
-                {sortedEvents &&
-                  sortedEvents.map((event, idx) => (
+                {currentVolEvents &&
+                  currentVolEvents.map((event, idx) => (
                     <li
                       key={event.eventpk}
                       className="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
@@ -70,6 +81,13 @@ export const VolunteerEvents = (props) => {
                       </div>
                     </li>
                   ))}
+                <div className="flex items-center justify-center">
+                  <VolunteerEventsPagination
+                    volEventsPerPage={volEventsPerPage}
+                    totalEvents={allEvents.length}
+                    paginate={paginate}
+                  />
+                </div>
               </ul>
             </div>
           </div>

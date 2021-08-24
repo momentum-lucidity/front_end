@@ -339,7 +339,7 @@ export const EventsList = (props) => {
                             href={`/events/${event.eventpk}`}
                             className="block focus:outline-none"
                           >
-                            <p className="text-sm font-medium text-gray-900 truncate">
+                            <p className="text-xl font-medium text-gray-900 truncate">
                               {event.event_header}
                             </p>
                             <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2">
@@ -352,7 +352,7 @@ export const EventsList = (props) => {
                               <div className="sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
                                 Volunteers Needed
                               </div>
-                              <div className="git sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                              <div className="sm:col-span-1 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
                                 Volunteers Signed Up
                               </div>
                             </div>
