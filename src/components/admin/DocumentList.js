@@ -53,7 +53,7 @@ export const DocumentList = (props) => {
       icon: CalendarIcon,
       current: false
     },
-    { name: 'Documents', href: '/documents', icon: InboxIcon, current: true }
+    { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: true }
   ]
 
   const userNavigation = [
@@ -63,7 +63,7 @@ export const DocumentList = (props) => {
 
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
-    { name: 'All Documents', href: '/documents', current: true }
+    { name: 'Admin Resources', href: '/documents', current: true }
   ]
 
   const items = [

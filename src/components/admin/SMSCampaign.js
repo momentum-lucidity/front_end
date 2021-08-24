@@ -25,7 +25,7 @@ export const SMSCampaign = () => {
     { name: 'Volunteers', href: '/volunteers', icon: UsersIcon, current: false },
     { name: 'Events', href: '/events', icon: FolderIcon, current: false },
     { name: 'Announcements', href: '/announcements', icon: CalendarIcon, current: false },
-    { name: 'Documents', href: '/documents', icon: InboxIcon, current: false },
+    { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: false },
     { name: 'Campaign', href: '/admindash/text', icon: InboxIcon, current: true }
   ]
 
