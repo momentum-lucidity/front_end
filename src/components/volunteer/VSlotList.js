@@ -46,9 +46,9 @@ export const VSlotList = (props) => {
 
               {eSlot.user[0] && eSlot.user[0]
                 ? (eSlot.user[0] === authUser.id
-                    ? <button>WithDraw</button>
-                    : <p>Slot filled</p>)
-                : (<button>SignUp</button>)}
+                    ? <button className='border rounded-md bg-indigo-700 text-s text-gray-50 py-4 px-4'>WithDraw</button>
+                    : <p className='border rounded-md bg-gray-200 text-s text-gray-900 py-4 px-4'>Slot filled</p>)
+                : (<button className='border rounded-md bg-indigo-700 text-s text-gray-50 py-4 px-4'>SignUp</button>)}
 
             </div>
           </div>
