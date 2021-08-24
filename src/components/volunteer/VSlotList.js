@@ -45,8 +45,10 @@ export const VSlotList = (props) => {
               <p className='text-sm text-gray-500 truncate'>Role/Duties: {eSlot.vslot_text}</p>
 
               {eSlot.user[0] && eSlot.user[0]
-                ? <button>Withdraw</button>
-                : <button>SignUp</button>}
+                ? (eSlot.user[0] === authUser.id
+                    ? <button>WithDraw</button>
+                    : <p>Slot filled</p>)
+                : (<button>SignUp</button>)}
 
             </div>
           </div>
