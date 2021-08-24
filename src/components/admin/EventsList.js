@@ -37,7 +37,7 @@ export const EventsList = (props) => {
   const sortedEvents = orderBy(
     allEvents,
     [(object) => new moment(object.date)],
-    ["desc"]
+    ["asc"]
   );
 
   const indexOfLastEvent = currentPage * eventsPerPage;
