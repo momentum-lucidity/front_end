@@ -53,7 +53,7 @@ export const CreateDocument = (props) => {
                   htmlFor="announcement-body"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Optional Resource URL
+                  Resource URL
                 </label>
                 <div className="mt-1">
                   <input

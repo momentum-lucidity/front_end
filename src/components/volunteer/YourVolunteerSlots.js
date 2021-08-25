@@ -3,7 +3,6 @@ import React from 'react'
 export const YourVolunteerSlots = (props) => {
   const { token, authUser, yourSlots } = props
 
-  console.log(`YourSlots: ${yourSlots}`)
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
   }

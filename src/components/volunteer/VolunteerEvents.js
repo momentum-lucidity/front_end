@@ -3,11 +3,15 @@ import { getEventsList } from '../../api'
 import { Link } from 'react-router-dom'
 import { orderBy } from 'lodash'
 import moment from 'moment'
+import { VolunteerEventsPagination } from './VolunteerEventsPagination';
 
 export const VolunteerEvents = (props) => {
   const hasFetchedEvents = useRef(false)
   const { token, authUser, allSlots, setAllSlots, yourSlots } = props
   const [allEvents, setAllEvents] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [volEventsPerPage] = useState(4)
+
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
@@ -23,11 +27,18 @@ export const VolunteerEvents = (props) => {
     ['asc']
   )
 
+  const indexOfLastVolEvent = currentPage * volEventsPerPage
+  const indexOfFirstVolEvent = indexOfLastVolEvent - volEventsPerPage
+  const currentVolEvents = sortedEvents.slice(
+    indexOfFirstVolEvent,
+    indexOfLastVolEvent
+  )
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
   function classNames (...classes) {
     return classes.filter(Boolean).join(' ')
   }
-  console.log({ allSlots })
-  console.log({ yourSlots })
   return (
     <div className='h-screen bg-white overflow-hidden overflow-y-auto flex flex-initial'>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
@@ -35,8 +46,8 @@ export const VolunteerEvents = (props) => {
           <div className='py-6'>
             <div className='px-4 sm:px-6 md:px-0 overflow-y-auto '>
               <ul className='divide-y divide-gray-500'>
-                {sortedEvents &&
-                  sortedEvents.map((event, idx) => (
+                {currentVolEvents &&
+                  currentVolEvents.map((event, idx) => (
                     <li
                       key={event.eventpk}
                       className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
@@ -77,6 +88,13 @@ export const VolunteerEvents = (props) => {
                       </div>
                     </li>
                   ))}
+                <div className='flex items-center justify-center'>
+                  <VolunteerEventsPagination
+                    volEventsPerPage={volEventsPerPage}
+                    totalEvents={allEvents.length}
+                    paginate={paginate}
+                  />
+                </div>
               </ul>
             </div>
           </div>

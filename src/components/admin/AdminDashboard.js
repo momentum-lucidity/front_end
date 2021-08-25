@@ -3,6 +3,7 @@ import Avatar from 'react-avatar'
 import Logo from '../images/1x/logo.png'
 import { ChevronRightIcon, CalendarIcon, SpeakerphoneIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, DocumentDuplicateIcon } from '@heroicons/react/outline'
 import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Redirect } from 'react-router'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: true },
@@ -14,7 +15,7 @@ const navigation = [
     icon: CalendarIcon,
     current: false
   },
-  { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
+  { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: false }
 ]
 
 const userNavigation = [
@@ -67,6 +68,10 @@ export const AdminDashboard = (props) => {
   const { authUser, token } = props
   const [sidebarOpen, setSidebarOpen] = useState(false)
   console.log(authUser)
+
+  if (authUser.user_status === "volunteer") {
+    return <Redirect to='/dreamcenter/volunteerdash'/>
+  }
 
   return (
     <div className='h-screen bg-gray-50 overflow-hidden flex'>

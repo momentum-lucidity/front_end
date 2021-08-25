@@ -57,6 +57,8 @@ function App () {
                 setAuthUser={setAuthUser}
                 errors={errors}
                 setErrors={setErrors}
+                setAllVolunteers={setAllVolunteers}
+                allVolunteers={allVolunteers}
               />
             )}
           />
@@ -191,6 +193,8 @@ function App () {
                 allVolunteers={allVolunteers}
                 errors={errors}
                 setErrors={setErrors}
+                loading={loading}
+                setLoading={setLoading}
               />
             )}
           />

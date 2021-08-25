@@ -1,10 +1,11 @@
 import { Fragment, useState, useRef, useEffect } from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, XCircleIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon, CalendarIcon, FolderIcon, HomeIcon, InboxIcon, MenuAlt2Icon, UsersIcon, XIcon, TrashIcon, XCircleIcon, ClipboardCopyIcon } from '@heroicons/react/outline'
 import { getDocuments, deleteDocument } from '../../api'
 import { CreateDocument } from './CreateDocument'
 import Avatar from 'react-avatar'
 import Logo from '../images/1x/logo.png'
+import { ClipboardCopy } from './ClipboardCopy'
 
 export const DocumentList = (props) => {
   const hasFetchedDocuments = useRef(false)
@@ -15,7 +16,7 @@ export const DocumentList = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   useEffect(() => {
     if (!hasFetchedDocuments.current) {
-      getDocuments().then((data) => {
+      getDocuments(token).then((data) => {
         setDocuments(data)
         setLoading(false)
       })
@@ -26,7 +27,7 @@ export const DocumentList = (props) => {
   const handleDelete = async () => {
     const success = await deleteDocument(token, documentPK)
     if (success) {
-      getDocuments().then((data) => {
+      getDocuments(token).then((data) => {
         setDocuments(data)
         setLoading(false)
       })
@@ -53,7 +54,7 @@ export const DocumentList = (props) => {
       icon: CalendarIcon,
       current: false
     },
-    { name: 'Documents', href: '/documents', icon: InboxIcon, current: true }
+    { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: true }
   ]
 
   const userNavigation = [
@@ -63,7 +64,7 @@ export const DocumentList = (props) => {
 
   const pages = [
     { name: 'Dashboard', href: '/admindash', current: false },
-    { name: 'All Documents', href: '/documents', current: true }
+    { name: 'Admin Resources', href: '/documents', current: true }
   ]
 
   const items = [
@@ -322,13 +323,13 @@ export const DocumentList = (props) => {
             )}
 
             <div className='sm:py-8'>
-              <div className='sm:flex sm:items-center sm:justify-between'>
+              <div className='sm:flex sm:items-center sm:justify-between px-2'>
                 <h1 className='text-3xl leading-6 font-semibold text-gray-900'>
                   Admin Resources
                 </h1>
                 <button
                   type='button'
-                  className='inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  className='inline-flex items-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                   onClick={handleClick}
                 >
                   Add A New Resource
@@ -357,15 +358,16 @@ export const DocumentList = (props) => {
                         {documents.map((document, idx) => (
                           <li
                             key={document.docpk}
-                            className='col-span-1 mt-2 mb-2 flex content-between shadow-sm rounded-md bg-color bg-pink-600'
+                            className='col-span-1 mt-1 mb-2 flex content-between shadow-sm rounded-md bg-color bg-indigo-200'
                           >
                             <div
                               className={classNames(
                                 document.bgColor,
-                                'flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md'
+                                'inline-flex items-center items-center justify-center w-4 pt-1 text-white text-sm font-medium rounded-l-md'
                               )}
                             />
-                            <div className='flex-1 flex-row items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
+                          <ClipboardCopy copyText={document.url} />
+                            <div className='flex-1 flex-row items-center justify-around border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
                               <div
                                 onClickCapture={() =>
                                   setDocumentPK(document.docpk)}
@@ -373,11 +375,11 @@ export const DocumentList = (props) => {
                               >
                                 <a
                                   href={document.url}
-                                  className='text-gray-900 font-medium hover:text-gray-200'
+                                  className='text-gray-900 font-medium hover:text-indigo-700'
                                   target='_blank'
                                   rel='noreferrer noopener'
                                 >
-                                  {document.doc_header}
+                                  {document.doc_header} <br /> 
                                 </a>
                                 <button>
                                   <TrashIcon

@@ -13,7 +13,7 @@ export const AnnouncementPagination = ({ announcementsPerPage, totalAnnouncement
 
   return (
     <div className='bg-gray-50 px-4 py-3 flex items-center justify-between border-gray-200 sm:px-6'>
-      <div className='hidden sm:flex-1 sm:flex sm:items-center'>
+      <div className='hidden sm:flex-1 sm:flex sm:items-center space-x-1'>
         {pageNumbers.map(number => (
           <div key={number}>
             <nav

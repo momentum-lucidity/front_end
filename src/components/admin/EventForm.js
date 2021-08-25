@@ -32,7 +32,7 @@ export const EventForm = (props) => {
       icon: CalendarIcon,
       current: false
     },
-    { name: 'Documents', href: '/documents', icon: InboxIcon, current: false }
+    { name: 'Admin Resources', href: '/documents', icon: InboxIcon, current: false }
   ]
 
   const userNavigation = [
