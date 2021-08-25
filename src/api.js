@@ -168,9 +168,29 @@ export const newVSlot = (eventID, token, slotText, volStart, volEnd, date) => {
 
 export const editVSlot = (eventID, selectedSlotID, token, slotText, volStart, volEnd, date) => {
   return axios
-    .put(`https://momentum-lucidity.herokuapp.com/volunteerops/${selectedSlotID}/`,
+    .patch(`https://momentum-lucidity.herokuapp.com/volunteerops/${selectedSlotID}/`,
       {
         user: [],
+        vslot_text: slotText,
+        event: eventID,
+        starttime: volStart,
+        endtime: volEnd,
+        date: date
+      },
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => res.data)
+}
+
+export const registerVSlot = (user, eventID, selectedSlotID, token, slotText, volStart, volEnd, date) => {
+  console.log(`api user ${user}`)
+  return axios
+    .patch(`https://momentum-lucidity.herokuapp.com/volunteerops/${selectedSlotID}/`,
+      {
+        user: [user],
         vslot_text: slotText,
         event: eventID,
         starttime: volStart,
