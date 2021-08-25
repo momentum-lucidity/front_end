@@ -6,7 +6,7 @@ import moment from 'moment'
 
 export const VolunteerEvents = (props) => {
   const hasFetchedEvents = useRef(false)
-  const { token, authUser, allSlots, yourSlots } = props
+  const { token, authUser, allSlots, setAllSlots, yourSlots } = props
   const [allEvents, setAllEvents] = useState([])
 
   useEffect(() => {
@@ -48,7 +48,6 @@ export const VolunteerEvents = (props) => {
 
                               pathname: `volunteer/events/${event.eventpk}/`,
                               state: {
-                                allSlots: allSlots,
                                 yourSlots: yourSlots
                               }
                             }}

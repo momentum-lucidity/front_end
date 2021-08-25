@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { getAllSlots } from '../../api'
-import { DotsVerticalIcon } from '@heroicons/react/solid'
+import React from 'react'
 
 export const YourVolunteerSlots = (props) => {
   const { token, authUser, yourSlots } = props

@@ -19,7 +19,7 @@ export const VolunteerDashboard = (props) => {
         .then((data) => setAllSlots(data))
       hasFetchedSlots.current = true
     }
-  })
+  }, [token, allSlots])
 
   const yourSlots = allSlots.filter(item => {
     return (item.user[0] === userID)
@@ -82,7 +82,7 @@ export const VolunteerDashboard = (props) => {
               <h1 className='text-2xl pb-1 font-semibold text-gray-900'>
                 All Upcoming Events
               </h1>
-              <VolunteerEvents authUser={authUser} token={token} allSlots={allSlots} yourSlots={yourSlots} />
+              <VolunteerEvents authUser={authUser} token={token} allSlots={allSlots} yourSlots={yourSlots} setAllSlots={setAllSlots} />
             </div>
           </section>
         </div>

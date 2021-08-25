@@ -9,10 +9,9 @@ export const VolunteerEventDetails = (props) => {
   const { token, authUser } = props
   const { id } = useParams()
   const fetchedEventDetails = useRef(false)
+  const hasFetchedSlots = useRef(false)
   const [event, setEvent] = useState('')
-  const location = useLocation()
-  const { allSlots, yourSlots } = location.state
-  const [allEventSlots, setAllEventSlots] = useState(allSlots)
+  const [allSlots, setAllSlots] = useState([])
 
   useEffect(() => {
     if (!fetchedEventDetails.current) {
@@ -23,8 +22,13 @@ export const VolunteerEventDetails = (props) => {
     }
   }, [token, id])
 
-  console.log({ allEventSlots })
-  console.log({ yourSlots })
+  useEffect(() => {
+    if (!hasFetchedSlots.current) {
+      getAllSlots(token)
+        .then((data) => setAllSlots(data))
+      hasFetchedSlots.current = true
+    }
+  }, [token])
 
   return (
     <>
@@ -82,7 +86,7 @@ export const VolunteerEventDetails = (props) => {
                 </div>
               </div>
             </div>
-            <VSlotList token={token} authUser={authUser} yourSlots={yourSlots} allEventSlots={allEventSlots} eventID={event.eventpk} />
+            <VSlotList token={token} authUser={authUser} allSlots={allSlots} eventID={event.eventpk} setAllSlots={setAllSlots} />
           </main>
         </div>
       </div>
