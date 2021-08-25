@@ -208,10 +208,9 @@ export const VolunteerDashboard = (props) => {
                           <div className='flex-shrink-0'>
                             <Avatar name={authUser.legal_name} size='80' round />
                           </div>
-                          <div className='mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left'>
-                            <p className='text-sm font-medium text-gray-600'>Welcome back,</p>
-                            <p className='text-xl font-bold text-gray-900 sm:text-2xl'>{authUser.display_name}!</p>
-                            <p className='text-sm font-medium text-gray-600'>{user.role}</p>
+                          <div className='mt-6 text-center sm:mt-2 sm:pt-1 sm:text-left'>
+                            <p className='text-xl font-medium text-gray-600'>Welcome back,</p>
+                            <p className='text-3xl font-bold text-gray-900 sm:text-2xl'>{authUser.display_name}!</p>
                           </div>
                         </div>
                         <div className='mt-5 justify-center sm:mt-0'>
