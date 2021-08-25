@@ -216,7 +216,7 @@ export const EditAnnouncement = (props) => {
         </div>
       </div>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex'>
+        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex'>
           <button
             className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
             onClick={() => setSidebarOpen(true)}
@@ -224,14 +224,14 @@ export const EditAnnouncement = (props) => {
             <span className='sr-only'>Open sidebar</span>
             <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-          <div className='flex-1 flex'>
+          <div className='flex-1 flex bg-gray-50'>
             <nav className='flex' aria-label='Breadcrumb'>
               <ol className='flex items-center space-x-4'>
                 <li>
                   <div>
-                    <a href='/' className='text-gray-400 hover:text-gray-500'>
+                    <a href='/' className='text-gray-700 hover:text-indigo-500'>
                       <HomeIcon
-                        className='flex-shrink-0 h-5 w-5'
+                        className='flex-shrink-0 h-7 w-7'
                         aria-hidden='true'
                       />
                       <span className='sr-only'>Home</span>
@@ -242,12 +242,12 @@ export const EditAnnouncement = (props) => {
                   <li key={page.name}>
                     <div className='flex items-center'>
                       <ChevronRightIcon
-                        className='flex-shrink-0 h-5 w-5 text-gray-400'
+                        className='flex-shrink-0 h-8 w-8 text-gray-700'
                         aria-hidden='true'
                       />
                       <a
                         href={page.href}
-                        className='ml-4 text-sm font-medium text-gray-500 hover:text-gray-700'
+                        className='ml-4 text-md font-medium text-gray-700 hover:text-indigo-500'
                         aria-current={page.current ? 'page' : undefined}
                       >
                         {page.name}
@@ -258,7 +258,7 @@ export const EditAnnouncement = (props) => {
               </ol>
             </nav>
           </div>
-          <div className='ml-4 flex items-center md:ml-6'>
+          <div className='ml-4 flex items-center bg-gray-50 md:ml-6'>
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -325,9 +325,9 @@ export const EditAnnouncement = (props) => {
                 </div>
               )}
               <div className='space-y-8 divide-y divide-gray-200'>
-                <div className='pt-8 space-y-8'>
+                <div className='space-y-8'>
                   <div>
-                    <h3 className='text-lg leading-6 font-medium text-gray-900 sm:border-b sm:border-gray-200 sm:pb-5'>
+                    <h3 className='text-3xl py-8 leading-6 font-semibold text-gray-900 sm:border-b sm:border-gray-200 sm:pb-8'>
                       Edit Announcement
                     </h3>
                   </div>
@@ -335,7 +335,7 @@ export const EditAnnouncement = (props) => {
                   <div className='sm:col-span-6'>
                     <label
                       htmlFor='announcement-heading'
-                      className='block text-sm font-medium text-gray-700'
+                      className='block text-md font-semibold text-gray-700'
                     >
                       Announcement Heading
                     </label>
@@ -353,7 +353,7 @@ export const EditAnnouncement = (props) => {
                   <div className='sm:col-span-6'>
                     <label
                       htmlFor='about'
-                      className='block text-sm font-medium text-gray-700'
+                      className='block text-md font-semibold text-gray-700'
                     >
                       Announcement Body
                     </label>
