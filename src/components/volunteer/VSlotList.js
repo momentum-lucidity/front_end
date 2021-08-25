@@ -35,13 +35,6 @@ export const VSlotList = (props) => {
     }
   }
 
-  console.log(`selectedSlotID ${selectedSlotID}`)
-  console.log(`slotText ${slotText}`)
-  console.log(`volStart ${volStart}`)
-  console.log(`volEnd ${volEnd}`)
-  console.log(`date ${date}`)
-  console.log(`user ${user}`)
-
   return (
     <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
 
@@ -66,14 +59,14 @@ export const VSlotList = (props) => {
                         className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-4 px-4'
                         onClick={handleWithDraw}
                       >WithDraw
-                      </button>
+                    </button>
                     : <p className='border rounded-md bg-gray-200 text-s text-gray-900 py-4 px-4'>Slot filled</p>)
                 : (<button
                     type='button'
                     className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-4 px-4'
                     onClick={handleSignUp}
                    >SignUp
-                </button>)}
+                   </button>)}
 
             </div>
           </div>
