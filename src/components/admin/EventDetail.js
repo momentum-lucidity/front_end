@@ -343,7 +343,7 @@ export const EventDetail = (props) => {
                   </button>
                 </div>
               </div>
-              <div className ='border rounded-xl px-4 sm:px-6 md:px-0'>
+              <div className='border rounded-xl px-4 sm:px-6 md:px-0'>
                 <div
                   key={eventDetails.id}
                   className='bg-white shadow overflow-hidden sm:rounded-lg'
