@@ -84,7 +84,7 @@ export const EditAnnouncement = (props) => {
   }
 
   return (
-    <div className='h-screen overflow-y-auto bg-white overflow-hidden flex'>
+    <div className='h-screen bg-gray-50 overflow-y-auto bg-white overflow-hidden flex'>
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as='div'

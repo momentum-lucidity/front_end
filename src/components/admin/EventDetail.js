@@ -351,7 +351,7 @@ export const EventDetail = (props) => {
               >
                 <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
                   <div className="px-4 py-4">
-                    <dt className="text-sm font-medium text-gray-500">
+                    <dt className="text-lg font-medium text-gray-500">
                       Event Details
                     </dt>
                     <dd className="text-sm font-medium text-gray-900">
@@ -361,7 +361,7 @@ export const EventDetail = (props) => {
                   <div className="px-4 py-4">
                     <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">
+                        <dt className="text-lg font-medium text-gray-500">
                           Date
                         </dt>
                         <dd className="mt-1 text-sm text-gray-900">
@@ -369,14 +369,14 @@ export const EventDetail = (props) => {
                         </dd>
                       </div>
                       <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">
+                        <dt className="text-lg font-medium text-gray-500">
                           Time
                         </dt>
                         <dd className="mt-1 text-sm text-gray-900">
-                          Start {eventDetails.start_time}
+                          Start: {eventDetails.start_time}
                         </dd>
                         <dd className="mt-1 text-sm text-gray-900">
-                          End {eventDetails.end_time}
+                          End: {eventDetails.end_time}
                         </dd>
                       </div>
                     </dl>

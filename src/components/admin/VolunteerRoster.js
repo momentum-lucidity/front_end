@@ -1,7 +1,8 @@
 import { VolunteerSlotEdit } from "./VolunteerSlotEdit";
 import Avatar from "react-avatar";
 import { useState } from "react";
-import { XCircleIcon } from "@heroicons/react/outline";
+import { TrashIcon, PencilIcon } from "@heroicons/react/outline";
+import moment from "moment";
 
 export const VolunteerRoster = (props) => {
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +26,8 @@ export const VolunteerRoster = (props) => {
     setErrors,
     fetchedAllSlots,
     slot,
-    setAllVSlots
+    setAllVSlots,
+    eventDetails
   } = props;
 
   return (
@@ -40,36 +42,48 @@ export const VolunteerRoster = (props) => {
       <div className="flex-1 min-w-0">
         <div>
           <p className="text-sm font-medium text-gray-900">
-            Scheduled Volunteer:{slot.user}
-          </p>
-          <p className="text-sm text-gray-500 truncate">Date: {slot.date}</p>
-          <p className="text-sm text-gray-500 truncate">
-            Start Time: {slot.starttime}
+            <b>Scheduled Volunteer:</b> {slot.user}
           </p>
           <p className="text-sm text-gray-500 truncate">
-            End Time: {slot.endtime}
+            <b> Date:</b> {moment(slot.date).format("LL")}
           </p>
           <p className="text-sm text-gray-500 truncate">
-            Role/Duties: {slot.vslot_text}
+            <b> Start Time: </b> {slot.starttime}
           </p>
-          <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium"
-          onClickCapture={() => setErrors()}>
+          <p className="text-sm text-gray-500 truncate">
+            <b>End Time: </b> {slot.endtime}
+          </p>
+          <p className="text-sm text-gray-500 truncate">
+            <b>Role/Duties: </b> {slot.vslot_text}
+          </p>
+          <div
+            className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium"
+            onClickCapture={() => setErrors()}
+          >
             <button
               type="button"
               value={slot.slotpk}
-              className="text-indigo-600 hover:text-indigo-900"
+              className="inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-200"
               aria-label="more options"
               onClick={() => setIsActive(!isActive)}
             >
+              <PencilIcon
+                className="-ml-1 mr-2 h-5 w-5 text-indigo-700"
+                aria-hidden="true"
+              />
               Edit
             </button>
           </div>
           <div className="px-6 py-2 whitespace-nowrap text-right text-sm font-medium">
             <button
               type="button"
-              className="text-indigo-600 hover:text-indigo-900"
+              className="inline-flex items-center px-2 py-1.5 border border-indigo-100 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
               onClick={handleDelete}
             >
+              <TrashIcon
+                className="-ml-1 mr-2 h-5 w-5 text-indigo-700"
+                aria-hidden="true"
+              />
               Delete
             </button>
           </div>

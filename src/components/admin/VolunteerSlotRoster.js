@@ -72,6 +72,7 @@ export const VolunteerSlotRoster = (props) => {
             setErrors={setErrors}
             fetchedAllSlots={fetchedAllSlots}
             slot={slot}
+            eventDetails={eventDetails}
             setAllVSlots={setAllVSlots}
           />
         </div>
