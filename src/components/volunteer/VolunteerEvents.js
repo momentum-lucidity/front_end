@@ -3,7 +3,8 @@ import { getEventsList } from '../../api'
 import { Link } from 'react-router-dom'
 import { orderBy } from 'lodash'
 import moment from 'moment'
-import { VolunteerEventsPagination } from './VolunteerEventsPagination';
+import { VolunteerEventsPagination } from './VolunteerEventsPagination'
+import { CheckCircleIcon, ChevronRightIcon, BookmarkIcon } from '@heroicons/react/solid'
 
 export const VolunteerEvents = (props) => {
   const hasFetchedEvents = useRef(false)
@@ -11,7 +12,6 @@ export const VolunteerEvents = (props) => {
   const [allEvents, setAllEvents] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [volEventsPerPage] = useState(4)
-
 
   useEffect(() => {
     if (!hasFetchedEvents.current) {
@@ -40,66 +40,61 @@ export const VolunteerEvents = (props) => {
     return classes.filter(Boolean).join(' ')
   }
   return (
-    <div className='h-screen bg-white overflow-hidden overflow-y-auto flex flex-initial'>
-      <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <main className='flex-1 relative focus:outline-none'>
-          <div className='py-6'>
-            <div className='px-4 sm:px-6 md:px-0 overflow-y-auto '>
-              <ul className='divide-y divide-gray-500'>
-                {currentVolEvents &&
+
+    <div className='bg-white shadow overflow-hidden sm:rounded-md'>
+      <h2 className='px-8 pb-2 pt-4 text-md font-medium font-semibold text-gray-900' id='announcements-title'>
+        Upcoming Volunteer Opportunites
+      </h2>
+      <ul className='divide-y divide-gray-200'>
+        {currentVolEvents &&
                   currentVolEvents.map((event, idx) => (
-                    <li
+                    <Link
                       key={event.eventpk}
-                      className='relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600'
+                      to={{
+                        pathname: `volunteer/events/${event.eventpk}/`,
+                        state: {
+                          yourSlots: yourSlots
+                        }
+                      }}
                     >
-                      <div className='flex justify-between space-x-3'>
-                        <div className='min-w-0 flex-1'>
-                          <Link
-                            to={{
+                      <li key={event.eventpk} className='block hover:bg-purple-50'>
 
-                              pathname: `volunteer/events/${event.eventpk}/`,
-                              state: {
-                                yourSlots: yourSlots
-                              }
-                            }}
-                          >
-                            <span
-                              className='absolute inset-0'
-                              aria-hidden='true'
-                            />
-                            <p className='text-sm font-mono font-medium font-semibold text-gray-900 truncate'>
-                              {event.event_header}
-                            </p>
-                            <p className='text-sm pb-2 font-mono text-gray-500 truncate'>
-                              {moment(event.date).format('LL')}
-                            </p>
-                            <p className='text-sm pb-2 font-mono text-black-500 truncate'>
-                              {event.description}
-                            </p>
-                            <span className='inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800'>
-                              Volunteers Needed
-                            </span>
-                            <p className='line-clamp-2 pt-2 text-sm font-mono text-gray-600'>
-                              Sign up to volunteer here!
-                            </p>
-
-                          </Link>
+                        <div className='flex items-center px-2 py-4 sm:px-4'>
+                          <div className='min-w-0 flex-1 flex items-center'>
+                            <div className='min-w-0 flex-1 px-4 items-center md:grid md:grid-cols-4 md:gap-4'>
+                              <div className='col-span-3'>
+                                <p className='text-med font-semibold text-indigo-700 truncate'>{event.event_header}
+                                </p>
+                                <p className='flex items-center overflow-ellipsis text-med text-gray-600'>
+                                  {event.description}
+                                </p>
+                              </div>
+                              <div className='justify-end'>
+                                <div className='justify-end'>
+                                  <p className=' ml-1 text-sm font-semibold text-gray-900'>{moment(event.date).format('LL')}</p>
+                                  <p className='ml-1 text-sm text-gray-900'>{event.start_time}</p>
+                                  <p className='inline-block text-sm text-gray-700'><BookmarkIcon className='mr-1 inline-block h-4 w-5 text-green-400' aria-hidden='true' />{event.type}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <ChevronRightIcon className='h-5 w-5 text-gray-400' aria-hidden='true' />
+                          </div>
                         </div>
-                      </div>
-                    </li>
+
+                      </li>
+                    </Link>
                   ))}
-                <div className='flex items-center justify-center'>
-                  <VolunteerEventsPagination
-                    volEventsPerPage={volEventsPerPage}
-                    totalEvents={allEvents.length}
-                    paginate={paginate}
-                  />
-                </div>
-              </ul>
-            </div>
-          </div>
-        </main>
-      </div>
+        <div className='flex items-center justify-center'>
+          <VolunteerEventsPagination
+            volEventsPerPage={volEventsPerPage}
+            totalEvents={allEvents.length}
+            paginate={paginate}
+          />
+        </div>
+      </ul>
     </div>
+
   )
 }

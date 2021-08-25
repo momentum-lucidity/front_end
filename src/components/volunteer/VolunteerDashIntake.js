@@ -20,10 +20,7 @@ export const VolunteerDashIntake = (props) => {
 
   return (
     <nav aria-label='Progress'>
-      <l
-        role='list'
-        className='border border-gray-300 rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'
-      >
+      <l className=' rounded-md divide-y divide-gray-300 md:flex md:divide-y-0'>
         {currentStatus.map((step, stepIdx) => (
           <li key={step.name} className='relative md:flex-1 md:flex'>
             {step.status === 'complete' ? (
