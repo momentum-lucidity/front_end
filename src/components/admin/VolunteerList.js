@@ -1,7 +1,7 @@
-import { Fragment, useEffect, useState, useRef } from 'react';
-import { Dialog, Menu, Transition } from '@headlessui/react';
-import Avatar from 'react-avatar';
-import Logo from '../images/1x/logo.png';
+import { Fragment, useEffect, useState, useRef } from 'react'
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import Avatar from 'react-avatar'
+import Logo from '../images/1x/logo.png'
 import {
   ChevronRightIcon,
   CalendarIcon,
@@ -11,8 +11,8 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon
-} from '@heroicons/react/outline';
-import { getVolunteerList } from '../../api';
+} from '@heroicons/react/outline'
+import { getVolunteerList } from '../../api'
 
 const navigation = [
   { name: 'Dashboard', href: '/admindash', icon: HomeIcon, current: false },
@@ -148,10 +148,14 @@ export const VolunteerList = (props) => {
       </Transition.Root>
 
       <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 bg-white flex flex-col'>
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
-            <div className='flex-shrink-0 px-4 flex items-center'>
-              <img src={Logo} alt='lucidity' />
+        <div className='w-54 bg-white flex flex-col'>
+          <div className='border-r border-gray-200 pt-2 pb-4 flex flex-col flex-grow overflow-y-auto'>
+            <div className='flex-shrink-1 px-4 flex items-center'>
+              <img
+                className='w-44 bg-white'
+                src={Logo}
+                alt='Lucidity Logo'
+              />
             </div>
             <div className='flex-grow mt-5 flex flex-col'>
               <nav className='flex-1 bg-white px-2 space-y-1'>
@@ -199,7 +203,7 @@ export const VolunteerList = (props) => {
                   <div>
                     <a href='/' className='text-gray-700 hover:text-indigo-500'>
                       <HomeIcon
-                        className='flex-shrink-0 h-7 w-'
+                        className='flex-shrink-0 h-7 w-7'
                         aria-hidden='true'
                       />
                       <span className='sr-only'>Home</span>
@@ -380,4 +384,4 @@ export const VolunteerList = (props) => {
       </div>
     </div>
   )
-};
+}

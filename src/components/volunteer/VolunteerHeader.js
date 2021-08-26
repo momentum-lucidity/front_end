@@ -28,18 +28,7 @@ export const VolunteerHeader = (props) => {
                 </Disclosure.Button>
               </div>
               <div className='flex-1 flex items-center justify-center sm:items-stretch sm:justify-start'>
-                <div className='flex flex items-center'>
-                  <img
-                    className='block lg:hidden h-8 w-auto'
-                    src={DCBanner}
-                    alt='Dream Big'
-                  />
-                  <img
-                    className='hidden lg:block h-full w-full'
-                    src={DCBanner}
-                    alt='Workflow'
-                  />
-                </div>
+
                 <div className='hidden sm:ml-6 sm:flex sm:space-x-8'>
                   <a
                     href='/dreamcenter/profile'
