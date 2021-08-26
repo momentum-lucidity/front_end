@@ -36,7 +36,7 @@ export const VSlotList = (props) => {
   }
 
   return (
-    <div className='grid grid-cols-1 gap-4 sm:grid-cols-1'>
+    <div className='grid grid-cols-2 gap-4 sm:grid-cols-2'>
 
       {filteredSlots.map((eSlot) => (
         <div
@@ -51,23 +51,23 @@ export const VSlotList = (props) => {
               <p className='text-sm text-gray-500 truncate'>Start Time: {eSlot.starttime}</p>
               <p className='text-sm text-gray-500 truncate'>End Time: {eSlot.endtime}</p>
               <p className='text-sm text-gray-500 truncate'>Role/Duties: {eSlot.vslot_text}</p>
-
-              {eSlot.user[0] && eSlot.user[0]
-                ? (eSlot.user[0] === authUser.id
-                    ? <button
-                        type='button'
-                        className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-4 px-4'
-                        onClick={handleWithDraw}
-                      >WithDraw
-                    </button>
-                    : <p className='border rounded-md bg-gray-200 text-s text-gray-900 py-4 px-4'>Slot filled</p>)
-                : (<button
-                    type='button'
-                    className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-4 px-4'
-                    onClick={handleSignUp}
-                   >SignUp
-                   </button>)}
-
+              <div className='mt-2 flex justify-center'>
+                {eSlot.user[0] && eSlot.user[0]
+                  ? (eSlot.user[0] === authUser.id
+                      ? <button
+                          type='button'
+                          className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-2 px-4'
+                          onClick={handleWithDraw}
+                        >WithDraw
+                        </button>
+                      : <p className='border rounded-md bg-gray-200 text-s text-gray-900 py-2 px-4'>Slot filled</p>)
+                  : (<button
+                      type='button'
+                      className='border rounded-md bg-indigo-700 text-s text-gray-50 hover:bg-indigo-900 py-2 px-4'
+                      onClick={handleSignUp}
+                     >SignUp
+                     </button>)}
+              </div>
             </div>
           </div>
         </div>

@@ -69,8 +69,8 @@ export const AdminDashboard = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   console.log(authUser)
 
-  if (authUser.user_status === "volunteer") {
-    return <Redirect to='/dreamcenter/volunteerdash'/>
+  if (authUser.user_status === 'volunteer') {
+    return <Redirect to='/dreamcenter/volunteerdash' />
   }
 
   return (
@@ -123,7 +123,7 @@ export const AdminDashboard = (props) => {
                   </button>
                 </div>
               </Transition.Child>
-              <div className='sm:mx-auto sm:w-9/12 sm:max-h-4'>
+              <div className='sm:mx-auto sm:max-w-s sm:max-h-4'>
                 <img
                   src={Logo}
                   alt='lucidity'
@@ -165,11 +165,11 @@ export const AdminDashboard = (props) => {
       </Transition.Root>
 
       <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 bg-white flex flex-col'>
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
+        <div className='w-54 bg-white flex flex-col'>
+          <div className='border-r border-gray-200 pt-2 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-1 px-4 flex items-center'>
               <img
-                className='w-full, bg-white'
+                className='w-44 bg-white'
                 src={Logo}
                 alt='Lucidity Logo'
               />

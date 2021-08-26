@@ -49,7 +49,7 @@ export const VolunteerEventDetails = (props) => {
                 >
                   <div className='px-4 py-5 sm:px-6'>
                     <h3 className='text-lg pb-3 leading-6 font-medium text-gray-900'>
-                      {event.event_header}{event.eventpk}
+                      {event.event_header}
                     </h3>
                     <p className='text-sm pb-2 font-semibold text-black-500'>
                       Description:

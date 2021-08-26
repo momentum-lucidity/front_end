@@ -180,7 +180,7 @@ export const VolunteerDashboard = (props) => {
   }
   return (
     <>
-      <VolunteerHeader authUser={authUser} token={token} />
+
 
       <div className='relative min-h-screen bg-indigo-400 bg-opacity-5'>
         <main className='mt-0 pb-8'>

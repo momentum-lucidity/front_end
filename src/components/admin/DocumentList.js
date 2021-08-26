@@ -170,11 +170,11 @@ export const DocumentList = (props) => {
       </Transition.Root>
 
       <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 bg-white flex flex-col'>
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
+        <div className='w-54 bg-white flex flex-col'>
+          <div className='border-r border-gray-200 pt-2 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-1 px-4 flex items-center'>
               <img
-                className='w-full, bg-white'
+                className='w-44 bg-white'
                 src={Logo}
                 alt='Lucidity Logo'
               />
@@ -366,7 +366,7 @@ export const DocumentList = (props) => {
                                 'inline-flex items-center items-center justify-center w-4 pt-1 text-white text-sm font-medium rounded-l-md'
                               )}
                             />
-                          <ClipboardCopy copyText={document.url} />
+                            <ClipboardCopy copyText={document.url} />
                             <div className='flex-1 flex-row items-center justify-around border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate'>
                               <div
                                 onClickCapture={() =>
@@ -379,7 +379,7 @@ export const DocumentList = (props) => {
                                   target='_blank'
                                   rel='noreferrer noopener'
                                 >
-                                  {document.doc_header} <br /> 
+                                  {document.doc_header} <br />
                                 </a>
                                 <button>
                                   <TrashIcon

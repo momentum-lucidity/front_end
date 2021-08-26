@@ -159,11 +159,11 @@ export const VolunteerDetails = (props) => {
       </Transition.Root>
 
       <div className='hidden md:flex md:flex-shrink-0'>
-        <div className='w-64 bg-white flex flex-col'>
-          <div className='border-r border-gray-200 pt-5 pb-4 flex flex-col flex-grow overflow-y-auto'>
+        <div className='w-54 bg-white flex flex-col'>
+          <div className='border-r border-gray-200 pt-2 pb-4 flex flex-col flex-grow overflow-y-auto'>
             <div className='flex-shrink-1 px-4 flex items-center'>
               <img
-                className='w-full, bg-white'
+                className='w-44 bg-white'
                 src={Logo}
                 alt='Lucidity Logo'
               />
@@ -199,7 +199,7 @@ export const VolunteerDetails = (props) => {
         </div>
       </div>
       <div className='flex-1 max-w-4xl mx-auto w-0 flex flex-col md:px-8 xl:px-0'>
-        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-100 border-b border-gray-200 flex'>
+        <div className='relative z-10 flex-shrink-0 h-24 bg-gray-50 border-b border-gray-200 flex'>
           <button
             className='border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
             onClick={() => setSidebarOpen(true)}
@@ -207,7 +207,7 @@ export const VolunteerDetails = (props) => {
             <span className='sr-only'>Open sidebar</span>
             <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-          <div className='flex-1 flex bg-gray-100'>
+          <div className='flex-1 flex bg-gray-50'>
             <nav className='flex' aria-label='Breadcrumb'>
               <ol className='flex items-center space-x-4'>
                 <li>
@@ -241,7 +241,7 @@ export const VolunteerDetails = (props) => {
               </ol>
             </nav>
           </div>
-          <div className='ml-4 flex items-center bg-gray-100 md:ml-6'>
+          <div className='ml-4 flex items-center bg-gray-50 md:ml-6'>
             <Menu as='div' className='ml-3 relative'>
               {({ open }) => (
                 <>
@@ -286,6 +286,7 @@ export const VolunteerDetails = (props) => {
               )}
             </Menu>
           </div>
+
         </div>
         <main className='flex-1 mt-8 relative overflow-y-auto focus:outline-none'>
           <div className='bg-white shadow overflow-hidden sm:rounded-lg'>
