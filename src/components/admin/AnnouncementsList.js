@@ -333,7 +333,7 @@ export const AnnouncementsList = (props) => {
             </div>
           </div>
 
-          <div className="px-4 py-12 sm:px-6py-8 md:px-0 py-8">
+          <div className="px-4 sm:px-6py-8 md:px-0">
             <div className="mx-1 my-5 ">
               {errors && (
                 <div className="rounded-md bg-red-50 p-4 mb-10">
