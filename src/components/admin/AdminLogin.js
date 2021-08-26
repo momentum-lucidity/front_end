@@ -13,7 +13,7 @@ export const AdminLogin = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     requestLogin(username, password)
-    .then((data) => {
+      .then((data) => {
         setToken(data.data.auth_token)
         history.push('/admindash')
       })
@@ -24,9 +24,9 @@ export const AdminLogin = (props) => {
 
   return (
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center '>
-      <div className='sm:mx-auto sm:w-full sm:max-w-lg'>
+      <div className='sm:mx-auto sm:w-md sm:max-w-md'>
         <img
-          className='w-full'
+          className='h-48'
           src={Logo}
           alt='Lucidity Logo'
         />
